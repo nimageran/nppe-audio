@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.2 Reference Card: Regulation of the Professions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 2 — Regulation of the Professions</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">2 Elements of Professional Self-Regulation<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Right to Title</span><span class="item-note">— exclusive right to use a protected professional title (e.g. "P.Eng.")</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Scope of Practice</span><span class="item-note">— exclusive right to practise in a particular area or field</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">4 Principal Functions of Regulatory Bodies<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Register members</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Regulate the practice of its members</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Discipline members</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Enforce the legislation against non-members</span><span class="item-note">— who are practising illegally</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">3 National Organizations<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Engineers Canada</span><span class="item-note">— national body for provincial engineering regulatory bodies</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Geoscientists Canada</span><span class="item-note">— national body for provincial geoscience regulatory bodies</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Architecture Canada (RAIC)</span><span class="item-note">— registers individual members voluntarily (unlike the other two)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">Technical Associations (examples)<span class="sec-count">7 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="list-title">Broader Groups</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">CSCE</span><span class="item-note">— Canadian Society for Civil Engineering</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">CSME</span><span class="item-note">— Canadian Society for Mechanical Engineering</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">IEEE</span><span class="item-note">— Institute of Electrical and Electronics Engineers</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">ACEC</span><span class="item-note">— Association of Consulting Engineering Companies</span></div></div>
+      </div>
+      <div class="list-title">Technical Groups</div>
+      <div class="items">
+        <div class="item"><div class="num">5</div><div><span class="item-title">CSC</span><span class="item-note">— Construction Specifications Canada</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">CAC</span><span class="item-note">— Cement Association of Canada</span></div></div>
+        <div class="item"><div class="num">7</div><div><span class="item-title">CGS</span><span class="item-note">— Canadian Geotechnical Society</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">2 Types of Scope of Practice Definitions<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Generic Definition</span><span class="item-note">— broadly states the types of tasks that make up the exclusive scope (e.g. Engineers Canada definition)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Specific Definition</span><span class="item-note">— identifies in detail the individual tasks that make up the exclusive scope</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">3 Registration Requirements for Engineers<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Experience</span><span class="item-note">— generally 4 years of qualifying experience</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Education</span><span class="item-note">— degree from an accredited university</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Examinations</span><span class="item-note">— NPPE (law & ethics); non-accredited candidates may also need technical exams</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#0F6E56">7</div>
+      <div class="sec-title">Engineers Canada Reciprocity Agreements<span class="sec-count">2 types</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="list-title">Professional-Level Reciprocity</div>
+      <div class="items">
+        <div class="item"><div class="num">–</div><div><span class="item-title">Mexico · Texas (NAFTA) · France · Hong Kong · Australia · Ireland</span></div></div>
+      </div>
+      <div class="list-title">Education-Level Agreements (accredited degrees recognized)</div>
+      <div class="items">
+        <div class="item"><div class="num">–</div><div><span class="item-title">USA · Australia · South Africa · Ireland · UK · New Zealand · Japan</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#854F0B">8</div>
+      <div class="sec-title">6 Potential Discipline Penalties<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Reprimand</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Suspension</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Fine</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Termination of licence</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Educational requirements</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Mentorship requirements</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#993C1D">9</div>
+      <div class="sec-title">Discipline vs Enforcement — 2 Distinct Processes<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Discipline</span><span class="item-note">— charging a MEMBER for incompetence or ethics breach → hearing to determine guilt</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Enforcement</span><span class="item-note">— charging a NON-MEMBER for illegal title use or illegal practice</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#3B6D11">10</div>
+      <div class="sec-title">Documents That Require the Professional Seal<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Final drawings</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Specifications</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Plans</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Reports</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Other documents prepared or checked by the professional</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

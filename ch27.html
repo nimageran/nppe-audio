@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 27: Visual Mechanics — Internet Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.jurisdiction { border-top-color: #64748b; }
+    .framework-card.defamation { border-top-color: #0ea5e9; }
+    .framework-card.copyright { border-top-color: #dc2626; }
+    .framework-card.cybersquat { border-top-color: #ca8a04; }
+    .framework-card.formation { border-top-color: #9333ea; }
+    .framework-card.timing { border-top-color: #f59e0b; }
+    .framework-card.identity { border-top-color: #15803d; }
+    .framework-card.website { border-top-color: #0ea5e9; }
+    .framework-card.email { border-top-color: #ef4444; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 27: VISUAL MECHANICS — INTERNET LAW</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Jurisdiction Conflict Problem</a>
+    <a href="#d2">2. Defamation Online — The Significance Threshold</a>
+    <a href="#d3">3. Copyright Online — The US/Canada ISP Liability Gap</a>
+    <a href="#d4">4. Cybersquatting — Two Legal Theories, One Act</a>
+    <a href="#d5">5. Electronic Contract Formation — The Agent Substitution</a>
+    <a href="#d6">6. Electronic Delivery and Receipt Timing</a>
+    <a href="#d7">7. The Identity Verification Layering Strategy</a>
+    <a href="#d8">8. The Website Lifecycle — Where Risk Doesn't End at Launch</a>
+    <a href="#d9">9. Email Risk-to-Policy Mapping</a>
+  </div>
+
+
+  <div class="framework-card jurisdiction" id="d1">
+    <h2>1. The Jurisdiction Conflict Problem</h2>
+    <p>This diagram tackles the chapter's opening puzzle directly: a single online contract can touch four or five different jurisdictions at once, and a governing-law clause — while necessary — doesn't actually solve the whole problem.</p>
+
+    <div class="mermaid">
+      graph TD
+        Deal[Software contract:<br/>signed by party in BC,<br/>other party in Washington,<br/>work done in INDIA,<br/>for use in SWEDEN] --> Clause{Contract specifies<br/>governing law +<br/>court jurisdiction}
+
+        Clause --> Solves[SOLVES: which law governs<br/>CONTRACT DISPUTES between<br/>these two parties]
+        Clause --> DoesNotSolve[DOES NOT SOLVE: local laws<br/>that independently apply<br/>to the WORK ITSELF]
+
+        DoesNotSolve --> L1[Employment law<br/>— where work is done]
+        DoesNotSolve --> L2[Taxation law<br/>— multiple jurisdictions]
+        DoesNotSolve --> L3[Safety law<br/>— where work is done]
+        DoesNotSolve --> L4[Privacy law<br/>— wherever data<br/>touches]
+
+        Solves --> Borderless{BORDERLESS PROBLEM:<br/>Internet activity affects<br/>residents in MANY places<br/>at once}
+        Borderless --> USCourts[Courts — ESPECIALLY<br/>US courts — may simply<br/>ASSERT jurisdiction if their<br/>own residents are affected]
+        USCourts --> Risk[RESULT: a business faces<br/>risk of UNKNOWN laws and<br/>court systems applying to it,<br/>regardless of what its own<br/>contract says]
+
+        style Deal fill:#1e293b,color:#fff
+        style Clause fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Solves fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style DoesNotSolve fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Borderless fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Risk fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The split into "Solves" versus "Does Not Solve" is the entire point of this diagram — a governing law clause is necessary but routinely OVERESTIMATED in how much protection it actually provides. It locks down which law and which court resolve a dispute BETWEEN the two contracting parties, but it has zero power over independent regulatory regimes (employment standards, tax authorities, safety regulators, privacy commissioners) that apply based on WHERE the work physically happens or where data travels, regardless of what the contract says. The bottom branch captures the chapter's separate, compounding problem: even setting aside contract law entirely, a foreign court — especially in the US — can simply decide it has jurisdiction over an online dispute just because its own residents were affected, which means a business's risk exposure isn't fully controllable through drafting alone.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card defamation" id="d2">
+    <h2>2. Defamation Online — The Significance Threshold</h2>
+    <p>Not every unflattering online comment is defamation. This diagram isolates the actual threshold test courts apply, since the chapter is explicit that hurt feelings alone don't clear the bar.</p>
+
+    <div class="mermaid">
+      graph TD
+        Statement[Statement posted online<br/>about a person/company] --> Test{Does it INJURE<br/>REPUTATION in a<br/>SIGNIFICANT way?}
+
+        Test -->|No — merely unflattering,<br/>annoying, irksome, or<br/>embarrassing| NotActionable[NOT ACTIONABLE —<br/>hurt feelings alone<br/>do not qualify]
+        Test -->|Yes — genuine reputational<br/>harm| Actionable{What FORM did<br/>it take?}
+
+        Actionable --> Written[WRITTEN — e.g. a<br/>website post, an email<br/>= LIBEL]
+        Actionable --> Spoken[ORAL — e.g. a podcast,<br/>video commentary<br/>= SLANDER]
+
+        Written --> Treatment[Courts treat website<br/>communications the SAME<br/>way as radio/TV broadcasts]
+        Spoken --> Treatment
+
+        style Statement fill:#1e293b,color:#fff
+        style Test fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style NotActionable fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Actionable fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Treatment fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The threshold diamond is placed first and given the most visual weight because it's the gate most people get wrong about online speech — there's a strong intuition that anything posted publicly and read by many people must be more serious than a private remark, but the actual legal test never changes based on audience size, only on whether the REPUTATIONAL injury itself is significant. The written/oral split underneath only matters once you're already past that gate, and it's really just inherited terminology (libel/slander) being mapped onto internet-specific formats — a blog post is libel, a recorded video rant is slander, but both still have to clear the same significance threshold first. The "Treatment" box at the bottom answers a question that might otherwise seem unresolved: courts don't invent a new framework for websites, they simply borrow the existing broadcast-media treatment and apply it directly.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card copyright" id="d3">
+    <h2>3. Copyright Online — The US/Canada ISP Liability Gap</h2>
+    <p>This diagram exists specifically to prevent a common cross-border mistake: assuming a US legal protection (the DMCA) for internet service providers also exists in Canada. It doesn't, and that gap changes the practical strategy available to a Canadian copyright holder.</p>
+
+    <div class="mermaid">
+      graph TD
+        Infringe[Copyright infringement<br/>occurs via an ISP's<br/>network/platform] --> Country{Which country?}
+
+        Country -->|UNITED STATES| US[ISP liability ONLY if ISP<br/>actively ENGAGES or<br/>PARTICIPATES in the<br/>infringement]
+        US --> DMCA[DMCA SHIELDS the ISP<br/>for activity BEYOND its<br/>knowledge/control]
+
+        Country -->|CANADA| Canada[NO equivalent legislation<br/>to the DMCA exists]
+        Canada --> NoShield[No statutory ISP<br/>safe-harbour framework]
+
+        DMCA --> USStrategy[US Strategy: notify ISP<br/>under DMCA process]
+        NoShield --> CAStrategy[CANADIAN Strategy:<br/>courts are the ONLY<br/>real recourse]
+
+        CAStrategy --> Protect[Practical protections:<br/>REGISTER copyright to<br/>prove publication, use<br/>LICENSING agreements,<br/>apply copyright MARKINGS,<br/>use electronic<br/>FINGERPRINTING tools]
+
+        style Infringe fill:#1e293b,color:#fff
+        style Country fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style US fill:#e0f2fe,stroke:#0284c7
+        style Canada fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NoShield fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Protect fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Splitting this into two completely separate national branches is the only way to make the gap impossible to miss — the DMCA is a US-specific statutory safe harbour, and the chapter is explicit that nothing equivalent exists in Canada, meaning a Canadian rights holder cannot rely on a formal notice-and-takedown statutory process the way an American one might. That gap is exactly why the "Protect" box at the bottom matters so much more in the Canadian context — without a statutory ISP framework to lean on, the practical defence becomes almost entirely about being LITIGATION-READY in advance: registering the copyright before any dispute arises (to prove publication date), having licensing paperwork in order, and using technical markers that make ownership easier to prove in court, since court action is described as "the only real recourse" once Canadian infringement actually occurs.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card cybersquat" id="d4">
+    <h2>4. Cybersquatting — Two Legal Theories, One Act</h2>
+    <p>Cybersquatting isn't punished under just one legal theory — courts have found that the SAME single act simultaneously satisfies two separate causes of action. This diagram shows both theories branching off the one act.</p>
+
+    <div class="mermaid">
+      graph TD
+        Act[Cybersquatting:<br/>pre-emptively register a domain<br/>containing a WELL-KNOWN<br/>trademark, then offer to<br/>sell it to the trademark owner] --> Theory1{THEORY 1:<br/>Unlawful Trademark Use}
+        Act --> Theory2{THEORY 2:<br/>Misrepresentation}
+
+        Theory1 --> T1Reason[Reasoning: selling the<br/>trademark-containing domain<br/>to a DIFFERENT organization<br/>is LIKELY TO CONFUSE OR<br/>MISLEAD internet users]
+
+        Theory2 --> T2Reason[Reasoning: the domain itself<br/>misrepresents APPROVAL,<br/>AUTHORIZATION, or<br/>ENDORSEMENT by the actual<br/>trademark owner]
+
+        T1Reason --> Combined[BOTH theories succeed<br/>SIMULTANEOUSLY from<br/>the SAME conduct]
+        T2Reason --> Combined
+
+        style Act fill:#1e293b,color:#fff
+        style Theory1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Theory2 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Combined fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diagram is built around a single point worth dwelling on: courts didn't have to choose just one legal label for cybersquatting, and the chapter explicitly states both theories apply. The trademark theory focuses on CONSUMER CONFUSION — the risk that internet users encountering the domain might think they're dealing with the real trademark owner. The misrepresentation theory focuses on something subtly different — a FALSE IMPLICATION that the real trademark owner has somehow blessed or endorsed this domain's use, even if no actual consumer confusion about WHO owns the domain occurs. Having both theories available gives a trademark owner two independent paths to a remedy, which matters practically if one theory faces a weaker fact pattern (e.g., if confusion is hard to prove) — the other theory remains available as a backup.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card formation" id="d5">
+    <h2>5. Electronic Contract Formation — The Agent Substitution</h2>
+    <p>An "I Agree" button click feels less formal than a signature on paper, but courts have mapped it onto an existing legal concept rather than inventing something new. This diagram shows that substitution directly.</p>
+
+    <div class="mermaid">
+      graph LR
+        Traditional[TRADITIONAL CONTRACT:<br/>Human agent communicates<br/>an offer on behalf<br/>of the offeror] --> TradAccept[Other party accepts<br/>— binding contract formed]
+
+        Electronic[ELECTRONIC CONTRACT:<br/>Website SOFTWARE displays<br/>the offer — e.g.<br/>'I Agree' button] --> Substitution{Legal Substitution:<br/>software = ELECTRONIC<br/>AGENT of the offeror}
+
+        Substitution --> SameEffect[Treated as EFFECTIVE<br/>as if a human agent<br/>had made the offer]
+        SameEffect --> ElecAccept[Click = ACCEPTANCE —<br/>binding contract formed,<br/>CONFIRMED valid by<br/>Canadian courts]
+
+        style Traditional fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Electronic fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Substitution fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style ElecAccept fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Placing the traditional and electronic paths side by side, converging on the same "Substitution" diamond, makes the legal reasoning transparent — courts didn't need a brand-new doctrine for online contracts, they simply extended AGENCY LAW (already covered in Chapter 9) to say that software performing the offering function counts as an agent the same way a human salesperson or representative would. This is precisely why "I Agree" clickwrap agreements are enforceable in Canada despite involving no human interaction at the moment of formation — the legal fiction of "software as agent" carries all the same weight as if a person had made the offer directly, and the click itself is simply ordinary acceptance under standard offer-and-acceptance principles from Chapter 6.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card timing" id="d6">
+    <h2>6. Electronic Delivery and Receipt Timing</h2>
+    <p>Electronic communications need their own timing rule because there's no physical envelope being handed over. This diagram shows the two distinct moments the law cares about, and where party autonomy can override the default.</p>
+
+    <div class="mermaid">
+      graph LR
+        Send[Sender transmits an<br/>electronic message] --> DeliveryMoment{DELIVERY = the instant<br/>the message enters a<br/>computer system<br/>BEYOND the SENDER's<br/>control}
+
+        DeliveryMoment --> InTransit[Message is now<br/>in transit]
+        InTransit --> ReceiptMoment{RECEIPT = the instant<br/>the message enters a<br/>computer system the<br/>RECEIVER CAN ACCESS}
+
+        ReceiptMoment --> Override{Did the PARTIES set<br/>their OWN timing rules<br/>by contract?}
+        Override -->|Yes| Custom[CUSTOM rules<br/>GOVERN instead]
+        Override -->|No| Default[DEFAULT rules above<br/>apply automatically]
+
+        style Send fill:#1e293b,color:#fff
+        style DeliveryMoment fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style ReceiptMoment fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Override fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Custom fill:#dcfce7,stroke:#16a34a
+        style Default fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The key distinction this diagram protects is that DELIVERY and RECEIPT are two genuinely different moments, not synonyms — delivery is defined entirely from the SENDER's side (the moment it leaves their control), while receipt is defined entirely from the RECEIVER's side (the moment they're capable of accessing it), and there can be a real time gap between the two if a server delay or network issue intervenes. This distinction matters anywhere a contract's timing affects rights — like whether an acceptance arrived before a deadline, or whether a notice was properly given. The override diamond at the end is a reminder that none of this is mandatory law in the sense of being unchangeable — parties remain free to write their own timing definitions into a contract, and where they've done so, that custom definition displaces the statutory default entirely.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card identity" id="d7">
+    <h2>7. The Identity Verification Layering Strategy</h2>
+    <p>Online contracting carries unique identity risk — you can't see who you're really dealing with. This diagram shows how the chapter recommends STACKING multiple verification layers rather than relying on any single method.</p>
+
+    <div class="mermaid">
+      graph TD
+        Risk[Online contracting:<br/>cannot directly verify<br/>WHO you're dealing with] --> Concerns{Three things<br/>to verify}
+        Concerns --> C1[IDENTITY<br/>— who is this party?]
+        Concerns --> C2[CAPACITY<br/>— can they legally<br/>bind themselves?]
+        Concerns --> C3[AUTHORITY<br/>— can they bind the<br/>organization they<br/>claim to represent?]
+
+        C1 --> Tech[TECHNOLOGICAL layer:<br/>certified e-signatures,<br/>cryptography, passwords,<br/>PINs]
+        C2 --> Tech
+        C3 --> Tech
+
+        Tech --> Traditional[TRADITIONAL layer<br/>— supplements tech:<br/>phone confirmation,<br/>signed/witnessed paper<br/>backup, credit card<br/>verification]
+
+        Traditional --> Residual{Can ALL risk be<br/>eliminated?}
+        Residual -->|No — some<br/>residual risk remains| Allocate[Address what's left via<br/>CONTRACTUAL RISK<br/>ALLOCATION + INSURANCE]
+
+        style Risk fill:#1e293b,color:#fff
+        style Concerns fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Tech fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Traditional fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Residual fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Allocate fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The three boxes under "Concerns" deliberately separate three DIFFERENT failure modes that get casually lumped together as "is this person legit" — identity (are they who they claim), capacity (can they legally enter a binding agreement at all — e.g., not a minor, not under some legal incapacity), and authority (even if this individual is real and capable, can THEY bind the company they say they represent). The layered structure (technological measures, THEN traditional backups on top) reflects the chapter's actual recommendation that companies don't rely on just one method — pairing a cryptographic signature with an old-fashioned phone call confirmation closes gaps that either method alone would miss. The final diamond is an honest acknowledgment baked into the chapter's own text: even with every reasonable layer in place, residual risk can never be reduced to zero, which is exactly why insurance and contractual risk allocation close out the diagram as the last line of defence for whatever verification simply cannot catch.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card website" id="d8">
+    <h2>8. The Website Lifecycle — Where Risk Doesn't End at Launch</h2>
+    <p>It's tempting to think of a website project as "done" once it's live. This diagram extends the visible development stages into the often-overlooked tail that creates ongoing legal and business exposure.</p>
+
+    <div class="mermaid">
+      graph LR
+        Assess[1. ASSESS<br/>purpose of<br/>the website] --> Design[2. DESIGN<br/>and plan]
+        Design --> Develop[3. DEVELOP]
+        Develop --> Feedback[4. CLIENT<br/>FEEDBACK]
+        Feedback --> Deploy[5. DEPLOY<br/>finished product]
+
+        Deploy --> Assumption{Common assumption:<br/>'project is done'}
+        Assumption -->|WRONG| Tail[ONGOING obligations<br/>continue past launch]
+
+        Tail --> M1[MAINTENANCE —<br/>keep content CURRENT,<br/>avoid outdated info]
+        Tail --> M2[TECHNICAL SUPPORT —<br/>a non-functioning site<br/>can cause SIGNIFICANT<br/>business loss]
+
+        style Assess fill:#e0f2fe,stroke:#0284c7
+        style Deploy fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Assumption fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Tail fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style M1 fill:#dcfce7,stroke:#16a34a
+        style M2 fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The five development stages are presented quickly and without much elaboration specifically so that the "Assumption" diamond lands with the right weight — that's the genuine teaching point of this section, not the development process itself, which is fairly intuitive. The chapter explicitly frames "Deploy" as a false finish line: maintenance and technical support are not optional extras but continuing obligations, and the consequences of skipping them are concrete and business-relevant rather than abstract — outdated content creates its own liability and credibility risks, while a broken website can directly translate into lost revenue. The practical contract-drafting lesson sitting underneath this diagram: a website development agreement that only covers stages 1 through 5 and is silent on post-launch maintenance and support leaves a real gap that both client and developer should want addressed up front.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card email" id="d9">
+    <h2>9. Email Risk-to-Policy Mapping</h2>
+    <p>The chapter's eight email risks aren't really eight unrelated facts — they cluster into a few underlying THEMES, and seeing those themes makes it obvious what a Communications System Policy actually needs to address.</p>
+
+    <div class="mermaid">
+      graph TD
+        Risks[8 Email Risks] --> Theme1{THEME: CARELESSNESS<br/>in creation}
+        Risks --> Theme2{THEME: LOSS OF<br/>CONTROL over<br/>distribution}
+        Risks --> Theme3{THEME: AUTHENTICITY<br/>cannot be assumed}
+        Risks --> Theme4{THEME: PERMANENCE<br/>— it doesn't<br/>really go away}
+
+        Theme1 --> R1[Casual, spontaneous tone<br/>→ ill-considered statements]
+
+        Theme2 --> R2[Effortless mass<br/>reproduction/redistribution]
+        Theme2 --> R3[One-click irretrievable<br/>distribution to the<br/>WRONG recipients]
+        Theme2 --> R5[Can be lost/delayed<br/>beyond either party's<br/>control]
+
+        Theme3 --> R4[Easy to FORGE/<br/>SPOOF or alter<br/>before forwarding]
+
+        Theme4 --> R6[Detailed metadata reveals<br/>who/when/to whom]
+        Theme4 --> R7[Almost always<br/>RECOVERABLE —<br/>forensics finds<br/>deleted emails]
+        Theme4 --> R8[Susceptible to<br/>UNAUTHORIZED ACCESS<br/>at every storage point]
+
+        R1 --> Policy[COMMUNICATIONS SYSTEM<br/>POLICY CSP must address<br/>ALL FOUR themes —<br/>educate users, define<br/>acceptable use, get legal<br/>+ technical input, assign<br/>SENIOR MANAGEMENT<br/>ownership]
+        R2 --> Policy
+        R3 --> Policy
+        R4 --> Policy
+        R5 --> Policy
+        R6 --> Policy
+        R7 --> Policy
+        R8 --> Policy
+
+        style Risks fill:#1e293b,color:#fff
+        style Theme1 fill:#fef3c7,stroke:#d97706
+        style Theme2 fill:#fde68a,stroke:#ca8a04
+        style Theme3 fill:#fee2e2,stroke:#dc2626
+        style Theme4 fill:#e0f2fe,stroke:#0284c7
+        style Policy fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Rather than memorizing eight disconnected risk facts as a flat list, grouping them into four underlying THEMES gives you a reusable mental model: any new email-related problem you encounter on the exam likely falls into one of these same four buckets, even if it's phrased differently than the textbook's exact wording. Carelessness is about the SENDER's own poor judgment in the moment of writing. Loss of control is about what happens to the message ONCE SENT — it can spread, misfire, or vanish in ways neither party controls. Authenticity is the unique risk that the email you're looking at might not actually be genuine. Permanence is the theme that surprises people most: email doesn't behave like a private conversation that fades, it behaves more like a permanent, recoverable, and exposed record — which is precisely why professionals are advised elsewhere in the broader course material to treat every email as though it could appear, unaltered, in a courtroom years later. The single arrow converging all eight risks into one "Policy" box reinforces that a CSP isn't optional boilerplate — it's the direct, deliberate response to this entire risk landscape, not a generic IT formality.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 10 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Contract A vs. Contract B</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> Tendering in Canada creates two contracts. <br><br><strong>Contract A:</strong> The "Bidding Contract." Formed the exact second a contractor submits a valid bid. It contains the rules of the game.<br><strong>Contract B:</strong> The "Construction Contract." Formed only with the winner to actually build the project.</div>
+        <div class="mnem">A = The Game | B = The Job</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The "Ron Engineering" Case</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A contractor made a $750k mistake in their bid, tried to cancel it after the deadline, and lost in the Supreme Court.<br><br><strong>The Rule:</strong> This case invented "Contract A." It proved that once the tender deadline passes, bids are legally locked and irrevocable.</div>
+        <div class="mnem">Deadline Passes = Locked In</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Compliant Bids</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You submit the cheapest bid, but you forgot to include the required schedule.<br><br><strong>The Rule:</strong> The owner MUST reject your bid. Contract A is only formed if the bid perfectly complies with the tender rules. Accepting a non-compliant bid allows all other bidders to sue the owner.</div>
+        <div class="mnem">Strict Rules, Zero Exceptions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Privilege Clause</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> A line in the tender stating: "Lowest or any bid not necessarily accepted."<br><br><strong>The Trap:</strong> It lets the owner pick a higher bid based on disclosed criteria (like better experience). It does NOT let the owner pick a non-compliant bid or invent secret judging criteria later.</div>
+        <div class="mnem">Not a License to Cheat</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Bid Shopping</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A General Contractor shows Subcontractor X's low bid to Subcontractor Y and says, "If you beat this price, you get the job."<br><br><strong>The Rule:</strong> This is completely unethical and often illegal. It poisons the bidding process and violates the owner's Duty of Fairness.</div>
+        <div class="mnem">Price Peddling is Prohibited</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Duty of Fairness</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> The owner legally promises to treat every bidder exactly the same. <br><br><strong>The Catch:</strong> You cannot give one bidder extra time, share secret site data with only one guy, or let someone fix a typo after the deadline. A level playing field is legally required.</div>
+        <div class="mnem">Equal Treatment for All</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Bid Bonds</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> A financial guarantee submitted with the bid.<br><br><strong>The Rule:</strong> If you win the tender but refuse to sign Contract B, the owner cashes your bond. The money covers the price difference between your bid and the second-place bidder.</div>
+        <div class="mnem">Put Your Money Where Your Mouth Is</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Letters of Intent (LOI)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> The owner writes, "We intend to hire you. Start mobilizing your gear," but you haven't signed the final contract.<br><br><strong>The Rule:</strong> It is usually just an "agreement to agree." If the deal collapses, you get paid for the work you already did (Quantum Meruit), but you cannot sue for lost future profits.</div>
+        <div class="mnem">Start Working, But No Promises</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Bid Depositories</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> A secure facility where subcontractors submit sealed bids before the main deadline.<br><br><strong>The Goal:</strong> It physically stops General Contractors from "Bid Shopping" at the last second, forcing them to use the legitimate sealed numbers.</div>
+        <div class="mnem">The Anti-Bid Shopping Vault</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The "Obvious Error" Exception</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A contractor meant to bid $1,000,000 but typed $1,000.<br><br><strong>The Rule:</strong> The owner cannot legally "snap up" an obviously broken bid. If the mistake is glaringly obvious on its face, trying to hold them to it breaches the owner's Duty of Fairness.</div>
+        <div class="mnem">Cannot Exploit an Obvious Typo</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

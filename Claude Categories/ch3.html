@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Chapter 3: Ethical Considerations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f2f5;overflow:hidden;height:100vh}
+#header{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid #e2e5ec;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:50px;}
+#header-left{display:flex;align-items:center;gap:14px}
+#badge{background:#eff4ff;color:#1d4ed8;font-size:11px;font-weight:600;padding:3px 9px;border-radius:4px;letter-spacing:.05em}
+#title{font-size:13px;font-weight:600;color:#1a1d26}
+#subtitle{font-size:11px;color:#8b95aa;margin-top:1px}
+#controls{display:flex;align-items:center;gap:6px}
+.cbtn{background:#fff;border:1px solid #d4d8e2;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:500;color:#5a6070;cursor:pointer;transition:all .12s;font-family:inherit;}
+.cbtn:hover{background:#f5f6f8;border-color:#b0b8cc;color:#1a1d26}
+#zoom-display{font-size:12px;color:#8b95aa;font-family:'Courier New',monospace;min-width:44px;text-align:center}
+#canvas-wrap{position:fixed;top:50px;left:0;right:0;bottom:0;background:#f0f2f5;background-image:radial-gradient(circle,#d4d8e2 1px,transparent 1px);background-size:24px 24px;overflow:hidden;cursor:grab;}
+#canvas-wrap.dragging{cursor:grabbing}
+#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#node-layer{position:absolute;top:0;left:0;transform-origin:0 0}
+.node{position:absolute;transform:translate(-50%,-50%);border-radius:10px;padding:8px 13px;font-size:12px;font-weight:500;line-height:1.35;text-align:center;cursor:pointer;border:1.5px solid transparent;min-width:90px;white-space:pre;transition:transform .15s,box-shadow .15s;}
+.node:hover{transform:translate(-50%,-50%) scale(1.07);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.node.root{font-size:14px;font-weight:600;padding:0;border-radius:50%;width:150px;height:150px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;white-space:pre;}
+.node.branch{font-size:12px;font-weight:600;padding:10px 15px;}
+.node.leaf{font-size:11.5px;padding:7px 11px;}
+.node.detail{font-size:11px;padding:6px 10px;}
+#tooltip{position:fixed;z-index:200;background:#fff;border:1px solid #d4d8e2;border-radius:10px;padding:12px 15px;font-size:12px;color:#1a1d26;max-width:300px;line-height:1.55;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 20px rgba(0,0,0,.1);}
+#tooltip strong{font-size:13px;display:block;margin-bottom:5px;color:#1a1d26}
+#tooltip p{font-size:12px;color:#5a6070}
+#legend{position:fixed;bottom:16px;left:16px;z-index:100;background:#fff;border:1px solid #e2e5ec;border-radius:10px;padding:12px 14px;}
+#legend h4{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;margin-bottom:8px}
+.leg-item{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:11px;color:#5a6070}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#hint{position:fixed;bottom:16px;right:16px;z-index:100;background:#fff;border:1px solid #e2e5ec;border-radius:8px;padding:8px 12px;font-size:11px;color:#8b95aa;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="title">Chapter 3 — Ethical Considerations</div>
+      <div id="subtitle">Engineers Geoscientists Manitoba &nbsp;·&nbsp; Hover nodes for detailed notes</div>
+    </div>
+  </div>
+  <div id="controls">
+    <button class="cbtn" id="zout">−</button>
+    <span id="zoom-display">100%</span>
+    <button class="cbtn" id="zin">+</button>
+    <button class="cbtn" id="fit">Fit</button>
+    <button class="cbtn" id="r1">1:1</button>
+  </div>
+</div>
+
+<div id="canvas-wrap">
+  <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg"><g id="lines"></g></svg>
+  <div id="node-layer"></div>
+</div>
+
+<div id="tooltip"><strong id="tt-title"></strong><p id="tt-body"></p></div>
+
+<div id="legend">
+  <h4>Topic Areas</h4>
+  <div class="leg-item"><div class="leg-dot" style="background:#534AB7"></div>Ethics & Law</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#185FA5"></div>Codes of Ethics</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#0F6E56"></div>Duty to Public</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#854F0B"></div>Duty to Client</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#993C1D"></div>Duty to Employer</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#3B6D11"></div>Duty to Profession</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#5F5E5A"></div>Special Topics</div>
+</div>
+
+<div id="hint">🖱 Scroll to zoom &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Hover nodes for notes</div>
+
+<script>
+const NODES = [
+
+  // ROOT
+  { id:'root', label:'Ethical\nConsiderations', type:'root', x:0, y:0,
+    color:{bg:'#EEEDFE',border:'#534AB7',text:'#3C3489'},
+    tip:'Chapter 3. Ethics = theory of morality. Professional codes of ethics help members determine correct conduct in unclear situations. Primary penalty for breach = disciplinary action. Ethical issues are closely tied to conflicts of interest.' },
+
+  // ETHICS & LAW
+  { id:'ethlaw', label:'Ethics &\nthe Law', type:'branch', x:-440, y:-220,
+    color:{bg:'#EEEDFE',border:'#534AB7',text:'#3C3489'},
+    tip:'Strong connection: laws are derived from society\'s collective morality. Unethical conduct usually attracts legal consequences too. Three types of consequences can apply simultaneously to design professionals.' },
+  { id:'consequences', label:'3 Types of\nConsequences', type:'leaf', x:-610, y:-330,
+    color:{bg:'#EEEDFE',border:'#7F77DD',text:'#3C3489'},
+    tip:'(1) Criminal — most serious, can result in imprisonment. Proved beyond reasonable doubt. (2) Civil — monetary damages. Proved on balance of probabilities. (3) Disciplinary — reprimand, suspension, fine, loss of licence, mandatory training. All three can apply simultaneously — no "double jeopardy" protection across categories.' },
+  { id:'fraud', label:'Fraud Example\n(Triple Jeopardy)', type:'detail', x:-760, y:-300,
+    color:{bg:'#EEEDFE',border:'#AFA9EC',text:'#534AB7'},
+    tip:'An engineer who defrauds a client can simultaneously face: Criminal Code charges (imprisonment), civil suit for damages, AND disciplinary hearing (loss of licence). Double jeopardy rule only prevents being charged TWICE criminally for the same offence — it does NOT prevent simultaneous criminal + civil + disciplinary proceedings.' },
+  { id:'proofstd', label:'Standards\nof Proof', type:'leaf', x:-610, y:-200,
+    color:{bg:'#EEEDFE',border:'#7F77DD',text:'#3C3489'},
+    tip:'Criminal: beyond reasonable doubt (highest standard). Civil: balance of probabilities (more likely true than not). Disciplinary: conflicting authority — somewhere between civil and criminal standard. A criminal fraud conviction almost always proves civil liability and can be used in disciplinary proceedings.' },
+  { id:'practicalstep', label:'Practical Steps\nWhen Accused', type:'leaf', x:-600, y:-100,
+    color:{bg:'#EEEDFE',border:'#7F77DD',text:'#3C3489'},
+    tip:'When accused of unethical conduct: (1) Obtain legal counsel immediately. (2) Notify liability insurer — coverage may apply for disciplinary defence. Fraud/intentional acts likely NOT covered; negligence likely IS covered. (3) If criminal + disciplinary proceedings run simultaneously, apply to SUSPEND disciplinary proceedings until criminal case concludes. Same applies for simultaneous civil proceedings.' },
+
+  // CODES OF ETHICS
+  { id:'codes', label:'Codes of Ethics', type:'branch', x:-180, y:-390,
+    color:{bg:'#E6F1FB',border:'#185FA5',text:'#0C447C'},
+    tip:'Each provincial A/E/G association has a code of ethics. All based on Engineers Canada\'s Guideline on the Code of Ethics. Architects, engineers, and geoscientists follow same general patterns. Geoscientist codes are largely identical to engineering codes.' },
+  { id:'engcanacode', label:'Engineers Canada\nGuideline', type:'leaf', x:-320, y:-490,
+    color:{bg:'#E6F1FB',border:'#378ADD',text:'#0C447C'},
+    tip:'Preamble: "Professional engineers shall conduct themselves in an honourable and ethical manner. Shall uphold truth, honesty and trustworthiness and safeguard human life, welfare, and the environment." First obligation: "Hold paramount the safety, health and welfare of the public, the protection of the environment and promote health and safety within the workplace."' },
+  { id:'peo', label:'PEO Code\n(Ontario)', type:'leaf', x:-130, y:-510,
+    color:{bg:'#E6F1FB',border:'#378ADD',text:'#0C447C'},
+    tip:'PEO (Professional Engineers Ontario) code requires: fairness and loyalty to associates/employers/clients, fidelity to public needs, devotion to high ideals of personal honour and integrity, knowledge of relevant developments, and competence in services undertaken.' },
+  { id:'dutyorder', label:'Priority of Duties', type:'leaf', x:50, y:-470,
+    color:{bg:'#E6F1FB',border:'#378ADD',text:'#0C447C'},
+    tip:'Order of duties (highest to lowest): (1) Duty to the PUBLIC — paramount. (2) Duty to the CLIENT. (3) Duty to the EMPLOYER. (4) Duty to the PROFESSION. (5) Duty to SELF — typically lowest. Toughest dilemmas arise when two duties conflict.' },
+
+  // DUTY TO PUBLIC
+  { id:'public', label:'Duty to\nthe Public', type:'branch', x:220, y:-340,
+    color:{bg:'#E1F5EE',border:'#0F6E56',text:'#085041'},
+    tip:'PARAMOUNT duty — highest of all duties. Regulatory bodies exist to protect public interest. Includes: safety & welfare of the public, fairness and integrity toward public, not undertaking work outside competence.' },
+  { id:'publicsafety', label:'Public Safety\nParamount', type:'leaf', x:100, y:-470,
+    color:{bg:'#E1F5EE',border:'#1D9E75',text:'#085041'},
+    tip:'If employers/clients pressure a professional to compromise judgment to save money or further their interest — public safety MUST take precedence over all other duties. Even threat of job loss does not change this. Some US jurisdictions explicitly prohibit clients/employers from directing or controlling a professional\'s independent judgment.' },
+  { id:'expertwitness', label:'Expert Witness\nDuty', type:'leaf', x:270, y:-490,
+    color:{bg:'#E1F5EE',border:'#1D9E75',text:'#085041'},
+    tip:'Negligence claims focus on whether defendant met the standard of care of an average professional in the field. Expert witnesses assist the court — they cannot be "hired guns." If an expert becomes an advocate, they lose independence and credibility. Must clearly state assumptions underlying their opinion.' },
+  { id:'competence', label:'Duty Not to\nOverreach', type:'leaf', x:400, y:-420,
+    color:{bg:'#E1F5EE',border:'#1D9E75',text:'#085041'},
+    tip:'Duty to public includes not undertaking work outside one\'s area of competence. Taking on work beyond your expertise is itself an ethical violation, not just a technical risk.' },
+
+  // DUTY TO CLIENT
+  { id:'client', label:'Duty to\nthe Client', type:'branch', x:400, y:-160,
+    color:{bg:'#FAEEDA',border:'#854F0B',text:'#633806'},
+    tip:'Second only to duty to public. Act as faithful agent of the client. Key duties: maintain confidentiality, avoid conflicts of interest, act with fairness/courtesy/good faith, present consequences if professional judgment is overruled.' },
+  { id:'clientconflict', label:'Conflict of\nInterest', type:'leaf', x:560, y:-250,
+    color:{bg:'#FAEEDA',border:'#BA7517',text:'#633806'},
+    tip:'Must not accept financial compensation from a party whose interest conflicts with the client. Must not accept assignments where personal interest conflicts with client\'s interest. EXCEPTION: full disclosure of the conflict to the client may resolve the problem. Example: engineer owns property in area affected by client\'s development — must disclose.' },
+  { id:'confidclient', label:'Confidentiality\nto Client', type:'leaf', x:570, y:-120,
+    color:{bg:'#FAEEDA',border:'#BA7517',text:'#633806'},
+    tip:'Confidential information (e.g. client\'s construction budget) must not be disclosed — a contractor could exploit it. EXCEPTION: duty to the public may override confidentiality. The duty to public safety ranks higher than the duty of confidentiality to any client.' },
+  { id:'dualrole', label:'Dual Role:\nAgent & Arbiter', type:'leaf', x:540, y:10,
+    color:{bg:'#FAEEDA',border:'#BA7517',text:'#633806'},
+    tip:'Consultants under CCDC 2 contracts must act as impartial arbiters between owner and contractor when: certifying progress payments, evaluating extra payment claims, issuing certificate of completion, acting as first arbiter of disputes. Must not allow obligation to owner to bias decisions against the contractor. Approving a contractor\'s extra payment claim may reveal a design error — consult insurer and get legal advice before approving.' },
+
+  // DUTY TO EMPLOYER
+  { id:'employer', label:'Duty to\nthe Employer', type:'branch', x:360, y:120,
+    color:{bg:'#FAECE7',border:'#993C1D',text:'#712B13'},
+    tip:'Employee is agent of the employer. Duty of loyalty: employer\'s interest ahead of personal interest. Similar to duty to client in many respects. Cannot accept assignments or compensation that conflict with employer\'s interest.' },
+  { id:'moonlight', label:'Moonlighting\n& Competition', type:'leaf', x:510, y:170,
+    color:{bg:'#FAECE7',border:'#D85A30',text:'#712B13'},
+    tip:'An employee who accepts private engineering work — even on evenings/weekends — is technically competing with the employer if it is work the employer might reasonably perform. This is a breach of duty unless the employer gives advance consent.' },
+  { id:'constructrust', label:'Constructive\nTrust', type:'leaf', x:490, y:280,
+    color:{bg:'#FAECE7',border:'#D85A30',text:'#712B13'},
+    tip:'Remedy for employees competing with their employer. Any profit earned in competition with the employer is deemed held in trust FOR the employer — the employee can be forced to forfeit those profits. Avoid this by getting employer consent in advance.' },
+  { id:'empconf', label:'Confidentiality\nto Employer', type:'leaf', x:330, y:290,
+    color:{bg:'#FAECE7',border:'#D85A30',text:'#712B13'},
+    tip:'Employees owe confidentiality to employer. Most commonly arises when employment ends. Employers often require non-competition agreements — either at hiring or during termination/severance negotiations. Duty of loyalty to employer may survive after leaving the job.' },
+
+  // DUTY TO PROFESSION
+  { id:'profession', label:'Duty to\nthe Profession', type:'branch', x:100, y:290,
+    color:{bg:'#EAF3DE',border:'#3B6D11',text:'#27500A'},
+    tip:'Self-governance means members police each other. Members elect boards/councils which establish committees for investigations, disciplinary proceedings, vetting new members, and drafting bylaws. Statutes require members to report unprofessional conduct of fellow members.' },
+  { id:'reporting', label:'Duty to Report\nMisconduct', type:'leaf', x:200, y:410,
+    color:{bg:'#EAF3DE',border:'#639922',text:'#27500A'},
+    tip:'BC code requires reporting hazardous, illegal or unethical professional decisions or practices. Some bodies expel members who fail to report malpractice claims against themselves. However: if accusing professional doesn\'t have all facts, their criticism may itself be seen as unprofessional conduct.' },
+  { id:'selfpolice', label:'Caution in\nPolicing Others', type:'leaf', x:40, y:420,
+    color:{bg:'#EAF3DE',border:'#639922',text:'#27500A'},
+    tip:'Expert witnesses and those reporting misconduct must clearly state the assumptions underlying their opinion and advise that the opinion may change if facts differ. Criticism without full access to facts can itself constitute unprofessional conduct. An expert must state the limited facts relied upon and flag that the opinion is conditional.' },
+
+  // SPECIAL TOPICS
+  { id:'bribery', label:'Bribery of\nForeign Officials', type:'branch', x:-260, y:270,
+    color:{bg:'#F1EFE8',border:'#5F5E5A',text:'#444441'},
+    tip:'Federal statute: Corruption of Foreign Public Officials Act (CFPOA). Unusual because it applies to conduct OUTSIDE Canada. Applies to: transactions with "real and substantial" connection to Canada, AND all individuals/companies with Canadian nationality (including permanent residents).' },
+  { id:'cfpoa', label:'CFPOA Details', type:'leaf', x:-400, y:'370',
+    color:{bg:'#F1EFE8',border:'#888780',text:'#444441'},
+    tip:'Facilitation payments (small payments to expedite routine approvals, NOT contract awarding) are currently an exception — but Canada is in the process of eliminating this exception. Breaches are punishable by lengthy imprisonment and fines.' },
+  { id:'fcpa', label:'US FCPA\n(Stricter)', type:'leaf', x:-220, y:390,
+    color:{bg:'#F1EFE8',border:'#888780',text:'#444441'},
+    tip:'US Foreign Corrupt Practices Act. Two key differences from Canadian law: (1) US does NOT recognize double jeopardy for foreign bribery — a Canadian convicted under CFPOA can STILL be tried in the US for the same conduct. (2) US does NOT require "real and substantial" connection — even using the US Postal Service may be enough to give US courts jurisdiction.' },
+  { id:'civildisobey', label:'Civil Disobedience\nException', type:'leaf', x:-80, y:340,
+    color:{bg:'#F1EFE8',border:'#888780',text:'#444441'},
+    tip:'Ethics is a matter of personal morals — not all criminal behaviour is unethical. Example: unjust legislation (slavery laws in US, wartime internment in Canada). Civil disobedience may result in criminal conviction without being unethical. This is a rare but recognized exception to the rule that criminal = unethical.' },
+];
+
+// Fix string coordinates
+NODES.find(n=>n.id==='cfpoa').y = 370;
+
+const EDGES = [
+  ['root','ethlaw'],['root','codes'],['root','public'],['root','client'],['root','employer'],['root','profession'],['root','bribery'],
+  ['ethlaw','consequences'],['ethlaw','proofstd'],['ethlaw','practicalstep'],
+  ['consequences','fraud'],
+  ['codes','engcanacode'],['codes','peo'],['codes','dutyorder'],
+  ['public','publicsafety'],['public','expertwitness'],['public','competence'],
+  ['client','clientconflict'],['client','confidclient'],['client','dualrole'],
+  ['employer','moonlight'],['employer','constructrust'],['employer','empconf'],
+  ['profession','reporting'],['profession','selfpolice'],
+  ['bribery','cfpoa'],['bribery','fcpa'],['bribery','civildisobey'],
+];
+
+let scale=1,tx=0,ty=0,dragging=false,lx=0,ly=0;
+const wrap=document.getElementById('canvas-wrap');
+const nodeLayer=document.getElementById('node-layer');
+const linesG=document.getElementById('lines');
+const tooltip=document.getElementById('tooltip');
+const ttTitle=document.getElementById('tt-title');
+const ttBody=document.getElementById('tt-body');
+const zoomDisplay=document.getElementById('zoom-display');
+const nodeMap={};
+NODES.forEach(n=>nodeMap[n.id]=n);
+
+function applyT(){
+  nodeLayer.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
+  zoomDisplay.textContent=Math.round(scale*100)+'%';
+  drawEdges();
+}
+
+function drawEdges(){
+  linesG.innerHTML='';
+  linesG.setAttribute('transform',`translate(${tx},${ty}) scale(${scale})`);
+  EDGES.forEach(([a,b])=>{
+    const na=nodeMap[a],nb=nodeMap[b];
+    if(!na||!nb)return;
+    const x1=na.x,y1=na.y,x2=nb.x,y2=nb.y;
+    const mx=(x1+x2)/2;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke',nb.color.border);
+    path.setAttribute('stroke-width',nb.type==='branch'?2:1.5);
+    path.setAttribute('opacity','0.45');
+    linesG.appendChild(path);
+  });
+}
+
+function buildNodes(){
+  NODES.forEach(n=>{
+    const d=document.createElement('div');
+    d.className='node '+n.type;
+    d.style.left=n.x+'px';
+    d.style.top=n.y+'px';
+    d.style.background=n.color.bg;
+    d.style.borderColor=n.color.border;
+    d.style.color=n.color.text;
+    d.textContent=n.label;
+    d.addEventListener('mouseenter',()=>{
+      ttTitle.textContent=n.label.replace(/\n/g,' ');
+      ttBody.textContent=n.tip;
+      tooltip.style.opacity='1';
+    });
+    d.addEventListener('mousemove',e=>{
+      const x=Math.min(e.clientX+16,window.innerWidth-320);
+      const y=Math.min(e.clientY-10,window.innerHeight-170);
+      tooltip.style.left=x+'px';
+      tooltip.style.top=y+'px';
+    });
+    d.addEventListener('mouseleave',()=>{tooltip.style.opacity='0';});
+    nodeLayer.appendChild(d);
+  });
+}
+
+function fitView(){
+  const xs=NODES.map(n=>n.x),ys=NODES.map(n=>n.y);
+  const minX=Math.min(...xs)-110,maxX=Math.max(...xs)+110;
+  const minY=Math.min(...ys)-80,maxY=Math.max(...ys)+80;
+  const W=window.innerWidth,H=window.innerHeight-50;
+  scale=Math.min(W/(maxX-minX),H/(maxY-minY))*0.9;
+  tx=W/2-(minX+maxX)/2*scale;
+  ty=(H/2+50)-(minY+maxY)/2*scale;
+  applyT();
+}
+
+wrap.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const f=e.deltaY<0?1.1:0.9;
+  const ox=e.clientX,oy=e.clientY-50;
+  const prev=scale;
+  scale=Math.min(5,Math.max(0.08,scale*f));
+  tx=ox-(ox-tx)*(scale/prev);
+  ty=oy-(oy-ty)*(scale/prev);
+  applyT();
+},{passive:false});
+
+wrap.addEventListener('mousedown',e=>{dragging=true;lx=e.clientX;ly=e.clientY;wrap.classList.add('dragging');});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  tx+=e.clientX-lx;ty+=e.clientY-ly;lx=e.clientX;ly=e.clientY;applyT();
+});
+window.addEventListener('mouseup',()=>{dragging=false;wrap.classList.remove('dragging');});
+
+document.getElementById('zin').onclick=()=>{scale=Math.min(5,scale*1.2);applyT();};
+document.getElementById('zout').onclick=()=>{scale=Math.max(0.08,scale/1.2);applyT();};
+document.getElementById('fit').onclick=fitView;
+document.getElementById('r1').onclick=()=>{scale=1;tx=window.innerWidth/2;ty=(window.innerHeight-50)/2;applyT();};
+
+buildNodes();
+setTimeout(fitView,100);
+</script>
+</body>
+</html>

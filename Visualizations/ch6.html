@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 6: Visualizing Contract Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.formation { border-top-color: #10b981; }
+    .framework-card.offer { border-top-color: #3b82f6; }
+    .framework-card.consideration { border-top-color: #f59e0b; }
+    .framework-card.voiding { border-top-color: #ef4444; }
+    .framework-card.quantum { border-top-color: #8b5cf6; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 6: DEEP CONTRACT FORMATION VISUALIZATION</h1>
+
+  <div class="framework-card formation">
+    <h2>1. The Five Pillars of Enforceability</h2>
+    <p>A contract is an enforceable voluntary agreement that sets out the rights, responsibilities, and liabilities of the parties involved[cite: 1]. Its real purpose is to allocate risk and obligations[cite: 1]. For a court to uphold it, five strict elements must be present[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Root[THE ENFORCEABLE CONTRACT] --> O[1. Offer & Acceptance]
+        Root --> C[2. Consideration]
+        Root --> L[3. Legal Capacity]
+        Root --> I[4. Intent to Create Relations]
+        Root --> P[5. Lawful Purpose]
+
+        style Root fill:#1e293b,color:#fff,stroke:none
+        style O fill:#dcfce7,stroke:#16a34a
+        style C fill:#dcfce7,stroke:#16a34a
+        style L fill:#dcfce7,stroke:#16a34a
+        style I fill:#dcfce7,stroke:#16a34a
+        style P fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This map shows the foundational requirements of any contract[cite: 1].</p>
+      <ul>
+        <li><strong>Privity of Contract:</strong> Only parties strictly within this structure (privy to the contract) can enforce it[cite: 1]. Even if a contract was made specifically to benefit a third party, that third party generally cannot enforce it in Canada, unlike in the United States[cite: 1].</li>
+        <li><strong>Form:</strong> A contract does not always need to be in writing (except for specific cases like land sales); oral contracts are fully enforceable, though much harder to prove in court[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card offer">
+    <h2>2. The Negotiation Dance (Offer & Acceptance)</h2>
+    <p>Contract formation requires an offer capable of being accepted, and an unequivocal acceptance of that offer[cite: 1]. However, the rules of negotiation dictate exactly when an offer is alive or dead[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Start[Initial Offer] --> |Rejected| Dead1[Offer is Dead]
+        Start --> |Counter-Offer made| Dead2[Original Offer is Destroyed]
+        Dead2 --> |New terms presented| New[New Offer]
+        New --> |Unequivocal Agreement| Acc(((CONTRACT FORMED)))
+        
+        style Start fill:#e0f2fe,stroke:#0284c7
+        style Dead1 fill:#fee2e2,stroke:#dc2626
+        style Dead2 fill:#fee2e2,stroke:#dc2626
+        style New fill:#e0f2fe,stroke:#0284c7
+        style Acc fill:#166534,color:#fff,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This sequence outlines how negotiations legally function[cite: 1].</p>
+      <ul>
+        <li><strong>Invitation to Treat vs. Offer:</strong> A general request for offers is an "invitation to treat" and cannot be accepted[cite: 1]. However, in large-scale procurement, an invitation for bids is treated legally as an offer in Canada[cite: 1].</li>
+        <li><strong>The Counter-Offer Trap:</strong> If an offeree responds to an offer by asking for different terms, they are making a counter-offer[cite: 1]. This automatically terminates the original offer; the offeree cannot change their mind and accept the original offer later unless the offeror revives it[cite: 1].</li>
+        <li><strong>Revocation:</strong> An offeror can revoke their offer at any time before it is accepted, but the revocation must be communicated to the offeree[cite: 1]. Bids in a formal tendering process are an exception and are typically irrevocable for 30 to 60 days[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card consideration">
+    <h2>3. The Consideration Trap (Amendments)</h2>
+    <p>Consideration means something of value, no matter how small, has been given or promised by each party[cite: 1]. The most common legal trap engineers face is attempting to amend a contract without adding <em>fresh</em> consideration[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Base[Original Contract Signed] --> Mid[Contractor demands more money to finish on time]
+        Mid --> Trap{Did the Contractor promise anything NEW?}
+        
+        Trap -->|No. They are doing what they originally promised.| Fail[PAST CONSIDERATION]
+        Trap -->|Yes. They promised to finish one week early.| Pass[FRESH CONSIDERATION]
+        
+        Fail --> Lose[Amendment is VOID. Owner does not have to pay extra.]
+        Pass --> Win[Amendment is VALID.]
+
+        style Base fill:#f1f5f9,stroke:#64748b
+        style Mid fill:#fef3c7,stroke:#d97706
+        style Trap fill:#fef3c7,stroke:#d97706
+        style Fail fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Pass fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Lose fill:#991b1b,color:#fff
+        style Win fill:#166534,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagrams the ruling from cases like <em>Smith v. Dawson</em> and <em>Modular Windows</em>[cite: 1].</p>
+      <ul>
+        <li><strong>The Core Rule:</strong> You cannot demand extra money to perform a task you are already legally bound to perform[cite: 1]. The promise to simply not abandon the contract is not valid consideration[cite: 1].</li>
+        <li><strong>The Exception:</strong> A promise made without consideration is considered a gift and will not be enforced by courts, unless the promise is made in a written document and a formal seal (like a corporate seal) is applied to it, which the courts recognize as a substitute for consideration[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card voiding">
+    <h2>4. The Contract Killers (Voidability)</h2>
+    <p>Sometimes a contract is formed perfectly, but a hidden flaw allows one party to void the contract and walk away legally[cite: 1]. The courts will only void a contract under very rare, specific circumstances[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Start[Valid Contract] --> F1{Mistake}
+        Start --> F2{Misrepresentation}
+        Start --> F3{Duress}
+        Start --> F4{Unconscionability}
+        Start --> F5{Frustration}
+        
+        F1 -.-> |Must be material, mutual, & exist at creation| Void[Contract Voidable]
+        F2 -.-> |Untrue factual statement inducing agreement| Void
+        F3 -.-> |Illegitimate pressure leaving no real choice| Void
+        F4 -.-> |Extreme inequality of bargaining power| Void
+        F5 -.-> |Unforeseen event makes performance impossible| Void
+        
+        style Start fill:#1e293b,color:#fff
+        style Void fill:#991b1b,color:#fff,stroke-width:3px
+        style F1 fill:#fee2e2,stroke:#dc2626
+        style F2 fill:#fee2e2,stroke:#dc2626
+        style F3 fill:#fee2e2,stroke:#dc2626
+        style F4 fill:#fee2e2,stroke:#dc2626
+        style F5 fill:#fee2e2,stroke:#dc2626
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This charts the exact conditions required to escape a contract[cite: 1].</p>
+      <ul>
+        <li><strong>Mistake:</strong> To escape via mistake, the misunderstanding must be significant (material), made by <em>both</em> parties (mutual), and must have existed at the exact time the contract was formed[cite: 1].</li>
+        <li><strong>Misrepresentation:</strong> A false statement that induces someone to sign[cite: 1]. If an owner has critical subsurface soil information that contradicts bid assumptions and hides it, this is misrepresentation by omission[cite: 1].</li>
+        <li><strong>Duress:</strong> Illegitimate pressure or threats[cite: 1]. The courts look at whether the coerced party protested, had any alternative legal remedies, or took steps to avoid the contract later (from the <em>Pao On</em> case)[cite: 1].</li>
+        <li><strong>Frustration:</strong> Also known as impossibility[cite: 1]. An unforeseen event makes performance literally impossible[cite: 1]. Note that most modern contracts use a "force majeure" clause to pre-allocate these exact risks, making frustration very difficult to prove[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card quantum">
+    <h2>5. Quantum Meruit & Waiver</h2>
+    <p>When the strict rules of a contract break down due to casual behavior or fundamental changes, the courts step in with equitable remedies to ensure fairness[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Sub1[Waiver & Estoppel] --> |Party acts like they won't enforce a rule| Effect1[They are 'estopped' from suddenly enforcing it]
+        Sub2[Quantum Meruit] --> |Work performed without a valid contract| Effect2[Court orders payment for 'the amount it is worth']
+        
+        style Sub1 fill:#ede9fe,stroke:#8b5cf6
+        style Sub2 fill:#ede9fe,stroke:#8b5cf6
+        style Effect1 fill:#f8fafc,stroke:#94a3b8
+        style Effect2 fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This highlights how courts fix broken contractual realities[cite: 1].</p>
+      <ul>
+        <li><strong>Waiver and Estoppel:</strong> If a contract says all changes must be in writing, but the owner casually approves oral changes for months, they have "waived" their right to enforce that clause[cite: 1]. They are "estopped" from suddenly refusing to pay for an oral change later[cite: 1].</li>
+        <li><strong>Quantum Meruit:</strong> Translates to "the amount it is worth"[cite: 1]. If an owner forces a contractor to change their work method (a constructive change) but refuses to acknowledge it as an official change order, the contract price no longer applies[cite: 1]. The court will use Quantum Meruit to calculate a fair payment based on the actual value of the work performed, including a reasonable profit[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

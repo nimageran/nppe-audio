@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 3: Visual Mechanics — Ethical Considerations</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.triple { border-top-color: #dc2626; }
+    .framework-card.hierarchy { border-top-color: #0ea5e9; }
+    .framework-card.suspend { border-top-color: #ca8a04; }
+    .framework-card.consultant { border-top-color: #9333ea; }
+    .framework-card.trust { border-top-color: #16a34a; }
+    .framework-card.report { border-top-color: #f59e0b; }
+    .framework-card.cfpoa { border-top-color: #64748b; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 3: VISUAL MECHANICS — ETHICAL CONSIDERATIONS</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Triple-Jeopardy Framework</a>
+    <a href="#d2">2. The Duty Hierarchy — What Outranks What</a>
+    <a href="#d3">3. The Parallel Proceedings Trap</a>
+    <a href="#d4">4. The Consultant's Three-Way Conflict</a>
+    <a href="#d5">5. The Constructive Trust Mechanism</a>
+    <a href="#d6">6. The Self-Policing Double Bind</a>
+    <a href="#d7">7. The CFPOA Jurisdictional Reach</a>
+  </div>
+
+
+  <div class="framework-card triple" id="d1">
+    <h2>1. The Triple-Jeopardy Framework</h2>
+    <p>A single act of professional misconduct can trigger THREE completely separate consequence tracks simultaneously, each with its own standard of proof. This diagram shows why "double jeopardy" protection doesn't block this from happening, using the chapter's own fraud example.</p>
+
+    <div class="mermaid">
+      graph TD
+        Act[Engineer defrauds<br/>a client] --> Track1[CRIMINAL TRACK<br/>— Criminal Code charges]
+        Act --> Track2[CIVIL TRACK —<br/>client sues for damages]
+        Act --> Track3[DISCIPLINARY TRACK<br/>— professional<br/>association hearing]
+
+        Track1 --> Proof1[Standard: BEYOND<br/>A REASONABLE DOUBT<br/>— highest bar]
+        Track2 --> Proof2[Standard: BALANCE<br/>OF PROBABILITIES<br/>— lower bar]
+        Track3 --> Proof3[Standard: BALANCE OF<br/>PROBABILITIES — or<br/>possibly something<br/>between the two —<br/>conflicting case authority]
+
+        Proof1 --> Outcome1[Possible IMPRISONMENT]
+        Proof2 --> Outcome2[MONETARY damages]
+        Proof3 --> Outcome3[Reprimand, suspension,<br/>fine, LOSS OF LICENCE,<br/>or required retraining]
+
+        DoubleJeopardy{Does 'double jeopardy'<br/>PREVENT all three<br/>from proceeding?} --> NoBlock[NO — double jeopardy<br/>ONLY prevents being tried<br/>TWICE for the SAME<br/>CRIMINAL offence. It does<br/>NOT block simultaneous<br/>civil + disciplinary<br/>proceedings]
+
+        NoBlock -.-> Act
+
+        style Act fill:#1e293b,color:#fff
+        style Track1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Track2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Track3 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style DoubleJeopardy fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style NoBlock fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The three tracks fanning out from a single act is the core image worth remembering, because it corrects a common intuition that "facing multiple proceedings for one act" must somehow be unfair or legally blocked. The DoubleJeopardy diamond exists specifically to dismantle that intuition — double jeopardy is a NARROW protection limited to the criminal track alone (you cannot be criminally tried twice for the identical offence), and it says NOTHING about civil or disciplinary consequences running in parallel. Each track's DIFFERENT standard of proof matters practically: a criminal acquittal (failing to meet the tough beyond-a-reasonable-doubt bar) does NOT automatically mean the civil or disciplinary cases fail too, since those only need the much lower balance-of-probabilities standard — meaning someone could walk free from criminal court yet still lose a civil case or their licence over the exact same underlying conduct.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card hierarchy" id="d2">
+    <h2>2. The Duty Hierarchy — What Outranks What</h2>
+    <p>A professional owes duties to five different parties simultaneously, and most genuine ethical dilemmas are really just CONFLICTS between two of these duties. This diagram shows the ranking that resolves those conflicts.</p>
+
+    <div class="mermaid">
+      graph TD
+        Public[1. DUTY TO THE PUBLIC<br/>— PARAMOUNT. Safety,<br/>health, welfare, environment.<br/>OVERRIDES all other duties,<br/>even at risk of job loss] --> Client[2. DUTY TO THE CLIENT<br/>— faithful agent, avoid<br/>conflicts, maintain<br/>confidentiality]
+
+        Client --> Employer[3. DUTY TO THE<br/>EMPLOYER — similar<br/>structure to client duty —<br/>loyalty, confidentiality,<br/>non-competition]
+
+        Employer --> Profession[4. DUTY TO THE<br/>PROFESSION — uphold<br/>reputation, REPORT<br/>misconduct of peers]
+
+        Profession --> Self[5. DUTY TO ONESELF<br/>— LOWEST ranking]
+
+        Conflict{Genuine ethical<br/>dilemma = conflict<br/>BETWEEN two of<br/>these duties} --> Resolve[RESOLUTION METHOD:<br/>identify which TWO duties<br/>are in tension, then apply<br/>this RANKING — higher<br/>duty wins]
+
+        style Public fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Client fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Employer fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Profession fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Self fill:#f3e8ff,stroke:#9333ea,stroke-width:2px
+        style Conflict fill:#1e293b,color:#fff
+        style Resolve fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This is the single most important diagram in the chapter because nearly every ethics scenario in the chapter questions reduces to "which of these two duties wins" — the formwork/superior pressure question (public safety over employer convenience), the geoscientist expert witness confidentiality question (public/profession over client confidentiality), and the no-damages-for-delay claim question (fairness/impartiality regardless of who's paying) all resolve by locating the conflicting duties on this hierarchy and letting the higher one win. The chapter is explicit that public safety is PARAMOUNT — that specific word matters, because it signals this isn't just "first among equals," it's a duty that overrides ALL others even where the professional risks real consequences like job loss for upholding it. Notice "Duty to Oneself" sits at the very bottom — self-interest is acknowledged as a real, legitimate consideration, but it's explicitly subordinate to every other duty on this list, meaning "but I might get fired" is never, on its own, a valid ethical justification for compromising any of the four duties ranked above it.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card suspend" id="d3">
+    <h2>3. The Parallel Proceedings Trap</h2>
+    <p>Facing criminal, civil, and disciplinary proceedings at the same time creates a genuine procedural trap around self-incrimination. This diagram shows the trap and the specific defensive move the chapter recommends.</p>
+
+    <div class="mermaid">
+      graph TD
+        Accused[Professional faces<br/>CRIMINAL charges AND<br/>civil/disciplinary<br/>proceedings — SAME<br/>underlying conduct] --> CriminalRight[In the CRIMINAL case:<br/>right to REMAIN SILENT,<br/>avoid self-incrimination]
+
+        CriminalRight --> Tension{TENSION: disciplinary/civil<br/>proceedings may PRESSURE<br/>the accused to explain<br/>or testify about the<br/>SAME facts}
+
+        Tension --> Risk[RISK: anything said in the<br/>disciplinary/civil proceeding<br/>could be used as EVIDENCE<br/>in the criminal case —<br/>undermining the right<br/>to silence]
+
+        Risk --> Move{RECOMMENDED MOVE}
+        Move --> Suspend[Apply to SUSPEND the<br/>disciplinary (or civil)<br/>proceeding UNTIL the<br/>criminal case concludes]
+
+        Suspend --> Result[Protects the right to<br/>silence in the criminal<br/>matter WITHOUT<br/>forfeiting the ability<br/>to later participate fully<br/>in the other proceedings]
+
+        style Accused fill:#1e293b,color:#fff
+        style Tension fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Risk fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Suspend fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagram exists to extend diagram 1's "three tracks running in parallel" insight into its most important PRACTICAL consequence — the tracks don't just coexist independently, they can actively interfere with each other if not managed carefully. The Risk box captures the real danger: a professional defending themselves in a disciplinary hearing might feel pressure to explain their side of the story, but doing so creates a transcript or record that could later be used as evidence against them in the SEPARATE criminal proceeding, effectively undermining the constitutional right to silence through a side door. The recommended fix — applying to suspend the non-criminal proceeding — isn't about avoiding accountability, it's about SEQUENCING the proceedings properly so the accused isn't forced to choose between defending their licence and protecting their criminal defence at the same time.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card consultant" id="d4">
+    <h2>4. The Consultant's Three-Way Conflict</h2>
+    <p>When a contractor claims extra payment, the architect/engineer reviewing that claim isn't just balancing TWO interests (owner vs contractor) — there's a hidden THIRD interest that makes this one of the chapter's most genuinely difficult conflicts.</p>
+
+    <div class="mermaid">
+      graph TD
+        Claim[Contractor submits a<br/>claim for EXTRA<br/>PAYMENT] --> Consultant{Consultant must<br/>evaluate the claim —<br/>THREE interests<br/>at work}
+
+        Consultant --> I1[DUTY TO OWNER:<br/>protect against<br/>UNFOUNDED claims]
+        Consultant --> I2[DUTY TO CONTRACTOR:<br/>evaluate FAIRLY and<br/>IMPARTIALLY — CCDC 2<br/>GC 2.2.6 explicitly<br/>requires no favouritism]
+        Consultant --> I3[CONSULTANT'S OWN<br/>SELF-INTEREST — the<br/>HIDDEN third interest]
+
+        I3 --> WhySelf{Why does approving<br/>the claim create<br/>SELF-INTEREST?}
+        WhySelf --> Explain[Approving an extra often<br/>means ADMITTING an<br/>error/omission existed<br/>in the CONSULTANT'S<br/>OWN original design —<br/>consultant is evaluating<br/>their OWN work]
+
+        Explain --> Consequence[If approved: OWNER may<br/>sue the consultant to<br/>recover the cost. Even<br/>without a lawsuit:<br/>reputation/future work<br/>may suffer]
+
+        Consequence --> Resolution{What SHOULD<br/>the consultant do?}
+        Resolution --> Honest[If HONESTLY believes the<br/>contractor is entitled —<br/>regardless of cause —<br/>APPROVE the claim]
+        Resolution --> Protect[BUT: be careful not to make<br/>statements prejudicing the<br/>INSURER's rights — notify<br/>insurer + seek legal advice<br/>if a claim against the<br/>consultant becomes possible]
+
+        style Claim fill:#1e293b,color:#fff
+        style Consultant fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style I3 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Explain fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Honest fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Protect fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The I3 box is given the heaviest visual weight because it's the genuinely surprising element of this conflict — most people analyzing a claim dispute would naturally see it as a simple TWO-PARTY tension (owner wants to pay less, contractor wants to be paid more), and miss that the person evaluating the dispute has their OWN stake in the outcome that's completely separate from either party's interest. The WhySelf branch traces exactly why: approving an extra for, say, a design error effectively means the consultant is grading their OWN homework and concluding they made a mistake — an inherently uncomfortable position that creates real pressure to side with the owner regardless of the claim's actual merits. The Resolution branch resolves this with a deceptively simple instruction (approve if honestly warranted, regardless of cause) paired with a practical self-protective step (loop in the insurer early) — the ethical answer and the practical risk-management answer turn out to be compatible, not in tension, as long as the consultant is honest about WHY they're approving something AND careful about how that approval is communicated.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card trust" id="d5">
+    <h2>5. The Constructive Trust Mechanism</h2>
+    <p>This diagram traces exactly how an employee secretly competing with their employer gets punished — not through a direct lawsuit for damages, but through a specific legal mechanism that captures the WRONGFUL profit itself.</p>
+
+    <div class="mermaid">
+      graph TD
+        Employee[Employee accepts<br/>outside engineering<br/>work — work the<br/>EMPLOYER could<br/>reasonably have<br/>performed] --> Permission{Did employee get<br/>EMPLOYER'S permission<br/>FIRST?}
+
+        Permission -->|Yes| NoBreach[NO BREACH —<br/>consent in advance<br/>avoids the problem<br/>entirely]
+        Permission -->|No| Breach[BREACH of duty<br/>of LOYALTY —<br/>even if performed<br/>on weekends/evenings,<br/>this is still<br/>'competition']
+
+        Breach --> Mechanism{REMEDY MECHANISM:<br/>Constructive Trust}
+        Mechanism --> Implied[Trust IMPLIED BY LAW<br/>— NOT something the<br/>parties agreed to —<br/>created specifically to<br/>PROTECT the employer's<br/>rights]
+
+        Implied --> Effect[EFFECT: any profit<br/>earned by the employee<br/>through the competing<br/>work is DEEMED to be<br/>HELD IN TRUST for<br/>the EMPLOYER]
+
+        Effect --> Forfeit[Employee can be<br/>FORCED TO FORFEIT<br/>those profits TO<br/>the employer —<br/>not just pay damages,<br/>but surrender the<br/>gains themselves]
+
+        style Employee fill:#1e293b,color:#fff
+        style Permission fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style NoBreach fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Mechanism fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Forfeit fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The key conceptual point this diagram protects is that a constructive trust is fundamentally different from an ordinary damages award — it's not the employer proving they LOST money and being compensated for that loss, it's the law treating the employee's WRONGFUL GAINS as never having truly belonged to the employee in the first place, instead deeming them to have been held in trust for the employer all along. This distinction matters practically: an employer doesn't need to prove they suffered a quantifiable loss from the competing work (which might be hard to establish, especially if the employer's business wasn't actually harmed) — they only need to show the employee earned profits through improper competition, and those profits themselves become recoverable regardless of whether the employer can point to its own corresponding loss. The Permission diamond at the top is the simple, practical escape valve — this entire mechanism is triggered only by SECRECY and lack of consent, meaning an employee who simply asks first and gets a green light avoids the entire problem.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card report" id="d6">
+    <h2>6. The Self-Policing Double Bind</h2>
+    <p>Professionals are required to report misconduct by their peers — but the chapter is explicit that doing so carelessly creates its own separate ethics violation. This diagram shows the narrow path between failing to report and over-reporting.</p>
+
+    <div class="mermaid">
+      graph TD
+        Awareness[Professional becomes<br/>aware of POTENTIAL<br/>misconduct by a<br/>colleague] --> Obligation{Duty to the<br/>PROFESSION requires<br/>reporting — but<br/>HOW carefully?}
+
+        Obligation --> TooLittle{Professional says<br/>NOTHING despite<br/>real awareness}
+        TooLittle --> Fail1[BREACH of duty to<br/>the profession —<br/>failure to report]
+
+        Obligation --> TooMuch{Professional accuses<br/>WITHOUT having access<br/>to ALL relevant facts}
+        TooMuch --> Fail2[The ACCUSATION ITSELF<br/>can be interpreted as<br/>UNPROFESSIONAL CONDUCT<br/>— criticizing another's<br/>work without full<br/>information]
+
+        Obligation --> Right{CORRECT APPROACH}
+        Right --> R1[Clearly STATE the<br/>ASSUMPTIONS the<br/>opinion is based on]
+        Right --> R2[ADVISE that the opinion<br/>MAY CHANGE if facts<br/>are later proven<br/>to differ]
+
+        R1 --> Safe[Especially relevant for<br/>EXPERT WITNESSES —<br/>often working with a<br/>LIMITED set of facts<br/>provided by counsel]
+        R2 --> Safe
+
+        style Awareness fill:#1e293b,color:#fff
+        style Obligation fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Fail1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Fail2 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two failure branches (TooLittle and TooMuch) deliberately bracket the correct path to show this isn't a simple "always report" rule — it's a genuine double bind where BOTH under-reporting and over-reporting carelessly create separate ethics problems. The chapter explicitly notes some governing bodies go further and require self-policing so strict that members can be expelled for failing to report claims against THEMSELVES, which raises the stakes on the "TooLittle" side considerably. But the "TooMuch" side is just as real a trap, especially for expert witnesses working from an incomplete record (since it's the LAWYER's job to introduce supporting facts into evidence, not the expert's) — an opinion that impugns another professional's competence, based on facts that later turn out to be incomplete or wrong, can boomerang into an ethics complaint against the ACCUSER. The Right branch resolves this tension elegantly: rather than choosing between silence and confident accusation, the safe path is TRANSPARENT CONDITIONALITY — state your assumptions, flag that your conclusion could change with new facts, and let that qualification do the protective work.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card cfpoa" id="d7">
+    <h2>7. The CFPOA Jurisdictional Reach</h2>
+    <p>Canadian criminal law is normally territorial — it applies to conduct happening IN Canada. The CFPOA breaks that pattern in an unusual way, and this diagram shows exactly how far that reach extends, plus the double-jeopardy gap waiting on the US side.</p>
+
+    <div class="mermaid">
+      graph TD
+        Normal[NORMAL RULE: most<br/>Canadian statutes apply<br/>only to conduct<br/>WITHIN Canada] --> CFPOA{CFPOA IS UNUSUAL:<br/>applies to conduct<br/>OUTSIDE Canada}
+
+        CFPOA --> Trigger{What triggers<br/>CFPOA jurisdiction?}
+        Trigger --> T1[A 'REAL AND<br/>SUBSTANTIAL'<br/>connection to Canada]
+        Trigger --> T2[CANADIAN NATIONALITY<br/>of the individual/company<br/>— INCLUDES permanent<br/>residents, not just<br/>citizens]
+
+        T1 --> Prohibited[PROHIBITS bribery of<br/>foreign public officials]
+        T2 --> Prohibited
+
+        Prohibited --> Exception{EXCEPTION:<br/>'facilitation payments'}
+        Exception --> Small[Small payments to<br/>expedite ROUTINE<br/>approvals — EXCLUDES<br/>awarding of contracts.<br/>Government is<br/>PHASING THIS<br/>EXCEPTION OUT]
+
+        Prohibited --> USComparison{Compare to US FCPA}
+        USComparison --> US1[US does NOT require<br/>'real and substantial'<br/>connection — even<br/>MINIMAL contact,<br/>e.g. using the US<br/>Postal Service, can<br/>create jurisdiction]
+        USComparison --> US2[US does NOT recognize<br/>double jeopardy for<br/>foreign bribery — a<br/>CANADIAN CONVICTION<br/>under CFPOA does NOT<br/>block a SEPARATE<br/>US prosecution for the<br/>SAME conduct]
+
+        style Normal fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style CFPOA fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Prohibited fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style US2 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "Normal" box at the top exists specifically to make the CFPOA's unusual extraterritorial reach stand out as an exception rather than the rule — most Canadian criminal statutes simply don't apply once you've left Canadian soil, which makes the CFPOA's two jurisdictional triggers (T1 and T2) worth remembering precisely because they're atypical. T2 deserves particular attention because "Canadian nationality" is defined more broadly than people often assume — it explicitly includes PERMANENT RESIDENTS, not just citizens, meaning a permanent resident engineer working entirely outside Canada can still fall within CFPOA's reach purely based on residency status. The US2 box at the bottom carries the most serious practical warning in the whole diagram: even a Canadian who fully resolves their CFPOA exposure (conviction, sentence served, case closed) is NOT protected from a completely separate US prosecution for the identical underlying conduct, because the US doesn't recognize double jeopardy across these two countries' legal systems — meaning "I already dealt with this in Canada" provides zero protection if the US decides to pursue the same facts independently, especially given how minimal a US jurisdictional trigger can be (even routing through the US Postal Service once).</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

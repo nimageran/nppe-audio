@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 13 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 13 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — Concurrent Liability</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 9</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — Concurrent Liability: Why a Contract Doesn't Block a Tort Claim",
+    text: "In the past, if you had a contract with a client, they could only sue you for breaching that exact contract. They could not sue you in tort. A major Supreme Court case called Central Trust versus Rafuse changed the rules entirely. Now, a client can sue you in both contract and tort at the exact same time. The only guardrail protecting you is that a client cannot use a tort claim to completely bypass or rewrite what the contract specifically says. However, if the contract is silent on an issue, the court will fill that gap by imposing a tort duty of care.",
+    ex: "You sign a contract to design a bridge, but you forget to include a clause limiting your financial liability. If the bridge falls, the client can sue you in tort for negligence, and you cannot hide behind the contract because it was totally silent on the liability limit."
+  },
+  {
+    title: "Diagram 2 — The Discoverability Clock",
+    text: "A limitation period is a legal stopwatch dictating how long someone has to sue you. If a defect is patent, meaning it is obvious to anyone who looks, the stopwatch starts ticking the moment the work is finished. But if a defect is latent, meaning it is hidden deep inside a wall or underground, the stopwatch sits completely frozen. Under the Kamloops rule, it only starts ticking when the client actually discovers the damage, or when a reasonable person ought to have discovered it. However, to prevent infinite liability, the government imposes an ultimate limitation period. This is an absolute cutoff, usually ten to fifteen years after the work was done, which kills the lawsuit no matter when the defect was discovered.",
+    ex: "You design a faulty underground pipe in 2010. The client doesn't see a leak until 2025. The standard 2-year clock starts in 2025 because it was a hidden latent defect. But if your province has a 10-year ultimate limitation period, the claim died in 2020. The client is legally blocked from suing you."
+  },
+  {
+    title: "Diagram 3 — The Limitation Period Decision Tree",
+    text: "When figuring out if a lawsuit is still alive, you must run it through three strict gates. Gate 1 asks if the defect was obvious or hidden, to find out exactly when the clock started. Gate 2 checks if the standard limitation period, like two years, has expired since that specific start date. If it hasn't, the claim is still alive. But Gate 3 is the ultimate override. It checks if the ultimate statutory limitation period has expired since the day the work was physically done. If Gate 3 is expired, the lawsuit dies instantly, regardless of what the other gates said.",
+    ex: "A client discovers a hidden roof defect three months ago and tries to sue you immediately. Gate 1 and 2 say the lawsuit is alive because they just found it. But if you built that roof 16 years ago, and the ultimate limitation period in your province is 15 years, Gate 3 slams shut and the lawsuit is dismissed."
+  },
+  {
+    title: "Diagram 4 — The Three Protections Against Indefinite Liability",
+    text: "Because hidden defects can trigger lawsuits decades later, professionals use three tools to cap their risk. Tool one is writing a shorter limitation period directly into the contract. Tool two is limiting the scope of damages in the contract, like capping your liability to the exact amount of your insurance payout. Tool three is the statutory ultimate limitation period, which applies automatically. Tools one and two only work if you aggressively negotiate them and write them down. But remember, in some provinces, you are legally forbidden from contracting out of the statute to shorten a limitation period.",
+    ex: "You write a contract saying the client only has 1 year to sue you after a project ends, using Tool 1. But if the local provincial law explicitly says you cannot shorten the statutory 2-year limit, the judge will throw your clause in the trash and the client gets the full 2 years."
+  },
+  {
+    title: "Diagram 5 — The Joint and Several Liability Cash-Flow Disaster",
+    text: "Joint and several liability is a terrifying financial trap for engineers. If a court decides an engineer is 30 percent at fault for a collapse, and the contractor is 70 percent at fault, the client does not have to split the bill. The client is legally allowed to force the engineer to pay 100 percent of the damages. The engineer is then forced to chase the contractor to get the 70 percent back. If the contractor goes bankrupt, the engineer is completely stuck paying the full bill for a mistake they only partially caused.",
+    ex: "You make a minor design error worth 10 percent of the blame, and the builder makes a massive pouring error worth 90 percent. The building collapses causing ten million dollars in damage. The builder goes bankrupt. Under joint and several liability, the owner can force you to pay the entire ten million dollars yourself."
+  },
+  {
+    title: "Diagram 6 — Contributory Negligence: The Switch That Changes Everything",
+    text: "In some provinces, there is a legal switch that completely turns off the nightmare of joint and several liability. That switch is called contributory negligence. If the plaintiff, which is usually the owner, is found to be even 1 percent at fault for the disaster, joint and several liability is destroyed. It flips to several liability. Under several liability, each defendant only pays their exact percentage of the blame, and the owner is forced to absorb the share of anyone who goes bankrupt.",
+    ex: "Using the previous example where the builder goes bankrupt. If the court finds the owner was 1 percent at fault for rushing the schedule, joint and several liability turns off. You only pay your 10 percent share, which is one million dollars, and the owner is forced to eat the bankrupt builder's nine million dollar share."
+  },
+  {
+    title: "Diagram 7 — The Vicarious Liability Boundary",
+    text: "Employers are vicariously liable for the mistakes of their employees, but only within a strict boundary called the course and scope of employment. If you make a negligent mistake while doing your assigned job, the employer pays the victim. But if you step outside that boundary—like doing private side-jobs or acting recklessly off the clock—the employer is completely protected. You become personally liable, and the employer's insurance will not protect you.",
+    ex: "You use your company laptop on a Sunday to design a retaining wall for your neighbor's cash-only backyard project. The wall collapses. Because you did this outside your scope of employment, your engineering firm is completely safe, and the neighbor will sue you personally for everything you own."
+  },
+  {
+    title: "Diagram 8 — Codes as a Floor, Not a Ceiling",
+    text: "Engineering codes and standards are the absolute minimum legal floor; they are never the ceiling. Legislated codes are mandatory for everyone. Contractual codes are mandatory only because you signed the deal. Voluntary industry guidelines are technically not mandatory, but courts use them as the baseline anyway. You are always allowed to use your professional judgment to design above the code. But if you design below the code, courts will automatically presume you were negligent unless you can prove an incredibly good reason.",
+    ex: "The building code requires a roof to hold 40 pounds of snow. You use your judgment and design it for 60 pounds. That is perfectly legal. But if you design it for 30 pounds to save money, and it caves in, the court will instantly presume you are guilty of negligence because you dropped below the minimum floor."
+  },
+  {
+    title: "Diagram 9 — The Code-Compliance Liability Matrix",
+    text: "Many engineers falsely believe that if they follow the building code perfectly, they cannot be sued. This is wrong. You can follow the code perfectly and still be found liable in four specific situations. First, if you actually knew the code was outdated. Second, if you should have known the code was bad because of recent industry accidents. Third, if the entire industry standard is proven to be careless. And fourth, if you are creating a leading-edge design where old codes do not apply, requiring you to get informed consent from the client.",
+    ex: "You design a balcony exactly to the 2025 building code. However, you read an engineering journal last month that proved the 2025 code calculations are dangerously flawed and cause balconies to crack. If you blindly follow the code anyway and the balcony falls, you are liable because you had actual knowledge the code was inadequate."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

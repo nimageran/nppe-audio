@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Canadian Constitution</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> It is the ultimate master rulebook for the entire country. <br><br><strong>The Rule:</strong> Its main job is to divide power between the Federal government and the Provincial governments so they do not fight over who controls what. Any law that breaks the Constitution is automatically cancelled.</div>
+        <div class="mnem">The Supreme Rulebook</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Federal Government Powers</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> The Federal government is only allowed to make laws about things that affect the whole country on a large scale.<br><br><strong>Examples:</strong> The military, criminal law, postal service, currency, and patents.</div>
+        <div class="mnem">National Scope = Federal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Provincial Government Powers</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> The Provinces make laws for local, day-to-day life inside their borders.<br><br><strong>The Exam Trick:</strong> Provinces control property, civil rights, and <strong>the regulation of professions</strong>. This means engineering is regulated by the province (like APEGM), not the national government.</div>
+        <div class="mnem">Local Rules = Provincial</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Charter of Rights and Freedoms</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> It is a shield that protects regular people from the government stepping on their basic rights.<br><br><strong>The Rule:</strong> It guarantees things like freedom of speech and religion. It only applies to government actions, not fights between private companies.</div>
+        <div class="mnem">People vs. The Government</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Statute Law"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> Laws that are officially written and passed by elected politicians (like Parliament or the Provincial Legislature).<br><br><strong>The Rule:</strong> Statutes are incredibly powerful. A new statute can instantly override an old judge-made law.</div>
+        <div class="mnem">Written by Politicians</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Common Law"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> It is the system used in 9 out of 10 Canadian provinces.<br><br><strong>The Rule:</strong> It is law created by judges in courtrooms. When a judge solves a problem, future judges look back at that decision and follow the same pattern to keep the rules fair and predictable.</div>
+        <div class="mnem">Rule of Past Precedent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Civil Law" (Quebec)?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Exception:</strong> Quebec does not use Common Law. They use the French "Civil Law" system.<br><br><strong>The Rule:</strong> Instead of looking at past cases like other provinces, Quebec judges look at one massive, written book of rules (the Civil Code) to find the answer.</div>
+        <div class="mnem">Quebec = The Rule Book</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Stare Decisis"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A Latin term that is the beating heart of the Common Law system. It means "let the decision stand."<br><br><strong>The Rule:</strong> Lower courts MUST follow the legal decisions made by higher courts in their province. They are not allowed to ignore the higher judges.</div>
+        <div class="mnem">Follow the Leader</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Supreme Court of Canada</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Hierarchy:</strong> It is the absolute highest court in the country.<br><br><strong>The Rule:</strong> Because of *stare decisis*, if the Supreme Court of Canada makes a decision, every single lower court in every single province must follow it forever. Their word is final.</div>
+        <div class="mnem">The Final Boss</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Public Law vs. Private Law</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>Public Law:</strong> The Government vs. A Citizen (e.g., Criminal Law, Tax Law). The state is enforcing the rules.<br><br><strong>Private Law:</strong> A Citizen vs. A Citizen (e.g., Contracts, Torts). The government is just providing the courtroom so two people can settle a fight.</div>
+        <div class="mnem">State Fight vs. Citizen Fight</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Do International Treaties apply in Canada?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> The government signs a trade deal like NAFTA/USMCA with another country.<br><br><strong>The Catch:</strong> It does NOT instantly become law inside Canada. To make it legally binding on Canadians, the politicians must first vote to pass a new domestic "Statute."</div>
+        <div class="mnem">Treaties Need Statutes First</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 7 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Breach of Contract</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> Failing to do exactly what you promised in the contract.<br><br><strong>The Rule:</strong> Liability in contract is strict. It does not matter if you tried your best or if it was an accident. If you failed to deliver, you breached.</div>
+        <div class="mnem">No Excuses, Just Delivery</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Goal of Damages</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Goal:</strong> When someone breaches, the court forces them to pay money ("damages").<br><br><strong>The Rule:</strong> The money must put the innocent party in the exact financial position they would be in if the contract had been performed perfectly.</div>
+        <div class="mnem">Fix the Math, Not the Feelings</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Duty to Mitigate</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A contractor abandons the job, leaving a hole in your roof. It rains. You let the rain destroy your house for a month.<br><br><strong>The Rule:</strong> You cannot sue for the water damage. You have a legal duty to "mitigate" (minimize) your own losses by throwing a tarp over it.</div>
+        <div class="mnem">Stop the Bleeding</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Remoteness<br>(Hadley v. Baxendale)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> You are only responsible for paying damages that were <strong>reasonably foreseeable</strong> at the time the contract was signed.<br><br><strong>The Catch:</strong> You are not liable for a bizarre, unpredictable chain reaction of losses that you could never have guessed.</div>
+        <div class="mnem">Predictable Pain Only</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Repudiation<br>(Anticipatory Breach)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> The contractor calls you on Tuesday and says "I am not showing up on Friday."<br><br><strong>The Rule:</strong> You do not have to wait until Friday to sue. You can accept the breach immediately, fire them, and hire a replacement.</div>
+        <div class="mnem">Quitting Early = Sued Early</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Fundamental Breach</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> A breach so massive that it destroys the entire purpose of the contract.<br><br><strong>The Rule:</strong> It gives the innocent party the right to instantly cancel the entire contract and sue, rather than just asking for a small discount for a minor defect.</div>
+        <div class="mnem">Destroy the Root, Kill the Contract</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Liquidated Damages</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> A clause where both parties agree in advance what the penalty will be if someone is late (e.g., "$1,000 per day").<br><br><strong>The Catch:</strong> The court will only enforce this if it is a genuine, realistic estimate of the actual money lost by the delay.</div>
+        <div class="mnem">Pre-Agreed Estimates are Legal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Penalty Clauses</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> The contract says "If you are one day late, you owe $10 Million."<br><br><strong>The Rule:</strong> Courts will absolutely NOT enforce this. If a number is an arbitrary, massive amount designed purely to punish or scare someone, it is an illegal penalty.</div>
+        <div class="mnem">Punishments are Not Legal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Specific Performance</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> Sometimes money is not good enough to fix a breach.<br><br><strong>The Rule:</strong> A court order forcing the breaching party to actually do the physical work they promised. Courts rarely use this, except for completely unique things like selling a specific piece of land.</div>
+        <div class="mnem">Do What You Promised</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Injunction</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> The opposite of Specific Performance.<br><br><strong>The Rule:</strong> A strict court order forcing someone to <strong>STOP</strong> doing something. (e.g., Stopping an ex-employee from sharing your trade secrets with a competitor).</div>
+        <div class="mnem">The Legal Stop Sign</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Quantum Meruit</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You did the work, but the contract was accidentally voided or missing a price.<br><br><strong>The Rule:</strong> Latin for "as much as is deserved." The court will force the client to pay you fair market value for the work you did. You do not work for free just because paperwork failed.</div>
+        <div class="mnem">Pay for What You Got</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Force Majeure</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> A contract clause that forgives a breach if an unforeseeable "Act of God" (hurricane, war) makes the job physically impossible.<br><br><strong>The Catch:</strong> It does NOT protect you if the job simply became more difficult or lost you money. It must be impossible.</div>
+        <div class="mnem">Impossible, Not Just Expensive</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

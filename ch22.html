@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 22: Visualizing Health & Safety Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; text-transform: uppercase; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.dual { border-top-color: #64748b; }
+    .framework-card.rights { border-top-color: #f59e0b; }
+    .framework-card.criminal { border-top-color: #ef4444; }
+    .framework-card.prime { border-top-color: #8b5cf6; }
+    .framework-card.tradeoff { border-top-color: #10b981; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 22: DEEP HEALTH & SAFETY VISUALIZATION</h1>
+
+  <div class="framework-card dual">
+    <h2>1. The Dual Engine of Safety Law</h2>
+    <p>Health and Safety Law in Canada is not a single concept. It is driven by two completely separate legislative machines: one designed to <em>prevent and punish</em>, and the other designed to <em>compensate and shield</em>[cite: 2].</p>
+
+    <div class="mermaid">
+      graph TD
+        Root[Canadian Workplace Safety] --> OHS[1. OH&S Legislation]
+        Root --> WCB[2. Workers' Compensation Board]
+        
+        OHS -.->|Goal| Prev[Prevent Accidents & Punish Negligence]
+        OHS -.->|Method| Fines[Site Inspections, Orders, Heavy Fines]
+        
+        WCB -.->|Goal| Comp[No-Fault Compensation]
+        WCB -.->|Method| Shield[Workers get guaranteed pay, Employers get shielded from lawsuits]
+        
+        style Root fill:#1e293b,color:#fff,stroke:none
+        style OHS fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style WCB fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Prev fill:#f8fafc,stroke:#94a3b8
+        style Fines fill:#f8fafc,stroke:#94a3b8
+        style Comp fill:#f8fafc,stroke:#94a3b8
+        style Shield fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This clarifies the two distinct realms of safety law[cite: 2].</p>
+      <ul>
+        <li><strong>Occupational Health and Safety (OH&S):</strong> This is the proactive, punitive arm[cite: 2]. It sets minimum technical standards to keep workers safe[cite: 2]. Regulators conduct site visits, issue stop-work orders, and apply devastating fines to companies that fail to meet these minimums[cite: 2].</li>
+        <li><strong>Workers' Compensation Board (WCB):</strong> This is the reactive, administrative arm[cite: 2]. It is a compulsory, no-fault mutual insurance scheme funded by employers[cite: 2]. It removes workplace injuries from the normal tort system entirely[cite: 2].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card rights">
+    <h2>2. The Three Fundamental Rights</h2>
+    <p>All Canadian OH&S legislation is built upon a foundation of three unalienable worker rights[cite: 2]. An employer who violates these rights faces extreme regulatory wrath[cite: 2].</p>
+
+    <div class="mermaid">
+      graph LR
+        Worker[The Worker] --> R1[1. Right to Know]
+        Worker --> R2[2. Right to Participate]
+        Worker --> R3[3. Right to Refuse]
+        
+        R1 -.->|Must be informed of known or foreseeable hazards| N1(Information)
+        R2 -.->|Must be part of joint health & safety committees| N2(Action)
+        R3 -.->|Can reject dangerous work without fear of being fired| N3(Protection)
+        
+        style Worker fill:#1e293b,color:#fff
+        style R1 fill:#e0f2fe,stroke:#0284c7
+        style R2 fill:#e0f2fe,stroke:#0284c7
+        style R3 fill:#e0f2fe,stroke:#0284c7
+        style N1 fill:#f1f5f9,stroke:#64748b
+        style N2 fill:#f1f5f9,stroke:#64748b
+        style N3 fill:#f1f5f9,stroke:#64748b
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps the core philosophy of Canadian safety empowerment[cite: 2].</p>
+      <ul>
+        <li><strong>The Right to Refuse:</strong> The most legally powerful of the three[cite: 2]. The law completely protects an employee from dismissal or disciplinary action if they make a legitimate refusal of dangerous work[cite: 2]. For example, a mining engineer threatened with being fired for refusing to descend an unsafe shaft is legally protected and can report the employer to OH&S authorities[cite: 2].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card criminal">
+    <h2>3. The Bill C-45 Trap (Criminal Liability)</h2>
+    <p>Workplace accidents are no longer just regulatory fines; they are federal crimes[cite: 2]. Section 217.1 of the Criminal Code exposes both organizations and individual supervisors to jail time[cite: 2].</p>
+
+    <div class="mermaid">
+      graph TD
+        Person[Anyone directing work: Supervisor or Company] --> Duty{Section 217.1 Duty}
+        Duty -->|Must take reasonable steps to prevent bodily harm| Action[Fails to train worker or disables safety device]
+        Action --> Accident((Worker Injured or Killed))
+        
+        Accident --> Charge[Charged with Criminal Negligence]
+        Charge --> Ind[Individual: Faces Imprisonment]
+        Charge --> Corp[Corporation: Faces Massive Fines]
+        
+        style Person fill:#1e293b,color:#fff
+        style Duty fill:#fef3c7,stroke:#d97706
+        style Action fill:#fee2e2,stroke:#dc2626
+        style Accident fill:#991b1b,color:#fff,stroke-width:4px
+        style Charge fill:#166534,color:#fff
+        style Ind fill:#f8fafc,stroke:#94a3b8
+        style Corp fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This illustrates the severe escalation of safety law into the Criminal Code[cite: 2].</p>
+      <ul>
+        <li><strong>The <em>Transpavé</em> Case (Corporate Conviction):</strong> In 2008, a worker was crushed by a machine with a deactivated safety sensor[cite: 2]. The company pled guilty to criminal negligence and received a $110,000 criminal fine—the first conviction of an organization under this new law[cite: 2].</li>
+        <li><strong>The <em>Fantini</em> Case (Individual Conviction):</strong> A supervisor failed to provide shoring instructions for a ditch, and it collapsed, killing a worker[cite: 2]. He was individually charged with criminal negligence causing death before pleading guilty to heavy OH&S fines[cite: 2].</li>
+        <li><strong>The Rule:</strong> If you have the authority to direct how someone does a task, you have a legal, criminal duty to prevent them from being harmed[cite: 2].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card prime">
+    <h2>4. The "Prime Contractor" Liability Funnel</h2>
+    <p>OH&S legislation demands that one, and <em>only one</em>, entity takes overall responsibility for safety on a multiple-employer worksite[cite: 2]. Mishandling this designation is a lethal contractual error for an owner[cite: 2].</p>
+
+    <div class="mermaid">
+      graph TD
+        Start[Owner creates a Worksite] --> Default[Default Status: Owner is the Prime Contractor]
+        
+        Default --> Choice{How many 'Prime Contractors' does the Owner contractually designate?}
+        
+        Choice -->|Designates ZERO| Trap1[Owner retains all Prime Contractor liabilities]
+        Choice -->|Designates ONE| Safe[The Contractor assumes Prime Contractor OH&S liabilities]
+        Choice -->|Designates TWO OR MORE| Trap2[Legal Failure: Liability defaults back to the Owner]
+        
+        style Start fill:#1e293b,color:#fff
+        style Default fill:#fef3c7,stroke:#d97706
+        style Trap1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Safe fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style Trap2 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps how the massive legal burden of worksite safety flows[cite: 2].</p>
+      <ul>
+        <li><strong>The Default:</strong> The owner of the site is automatically the "Prime Contractor" (or "Constructor" in some provinces) and holds all OH&S liability[cite: 2].</li>
+        <li><strong>The Transfer:</strong> An owner can legally contract out of the Prime Contractor role by explicitly transferring it to ONE qualified party[cite: 2].</li>
+        <li><strong>The Dual-Designation Trap:</strong> If an owner designates two contractors as the prime contractor simultaneously, the law voids the transfer[cite: 2]. Because you cannot have two captains of a ship, the liability instantly rebounds back onto the owner, making the owner fully responsible for any OH&S breaches on site[cite: 2].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card tradeoff">
+    <h2>5. The WCB "Historic Trade-Off"</h2>
+    <p>Why can't an injured worker sue their boss in Canada? Because of a 100-year-old legal compromise that fundamentally altered Canadian tort law[cite: 2].</p>
+
+    <div class="mermaid">
+      graph LR
+        subgraph The Worker
+          W_Give[GIVES UP: The right to sue their employer or coworkers]
+          W_Get[GAINS: Guaranteed, no-fault compensation regardless of who was careless]
+        end
+        
+        subgraph The Employer
+          E_Give[GIVES UP: Mandatory insurance premiums paid to the state]
+          E_Get[GAINS: Freedom from crippling negligence lawsuits]
+        end
+        
+        W_Give <-->|The Historic Trade-Off| E_Get
+        W_Get <-->|State Administered| E_Give
+        
+        style W_Give fill:#fee2e2,stroke:#dc2626
+        style W_Get fill:#dcfce7,stroke:#16a34a
+        style E_Give fill:#fee2e2,stroke:#dc2626
+        style E_Get fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This illustrates the foundation of the Workers' Compensation Board (WCB)[cite: 2].</p>
+      <ul>
+        <li><strong>The Deal:</strong> Proposed by Sir William Ralph Meredith in 1910, this system replaces the normal tort process[cite: 2]. A worker does not need to prove their boss was at fault to get paid for an injury, and a boss does not have to face a multi-million-dollar lawsuit[cite: 2].</li>
+        <li><strong>The Multi-Employer Shield:</strong> The WCB shield is extremely broad[cite: 2]. If Zoe, a software engineer, is driving to a client's office and is rear-ended by a police car, she <em>cannot</em> sue the police officer or the city[cite: 2]. Because both she and the officer were working for WCB-registered employers at the time, her only remedy is to collect WCB compensation[cite: 2].</li>
+        <li><strong>International Exception:</strong> WCB protection stops at the Canadian border[cite: 2]. If you send an employee to work internationally, they can sue you unless you have secured specific international coverage[cite: 2].</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

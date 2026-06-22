@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 4: Visual Mechanics — Property Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.classify { border-top-color: #0ea5e9; }
+    .framework-card.fixture { border-top-color: #dc2626; }
+    .framework-card.tenancy { border-top-color: #9333ea; }
+    .framework-card.runs { border-top-color: #ca8a04; }
+    .framework-card.registry { border-top-color: #16a34a; }
+    .framework-card.interests { border-top-color: #f59e0b; }
+    .framework-card.ip { border-top-color: #64748b; }
+    .framework-card.term { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 4: VISUAL MECHANICS — PROPERTY LAW</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Property Classification Tree</a>
+    <a href="#d2">2. The Fixture Test — The Mobile Home Problem</a>
+    <a href="#d3">3. Joint Tenancy vs Tenancy in Common — What Happens at Death</a>
+    <a href="#d4">4. "Runs With the Land" — The Boundary That Decides Everything</a>
+    <a href="#d5">5. Torrens vs Registry System</a>
+    <a href="#d6">6. The Real Property Interest Spectrum</a>
+    <a href="#d7">7. The Intellectual Property Selection Tree</a>
+    <a href="#d8">8. IP Terms of Protection — A Timeline Comparison</a>
+  </div>
+
+
+  <div class="framework-card classify" id="d1">
+    <h2>1. The Property Classification Tree</h2>
+    <p>Before anything else in this chapter makes sense, you need a single classification tree showing how ANY piece of property gets sorted. This diagram mirrors the chapter's own Figure 4-1 but adds the DECISION POINTS that actually sort an item into its category.</p>
+
+    <div class="mermaid">
+      graph TD
+        Property{Any piece of<br/>property} --> Q1{Is it LAND, or<br/>something ATTACHED<br/>to land FOR THE<br/>LAND'S BENEFIT?}
+
+        Q1 -->|Yes| Real[REAL PROPERTY]
+        Q1 -->|No| Personal[PERSONAL PROPERTY]
+
+        Real --> R1[Land itself]
+        Real --> R2[Buildings]
+        Real --> R3[Fixtures —<br/>see diagram 2]
+        Real --> R4[Mines, oil, gas,<br/>mineral rights —<br/>generally EXCLUDED<br/>from fee simple]
+
+        Personal --> Q2{Does it have<br/>PHYSICAL<br/>ATTRIBUTES?}
+        Q2 -->|Yes| Tangible[TANGIBLE —<br/>'chattels']
+        Q2 -->|No| Intangible[INTANGIBLE]
+
+        Intangible --> Q3{Is it the<br/>EXPRESSION of<br/>an idea in a<br/>physical form?}
+        Q3 -->|Yes| IP[INTELLECTUAL<br/>PROPERTY —<br/>see diagram 7]
+        Q3 -->|No| OtherIntangible[Other intangible —<br/>e.g. licences,<br/>royalty rights]
+
+        style Property fill:#1e293b,color:#fff
+        style Q1 fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Real fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Personal fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Tangible fill:#dcfce7,stroke:#16a34a
+        style IP fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The single most important gate in this entire chapter sits at Q1, because EVERY other rule in the chapter (registration systems, rights that run with the land, fixtures versus chattels) depends entirely on which side of this gate a given item falls. Notice the gate's wording carefully: it's not just "is this attached to land," it's attached FOR THE LAND'S BENEFIT — that specific qualifier is what separates this simple tree from the more nuanced fixture test in diagram 2, which exists precisely because borderline cases (like a bolted-down mobile home) don't answer Q1 cleanly on their own. The R4 box deserves attention because it corrects a common assumption: people intuitively think "owning land in fee simple" means owning everything below it too, but Canadian law specifically carves mines, minerals, oil, and gas OUT of the standard fee simple bundle, reserving most of those rights to government, which licenses them out separately.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fixture" id="d2">
+    <h2>2. The Fixture Test — The Mobile Home Problem</h2>
+    <p>This diagram works through the chapter's own mobile home example as a precise two-factor test, since "attached to land" alone isn't enough to settle whether something is real or personal property.</p>
+
+    <div class="mermaid">
+      graph TD
+        Item[Mobile home bolted<br/>onto a concrete<br/>foundation] --> F1{Factor 1: Is the<br/>attachment<br/>TEMPORARY or<br/>PERMANENT?}
+
+        F1 --> F2{Factor 2: Was the<br/>PURPOSE of attaching it<br/>to BENEFIT THE LAND, or<br/>to benefit the<br/>ITEM ITSELF?}
+
+        F2 -->|Temporary attachment<br/>AND purpose was to<br/>benefit the MOBILE<br/>HOME itself — e.g.<br/>stability while still<br/>movable| StaysPersonal[REMAINS<br/>PERSONAL PROPERTY<br/>— a chattel]
+
+        F2 -->|PERMANENT attachment<br/>AND purpose was to<br/>benefit the REAL<br/>PROPERTY| BecomesReal[BECOMES REAL<br/>PROPERTY —<br/>a 'fixture']
+
+        BecomesReal --> Reversible{Can this<br/>classification<br/>CHANGE again?}
+        Reversible -->|Yes — e.g. a nail<br/>pounded into a house<br/>becomes real property,<br/>but REMOVING it<br/>later| BackToChattel[BECOMES A CHATTEL<br/>AGAIN once removed —<br/>classification is NOT<br/>permanent, it tracks<br/>CURRENT physical<br/>status]
+
+        style Item fill:#1e293b,color:#fff
+        style F1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style F2 fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style StaysPersonal fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style BecomesReal fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style BackToChattel fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The TWO-factor structure (not one) is the entire point of using the mobile home as the worked example — the chapter deliberately picks an item that's PHYSICALLY bolted down (satisfying a naive "is it attached" test) specifically to show that physical attachment ALONE doesn't resolve the question. You need BOTH factors: how permanent is the attachment, AND what was the underlying PURPOSE of attaching it. A mobile home bolted down just for stability while it's still essentially intended to remain movable stays personal property, but the same bolting-down, done with genuine permanence and intent to make the structure part of the land, flips it into real property — same physical act, different legal outcome, depending entirely on intent and permanence. The "Reversible" branch at the bottom captures a separate, important point using the chapter's nail example: this classification isn't a one-time, permanent label assigned at the moment of attachment — it tracks the CURRENT physical and intentional status of the item, meaning something can genuinely flip back and forth between chattel and fixture over its lifetime as it's installed and later removed.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card tenancy" id="d3">
+    <h2>3. Joint Tenancy vs Tenancy in Common — What Happens at Death</h2>
+    <p>These two co-ownership structures look similar day-to-day but produce completely different results the moment one owner dies. This diagram shows that exact fork using the chapter's own Joe and Mary example.</p>
+
+    <div class="mermaid">
+      graph TD
+        TwoOwners[Joe and Mary both<br/>hold a fee simple<br/>interest in the<br/>SAME property] --> Structure{Which co-ownership<br/>structure applies?}
+
+        Structure --> JT[JOINT TENANCY —<br/>the LAW'S DEFAULT<br/>ASSUMPTION when two<br/>or more parties hold<br/>an interest together]
+        Structure --> TIC[TENANCY IN COMMON —<br/>each holder owns a<br/>STATED, SEPARATE<br/>portion]
+
+        JT --> JTDeath{Joe dies}
+        JTDeath --> JTResult[Mary AUTOMATICALLY<br/>inherits Joe's interest —<br/>Mary becomes SOLE<br/>holder of the FULL<br/>fee simple right.<br/>Joe's HEIRS get<br/>NOTHING from<br/>this property]
+
+        TIC --> TICDeath{Joe dies —<br/>e.g. each held<br/>50%}
+        TICDeath --> TICResult[JOE'S HEIRS inherit<br/>Joe's 50% interest —<br/>Mary does NOT<br/>automatically gain<br/>anything. Mary and<br/>Joe's heirs now<br/>co-own the property]
+
+        style TwoOwners fill:#1e293b,color:#fff
+        style Structure fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style JTResult fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style TICResult fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Running the SAME fact pattern (Joe and Mary, Joe dies) through both branches side by side is what makes the practical stakes of this distinction unmistakable — under joint tenancy, Mary ends up owning the ENTIRE property outright and Joe's own family inherits nothing FROM THIS PROPERTY, while under tenancy in common, Joe's heirs step directly into his share and Mary is left co-owning the property with people who may be complete strangers to her. This is exactly why the distinction matters enormously for estate planning: joint tenancy is often chosen deliberately by couples specifically because they WANT automatic survivorship (no probate delay, no risk of the deceased's share going to unintended parties), while tenancy in common is often chosen by business partners or unrelated co-investors who specifically want their own share to pass to THEIR OWN heirs rather than automatically enriching their co-owner. The chapter's framing that joint tenancy is the law's DEFAULT assumption is also worth remembering — parties who actually want tenancy in common generally need to say so explicitly, or risk the default joint-tenancy rule applying without their full understanding of its survivorship consequences.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card runs" id="d4">
+    <h2>4. "Runs With the Land" — The Boundary That Decides Everything</h2>
+    <p>Whether a right "runs with the land" is the single most consequential classification for every specific real property right covered in section 4.1(f). This diagram sorts those rights by which side of that boundary they fall on.</p>
+
+    <div class="mermaid">
+      graph TD
+        Right[A real property right<br/>is created — lease,<br/>easement, covenant,<br/>licence, etc.] --> Test{Does this right<br/>RUN WITH THE LAND?}
+
+        Test -->|YES| Runs[Binds FUTURE OWNERS too —<br/>a new purchaser takes the<br/>property SUBJECT TO this<br/>right, even though they<br/>never personally agreed<br/>to it]
+        Test -->|NO| DoesNotRun[Only a CONTRACT between<br/>the ORIGINAL two parties —<br/>NOT binding on a future<br/>owner who buys<br/>the property]
+
+        Runs --> RunsList[Lease — Easement —<br/>NEGATIVE restrictive<br/>covenant — Profit à prendre]
+        DoesNotRun --> NotRunsList[Licence — POSITIVE<br/>restrictive covenant]
+
+        DoesNotRun --> KeyDistinction{Restrictive covenant<br/>SPLIT: negative vs<br/>positive obligation}
+        KeyDistinction --> Negative[NEGATIVE — refrain<br/>from doing something<br/>e.g. 'don't build here' —<br/>RUNS with the land]
+        KeyDistinction --> Positive[POSITIVE — requirement<br/>TO DO something<br/>e.g. 'must build X' —<br/>does NOT run<br/>with the land]
+
+        style Right fill:#1e293b,color:#fff
+        style Test fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Runs fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style DoesNotRun fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Negative fill:#dcfce7,stroke:#16a34a
+        style Positive fill:#fee2e2,stroke:#dc2626
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The top diamond is the single organizing question this entire diagram exists to answer, because it's the variable that determines whether buying a piece of property is a clean transaction or one where you inherit obligations you never personally negotiated. The restrictive covenant split deserves special attention as the chapter's subtlest distinction: most people assume "restrictive covenant" is a single category, but the chapter draws a sharp line between NEGATIVE covenants (a promise to refrain from something, like not building a structure) which DO run with the land, and POSITIVE covenants (a promise to actively DO something, like maintaining a shared fence) which generally do NOT run with the land. This asymmetry has a practical real-estate consequence worth remembering: a buyer doing due diligence needs to check not just WHETHER a restrictive covenant exists on title, but WHICH TYPE it is, since a positive covenant that looked binding on paper might not actually bind them as the new owner at all.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card registry" id="d5">
+    <h2>5. Torrens vs Registry System</h2>
+    <p>Canada doesn't use one uniform land registration system — it uses two structurally different ones, and the practical task of "find out what interests exist in this property" is dramatically easier under one than the other.</p>
+
+    <div class="mermaid">
+      graph TD
+        Province{Which provinces?} --> Torrens[WESTERN PROVINCES —<br/>TORRENS SYSTEM]
+        Province --> RegistrySys[Parts of ONTARIO +<br/>most EASTERN<br/>provinces — REGISTRY<br/>SYSTEM]
+
+        Torrens --> TorrensHow[Government maintains a<br/>CERTIFICATE OF TITLE<br/>for EVERY property —<br/>shows current fee simple<br/>holder + ALL other<br/>rights + discharges, kept<br/>CONTINUOUSLY UP TO DATE]
+        TorrensHow --> TorrensSearch[SEARCH = look up ONE<br/>certificate, see the<br/>COMPLETE current<br/>picture immediately]
+
+        RegistrySys --> RegistryHow[Registry office maintains<br/>only a CHRONOLOGICAL<br/>LISTING of land-related<br/>rights — NOT organized<br/>by individual property]
+        RegistryHow --> RegistrySearch[SEARCH = must review<br/>HISTORICAL RECORDS<br/>to piece together<br/>what interests<br/>currently exist]
+
+        TorrensSearch --> Compare{Comparing the<br/>two systems}
+        RegistrySearch --> Compare
+        Compare --> Conclusion[Torrens = SIMPLER,<br/>FASTER due diligence.<br/>Registry = requires<br/>MORE WORK to<br/>reconstruct current<br/>title status]
+
+        style Province fill:#1e293b,color:#fff
+        style Torrens fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style RegistrySys fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Conclusion fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The structural difference between these two systems isn't cosmetic — it changes the actual WORK required to determine what interests exist in a property, which is exactly why the diagram traces each system through to its practical SEARCH experience rather than stopping at the definitional level. Under torrens, the certificate of title functions like a single, continuously-updated snapshot — everything relevant to that specific property lives in one place, and a buyer's lawyer can rely on that single document being accurate and current. Under a registry system, there's no equivalent single snapshot — the registry is fundamentally CHRONOLOGICAL (organized by when documents were filed, not by which property they relate to), meaning determining current title status requires actively reconstructing the property's history from potentially many separate historical entries. This explains why due diligence costs and complexity genuinely differ by jurisdiction in Canada — it's not just a regional quirk, it reflects a real difference in how much investigative work a title search actually requires.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card interests" id="d6">
+    <h2>6. The Real Property Interest Spectrum</h2>
+    <p>Section 4.1(f)'s six named interests (lease, mortgage, easement, restrictive covenant, licence, profit à prendre) aren't random — they sit on a spectrum of how broad and land-tied each right actually is. This diagram organizes them along that spectrum.</p>
+
+    <div class="mermaid">
+      graph LR
+        Lease[LEASE<br/>EXCLUSIVE right<br/>to occupy all<br/>or part of<br/>the property] --> Mortgage[MORTGAGE<br/>Security interest —<br/>right to be paid<br/>FROM the property's<br/>value, in PRIORITY,<br/>upon sale]
+
+        Mortgage --> Easement[EASEMENT<br/>Right to USE<br/>neighbouring land<br/>— typically to CROSS<br/>it. Tied to BOTH<br/>properties]
+
+        Easement --> Covenant[RESTRICTIVE COVENANT<br/>Conditions imposed<br/>for a neighbour's<br/>benefit — CAN BE<br/>VERY BROAD<br/>— e.g. paint colour]
+
+        Covenant --> Licence[LICENCE<br/>Simple right to use —<br/>does NOT run with<br/>the land — purely<br/>CONTRACTUAL]
+
+        Licence --> Profit[PROFIT À PRENDRE<br/>HYBRID — runs with<br/>land like an easement,<br/>but grants licence-like<br/>rights — e.g. harvest<br/>trees, remove gravel]
+
+        style Lease fill:#e0f2fe,stroke:#0284c7
+        style Mortgage fill:#fde68a,stroke:#ca8a04
+        style Easement fill:#fef3c7,stroke:#d97706
+        style Covenant fill:#fee2e2,stroke:#dc2626
+        style Licence fill:#f3e8ff,stroke:#9333ea
+        style Profit fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Rather than treating these six interests as an alphabetical list to memorize independently, arranging them on a spectrum reveals genuine FAMILY RELATIONSHIPS between them, which is a much more durable way to retain the distinctions. A lease and an easement both grant rights to USE property, but a lease is exclusive occupation while an easement is typically just a right of passage or limited use — a meaningfully narrower right. A restrictive covenant is conceptually different from an easement because it can restrict almost ANYTHING (paint colour, building height, business types) rather than just granting a specific use right, which is exactly why the chapter flags covenant conditions as potentially "very broad." The profit à prendre sitting at the end as a deliberate HYBRID is the perfect capstone for this spectrum — it explicitly borrows the land-binding permanence of an easement (running with the land) while ALSO carrying the specific-activity flavor of a licence (harvesting trees, removing gravel), making it the conceptual bridge connecting the two ends of this spectrum together in a single right.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card ip" id="d7">
+    <h2>7. The Intellectual Property Selection Tree</h2>
+    <p>Faced with something to protect, which IP regime actually applies? This diagram routes a creation through the five IP categories based on WHAT KIND of thing is being protected, directly answering the chapter's own "best mousetrap" question.</p>
+
+    <div class="mermaid">
+      graph TD
+        Creation{What are you<br/>trying to protect?} --> Q1{Is it WORDS, DATA,<br/>or an artistic/<br/>literary/dramatic/<br/>musical WORK?}
+
+        Q1 -->|Yes| Copyright[COPYRIGHT —<br/>automatic, no<br/>registration needed,<br/>just use the<br/>© symbol]
+
+        Q1 -->|No| Q2{Is it a NEW,<br/>USEFUL, INVENTIVE<br/>invention/process/<br/>machine?}
+        Q2 -->|Yes| Patent[PATENT — must be<br/>NEW + USEFUL +<br/>INVENTIVE. 1-year grace<br/>period if YOU disclosed<br/>first; ZERO grace<br/>period if a THIRD<br/>PARTY disclosed first]
+
+        Q2 -->|No| Q3{Is it a NAME,<br/>LOGO, or MARK<br/>distinguishing<br/>goods/services?}
+        Q3 -->|Yes| Trademark{Is the mark<br/>DISTINCTIVE?}
+        Trademark -->|Yes| TrademarkOK[TRADEMARK<br/>protection available]
+        Trademark -->|No — e.g. a<br/>generic descriptive<br/>name| TrademarkFail[LIKELY TO FAIL —<br/>e.g. 'The Best<br/>Mousetrap' is NOT<br/>distinctive enough]
+
+        Q3 -->|No| Q4{Is it the SHAPE/<br/>CONFIGURATION/LOOK<br/>of a MASS-PRODUCED<br/>item, for AESTHETIC<br/>— not purely<br/>utilitarian — purposes?}
+        Q4 -->|Yes| Industrial[INDUSTRIAL DESIGN]
+
+        Q4 -->|No| Q5{Is it the LAYOUT/<br/>TOPOGRAPHY of an<br/>INTEGRATED CIRCUIT?}
+        Q5 -->|Yes| IntCircuit[INTEGRATED CIRCUIT<br/>TOPOGRAPHY protection]
+        Q5 -->|No| TradeSecret[Consider TRADE SECRET/<br/>CONFIDENTIAL INFORMATION<br/>instead — Ch.21 — the<br/>ONLY way to protect a<br/>bare IDEA itself]
+
+        style Creation fill:#1e293b,color:#fff
+        style Q1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Q2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Q3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style TrademarkFail fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style TradeSecret fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This tree exists to answer the chapter's own "best mousetrap" question completely, by routing the same invention through MULTIPLE applicable categories rather than assuming only one IP regime could ever apply to a single creation. The mousetrap design itself routes through Q2 to PATENT protection (and potentially Q4 to industrial design, if its appearance has aesthetic value beyond pure function), while the catchy NAME "The Best Mousetrap" routes through an entirely separate branch (Q3, trademark) — and that branch's outcome diamond is exactly why the chapter's answer says trademark protection is UNLIKELY to succeed: a purely descriptive, non-distinctive name fails the distinctiveness requirement regardless of how memorable or fitting it sounds to the inventor. The TradeSecret box at the very end captures the chapter's foundational principle stated at the top of section 4.3: IP law protects EXPRESSIONS of ideas, never bare ideas themselves — so anything that doesn't fit cleanly into one of the five named categories (copyright, patent, trademark, industrial design, integrated circuit topography) falls back to the much weaker, contract/confidentiality-based protection of trade secrets, which only works as long as the secret actually stays secret.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card term" id="d8">
+    <h2>8. IP Terms of Protection — A Timeline Comparison</h2>
+    <p>Each IP type protects for a different length of time, measured from different starting points. This diagram lines up all five terms on a single comparative timeline to make the durations and their starting triggers easy to contrast.</p>
+
+    <div class="mermaid">
+      graph LR
+        Copyright["COPYRIGHT<br/>50 YEARS<br/>— measured from end of<br/>calendar year the<br/>(LAST LIVING) author DIES"] --> Patent["PATENT<br/>20 YEARS<br/>— from date<br/>APPLICATION FILED"]
+
+        Patent --> Trademark["TRADEMARK<br/>15 YEARS<br/>— but RENEWABLE<br/>INDEFINITELY —<br/>ONLY type with<br/>no hard cap, BUT<br/>requires ACTIVE<br/>use + protection"]
+
+        Trademark --> Industrial["INDUSTRIAL DESIGN<br/>10 YEARS<br/>— from date<br/>of REGISTRATION"]
+
+        Industrial --> IntCircuit["INTEGRATED CIRCUIT<br/>10 YEARS<br/>— from date<br/>APPLICATION FILED"]
+
+        style Copyright fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Patent fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Trademark fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style Industrial fill:#fef3c7,stroke:#d97706
+        style IntCircuit fill:#fee2e2,stroke:#dc2626
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Lining these up side by side surfaces two distinctions easy to lose when each term is studied in isolation. First, the STARTING POINT varies meaningfully across types — copyright's clock doesn't start at creation or publication, it starts at the AUTHOR'S DEATH (making its effective duration highly variable and often far longer than 50 years from the work's creation), while patents and integrated circuit protection both start from the APPLICATION FILING DATE, and industrial design starts from REGISTRATION — three genuinely different trigger events that are easy to confuse under exam pressure. Second, and more importantly, trademark is structurally UNIQUE on this list — it's the only IP type without an absolute, hard ceiling, since it can be renewed indefinitely every 15 years forever, but that apparent advantage comes with a real string attached: unlike the other four types (which simply expire passively after their fixed term regardless of what the owner does), trademark protection can be LOST EARLY through inaction — failure to actively use or protect/police the mark against infringement destroys the right even within an otherwise-valid renewal period, making trademark simultaneously the most potentially permanent AND the most actively demanding of the five protections to maintain.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 14 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 14 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Voluntary-to-Involuntary Spectrum</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 9</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Voluntary-to-Involuntary Spectrum",
+    text: "Dispute resolution methods sit on a spectrum from completely voluntary to completely forced. Negotiation is fully voluntary; if someone walks away, nothing happens. Mediation forces attendance if it is in your contract, but you can still refuse to settle. Arbitration is a trap: it is voluntary to put it in a contract, but once signed, it legally forces you to participate. Finally, litigation is completely involuntary for the defendant. If you get sued and ignore it, you automatically lose.",
+    ex: "A client sends you an email demanding a discount. You can just ignore it—that is failed negotiation. But if they formally sue you in court and you ignore the lawsuit, the judge will issue a default judgment against you and drain your bank account."
+  },
+  {
+    title: "Diagram 2 — The Litigation Timeline",
+    text: "A lawsuit is not a single event; it is a long, rigid timeline. It starts with pleadings, where the Statement of Claim and Defence outline the fight. Then comes the Discovery phase. This is where lawyers demand all your emails, documents, and question you under oath to eliminate surprises. Because Discovery exposes all the evidence, most cases settle right here before Trial. If you go to Trial and lose, the judge will usually order you to pay a large chunk of the winner's legal costs.",
+    ex: "Your firm is sued for a flawed foundation. During the Discovery phase, the other side forces you to hand over internal emails where your junior engineer admitted they didn't check the soil report. Knowing the jury will see this at trial, your firm quickly decides to settle the case."
+  },
+  {
+    title: "Diagram 3 — The Third-Party Claim Branching Problem",
+    text: "If you are sued for a failure that was actually caused by a subcontractor, you have a critical choice. You could fight the owner first, and if you lose, sue the subcontractor later in a second trial. This is a massive risk because the subcontractor was not at the first trial and can bring up totally new defenses. The smarter move is a Third-Party Claim. You drag the subcontractor into the exact same lawsuit right now. This forces one trial, one judge, and one binding outcome for everybody.",
+    ex: "A client sues you because the HVAC system you specified failed. The real fault belongs to the manufacturer who built a defective fan. Instead of fighting the client alone, you file a Third-Party Claim to drag the manufacturer into the same courtroom, ensuring the judge makes them pay the client directly."
+  },
+  {
+    title: "Diagram 4 — The Arbitration Setup Decision Tree",
+    text: "Before arbitration can begin, you must establish the rules, but the most important step is picking the arbitrator. This is your private judge, so they need technical expertise and absolute neutrality. If both sides agree, great. If they hate each other and cannot agree, the process does not die. A court or a recognized arbitration organization will step in and forcefully appoint an arbitrator for you.",
+    ex: "You have an arbitration clause with a software vendor, but you cannot agree on who should judge the dispute. You want an engineer; they want a lawyer. Instead of being stuck forever, a judge simply appoints an independent software expert to decide the case, forcing both of you to proceed."
+  },
+  {
+    title: "Diagram 5 — Method Selection: Matching the Dispute to the Tool",
+    text: "You must pick the right tool for the fight. If the other side refuses to cooperate, you must use Litigation to force them. If they are willing to talk, you look at other factors. Need to keep trade secrets private and want an expert judging you? Pick Arbitration. Want to salvage the business relationship and just find a middle ground? Use Mediation or Negotiation.",
+    ex: "Your competitor steals your patented pump design. You do not want to preserve the relationship, and they are ignoring your calls. You must choose Litigation because a judge is the only person who has the power to issue an injunction and send the police to shut down their factory."
+  },
+  {
+    title: "Diagram 6 — The Privilege Shield (Negotiation and Mediation)",
+    text: "When you negotiate or mediate, the law puts a shield over the room called Privilege. If you try to compromise and offer the other side money to go away, but the talks fail, that offer is shielded. The other side cannot go to court and tell the judge about your offer to prove you admitted fault. Without this shield, nobody would ever be honest during settlement talks.",
+    ex: "During mediation for a collapsed roof, you offer to pay the owner fifty thousand dollars just to end the headache, but they demand a million. Mediation fails. At trial, the owner tries to tell the judge, 'They offered me fifty grand, so they know they are guilty!' The judge will strike that from the record because it is protected by the privilege shield."
+  },
+  {
+    title: "Diagram 7 — The Binding Mediation Role-Conflict Trap",
+    text: "Binding mediation is a hybrid process where the same person acts as a mediator, and if that fails, they instantly become the arbitrator. This creates two fatal problems. First, as a mediator, they heard secret bottom-line information from each side privately. As an arbitrator, they now hold secrets that the other side cannot defend against. Second, because parties know this person might eventually judge them, they hide their true weaknesses, destroying the honesty needed for mediation.",
+    ex: "You tell a mediator in private that your firm is completely out of cash and desperate to settle. Mediation fails. That same mediator puts on their arbitrator hat, remembers you are broke, and uses that secret weakness against you when rendering their binding, final judgment."
+  },
+  {
+    title: "Diagram 8 — The Mediator's Private-Meeting Privilege",
+    text: "Judges and arbitrators are strictly forbidden from meeting with one side in private. If they did, it would destroy the fairness of the trial because the other side could not hear the arguments. A mediator is the exact opposite. A mediator's defining superpower is the ability to meet with each side privately. They use these confidential meetings to figure out where the real compromise lies.",
+    ex: "During a tense dispute, the mediator puts the client in one room and your engineering team in another. The mediator walks into your room alone and asks, 'What is your absolute maximum payout?' You can tell them the truth, knowing they will not tell the client, and they will use that info to silently guide the negotiation."
+  },
+  {
+    title: "Diagram 9 — The Expert Witness Neutrality Boundary",
+    text: "An expert witness is paid by one side, but their legal duty is strictly to assist the court, not to be a cheerleader. An expert is allowed to pick the most credible theory, but they are forbidden from pretending a crazy theory is a scientific fact. Most importantly, an expert can never take a contingent fee, meaning they only get paid if the side that hired them wins the case. Doing so destroys their credibility and can lead to license suspension.",
+    ex: "You are hired as a structural expert for a trial. The lawyer says, 'If we win, I will give you twenty percent of the payout.' You accept. The engineering association finds out, suspends your professional license for three months for unprofessional conduct, and the judge throws your entire report in the garbage."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

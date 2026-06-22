@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Chapter 9: Selected Contract Issues</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f2f5;overflow:hidden;height:100vh}
+#header{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid #e2e5ec;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:50px;}
+#header-left{display:flex;align-items:center;gap:14px}
+#badge{background:#eff4ff;color:#1d4ed8;font-size:11px;font-weight:600;padding:3px 9px;border-radius:4px;letter-spacing:.05em}
+#title{font-size:13px;font-weight:600;color:#1a1d26}
+#subtitle{font-size:11px;color:#8b95aa;margin-top:1px}
+#controls{display:flex;align-items:center;gap:6px}
+.cbtn{background:#fff;border:1px solid #d4d8e2;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:500;color:#5a6070;cursor:pointer;transition:all .12s;font-family:inherit;}
+.cbtn:hover{background:#f5f6f8;border-color:#b0b8cc;color:#1a1d26}
+#zoom-display{font-size:12px;color:#8b95aa;font-family:'Courier New',monospace;min-width:44px;text-align:center}
+#canvas-wrap{position:fixed;top:50px;left:0;right:0;bottom:0;background:#f0f2f5;background-image:radial-gradient(circle,#d4d8e2 1px,transparent 1px);background-size:24px 24px;overflow:hidden;cursor:grab;}
+#canvas-wrap.dragging{cursor:grabbing}
+#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#node-layer{position:absolute;top:0;left:0;transform-origin:0 0}
+.node{position:absolute;transform:translate(-50%,-50%);border-radius:10px;padding:8px 13px;font-size:12px;font-weight:500;line-height:1.4;text-align:center;cursor:pointer;border:1.5px solid transparent;min-width:90px;white-space:pre;transition:transform .15s,box-shadow .15s;}
+.node:hover{transform:translate(-50%,-50%) scale(1.07);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.node.root{font-size:14px;font-weight:600;padding:0;border-radius:50%;width:150px;height:150px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;white-space:pre;}
+.node.branch{font-size:12px;font-weight:600;padding:10px 15px;}
+.node.leaf{font-size:11.5px;padding:7px 11px;}
+.node.detail{font-size:11px;padding:6px 10px;}
+#tooltip{position:fixed;z-index:200;background:#fff;border:1px solid #d4d8e2;border-radius:10px;padding:12px 15px;font-size:12px;color:#1a1d26;max-width:300px;line-height:1.55;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 20px rgba(0,0,0,.1);}
+#tooltip strong{font-size:13px;display:block;margin-bottom:5px;color:#1a1d26}
+#tooltip p{font-size:12px;color:#5a6070}
+#legend{position:fixed;bottom:16px;left:16px;z-index:100;background:#fff;border:1px solid #e2e5ec;border-radius:10px;padding:12px 14px;}
+#legend h4{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;margin-bottom:8px}
+.leg-item{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:11px;color:#5a6070}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#hint{position:fixed;bottom:16px;right:16px;z-index:100;background:#fff;border:1px solid #e2e5ec;border-radius:8px;padding:8px 12px;font-size:11px;color:#8b95aa;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="title">Chapter 9 — Selected Contract Issues</div>
+      <div id="subtitle">Engineers Geoscientists Manitoba &nbsp;·&nbsp; Hover nodes for detailed notes</div>
+    </div>
+  </div>
+  <div id="controls">
+    <button class="cbtn" id="zout">−</button>
+    <span id="zoom-display">100%</span>
+    <button class="cbtn" id="zin">+</button>
+    <button class="cbtn" id="fit">Fit</button>
+    <button class="cbtn" id="r1">1:1</button>
+  </div>
+</div>
+
+<div id="canvas-wrap">
+  <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg"><g id="lines"></g></svg>
+  <div id="node-layer"></div>
+</div>
+
+<div id="tooltip"><strong id="tt-title"></strong><p id="tt-body"></p></div>
+
+<div id="legend">
+  <h4>Execution Issues</h4>
+  <div class="leg-item"><div class="leg-dot" style="background:#283593"></div>Core Concept</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#00695C"></div>Authority & Risk</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#D84315"></div>Scope Changes</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#6A1B9A"></div>Subcontracts & Specs</div>
+</div>
+
+<div id="hint">🖱 Scroll to zoom &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Hover nodes for notes</div>
+
+<script>
+const NODES = [
+
+  // ROOT
+  { id:'root', label:'Selected\nContract Issues', type:'root', x:0, y:0,
+    color:{bg:'#E8EAF6',border:'#283593',text:'#1A237E'},
+    tip:'Chapter 9. Contracts rarely go exactly as planned. This chapter covers the specific, frequent legal issues that arise during the actual performance and administration of a project.' },
+
+  // AUTHORITY & RISK
+  { id:'auth', label:'Agency &\nAuthority', type:'branch', x:-300, y:-150,
+    color:{bg:'#E0F2F1',border:'#00695C',text:'#004D40'},
+    tip:'An agent acts on behalf of a principal to bind them to a third party (e.g., Engineer acts for Owner to bind Contractor).' },
+  { id:'actual', label:'Actual vs.\nApparent', type:'leaf', x:-450, y:-250,
+    color:{bg:'#E0F2F1',border:'#26A69A',text:'#004D40'},
+    tip:'Actual/Express: Explicitly given by contract. Apparent/Implied: Created by the principal\'s representations to a third party. Both legally bind the principal.' },
+  { id:'indemnity', label:'Indemnities', type:'leaf', x:-450, y:-100,
+    color:{bg:'#E0F2F1',border:'#26A69A',text:'#004D40'},
+    tip:'A "hold harmless" agreement. One party agrees to bear the financial loss of another for a specified event, often to protect against third-party claims.' },
+  { id:'vicarious', label:'Vicarious\nLiability', type:'detail', x:-450, y:-10,
+    color:{bg:'#E0F2F1',border:'#4DB6AC',text:'#004D40'},
+    tip:'A rule making one party legally liable for the acts of another (e.g., an employer is liable for the negligence of their employees).' },
+
+  // SCOPE CHANGES
+  { id:'changes', label:'Change\nOrders', type:'branch', x:300, y:-150,
+    color:{bg:'#FBE9E7',border:'#D84315',text:'#BF360C'},
+    tip:'Modifications to the scope of work resulting in an increase (extra) or decrease (credit) to the contract price.' },
+  { id:'impact', label:'Impact\nCosts', type:'leaf', x:480, y:-250,
+    color:{bg:'#FBE9E7',border:'#FF7043',text:'#BF360C'},
+    tip:'Costs from inefficiency, delays, and schedule changes caused by the change. Must be claimed or reserved at the time the change order is priced, otherwise they are waived.' },
+  { id:'directive', label:'Change\nDirective', type:'leaf', x:480, y:-150,
+    color:{bg:'#FBE9E7',border:'#FF7043',text:'#BF360C'},
+    tip:'An order for the contractor to proceed with work when price cannot be agreed upon immediately; usually paid on a cost-plus basis later.' },
+  { id:'protest', label:'Performance\nUnder Protest', type:'leaf', x:480, y:-50,
+    color:{bg:'#FBE9E7',border:'#FF7043',text:'#BF360C'},
+    tip:'A statutory or contractual right allowing a contractor to perform disputed work while officially maintaining the right to claim extra payment for it later.' },
+
+  // SUBCONTRACTS & SPECS
+  { id:'subspecs', label:'Subcontracts &\nExecution', type:'branch', x:0, y:250,
+    color:{bg:'#F3E5F5',border:'#6A1B9A',text:'#4A148C'},
+    tip:'Issues arising from the chain of command and the physical realities of the site[cite: 2].' },
+  { id:'payifpaid', label:'Pay-if-Paid\nClauses', type:'leaf', x:-200, y:350,
+    color:{bg:'#F3E5F5',border:'#AB47BC',text:'#4A148C'},
+    tip:'Transfers the risk of owner non-payment to the subcontractor. Courts hate these and often interpret them narrowly as "Pay-when-Paid" (affecting only timing, not ultimate liability)[cite: 2].' },
+  { id:'incorporate', label:'Incorporation\nby Reference', type:'leaf', x:-50, y:400,
+    color:{bg:'#F3E5F5',border:'#AB47BC',text:'#4A148C'},
+    tip:'Subcontracts routinely bind the subtrade to all applicable terms of the prime contract, even if the subtrade never bothered to read the prime contract[cite: 2].' },
+  { id:'unforeseen', label:'Unforeseen\nConditions', type:'leaf', x:100, y:400,
+    color:{bg:'#F3E5F5',border:'#AB47BC',text:'#4A148C'},
+    tip:'Hidden conditions (e.g., bad soil). Owners often try to shift this risk via disclaimers requiring contractors to do their own investigations, but courts may reject these if unrealistic time was given during bidding[cite: 2].' },
+  { id:'admin', label:'Contract\nAdministration', type:'leaf', x:250, y:350,
+    color:{bg:'#F3E5F5',border:'#AB47BC',text:'#4A148C'},
+    tip:'The consultant must act strictly within their authority, make decisions in a timely manner, and conduct adequate field reviews (timing of reviews matters as much as the quantity)[cite: 2].' },
+];
+
+const EDGES = [
+  ['root','auth'],['root','changes'],['root','subspecs'],
+  ['auth','actual'],['auth','indemnity'],['indemnity','vicarious'],
+  ['changes','impact'],['changes','directive'],['changes','protest'],
+  ['subspecs','payifpaid'],['subspecs','incorporate'],['subspecs','unforeseen'],['subspecs','admin']
+];
+
+let scale=1,tx=0,ty=0,dragging=false,lx=0,ly=0;
+const wrap=document.getElementById('canvas-wrap');
+const nodeLayer=document.getElementById('node-layer');
+const linesG=document.getElementById('lines');
+const tooltip=document.getElementById('tooltip');
+const ttTitle=document.getElementById('tt-title');
+const ttBody=document.getElementById('tt-body');
+const zoomDisplay=document.getElementById('zoom-display');
+const nodeMap={};
+NODES.forEach(n=>nodeMap[n.id]=n);
+
+function applyT(){
+  nodeLayer.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
+  zoomDisplay.textContent=Math.round(scale*100)+'%';
+  drawEdges();
+}
+
+function drawEdges(){
+  linesG.innerHTML='';
+  linesG.setAttribute('transform',`translate(${tx},${ty}) scale(${scale})`);
+  EDGES.forEach(([a,b])=>{
+    const na=nodeMap[a],nb=nodeMap[b];
+    if(!na||!nb)return;
+    const x1=na.x,y1=na.y,x2=nb.x,y2=nb.y;
+    const mx=(x1+x2)/2;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke',nb.color.border);
+    path.setAttribute('stroke-width',nb.type==='branch'?2:1.5);
+    path.setAttribute('opacity','0.45');
+    linesG.appendChild(path);
+  });
+}
+
+function buildNodes(){
+  NODES.forEach(n=>{
+    const d=document.createElement('div');
+    d.className='node '+n.type;
+    d.style.left=n.x+'px';
+    d.style.top=n.y+'px';
+    d.style.background=n.color.bg;
+    d.style.borderColor=n.color.border;
+    d.style.color=n.color.text;
+    d.textContent=n.label;
+    d.addEventListener('mouseenter',()=>{
+      ttTitle.textContent=n.label.replace(/\n/g,' ');
+      ttBody.textContent=n.tip;
+      tooltip.style.opacity='1';
+    });
+    d.addEventListener('mousemove',e=>{
+      const x=Math.min(e.clientX+16,window.innerWidth-320);
+      const y=Math.min(e.clientY-10,window.innerHeight-170);
+      tooltip.style.left=x+'px';
+      tooltip.style.top=y+'px';
+    });
+    d.addEventListener('mouseleave',()=>{tooltip.style.opacity='0';});
+    nodeLayer.appendChild(d);
+  });
+}
+
+function fitView(){
+  const xs=NODES.map(n=>n.x),ys=NODES.map(n=>n.y);
+  const minX=Math.min(...xs)-110,maxX=Math.max(...xs)+110;
+  const minY=Math.min(...ys)-80,maxY=Math.max(...ys)+80;
+  const W=window.innerWidth,H=window.innerHeight-50;
+  scale=Math.min(W/(maxX-minX),H/(maxY-minY))*0.9;
+  tx=W/2-(minX+maxX)/2*scale;
+  ty=(H/2+50)-(minY+maxY)/2*scale;
+  applyT();
+}
+
+wrap.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const f=e.deltaY<0?1.1:0.9;
+  const ox=e.clientX,oy=e.clientY-50;
+  const prev=scale;
+  scale=Math.min(5,Math.max(0.08,scale*f));
+  tx=ox-(ox-tx)*(scale/prev);
+  ty=oy-(oy-ty)*(scale/prev);
+  applyT();
+},{passive:false});
+
+wrap.addEventListener('mousedown',e=>{dragging=true;lx=e.clientX;ly=e.clientY;wrap.classList.add('dragging');});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  tx+=e.clientX-lx;ty+=e.clientY-ly;lx=e.clientX;ly=e.clientY;applyT();
+});
+window.addEventListener('mouseup',()=>{dragging=false;wrap.classList.remove('dragging');});
+
+document.getElementById('zin').onclick=()=>{scale=Math.min(5,scale*1.2);applyT();};
+document.getElementById('zout').onclick=()=>{scale=Math.max(0.08,scale/1.2);applyT();};
+document.getElementById('fit').onclick=fitView;
+document.getElementById('r1').onclick=()=>{scale=1;tx=window.innerWidth/2;ty=(window.innerHeight-50)/2;applyT();};
+
+buildNodes();
+setTimeout(fitView,100);
+</script>
+</body>
+</html>

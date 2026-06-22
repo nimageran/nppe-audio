@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 14 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Litigation</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You sue someone in the official, public court system.<br><br><strong>The Rule:</strong> It is the default system, but it is incredibly slow, entirely public, and your case will be decided by a judge who likely knows absolutely nothing about engineering.</div>
+        <div class="mnem">Public, Slow, Expensive</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Arbitration</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You want a binding decision, but you do not want to go to public court.<br><br><strong>The Rule:</strong> A private trial where you hire an expert (like a senior engineer) to be the judge. Their decision is legally binding and extremely difficult to appeal.</div>
+        <div class="mnem">Private, Binding, Expert Judge</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Mediation</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Two parties are fighting but want to find a compromise.<br><br><strong>The Rule:</strong> You hire a neutral third party to help you negotiate. The mediator has zero power to force a decision. If you do not agree, you just walk away.</div>
+        <div class="mnem">Assisted Negotiation (No Power)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Alternative Dispute Resolution (ADR)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> Any method used to resolve a fight without going to formal Litigation.<br><br><strong>The Rule:</strong> This includes Negotiation, Mediation, and Arbitration. Modern contracts usually force you to try ADR before you are legally allowed to sue.</div>
+        <div class="mnem">Anything But Court</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Dispute Resolution Board (DRB)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You are building a massive $500M dam. If you stop construction to fight in court, everyone goes bankrupt.<br><br><strong>The Rule:</strong> A pre-selected panel of neutral experts visits the site regularly and solves disputes immediately so the work never stops.</div>
+        <div class="mnem">Solve It Fast, Keep Building</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Expert Witness (Duty)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Trap:</strong> Your client pays you $500/hour to testify in court about a bridge collapse.<br><br><strong>The Rule:</strong> Your absolute, strict legal duty is to tell the objective truth to the court. You are legally forbidden from acting as a "hired gun" or advocate for your client.</div>
+        <div class="mnem">Loyalty to the Court, Not the Client</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Fact vs. Expert Witness</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> A regular Fact Witness can only testify about what they physically saw or heard (e.g., "The beam bent").<br><br><strong>The Catch:</strong> An Expert Witness is the *only* person in the courtroom legally allowed to give an opinion (e.g., "The beam bent because the design was negligent").</div>
+        <div class="mnem">Only Experts Give Opinions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">"Without Prejudice"</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You email the client and offer $10,000 to drop the lawsuit, marking it "Without Prejudice."<br><br><strong>The Rule:</strong> If they reject it and go to court, they cannot show that email to the judge as proof you admitted fault. It protects settlement negotiations.</div>
+        <div class="mnem">Settlement Offers are Secret</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Document Discovery</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You are sued, and you decide to delete an embarrassing email where you admitted a mistake.<br><br><strong>The Rule:</strong> This is highly illegal. In litigation, both sides are legally forced to share all relevant documents, even the ones that completely destroy their own case.</div>
+        <div class="mnem">Hide Nothing</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

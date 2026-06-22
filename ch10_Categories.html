@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.10 Reference Card: Getting to a Contract</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 10 — Getting to a Contract</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">3 Dimensions of Contract Delivery (Table 10-1)<span class="sec-count">3 columns</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Choosing Whom (Process)</th><th>Choosing How (Delivery Method)</th><th>Choosing How to Pay</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Request for Qualifications · Tender · Request for Quotation · Request for Standing Offers · Request for Proposals · Prequalification · Hybrid Methods</td>
+            <td>Design-Bid-Build · Design-Build · Design-Build-Operate · Design-Build-Operate-Finance · Construction Management</td>
+            <td>Fixed Price / Stipulated Sum · Cost-Plus · Unit Price · Alliance · Public–Private Partnership (P3)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">7 Processes for Choosing Project Participants<span class="sec-count">7 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">i</div><div><span class="item-title">Request for Qualifications (RFQ)</span><span class="item-note">— selection based solely on qualifications, not price; used for professionals, design-builders, alliance/P3 participants</span></div></div>
+        <div class="item"><div class="num">ii</div><div><span class="item-title">Invitation to Tender (Call for Tenders)</span><span class="item-note">— formal; clearly defined scope; lowest price wins without negotiation; strict rules apply</span></div></div>
+        <div class="item"><div class="num">iii</div><div><span class="item-title">Request for Quotation</span><span class="item-note">— informal; no formal closing time; used when scope not fully defined; negotiation may follow</span></div></div>
+        <div class="item"><div class="num">iv</div><div><span class="item-title">Request for Standing Offers</span><span class="item-note">— prearranges prices/terms for frequently ordered goods/services; activated by "call-up" or requisition</span></div></div>
+        <div class="item"><div class="num">v</div><div><span class="item-title">Request for Proposals (RFP)</span><span class="item-note">— invite proposed solutions; success based on quality of solution, not just price; buyer expects to negotiate with top proponent(s)</span></div></div>
+        <div class="item"><div class="num">vi</div><div><span class="item-title">Prequalification / Letter of Interest</span><span class="item-note">— screening before tender/RFP; limits field to qualified sellers only; spares underqualified sellers from wasted bidding effort</span></div></div>
+        <div class="item"><div class="num">vii</div><div><span class="item-title">Hybrid Methods</span><span class="item-note">— buyer-defined unique process; must follow its own terms once established; government contracts must still be fair</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">Contract A vs Contract B — 2 Contracts in Tendering<span class="sec-count">2 items · from Ron Engineering</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">A</div><div><span class="item-title">Contract A — Bidding Contract</span><span class="item-note">— formed the moment a compliant bid is submitted; one Contract A per compliant bidder; contains implied terms (bid irrevocable, parties obligated to enter Contract B on acceptance, buyer must normally accept lowest tender)</span></div></div>
+        <div class="item"><div class="num">B</div><div><span class="item-title">Contract B — Construction/Project Contract</span><span class="item-note">— only one formed; between buyer and the SUCCESSFUL bidder; created upon acceptance of the bid</span></div></div>
+      </div>
+      <div class="warn"><strong>MJB modification:</strong> Contract A does NOT automatically arise on every bid. Depends on terms of the invitation. Buyer has 2 options: (1) define the relationship parameters, or (2) explicitly state no Contract A exists — though courts may ignore this.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">6 Stages of the Bidding Process<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Preparation of bid documents</span><span class="item-note">— drawings, specifications, general conditions, special conditions, instructions to bidders, invitation to bidders</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Solicitation / invitation of bids</span><span class="item-note">— by invitation only, open invitation, or through a bid depository</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Pricing by potential sellers</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Submission of bids</span><span class="item-note">— must comply with timing, form, and content; late bids typically must be rejected</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Evaluation by the buyer</span><span class="item-note">— with consultant assistance; only permitted alternatives considered; no post-tender negotiation unless defined in process</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Award of the contract</span><span class="item-note">— constitutes acceptance of an offer; must follow criteria stated in tender documents</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">6 Rules for Avoiding Liability at Contract Award<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Treat all bidders fairly, in good faith, consistent with instructions to bidders</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Reject non-compliant bids; minimize mandatory requirements to limit rejections</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Do not ask bidders to clarify ambiguities after tenders close</span><span class="item-note">— except in exceptional circumstances</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">No negotiations before award unless clearly defined in the bid process</span><span class="item-note">— never share one bidder's info with another</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Make contract changes only after award and write them into the contract</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Award in accordance with criteria stated in the tender documents</span><span class="item-note">— price is often most important but not the only criterion</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">5 Project Delivery Methods — Advantages & Disadvantages<span class="sec-count">comparison table</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Method</th><th>Advantages</th><th>Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Design-Bid-Build</td><td>Well known · Buyer can shift risks · Separates designer/inspector from builder</td><td>Lowest bidder generally required · Reduces innovation · Can be time consuming</td></tr>
+          <tr><td>Design-Build</td><td>One-stop shopping · Integrating designer and builder fosters cooperation · Increasingly well known</td><td>Limits buyer control over design · Concern over inspection integrity · Possible conflict of interest (consultant paid by contractor they review)</td></tr>
+          <tr><td>Design-Build-Operate</td><td>Contractor responsible for operations after build — reduces incentive to cut corners</td><td>Longer commitment; contractor's profit at risk throughout operation period</td></tr>
+          <tr><td>Design-Build-Operate-Finance (P3)</td><td>Same as DBO + contractor invests in project</td><td>Increased contractor risk due to capital at risk</td></tr>
+          <tr><td>Construction Management</td><td>Cuts out GC profit · Closer buyer relationship with trades</td><td>Requires sophisticated parties · Separates liability · Cost/schedule risk usually stays with buyer</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">Bid Mistakes — 2 Requirements to Withdraw Without Penalty<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Error must be Obvious</span><span class="item-note">— apparent on the face of the bid</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Error must be Material</span><span class="item-note">— significant enough to affect the substance of the bid</span></div></div>
+      </div>
+      <div class="warn"><strong>Risk:</strong> A bidder who revokes an irrevocable bid after closing but before acceptance forfeits the bid bond/deposit — unless the error is both obvious AND material. Courts are reluctant to let bidders withdraw.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#993C1D">8</div>
+      <div class="sec-title">3 Key International / Interprovincial Trade Agreements<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">NAFTA</span><span class="item-note">— North American Free Trade Agreement; 2014 threshold for services: $80,400</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">WTO Agreement on Government Procurement</span><span class="item-note">— World Trade Organization rules for government purchasing</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">AIT — Agreement on Internal Trade</span><span class="item-note">— interprovincial; threshold for services: $100,000. Only important interprovincial agreement.</span></div></div>
+      </div>
+      <div class="info">Complaints about government procurement fairness go to the <strong>Canadian International Trade Tribunal (CITT)</strong>. Filing deadline: <strong>10 days</strong> from when the supplier knew or ought to have known about the breach.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#3B6D11">9</div>
+      <div class="sec-title">Bid Shopping — 3 Legal Theories a Plaintiff Must Use<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Breach of Contract</span><span class="item-note">— must show Contract A was created AND that non-shopping was an implied term of Contract A</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Promissory Estoppel</span><span class="item-note">— prime contractor relied on subcontractor's price (detrimental reliance)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Unjust Enrichment</span><span class="item-note">— buyer or prime contractor gained benefit from the shopped price without proper compensation</span></div></div>
+      </div>
+      <div class="warn"><strong>Key point:</strong> Bid shopping is unethical but not automatically illegal — no remedy exists in many jurisdictions. Bidders who bid shop may lose the right to hold suppliers to their quoted price.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

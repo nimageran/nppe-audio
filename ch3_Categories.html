@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.3 Reference Card: Ethical Considerations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 3 — Ethical Considerations</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">3 Types of Legal Consequences for a Design Professional<span class="sec-count">3 items · in order of severity</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Criminal</span><span class="item-note">— most serious; can result in imprisonment. Proved beyond reasonable doubt.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Civil</span><span class="item-note">— monetary damages awarded against defendant. Proved on balance of probabilities.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Disciplinary</span><span class="item-note">— reprimand, suspension, fine, loss of right to practise, further training. Quasi-criminal proceedings.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">2 Standards of Proof<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Beyond Reasonable Doubt</span><span class="item-note">— criminal proceedings (highest standard)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Balance of Probabilities</span><span class="item-note">— civil proceedings (more likely true than not). Disciplinary: conflicting authority — somewhere between the two.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">5 Duties Owed by A/E/G Professionals<span class="sec-count">5 items · in priority order</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Duty to the Public</span><span class="item-note">— paramount (highest). Safety, health, welfare, fairness, integrity. Cannot be overridden by employer or client pressure.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Duty to the Client</span><span class="item-note">— second. Faithful agent, confidentiality, avoid conflicts of interest.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Duty to the Employer</span><span class="item-note">— loyalty, confidentiality, no competing without consent.</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Duty to the Profession</span><span class="item-note">— uphold honour/dignity, report misconduct of fellow members.</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Duty to Self</span><span class="item-note">— lowest priority; typically ranks below all other duties.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">5 Requirements in PEO Code of Ethics<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">i</div><div><span class="item-title">Fairness and loyalty</span><span class="item-note">— to associates, employers, clients, subordinates, employees</span></div></div>
+        <div class="item"><div class="num">ii</div><div><span class="item-title">Fidelity to public needs</span></div></div>
+        <div class="item"><div class="num">iii</div><div><span class="item-title">Devotion to high ideals of personal honour and professional integrity</span></div></div>
+        <div class="item"><div class="num">iv</div><div><span class="item-title">Knowledge of relevant developments</span><span class="item-note">— in engineering relevant to services undertaken</span></div></div>
+        <div class="item"><div class="num">v</div><div><span class="item-title">Competence</span><span class="item-note">— in performance of any professional engineering services undertaken</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">4 Functions of Consultant as Impartial Arbiter (CCDC 2)<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Evaluate and certify requests for progress payments</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Evaluate claims for extra payment and delay</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Issue the certificate of completion</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Act as first arbiter of disputes between owner and contractor</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">3 Competing Interests in Extra Payment Claims<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Duty to the Owner</span><span class="item-note">— protect against unfounded claims</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Duty to the Contractor</span><span class="item-note">— act fairly and impartially in evaluating the claim</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Consultant's Self-Interest</span><span class="item-note">— approving may reveal a design error; may expose consultant to owner's lawsuit</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">2 CFPOA Key Characteristics vs US FCPA<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="list-title">CFPOA (Canada) — Corruption of Foreign Public Officials Act</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Applies outside Canada</span><span class="item-note">— requires "real and substantial" connection to Canada or Canadian nationality (incl. permanent residents)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Facilitation payments exception</span><span class="item-note">— small payments to expedite routine approvals are currently allowed (Canada is eliminating this)</span></div></div>
+      </div>
+      <div class="list-title">US FCPA — 2 Key Differences from CFPOA</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">No double jeopardy protection</span><span class="item-note">— convicted under CFPOA in Canada? US can still try and convict you for the same conduct</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">No "real and substantial" connection required</span><span class="item-note">— even minor US connection (e.g. using US Postal Service) is enough for US jurisdiction</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#993C1D">8</div>
+      <div class="sec-title">Architectural Code of Ethics — 5 Topic Areas<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Conflict-of-interest guidelines</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Disclosure requirements</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Confidentiality</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Honesty and impartiality</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Reporting requirements</span><span class="item-note">— when architect becomes aware of a code of ethics violation</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

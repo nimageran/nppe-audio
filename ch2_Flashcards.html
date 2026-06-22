@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 2 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The #1 Purpose of the Association</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Catch:</strong> The provincial association (like EGM) is NOT a labor union. They do not care about your salary or protecting your job.<br><br><strong>The Rule:</strong> Their only legal purpose is to <strong>protect the public</strong> from bad engineers.</div>
+        <div class="mnem">Protect the Public FIRST</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Who regulates engineering?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> It is regulated provincially, not federally. The provincial government passes a law giving engineers the privilege of <strong>Self-Regulation</strong>.<br><br><strong>The Catch:</strong> If the profession fails to protect the public, the government can take this privilege away.</div>
+        <div class="mnem">Self-Regulated by Province</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Right to Title vs.<br>Scope of Practice</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>Right to Title:</strong> Only registered members can legally call themselves "Engineer" or "P.Eng.".<br><br><strong>Exclusive Scope of Practice:</strong> Only registered members can legally DO engineering work. Both the name and the job are protected by law.</div>
+        <div class="mnem">Protects the Name AND the Job</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Discipline vs. Enforcement</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>Discipline:</strong> Punishing <em>registered members</em> who break the rules (e.g., unethical behavior, incompetence).<br><br><strong>Enforcement:</strong> Going after <em>fake engineers</em> (non-members) who illegally use the title or practice without a license.</div>
+        <div class="mnem">Discipline = Members | Enforcement = Fakes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Hierarchy of Rules</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>1. The Act:</strong> Passed by the government. The highest authority.<br><strong>2. Regulations:</strong> Rules for running the association, approved by the government.<br><strong>3. Bylaws:</strong> Day-to-day administrative rules voted on by the engineers themselves (the lowest authority).</div>
+        <div class="mnem">Act > Regulations > Bylaws</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What does your Professional Seal (Stamp) mean?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Applying your stamp means you personally prepared, supervised, or thoroughly reviewed the work. <br><br><strong>The Catch:</strong> It means you are taking full legal and professional responsibility for that document. Never stamp something you did not check.</div>
+        <div class="mnem">Stamp = Total Responsibility</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Certificates of Authorization<br>(C of A)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> A company cannot be a "P.Eng." Only humans get that title.<br><br><strong>The Catch:</strong> If a company wants to offer engineering services to the public, the business itself must hold a Certificate of Authorization (or Permit to Practice) to operate legally.</div>
+        <div class="mnem">Humans get P.Eng. | Companies get C of A</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Can you practice in another province?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Your license stops at the provincial border. If you move, you must apply to the new province's association. <br><br><strong>The Catch:</strong> "Mobility agreements" make transferring your license fast, but it is never automatic. You must register locally.</div>
+        <div class="mnem">License Stays at the Border</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What can the Discipline Committee do to you?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> They can fine you, suspend you, force you to take classes, or permanently strip your P.Eng. license.<br><br><strong>The Catch:</strong> They CANNOT send you to jail. Only the real Canadian court system can put you in prison.</div>
+        <div class="mnem">They Take Your License, Not Your Freedom</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Incompetence</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You take on a bridge design job, but you only know how to design HVAC systems.<br><br><strong>The Rule:</strong> Practicing outside your specific area of training and expertise is legally considered "incompetence" and is grounds for losing your license.</div>
+        <div class="mnem">Stick to What You Know</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Continuing Professional Development (CPD)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Getting your P.Eng. is not the finish line. To keep the public safe, you are legally required to keep your skills sharp.<br><br><strong>The Catch:</strong> You must track and report your ongoing education (CPD hours) every year, or you will lose your license.</div>
+        <div class="mnem">Learn or Lose It</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Code of Ethics</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Catch:</strong> The Code of Ethics is not just a list of polite suggestions.<br><br><strong>The Rule:</strong> It is a strict legal requirement built directly into the provincial Regulations. Breaking the Code is professional misconduct and will trigger a discipline hearing.</div>
+        <div class="mnem">Ethics = The Law</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

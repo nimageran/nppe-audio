@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.4 Reference Card: Property Law</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 4 — Property Law</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">2 Main Categories of Property<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Real Property</span><span class="item-note">— land and anything permanently attached to benefit the land (buildings, fixtures)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Personal Property</span><span class="item-note">— everything else; divided into tangible (chattels) and intangible (IP, licences)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">2 Types of Co-Ownership of Real Property<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Joint Tenancy</span><span class="item-note">— co-owners hold concurrently; on death, remaining joint tenants automatically inherit (right of survivorship). Default assumption.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Tenancy in Common</span><span class="item-note">— each holds a stated portion; on death, heirs of the deceased inherit their share (NOT the co-owner)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">3 Types of Property Boundary Rights<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Lateral Support</span><span class="item-note">— neighbour cannot undermine support of adjacent land/buildings by digging</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Riparian Rights</span><span class="item-note">— rights to use water on or adjacent to a property</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Air Rights</span><span class="item-note">— extend above property to a reasonable level; prevent neighbours blocking sunlight; used for air space parcels</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">2 Systems for Registering Real Property<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Torrens System</span><span class="item-note">— western provinces; government-run certificates of title; shows current fee simple holder and all charges; always up to date</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Registry System</span><span class="item-note">— parts of Ontario and eastern provinces; chronological list only; must review historical records to find interests</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">7 Specific Real Property Rights<span class="sec-count">7 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">i</div><div><span class="item-title">Lease</span><span class="item-note">— exclusive right to occupy; generally runs with the land</span></div></div>
+        <div class="item"><div class="num">ii</div><div><span class="item-title">Mortgage</span><span class="item-note">— security for a loan; lender paid from property value on sale; discharged on repayment</span></div></div>
+        <div class="item"><div class="num">iii</div><div><span class="item-title">Easement / Right of Way</span><span class="item-note">— right to use or cross neighbouring land; runs with the land; can be created by historical/repetitive use</span></div></div>
+        <div class="item"><div class="num">iv</div><div><span class="item-title">Restrictive Covenant</span><span class="item-note">— conditions on one property for benefit of neighbour. Negative (refrain) = runs with land. Positive (do something) = does NOT run with land.</span></div></div>
+        <div class="item"><div class="num">v</div><div><span class="item-title">Licence</span><span class="item-note">— right to use property; does NOT run with the land; only between original parties</span></div></div>
+        <div class="item"><div class="num">vi</div><div><span class="item-title">Profit à Prendre</span><span class="item-note">— combo of easement + licence; DOES run with the land; e.g. harvesting trees, removing gravel</span></div></div>
+        <div class="item"><div class="num">vii</div><div><span class="item-title">Construction Lien</span><span class="item-note">— charge on land from unpaid builder; provided by statute in each province; cannot be registered on unpatented land</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">4 Types of Intellectual Property Protection<span class="sec-count">4 items + integrated circuits</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Type</th><th>Protects</th><th>Requirements</th><th>Term</th></tr></thead>
+        <tbody>
+          <tr><td>Copyright</td><td>Expression of words/data in original literary, musical, dramatic, artistic works</td><td>Original, permanent, published (© + name + year). No registration needed.</td><td>50 years after author dies</td></tr>
+          <tr><td>Patent</td><td>Inventions — new, useful art/process/machine/manufacture/composition</td><td>New (not publicly known), useful (commercial application), inventive. Registration required.</td><td>20 years from filing date</td></tr>
+          <tr><td>Trademark</td><td>Marks (names, logos, designs) distinguishing goods/services</td><td>Distinctive; used or known in Canada. Must actively use and defend or lose it.</td><td>15 years, renewable indefinitely</td></tr>
+          <tr><td>Industrial Design</td><td>Shape, configuration, look of mass-produced items</td><td>Novel, original, NOT purely utilitarian — must have aesthetic purpose</td><td>10 years from registration</td></tr>
+          <tr><td>Integrated Circuits</td><td>Topography (layer configuration) of integrated circuits</td><td>Original — cannot be a reproduction of another circuit</td><td>10 years from filing date</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">Copyright — 2 Types of Rights<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Economic Rights</span><span class="item-note">— publication, reproduction, performance, exhibition, translation, dissemination, authorization. Can be assigned.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Moral Rights</span><span class="item-note">— protect artistic integrity; right to prevent distortions, mutilations, false claims of authorship. Cannot be assigned — only waived.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#854F0B">8</div>
+      <div class="sec-title">Patent — 3 Requirements to Qualify<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">New</span><span class="item-note">— not generally known to the public</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Useful</span><span class="item-note">— has commercial application; does what it claims</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Inventive</span><span class="item-note">— not obvious; goes beyond existing knowledge</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#993C1D">9</div>
+      <div class="sec-title">3 Remedies for IP Infringement<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Injunction</span><span class="item-note">— court order preventing further infringement</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Order to surrender all infringing copies</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Damages</span><span class="item-note">— based on owner's lost profits OR infringer's profits earned</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#3B6D11">10</div>
+      <div class="sec-title">Sale of Goods — 3 Implied Warranties in Chattel Contracts<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Fitness for Purpose</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Merchantability / Quality</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Passing of Title</span><span class="item-note">— terms relating to when ownership of the goods transfers</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

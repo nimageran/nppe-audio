@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 4 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 4 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Property Classification Tree</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 8</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Property Classification Tree",
+    text: "The law sorts all property into two massive buckets: Real and Personal. Real property is land and anything permanently glued to it for the land's benefit, like a building. But surprisingly, owning the land does not usually mean you own the oil or gold buried underneath it; the government keeps those mineral rights. Personal property is everything else, split into things you can actually touch, called chattels, and things you cannot touch, like intellectual property and licenses.",
+    ex: "You buy a plot of land to build a chemical plant. The dirt and the plant are Real Property. The fleets of delivery trucks parked outside are tangible Personal Property. The patent for the chemical you mix inside is intangible Personal Property."
+  },
+  {
+    title: "Diagram 2 — The Fixture Test: The Mobile Home Problem",
+    text: "Just because something is physically bolted down does not magically make it real property. To figure out if an item is a 'fixture' that belongs to the land, or a 'chattel' you can take with you, courts look at permanence and purpose. If you bolt a structure down just to keep it stable while you use it, it stays personal property. If you permanently bolt it down with the intent of making it a permanent improvement to the lot, it becomes real property.",
+    ex: "You bolt a massive $100,000 industrial drill press to the floor of your rented warehouse purely to stop it from vibrating during use. Because the purpose is to benefit the drill, not the warehouse, it remains your personal chattel, and you can legally unbolt it and take it with you when your lease ends."
+  },
+  {
+    title: "Diagram 3 — Joint Tenancy vs Tenancy in Common",
+    text: "How you share ownership of property dictates what happens when you die. In a Joint Tenancy, which is the default rule in law, if you die, your partner instantly absorbs your entire share, and your family gets absolutely nothing. In a Tenancy in Common, you own a distinct mathematical percentage. If you die, your specific percentage goes directly to your heirs, leaving your business partner stuck co-owning the property with your family.",
+    ex: "You and your business partner buy an office building as Joint Tenants. You get hit by a bus. Your partner instantly owns 100 percent of the building, and your spouse and kids get zero dollars from it. If you had specifically registered as Tenants in Common, your spouse would have safely inherited your 50 percent share."
+  },
+  {
+    title: "Diagram 4 — 'Runs With the Land': The Boundary That Decides Everything",
+    text: "When you buy a piece of property, you sometimes inherit invisible legal baggage that you never signed up for. If a right 'runs with the land,' it permanently sticks to the dirt and automatically binds every future owner. Easements and negative covenants run with the land. But personal licenses and positive covenants, like a promise to mow the grass or share costs, only bind the original two people who shook hands, and do not stick to the new buyer.",
+    ex: "The previous owner of your land signed a negative restrictive covenant promising never to build a structure taller than two stories, so the neighbor keeps their view. Because negative covenants 'run with the land,' you are legally forbidden from building a three-story house, even though you personally never signed that promise."
+  },
+  {
+    title: "Diagram 5 — Torrens vs Registry System",
+    text: "Canada uses two completely different filing systems for land, which dictates how hard it is to check who actually owns it. In Western Canada, the Torrens system uses a single, continuously updated 'Certificate of Title.' You look at one piece of paper, and you know exactly who owns it and what liens exist. In Eastern Canada, the older Registry system is just a messy, chronological pile of historical receipts. You have to pay a lawyer to dig through decades of history to reconstruct the truth.",
+    ex: "You want to buy a plot of land in Alberta to build a substation. Under the Torrens system, your lawyer pulls a single digital certificate that guarantees the seller owns it free and clear. It takes five minutes, and you can buy it immediately with total legal safety."
+  },
+  {
+    title: "Diagram 6 — The Real Property Interest Spectrum",
+    text: "Not all property rights are equal; they range from total control down to a brief pass. A Lease gives you exclusive physical control. A Mortgage just gives a bank the right to sell your property if you don't pay them. An Easement gives your neighbor the right to cross your land forever. A Restrictive Covenant dictates what color you can paint your walls. And a Licence is just a temporary, weak contractual permission to use something, like a movie ticket, which can be revoked at any time.",
+    ex: "You grant a utility company an Easement to run high-voltage power lines across the edge of your property. That is a permanent property interest. But if you just tell a local farmer he can park his truck on your land for the weekend, that is a Licence, and you can legally kick him off ten minutes later."
+  },
+  {
+    title: "Diagram 7 — The Intellectual Property Selection Tree",
+    text: "You cannot just 'patent' everything. The law forces your idea into specific buckets. Words, code, and art automatically get Copyright. Only physical, new, and useful inventions get Patents. Logos and brand names get Trademarks. Aesthetic, mass-produced shapes get Industrial Design. The layout of microchips gets Integrated Circuit protection. If your creation is just a pure, abstract idea, the only way to protect it is to keep your mouth shut and use a Trade Secret.",
+    ex: "You invent a revolutionary new pump. The physical mechanical pumping action gets a Patent. The user manual you wrote gets a Copyright. The catchy brand name 'SuperPump' gets a Trademark. And the specific, cool-looking curve of the plastic casing gets an Industrial Design."
+  },
+  {
+    title: "Diagram 8 — IP Terms of Protection: A Timeline Comparison",
+    text: "Intellectual property expires on brutal, arbitrary timelines. Copyright lasts for fifty years after you literally die. Patents last exactly twenty years from the day you file the paperwork, and then anyone can copy your machine legally. Industrial designs and circuits last ten years. Trademarks are the only exception: they last for fifteen years, but you can renew them forever. However, if you stop aggressively using and defending your Trademark, you lose it completely.",
+    ex: "You patent a new drill bit. Twenty years later, your patent expires, and every cheap knock-off factory in the world starts legally manufacturing your exact design. But because you constantly defended your Trademark name 'DiamondDrill,' none of them are legally allowed to use your famous brand name on their boxes."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

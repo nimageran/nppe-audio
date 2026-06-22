@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 20: Visualizing Labour Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; text-transform: uppercase; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.agency { border-top-color: #64748b; }
+    .framework-card.spectrum { border-top-color: #f59e0b; }
+    .framework-card.security { border-top-color: #3b82f6; }
+    .framework-card.disputes { border-top-color: #ef4444; }
+    .framework-card.corporate { border-top-color: #8b5cf6; }
+    .framework-card.grievance { border-top-color: #10b981; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 20: DEEP LABOUR LAW VISUALIZATION</h1>
+
+  <div class="framework-card agency">
+    <h2>1. Employment Law vs. Labour Law (The Agency Model)</h2>
+    <p>The law explicitly divides the workplace into two distinct legal realms based on union representation[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        subgraph Employment Law
+          Emp1[Employer] <-->|Direct Contract & Negotiation| W1[Non-Union Employee]
+        end
+        
+        subgraph Labour Law
+          Emp2[Employer] <-->|Collective Agreement| Union[The Trade Union]
+          Union <-->|Sole Bargaining Agent| W2[Unionized Employee]
+          Emp2 -.->|Direct Negotiation PROHIBITED| W2
+        end
+        
+        style Emp1 fill:#f1f5f9,stroke:#64748b
+        style W1 fill:#e0f2fe,stroke:#0284c7
+        style Emp2 fill:#f1f5f9,stroke:#64748b
+        style Union fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style W2 fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This illustrates the fundamental shift in power and communication when a union is formed[cite: 1].</p>
+      <ul>
+        <li><strong>Employment Law:</strong> Governs employee-employer relationships where there is no union representation[cite: 1].</li>
+        <li><strong>Labour Law:</strong> Governs union-management and employee-union relationships, primarily under provincial legislation[cite: 1]. Section 2(d) of the Charter of Rights and Freedoms guarantees freedom of association, protecting the right to collectively bargain[cite: 1].</li>
+        <li><strong>The Agency Shift:</strong> Once a union is certified, it becomes the sole agent for the employees[cite: 1]. The employer is legally prohibited from bypassing the union to negotiate directly with a represented employee[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card spectrum">
+    <h2>2. The Worker Classification Spectrum</h2>
+    <p>Labour boards must categorize every worker to determine if they are legally allowed to join a union[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Root[WORKER CLASSIFICATIONS] --> IC[Independent Contractor]
+        Root --> DC[Dependent Contractor]
+        Root --> E[Employee]
+        Root --> S[Supervisory / Managerial]
+        
+        IC -.->|Controls own methods, true entrepreneur| C1[CANNOT Form Union: Anti-competition laws]
+        DC -.->|Owns tools, but economically dependent| C2[CAN Join Union]
+        E -.->|Supplies only labour| C3[CAN Join Union]
+        S -.->|Controls/disciplines other workers| C4[OFTEN EXCLUDED: Conflict of Interest]
+        
+        style Root fill:#1e293b,color:#fff
+        style IC fill:#f1f5f9,stroke:#64748b
+        style DC fill:#fef3c7,stroke:#d97706
+        style E fill:#e0f2fe,stroke:#0284c7
+        style S fill:#fee2e2,stroke:#dc2626
+        style C1 fill:#991b1b,color:#fff
+        style C2 fill:#166534,color:#fff
+        style C3 fill:#166534,color:#fff
+        style C4 fill:#991b1b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps out who is protected by labour legislation[cite: 1].</p>
+      <ul>
+        <li><strong>The Control Test:</strong> An independent contractor determines their own means and methods, while an employee does not[cite: 1]. Independent contractors are legally prohibited from colluding to fix prices, meaning they cannot unionize[cite: 1].</li>
+        <li><strong>The Dependent Contractor:</strong> A shaded middle ground. They may provide their own vehicles or tools, but they rely on one source for their income (economic dependence), making them eligible for unionization[cite: 1].</li>
+        <li><strong>Professional Ethics Override:</strong> In some provinces, professionals (like engineers) may find themselves in a union[cite: 1]. However, if a strike is called that endangers public safety, the professional's Code of Ethics strictly prevails over the union's strike rules[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card security">
+    <h2>3. Union Security & The Rand Formula</h2>
+    <p>To survive, unions need financial security. The law permits various models to ensure unions are funded and membership is maintained[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Model[Union Security Models] --> Closed[Closed Shop]
+        Model --> UnionShop[Union Shop]
+        Model --> Rand[Rand Formula]
+        Model --> Open[Open Shop]
+        
+        Closed -.->|Must be a union member BEFORE getting hired| M1(Membership Required)
+        UnionShop -.->|Must join union AFTER getting hired| M2(Membership Required)
+        Rand -.->|Do not have to join, but MUST PAY DUES| M3(Dues Required / No Free Rides)
+        Open -.->|No membership or dues required| M4(Fully Voluntary)
+        
+        style Model fill:#1e293b,color:#fff
+        style Closed fill:#fef3c7,stroke:#d97706
+        style UnionShop fill:#fef3c7,stroke:#d97706
+        style Rand fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Open fill:#f1f5f9,stroke:#64748b
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This compares the structures of workplace union enforcement[cite: 1].</p>
+      <ul>
+        <li><strong>The Free Rider Problem:</strong> When a union secures a raise, even non-union employees benefit from it[cite: 1]. The <strong>Rand Formula</strong> forces non-members to pay union dues as a compromise so they do not financially exploit the union's bargaining efforts[cite: 1]. The Supreme Court ruled this does not violate the Charter[cite: 1].</li>
+        <li><strong>Closed Shops in Canada:</strong> Unlike the United States, where "Closed Shops" are heavily restricted as an infringement on freedom of association, Canadian courts still permit them[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card disputes">
+    <h2>4. Multi-Union Construction & Stoppages</h2>
+    <p>Unlike a factory with one giant union, construction sites have dozens of separate "trade" or "craft" unions operating simultaneously[cite: 1]. This creates massive coordination risks[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Site[Construction Site] --> Strike[Strikes & Lockouts]
+        Site --> JD[Jurisdictional Disputes]
+        
+        Strike --> S1{Is a Collective Agreement in force?}
+        S1 -->|Yes| Illegal[Strike / Lockout is ILLEGAL]
+        S1 -->|No| Legal[Legal Work Stoppage]
+        
+        JD --> Claim[Carpenters & Plumbers BOTH claim the right to install specific pipe supports]
+        Claim --> Halt[Work Stoppage PROHIBITED]
+        Halt --> Board[Labour Board resolves based on industry practice & skills]
+        
+        style Site fill:#1e293b,color:#fff
+        style Strike fill:#fee2e2,stroke:#dc2626
+        style JD fill:#fef3c7,stroke:#d97706
+        style Illegal fill:#991b1b,color:#fff
+        style Legal fill:#166534,color:#fff
+        style Halt fill:#1e293b,color:#fff
+        style Board fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps out how conflicts manifest on a job site[cite: 1].</p>
+      <ul>
+        <li><strong>Jurisdictional Disputes:</strong> A conflict where two or more unions claim that a specific piece of work belongs exclusively to their members[cite: 1]. Because one small trade striking can shut down the entire site, labour legislation explicitly prohibits work stoppages caused by jurisdictional disputes[cite: 1].</li>
+        <li><strong>Strikes & Lockouts:</strong> These are the ultimate weapons in a labour dispute, but they are strictly illegal as long as an active collective agreement is in force[cite: 1].</li>
+        <li><strong>Replacement Workers:</strong> Some provinces (like British Columbia) legally prohibit employers from hiring replacement workers (scabs) to do the jobs of employees who are on a legal strike or locked out[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card corporate">
+    <h2>5. The "Corporate Charade" Shield</h2>
+    <p>Employers cannot simply shuffle paperwork or change their company name to destroy a union[cite: 1]. The law pierces through corporate structures to protect bargaining rights[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Old[Old Unionized Company] -->|Goes Bankrupt / Sells Assets| New[New "Non-Union" Company]
+        
+        New --> Test{Labour Board Test}
+        Test --> T1[1. Successor Employer Rule: Did they buy the business?]
+        Test --> T2[2. Common Employer Rule: Same Directors & Control?]
+        
+        T1 -->|Yes| Bind[Union Agreement SURVIVES & Binds New Company]
+        T2 -->|Yes| Bind
+        
+        style Old fill:#f1f5f9,stroke:#64748b
+        style New fill:#fee2e2,stroke:#dc2626
+        style Test fill:#fef3c7,stroke:#d97706
+        style Bind fill:#166534,color:#fff,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagrams the outcome of the <em>Vulcan Packaging</em> Case Study[cite: 1].</p>
+      <ul>
+        <li><strong>Successor Employers:</strong> If a corporation purchases a business or its substantial assets, they inherit the obligation to bargain with the existing union[cite: 1].</li>
+        <li><strong>Common Employers:</strong> If separate companies are running related activities under common control or direction (same key officers and directors), the board will treat them as a single employer[cite: 1].</li>
+        <li><strong>The Vulcan Case:</strong> In <em>Vulcan Packaging</em>, the owners pushed the company into bankruptcy, then a group controlled by the exact same people bought the assets and tried to operate non-union[cite: 1]. The board ruled this a "corporate charade" designed to get rid of the union, and legally bound the new companies to the old collective agreement[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card grievance">
+    <h2>6. Grievances, Layoffs, and Arbitrator Power</h2>
+    <p>The rules of discipline and termination under a collective agreement are drastically different from standard common law[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Event[Business Downturn or Employee Misconduct] --> Action1[Layoff]
+        Event --> Action2[Termination]
+        
+        Action1 -.->|Temporary suspension| L1[Must follow SENIORITY: Last hired, first laid off]
+        Action2 -.->|Permanent end| T1[Requires JUST CAUSE: Multiple warnings usually required]
+        
+        T1 --> Union[Union files Grievance]
+        Union --> Arb[Grievance Arbitration]
+        Arb -.->|Arbitrator's Extreme Power| Reinstate((Can Order Reinstatement<br>with Back Pay))
+        
+        style Event fill:#1e293b,color:#fff
+        style Action1 fill:#e0f2fe,stroke:#0284c7
+        style Action2 fill:#fee2e2,stroke:#dc2626
+        style L1 fill:#f8fafc,stroke:#94a3b8
+        style T1 fill:#f8fafc,stroke:#94a3b8
+        style Union fill:#dcfce7,stroke:#16a34a
+        style Arb fill:#fef3c7,stroke:#d97706
+        style Reinstate fill:#166534,color:#fff,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This contrasts collective agreement protections against normal employment law[cite: 1].</p>
+      <ul>
+        <li><strong>Grievance vs. Interest Arbitration:</strong> <em>Grievance Arbitration</em> resolves disputes over the interpretation of an existing agreement[cite: 1]. <em>Interest Arbitration</em> is used to formulate a brand new collective agreement when negotiations break down[cite: 1].</li>
+        <li><strong>Layoffs & Seniority:</strong> A layoff is temporary[cite: 1]. Employers cannot pick and choose who stays; they are legally forced to lay off the most junior employees first, and re-hire them in reverse order[cite: 1].</li>
+        <li><strong>Arbitrator Supremacy:</strong> Under normal common law, an employer can fire anyone without cause as long as they pay severance (reasonable notice)[cite: 1]. Under a collective agreement, firing without "just cause" is essentially banned[cite: 1]. Furthermore, a labour arbitrator has the power to order an employer to physically reinstate a fired worker—a power that standard common law courts do not have[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

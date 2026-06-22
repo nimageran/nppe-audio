@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 3 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 3 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Triple-Jeopardy Framework</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 7</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Triple-Jeopardy Framework",
+    text: "A single mistake can trigger three completely separate legal nightmares at the exact same time: a criminal trial, a civil lawsuit, and a professional disciplinary hearing. People think 'double jeopardy' protects them from being punished three times for one crime, but that is totally false. Double jeopardy only stops the government from charging you with the exact same criminal offense twice. Furthermore, the standard of proof is different. You might be found 'not guilty' in criminal court because there is reasonable doubt, but still lose your license and get sued for millions because civil and disciplinary courts use a much lower bar called the balance of probabilities.",
+    ex: "You are accused of defrauding a client. You are acquitted in criminal court because the jury has a slight doubt. But the engineering association uses the lower standard of proof, decides it is more likely than not that you did it, and strips your engineering license forever."
+  },
+  {
+    title: "Diagram 2 — The Duty Hierarchy: What Outranks What",
+    text: "As an engineer, you owe duties to five different groups, and ethical dilemmas happen when two of those groups demand opposite things. To solve the dilemma, you use a strict hierarchy. The public comes first, the client second, the employer third, the profession fourth, and yourself dead last. Your duty to public safety is absolutely paramount, meaning it overrides every single other duty on the list. Also, notice that your duty to yourself is at the very bottom. 'I might get fired' is never a valid excuse for ignoring public safety.",
+    ex: "Your boss orders you to ignore a cracked foundation to save money, threatening to fire you if you don't. Your duty to public safety, which is number one, completely outranks your duty to your employer, number three, and your duty to yourself, number five. You must report the crack, even if you lose your job."
+  },
+  {
+    title: "Diagram 3 — The Parallel Proceedings Trap",
+    text: "If you are fighting a criminal charge and a disciplinary hearing at the same time, you are in a massive legal trap. In a criminal trial, you have the constitutional right to remain silent so you don't incriminate yourself. But in a disciplinary hearing, you feel pressured to speak up and defend your license. If you talk in the disciplinary hearing, the police can take that transcript and use your own words against you in criminal court. The only safe move is to officially ask the disciplinary board to suspend their hearing entirely until your criminal trial is finished.",
+    ex: "You are charged with criminal negligence for a bridge collapse and the engineering board wants to interview you. If you go to the board interview to try to save your license, the prosecutor will use your interview answers to put you in prison. You must halt the board interview until the criminal trial ends."
+  },
+  {
+    title: "Diagram 4 — The Consultant's Three-Way Conflict",
+    text: "When a contractor demands extra money and the owner refuses, the consultant evaluating the claim is caught in a brutal three-way conflict. They owe a duty to protect the owner from fake claims, and a duty to treat the contractor completely fairly. But the hidden third interest is their own self-preservation. Often, the extra money is needed because the consultant made a stupid design error. The consultant is essentially grading their own homework. Despite the temptation to lie to protect themselves, they must evaluate the claim honestly, approve it if warranted, and immediately notify their insurance company that they might be sued.",
+    ex: "A contractor asks for an extra $50,000 because your blueprint forgot to include the plumbing layout. To save your own reputation, you might want to reject the claim and blame the contractor. But ethically, you must honestly approve the $50,000 extra and admit it was your fault, then call your liability insurer."
+  },
+  {
+    title: "Diagram 5 — The Constructive Trust Mechanism",
+    text: "If you secretly moonlight on the weekends doing engineering jobs that your boss could have taken, you have breached your duty of loyalty. Your boss does not just sue you for the money they lost. Instead, the law uses a terrifying weapon called a Constructive Trust. The law simply pretends that every dollar of profit you made on those secret side-jobs was actually held in trust for your boss all along. You will be forced to surrender your entire profit to your employer, even if your employer wasn't actively harmed. The only way to avoid this is to ask your boss for written permission before taking the side-job.",
+    ex: "You work for an engineering firm. On the weekend, you secretly design a patio for a neighbor and make a $5,000 profit. When your firm finds out, the court applies a constructive trust and forces you to hand that entire $5,000 check directly over to your boss."
+  },
+  {
+    title: "Diagram 6 — The Self-Policing Double Bind",
+    text: "Professionals are forced to self-police, which puts you in a terrible double bind. If you see another engineer make a dangerous mistake and you say nothing, you can be disciplined for failing to report them. But if you aggressively accuse them without having all the facts, you can be disciplined for unprofessional conduct and attacking a peer. To survive this trap, you must use transparent conditionality. You report the issue, but clearly state what assumptions you are making and explicitly note that your opinion might change if new facts come to light.",
+    ex: "You are hired as an expert witness and review a rival engineer's calculation. Instead of screaming in court, 'This engineer is a total incompetent fraud!', which could get you disciplined, you safely state, 'Based strictly on the limited data I was provided, these calculations appear incorrect, but I reserve the right to change my opinion if the original engineer provides missing field data.'"
+  },
+  {
+    title: "Diagram 7 — The CFPOA Jurisdictional Reach",
+    text: "Canadian criminal law usually only applies if you commit the crime inside Canada. The Corruption of Foreign Public Officials Act, or CFPOA, completely shatters that rule. It makes it illegal to bribe foreign officials anywhere in the world. It applies if your business has a real connection to Canada, or if you are a Canadian citizen or even just a Permanent Resident. And here is the ultimate nightmare: if you are convicted under this act in Canada, the United States can still prosecute you for the exact same bribe under their own laws. The US does not recognize double jeopardy for foreign bribery.",
+    ex: "You are a Permanent Resident of Canada working in Brazil, and you pay a $10,000 bribe to a local Brazilian mayor to get a mining permit. You will be arrested and thrown in a Canadian prison under the CFPOA. When you get out, the United States can immediately arrest you and throw you in an American prison for that exact same Brazilian bribe."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

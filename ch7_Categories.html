@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.7 Reference Card: Breach of Contract</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 7 — Breach of Contract</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">4 Causes of Breach of Contract<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Inability</span><span class="item-note">— wants to perform but cannot (e.g. lack of financial resources)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Inadvertence</span><span class="item-note">— unintentionally failed to carry out a promise or obligation</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Disagreement</span><span class="item-note">— parties interpret the contract differently (e.g. dispute over scope of work)</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Anticipated Financial Losses</span><span class="item-note">— party calculates it is cheaper to breach than to perform (e.g. go bankrupt rather than continue)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#185FA5">2</div>
+      <div class="sec-title">4 Remedies for Breach of Contract<span class="sec-count">4 items · damages is most common</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Damages</span><span class="item-note">— most common; money to put innocent party in same position as if contract performed properly</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Specific Performance</span><span class="item-note">— court orders party to perform specific acts; rarely used in A/E/G contracts; typical for land sale refusals</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Injunction</span><span class="item-note">— court prohibits a party from doing something</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Declaratory Order</span><span class="item-note">— court determines rights of parties without ordering payment or action</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">3 Limitations on Recovery of Damages<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Mitigation</span><span class="item-note">— innocent party must take reasonable steps to reduce their loss; can only recover the difference after mitigating</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Not Speculative</span><span class="item-note">— must prove on balance of probabilities that the loss would have occurred AND the amount of that loss</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Remoteness</span><span class="item-note">— loss must have been reasonably foreseeable at time of contract; unusual risks must be disclosed to the other party or they cannot be claimed</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#0F6E56">4</div>
+      <div class="sec-title">2 Types of Breach<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Fundamental Breach</span><span class="item-note">— goes to the root of the contract; deprives innocent party of substantially all benefit. Options: (a) continue and sue for damages, OR (b) terminate and sue for damages.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Simple Breach</span><span class="item-note">— does NOT entitle innocent party to terminate or stop performing. Only remedy: sue for damages. Treating a simple breach as fundamental = the innocent party commits a fundamental breach themselves.</span></div></div>
+      </div>
+      <div class="warn"><strong>Critical:</strong> Never terminate a contract unilaterally without legal advice. If wrongly treated as fundamental, the terminating party becomes liable for damages.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">2 Options for the Innocent Party After a Fundamental Breach<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Continue to perform and sue for damages</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Declare contract terminated and sue for damages</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#854F0B">6</div>
+      <div class="sec-title">3 Types of Damages Clauses<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Consequential Damages Exclusion</span><span class="item-note">— excludes indirect/consequential losses (e.g. lost business). Common in supplier contracts. Interpreted narrowly; ambiguity construed against the drafter (contra proferentem).</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Liquidated Damages</span><span class="item-note">— genuine pre-agreed estimate of loss for a specific breach (e.g. $1,000/day delay). Must be a real estimate, not a penalty. Common in construction contracts.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Penalty Clause</span><span class="item-note">— sum set as punishment rather than compensation. Courts have discretion NOT to enforce penalty clauses. Distinguished from liquidated damages by intent.</span></div></div>
+      </div>
+      <div class="info"><strong>Bonus clause:</strong> Entitles a party to extra payment for exceeding performance (e.g. early completion). Not required alongside liquidated damages to make them enforceable.</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">2 Ways to Measure Damages for Deficient Work<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Cost of Repair / Performance</span><span class="item-note">— standard measure; used when repairs have been or will be carried out and it is reasonable to do so</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Diminution in Value</span><span class="item-note">— used when repairs are unreasonable or the owner has no genuine intention to repair; avoids giving the innocent party a windfall</span></div></div>
+      </div>
+      <div class="info">Key factor: whether the innocent party has already done repairs or genuinely intends to. Courts will not award a windfall.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#993C1D">8</div>
+      <div class="sec-title">Ways a Contract Can Be Terminated<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Completion of Performance</span><span class="item-note">— most common; all obligations performed and warranty periods expired</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Frustration / Impossibility</span><span class="item-note">— unforeseen event makes performance impossible or of no value</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Mutual Agreement</span><span class="item-note">— both parties agree to end before full performance; should set out final payment terms</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Unilateral Termination</span><span class="item-note">— one party terminates; either provoked by a breach OR is itself a breach. Requires strict compliance with notice and limitation periods.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#3B6D11">9</div>
+      <div class="sec-title">Repudiation vs Anticipatory Breach — 2 Distinctions<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Repudiation</span><span class="item-note">— party communicates by words or conduct that it will NOT perform its obligations. Without justification = fundamental breach.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Anticipatory Breach</span><span class="item-note">— party communicates BEFORE the time for performance that it intends to breach. If fundamental in nature, it is also repudiation.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#3B6D11">10</div>
+      <div class="sec-title">Performance Under Protest — 4 Entitlements<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">a</div><div><span class="item-title">Service performed</span></div></div>
+        <div class="item"><div class="num">b</div><div><span class="item-title">Property supplied or transferred</span></div></div>
+        <div class="item"><div class="num">c</div><div><span class="item-title">Liability assumed</span></div></div>
+        <div class="item"><div class="num">d</div><div><span class="item-title">Money paid</span></div></div>
+      </div>
+      <div class="warn"><strong>Note:</strong> Not available in all provinces — Alberta has NO statutory right to perform under protest. Must verify by statute or negotiate into the contract. Must give written notice of protest.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

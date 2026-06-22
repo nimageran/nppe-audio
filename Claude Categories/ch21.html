@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Chapter 21: Employment Law</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f2f5;overflow:hidden;height:100vh}
+#header{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid #e2e5ec;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:50px;}
+#header-left{display:flex;align-items:center;gap:14px}
+#badge{background:#eff4ff;color:#1d4ed8;font-size:11px;font-weight:600;padding:3px 9px;border-radius:4px;letter-spacing:.05em}
+#title{font-size:13px;font-weight:600;color:#1a1d26}
+#subtitle{font-size:11px;color:#8b95aa;margin-top:1px}
+#controls{display:flex;align-items:center;gap:6px}
+.cbtn{background:#fff;border:1px solid #d4d8e2;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:500;color:#5a6070;cursor:pointer;transition:all .12s;font-family:inherit;}
+.cbtn:hover{background:#f5f6f8;border-color:#b0b8cc;color:#1a1d26}
+#zoom-display{font-size:12px;color:#8b95aa;font-family:'Courier New',monospace;min-width:44px;text-align:center}
+#canvas-wrap{position:fixed;top:50px;left:0;right:0;bottom:0;background:#f0f2f5;background-image:radial-gradient(circle,#d4d8e2 1px,transparent 1px);background-size:24px 24px;overflow:hidden;cursor:grab;}
+#canvas-wrap.dragging{cursor:grabbing}
+#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#node-layer{position:absolute;top:0;left:0;transform-origin:0 0}
+.node{position:absolute;transform:translate(-50%,-50%);border-radius:10px;padding:8px 13px;font-size:12px;font-weight:500;line-height:1.4;text-align:center;cursor:pointer;border:1.5px solid transparent;min-width:90px;white-space:pre;transition:transform .15s,box-shadow .15s;}
+.node:hover{transform:translate(-50%,-50%) scale(1.07);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.node.root{font-size:14px;font-weight:600;padding:0;border-radius:50%;width:150px;height:150px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;white-space:pre;}
+.node.branch{font-size:12px;font-weight:600;padding:10px 15px;}
+.node.leaf{font-size:11.5px;padding:7px 11px;}
+.node.detail{font-size:11px;padding:6px 10px;}
+#tooltip{position:fixed;z-index:200;background:#fff;border:1px solid #d4d8e2;border-radius:10px;padding:12px 15px;font-size:12px;color:#1a1d26;max-width:300px;line-height:1.55;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 20px rgba(0,0,0,.1);}
+#tooltip strong{font-size:13px;display:block;margin-bottom:5px;color:#1a1d26}
+#tooltip p{font-size:12px;color:#5a6070}
+#legend{position:fixed;bottom:16px;left:16px;z-index:100;background:#fff;border:1px solid #e2e5ec;border-radius:10px;padding:12px 14px;}
+#legend h4{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;margin-bottom:8px}
+.leg-item{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:11px;color:#5a6070}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#hint{position:fixed;bottom:16px;right:16px;z-index:100;background:#fff;border:1px solid #e2e5ec;border-radius:8px;padding:8px 12px;font-size:11px;color:#8b95aa;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="title">Chapter 21 — Employment Law</div>
+      <div id="subtitle">Engineers Geoscientists Manitoba &nbsp;·&nbsp; Hover nodes for detailed notes</div>
+    </div>
+  </div>
+  <div id="controls">
+    <button class="cbtn" id="zout">−</button>
+    <span id="zoom-display">100%</span>
+    <button class="cbtn" id="zin">+</button>
+    <button class="cbtn" id="fit">Fit</button>
+    <button class="cbtn" id="r1">1:1</button>
+  </div>
+</div>
+
+<div id="canvas-wrap">
+  <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg"><g id="lines"></g></svg>
+  <div id="node-layer"></div>
+</div>
+
+<div id="tooltip"><strong id="tt-title"></strong><p id="tt-body"></p></div>
+
+<div id="legend">
+  <h4>Employment Mechanics</h4>
+  <div class="leg-item"><div class="leg-dot" style="background:#283593"></div>Core Concept</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#1565C0"></div>21.1/21.2 The Contract & Status</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#2E7D32"></div>21.3/21.4 Statutory Minimums & Rights</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#E65100"></div>21.5 Termination</div>
+</div>
+
+<div id="hint">🖱 Scroll to zoom &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Hover nodes for notes</div>
+
+<script>
+const NODES = [
+
+  // ROOT
+  { id:'root', label:'Employment\nLaw', type:'root', x:0, y:0,
+    color:{bg:'#E8EAF6',border:'#283593',text:'#1A237E'},
+    tip:'Chapter 21. The laws governing the private, non-union relationship between one employer and one employee. It is a mix of common law contract principles and strict provincial statutes.' },
+
+  // THE CONTRACT & STATUS
+  { id:'contract', label:'Contract &\nStatus', type:'branch', x:-300, y:-150,
+    color:{bg:'#E3F2FD',border:'#1565C0',text:'#0D47A1'},
+    tip:'The fundamental basis of employment is a contract, which includes many unwritten, implied terms. Identifying who is actually an employee is the first legal hurdle.' },
+  { id:'implied', label:'21.1 Implied\nTerms', type:'leaf', x:-450, y:-250,
+    color:{bg:'#E3F2FD',border:'#42A5F5',text:'#0D47A1'},
+    tip:'Terms automatically injected into the contract by law. The employee owes a duty of fidelity (loyalty), a duty of competence, and a duty to protect confidential information. The employer owes a duty to provide reasonable notice of termination.' },
+  { id:'status', label:'21.2 Employee vs.\nContractor', type:'leaf', x:-450, y:-100,
+    color:{bg:'#E3F2FD',border:'#42A5F5',text:'#0D47A1'},
+    tip:'A contract cannot magically make someone an independent contractor. Courts use tests: Who controls the work? Who owns the tools? Who risks taking a financial loss on the job? If the employer dictates these, it is an employment relationship.' },
+
+  // STATUTORY MINIMUMS
+  { id:'statutes', label:'Statutes &\nHuman Rights', type:'branch', x:300, y:-150,
+    color:{bg:'#E8F5E9',border:'#2E7D32',text:'#1B5E20'},
+    tip:'The law does not allow you to negotiate away basic rights. Provincial statutes strictly override any contract that falls below the minimum standards.' },
+  { id:'standards', label:'21.3 Employment\nStandards', type:'leaf', x:480, y:-250,
+    color:{bg:'#E8F5E9',border:'#66BB6A',text:'#1B5E20'},
+    tip:'Provincial legislation defining non-negotiable minimums for wages, vacation, overtime, and statutory severance. You cannot sign a contract agreeing to less than the statutory minimum.' },
+  { id:'humanrights', label:'21.4 Human\nRights', type:'leaf', x:480, y:-150,
+    color:{bg:'#E8F5E9',border:'#66BB6A',text:'#1B5E20'},
+    tip:'Absolute prohibition against discrimination based on race, religion, gender, age, or disability. Includes a strict "duty to accommodate" disabled employees up to the point of undue hardship.' },
+  { id:'charter', label:'21.6 Charter\nof Rights', type:'detail', x:480, y:-50,
+    color:{bg:'#E8F5E9',border:'#81C784',text:'#1B5E20'},
+    tip:'Generally only applies to government actions, not private businesses. However, it strongly influences how human rights tribunals interpret discrimination.' },
+
+  // TERMINATION
+  { id:'termination', label:'21.5 Facing\nTermination', type:'branch', x:-200, y:200,
+    color:{bg:'#FFF3E0',border:'#E65100',text:'#E65100'},
+    tip:'How the employment contract legally concludes. Layoffs do not exist in common law; you are either employed or terminated.' },
+  { id:'justcause', label:'Just\nCause', type:'leaf', x:-350, y:300,
+    color:{bg:'#FFF3E0',border:'#FFB74D',text:'#E65100'},
+    tip:'The "capital punishment" of employment law. If an employee commits a severe breach (e.g., theft, fraud, severe insubordination), the employer can fire them immediately with zero notice and zero severance.' },
+  { id:'withoutcause', label:'Without\nCause', type:'leaf', x:-150, y:350,
+    color:{bg:'#FFF3E0',border:'#FFB74D',text:'#E65100'},
+    tip:'An employer can terminate an employee at any time, for any reason (other than discrimination), as long as they provide "reasonable working notice" or cash in lieu of notice. Often calculated in months per year of service.' },
+  { id:'constructive', label:'Constructive\nDismissal', type:'leaf', x:50, y:350,
+    color:{bg:'#FFF3E0',border:'#FFB74D',text:'#E65100'},
+    tip:'The employer unilaterally forces a fundamental change to the contract (e.g., a 20% pay cut or a humiliating demotion). The employee can quit and sue for full termination severance, as the law treats it as a firing.' },
+  { id:'mitigation', label:'Duty to\nMitigate', type:'detail', x:-250, y:400,
+    color:{bg:'#FFF3E0',border:'#FFCC80',text:'#E65100'},
+    tip:'A terminated employee cannot just sit at home and collect severance. They have a strict legal duty to actively search for a new, comparable job to reduce the financial damage.' }
+];
+
+const EDGES = [
+  ['root','contract'],['root','statutes'],['root','termination'],
+  ['contract','implied'],['contract','status'],
+  ['statutes','standards'],['statutes','humanrights'],['statutes','charter'],
+  ['termination','justcause'],['termination','withoutcause'],['termination','constructive'],['termination','mitigation']
+];
+
+let scale=1,tx=0,ty=0,dragging=false,lx=0,ly=0;
+const wrap=document.getElementById('canvas-wrap');
+const nodeLayer=document.getElementById('node-layer');
+const linesG=document.getElementById('lines');
+const tooltip=document.getElementById('tooltip');
+const ttTitle=document.getElementById('tt-title');
+const ttBody=document.getElementById('tt-body');
+const zoomDisplay=document.getElementById('zoom-display');
+const nodeMap={};
+NODES.forEach(n=>nodeMap[n.id]=n);
+
+function applyT(){
+  nodeLayer.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
+  zoomDisplay.textContent=Math.round(scale*100)+'%';
+  drawEdges();
+}
+
+function drawEdges(){
+  linesG.innerHTML='';
+  linesG.setAttribute('transform',`translate(${tx},${ty}) scale(${scale})`);
+  EDGES.forEach(([a,b])=>{
+    const na=nodeMap[a],nb=nodeMap[b];
+    if(!na||!nb)return;
+    const x1=na.x,y1=na.y,x2=nb.x,y2=nb.y;
+    const mx=(x1+x2)/2;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke',nb.color.border);
+    path.setAttribute('stroke-width',nb.type==='branch'?2:1.5);
+    path.setAttribute('opacity','0.45');
+    linesG.appendChild(path);
+  });
+}
+
+function buildNodes(){
+  NODES.forEach(n=>{
+    const d=document.createElement('div');
+    d.className='node '+n.type;
+    d.style.left=n.x+'px';
+    d.style.top=n.y+'px';
+    d.style.background=n.color.bg;
+    d.style.borderColor=n.color.border;
+    d.style.color=n.color.text;
+    d.textContent=n.label;
+    d.addEventListener('mouseenter',()=>{
+      ttTitle.textContent=n.label.replace(/\n/g,' ');
+      ttBody.textContent=n.tip;
+      tooltip.style.opacity='1';
+    });
+    d.addEventListener('mousemove',e=>{
+      const x=Math.min(e.clientX+16,window.innerWidth-320);
+      const y=Math.min(e.clientY-10,window.innerHeight-170);
+      tooltip.style.left=x+'px';
+      tooltip.style.top=y+'px';
+    });
+    d.addEventListener('mouseleave',()=>{tooltip.style.opacity='0';});
+    nodeLayer.appendChild(d);
+  });
+}
+
+function fitView(){
+  const xs=NODES.map(n=>n.x),ys=NODES.map(n=>n.y);
+  const minX=Math.min(...xs)-110,maxX=Math.max(...xs)+110;
+  const minY=Math.min(...ys)-80,maxY=Math.max(...ys)+80;
+  const W=window.innerWidth,H=window.innerHeight-50;
+  scale=Math.min(W/(maxX-minX),H/(maxY-minY))*0.9;
+  tx=W/2-(minX+maxX)/2*scale;
+  ty=(H/2+50)-(minY+maxY)/2*scale;
+  applyT();
+}
+
+wrap.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const f=e.deltaY<0?1.1:0.9;
+  const ox=e.clientX,oy=e.clientY-50;
+  const prev=scale;
+  scale=Math.min(5,Math.max(0.08,scale*f));
+  tx=ox-(ox-tx)*(scale/prev);
+  ty=oy-(oy-ty)*(scale/prev);
+  applyT();
+},{passive:false});
+
+wrap.addEventListener('mousedown',e=>{dragging=true;lx=e.clientX;ly=e.clientY;wrap.classList.add('dragging');});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  tx+=e.clientX-lx;ty+=e.clientY-ly;lx=e.clientX;ly=e.clientY;applyT();
+});
+window.addEventListener('mouseup',()=>{dragging=false;wrap.classList.remove('dragging');});
+
+document.getElementById('zin').onclick=()=>{scale=Math.min(5,scale*1.2);applyT();};
+document.getElementById('zout').onclick=()=>{scale=Math.max(0.08,scale/1.2);applyT();};
+document.getElementById('fit').onclick=fitView;
+document.getElementById('r1').onclick=()=>{scale=1;tx=window.innerWidth/2;ty=(window.innerHeight-50)/2;applyT();};
+
+buildNodes();
+setTimeout(fitView,100);
+</script>
+</body>
+</html>

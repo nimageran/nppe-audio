@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Chapter 2: Regulation of the Professions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f2f5;overflow:hidden;height:100vh}
+
+#header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:#fff;border-bottom:1px solid #e2e5ec;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;height:50px;
+}
+#header-left{display:flex;align-items:center;gap:14px}
+#badge{background:#eff4ff;color:#1d4ed8;font-size:11px;font-weight:600;padding:3px 9px;border-radius:4px;letter-spacing:.05em}
+#title{font-size:13px;font-weight:600;color:#1a1d26}
+#subtitle{font-size:11px;color:#8b95aa;margin-top:1px}
+#controls{display:flex;align-items:center;gap:6px}
+.cbtn{
+  background:#fff;border:1px solid #d4d8e2;border-radius:6px;
+  padding:5px 11px;font-size:12px;font-weight:500;color:#5a6070;
+  cursor:pointer;transition:all .12s;font-family:inherit;
+}
+.cbtn:hover{background:#f5f6f8;border-color:#b0b8cc;color:#1a1d26}
+#zoom-display{font-size:12px;color:#8b95aa;font-family:'Courier New',monospace;min-width:44px;text-align:center}
+
+#canvas-wrap{
+  position:fixed;top:50px;left:0;right:0;bottom:0;
+  background:#f0f2f5;
+  background-image:radial-gradient(circle,#d4d8e2 1px,transparent 1px);
+  background-size:24px 24px;
+  overflow:hidden;cursor:grab;
+}
+#canvas-wrap.dragging{cursor:grabbing}
+#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#node-layer{position:absolute;top:0;left:0;transform-origin:0 0}
+
+.node{
+  position:absolute;transform:translate(-50%,-50%);
+  border-radius:10px;padding:8px 13px;
+  font-size:12px;font-weight:500;line-height:1.35;
+  text-align:center;cursor:pointer;
+  border:1.5px solid transparent;
+  min-width:90px;white-space:pre;
+  transition:transform .15s,box-shadow .15s;
+}
+.node:hover{transform:translate(-50%,-50%) scale(1.07);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.node.root{
+  font-size:14px;font-weight:600;padding:0;
+  border-radius:50%;width:148px;height:148px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;line-height:1.3;
+}
+.node.branch{font-size:12px;font-weight:600;padding:10px 15px;min-width:100px}
+.node.leaf{font-size:11.5px;padding:7px 11px;min-width:80px}
+.node.detail{font-size:11px;padding:6px 10px;min-width:75px}
+
+#tooltip{
+  position:fixed;z-index:200;
+  background:#fff;border:1px solid #d4d8e2;
+  border-radius:10px;padding:12px 15px;
+  font-size:12px;color:#1a1d26;
+  max-width:290px;line-height:1.55;
+  pointer-events:none;opacity:0;
+  transition:opacity .15s;
+  box-shadow:0 4px 20px rgba(0,0,0,.1);
+}
+#tooltip strong{font-size:13px;display:block;margin-bottom:5px;color:#1a1d26}
+#tooltip p{font-size:12px;color:#5a6070}
+
+#legend{
+  position:fixed;bottom:16px;left:16px;z-index:100;
+  background:#fff;border:1px solid #e2e5ec;border-radius:10px;
+  padding:12px 14px;
+}
+#legend h4{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;margin-bottom:8px}
+.leg-item{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:11px;color:#5a6070}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+#hint{
+  position:fixed;bottom:16px;right:16px;z-index:100;
+  background:#fff;border:1px solid #e2e5ec;border-radius:8px;
+  padding:8px 12px;font-size:11px;color:#8b95aa;line-height:1.6;
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="title">Chapter 2 — Regulation of the Professions</div>
+      <div id="subtitle">Engineers Geoscientists Manitoba &nbsp;·&nbsp; Hover nodes for detailed notes</div>
+    </div>
+  </div>
+  <div id="controls">
+    <button class="cbtn" id="zout">−</button>
+    <span id="zoom-display">100%</span>
+    <button class="cbtn" id="zin">+</button>
+    <button class="cbtn" id="fit">Fit</button>
+    <button class="cbtn" id="r1">1:1</button>
+  </div>
+</div>
+
+<div id="canvas-wrap">
+  <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg"><g id="lines"></g></svg>
+  <div id="node-layer"></div>
+</div>
+
+<div id="tooltip"><strong id="tt-title"></strong><p id="tt-body"></p></div>
+
+<div id="legend">
+  <h4>Topic Areas</h4>
+  <div class="leg-item"><div class="leg-dot" style="background:#534AB7"></div>Self-Regulation</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#185FA5"></div>Right to Title</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#0F6E56"></div>Scope of Practice</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#854F0B"></div>Registration</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#993C1D"></div>Discipline & Enforcement</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#3B6D11"></div>Seals & Assurance</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#5F5E5A"></div>National Bodies</div>
+</div>
+
+<div id="hint">
+  🖱 Scroll to zoom &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Hover nodes for notes
+</div>
+
+<script>
+const NODES=[
+  // ROOT
+  {id:'root',label:'Regulation of\nthe Professions',type:'root',x:0,y:0,
+   color:{bg:'#EEEDFE',border:'#534AB7',text:'#3C3489'},
+   tip:'Chapter 2. Professions in Canada are self-regulated by provincial statute. Covers: right to title, scope of practice, registration, obligations, discipline, seals, and national bodies.'},
+
+  // SELF-REGULATION
+  {id:'selfreg',label:'Self-Regulation',type:'branch',x:-420,y:-210,
+   color:{bg:'#EEEDFE',border:'#534AB7',text:'#3C3489'},
+   tip:'Most professions in Canada are self-regulated — statutory authority to govern themselves. Provinces have jurisdiction to regulate professions. Two main elements: right to title and scope of practice.'},
+  {id:'rtt',label:'Right to Title',type:'leaf',x:-580,y:-310,
+   color:{bg:'#EEEDFE',border:'#7F77DD',text:'#3C3489'},
+   tip:'Regulatory authority can restrict the exclusive right to use a professional title. E.g. "Professional Engineer" / "P.Eng." is protected. A/E/G all have right to title. Some professions (e.g. interior design) have right to title ONLY — no exclusive scope of practice.'},
+  {id:'sop',label:'Scope of Practice',type:'leaf',x:-580,y:-180,
+   color:{bg:'#EEEDFE',border:'#7F77DD',text:'#3C3489'},
+   tip:'Regulatory authority restricts who can practise in a particular field. A/E/G all have exclusive scope of practice (except PEI and Yukon for geoscience). Defined in each province\'s legislation — can be generic or specific.'},
+  {id:'provjuris',label:'Provincial\nJurisdiction',type:'detail',x:-740,y:-250,
+   color:{bg:'#EEEDFE',border:'#AFA9EC',text:'#534AB7'},
+   tip:'Each province has its own legislation governing the professions. Laws differ province to province. Regulatory bodies are created by provincial legislation with elected officials (mainly profession members) and staff.'},
+
+  // RIGHT TO TITLE detail
+  {id:'titledetail',label:'Title Protection',type:'branch',x:-160,y:-400,
+   color:{bg:'#E6F1FB',border:'#185FA5',text:'#0C447C'},
+   tip:'Only licensed members can use the protected title. A BSc in Engineering alone does NOT give the right to use the title "engineer" or "P.Eng." Misrepresentation leads to enforcement and civil proceedings.'},
+  {id:'eit',label:'Engineer-in-Training\n(EIT / MIT)',type:'leaf',x:-60,y:-500,
+   color:{bg:'#E6F1FB',border:'#378ADD',text:'#0C447C'},
+   tip:'During the apprenticeship period, graduates use interim titles: EIT (Engineer-in-Training) or MIT (Member-in-Training). These are the ONLY titles permitted before full registration. A degree alone gives no right to any title.'},
+  {id:'enforcement',label:'Title Enforcement',type:'leaf',x:-280,y:-500,
+   color:{bg:'#E6F1FB',border:'#378ADD',text:'#0C447C'},
+   tip:'Regulatory bodies enforce title protection through discipline and enforcement proceedings. Illegal use of "architect", "engineer", or "geoscientist" can lead to enforcement proceedings and civil liability.'},
+
+  // SCOPE OF PRACTICE
+  {id:'scopebranch',label:'Scope of Practice\nDefinitions',type:'branch',x:200,y:-350,
+   color:{bg:'#E1F5EE',border:'#0F6E56',text:'#085041'},
+   tip:'No one can practise within the exclusive scope without a licence. Two types of definitions: generic (broad statement of tasks) and specific (detailed list of tasks). Only definitions in enabling legislation/regulations are legally binding.'},
+  {id:'engdef',label:'Engineering\nDefinition',type:'leaf',x:80,y:-480,
+   color:{bg:'#E1F5EE',border:'#1D9E75',text:'#085041'},
+   tip:'Engineers Canada generic definition: "any act of planning, designing, composing, evaluating, advising, reporting, directing or supervising... that requires the application of engineering principles and concerns the safeguarding of life, health, property, economic interests, public welfare or the environment."'},
+  {id:'geodef',label:'Geoscience\nDefinition',type:'leaf',x:240,y:-500,
+   color:{bg:'#E1F5EE',border:'#1D9E75',text:'#085041'},
+   tip:'Geoscientists Canada definition: performing any activity requiring application of geological science principles, concerning safeguarding public welfare/life/health/property/economic interests. Includes mineral/fuel/water resource investigation and geoscientific process evaluation.'},
+  {id:'archdef',label:'Architecture\nDefinition',type:'leaf',x:390,y:-450,
+   color:{bg:'#E1F5EE',border:'#1D9E75',text:'#085041'},
+   tip:'Ontario Architects Act (generic): preparation/provision of design governing construction/enlargement/alteration of a building; evaluating/advising/reporting on same; or general review of construction. Individual provinces may adopt RAIC national definition or create their own.'},
+  {id:'exclusions',label:'Exclusions &\nExceptions',type:'leaf',x:420,y:-320,
+   color:{bg:'#E1F5EE',border:'#1D9E75',text:'#085041'},
+   tip:'Definitions include exceptions. Natural science exception: honours degree holders in physical/chemical/life/computer/mathematical sciences can practise natural science without an engineering licence. Related professionals (foresters, etc.) are also excluded from breach when practising their own regulated profession.'},
+
+  // REGISTRATION
+  {id:'reg',label:'Registration',type:'branch',x:380,y:-110,
+   color:{bg:'#FAEEDA',border:'#854F0B',text:'#633806'},
+   tip:'Primary mandate of regulatory bodies. May require registration of corporations AND individuals. Some require extra registration for public consultants. Required in EACH province where practising.'},
+  {id:'requirements',label:'Requirements',type:'leaf',x:530,y:-200,
+   color:{bg:'#FAEEDA',border:'#BA7517',text:'#633806'},
+   tip:'Three components: (1) Experience — generally 4 years qualifying experience for engineers. (2) Education — accredited university degree. (3) Examinations — NPPE is the law & ethics exam for engineers/geoscientists from accredited programs. Non-accredited candidates may need additional technical exams.'},
+  {id:'archexam',label:'Architecture\nExams (NCARB)',type:'leaf',x:550,y:-80,
+   color:{bg:'#FAEEDA',border:'#BA7517',text:'#633806'},
+   tip:'Canadian architects write 9 technical and non-technical examinations through the US National Council of Architectural Registration Boards (NCARB). US engineers use NCEES (National Council of Examiners for Engineering and Surveying).'},
+  {id:'reciprocity',label:'Reciprocity\nAgreements',type:'leaf',x:500,y:50,
+   color:{bg:'#FAEEDA',border:'#BA7517',text:'#633806'},
+   tip:'Engineers Canada has reciprocity agreements with: Mexico & Texas (NAFTA), France, Hong Kong, Australia, Ireland. Education-level agreements with: US, Australia, South Africa, Ireland, UK, New Zealand, Japan. Reciprocity makes registration EASIER — does NOT eliminate the need to register in each jurisdiction.'},
+
+  // OBLIGATIONS
+  {id:'oblig',label:'Professional\nObligations',type:'branch',x:320,y:130,
+   color:{bg:'#EAF3DE',border:'#3B6D11',text:'#27500A'},
+   tip:'Members must practise competently and comply with the code of ethics. Most regulatory bodies have mandatory Continuing Professional Development (CPD) requirements. Some also conduct practice audits for systematic and technical competence.'},
+  {id:'cpd',label:'CPD\n(Continuing Prof.\nDevelopment)',type:'leaf',x:460,y:180,
+   color:{bg:'#EAF3DE',border:'#639922',text:'#27500A'},
+   tip:'Mandatory in most regulatory bodies. Goal: assist members in following codes of ethics and maintaining competence. Some bodies provide CPD prep courses and alternative fulfilment methods. Practice audits review systematic and technical competence.'},
+
+  // DISCIPLINE & ENFORCEMENT
+  {id:'disc',label:'Discipline &\nEnforcement',type:'branch',x:100,y:280,
+   color:{bg:'#FAECE7',border:'#993C1D',text:'#712B13'},
+   tip:'Discipline = charging a MEMBER for incompetence or ethics breach, then a hearing. Enforcement = charging a NON-MEMBER for illegal title use or illegal practice. Both are serious — quasi-criminal proceedings.'},
+  {id:'penalties',label:'Discipline\nPenalties',type:'leaf',x:240,y:380,
+   color:{bg:'#FAECE7',border:'#D85A30',text:'#712B13'},
+   tip:'Potential outcomes: reprimand, suspension, fines, licence termination, mandatory education, mentorship requirements. Standards of proof are strict because a disciplined professional may lose their livelihood. Penalties carefully considered.'},
+  {id:'quasicrim',label:'Quasi-Criminal\nNature',type:'leaf',x:60,y:400,
+   color:{bg:'#FAECE7',border:'#D85A30',text:'#712B13'},
+   tip:'Disciplinary proceedings are quasi-criminal — NOT criminal proceedings. Courts and bodies take them seriously due to the severity of potential outcomes (loss of licence = loss of livelihood). Rigorous formal process required.'},
+  {id:'nonmember',label:'Non-Member\nEnforcement',type:'leaf',x:-100,y:380,
+   color:{bg:'#FAECE7',border:'#D85A30',text:'#712B13'},
+   tip:'Regulatory bodies also enforce against non-members who: (1) use the protected professional title illegally, or (2) practise within the exclusive scope of practice without a licence. These are enforcement actions, not disciplinary actions.'},
+
+  // SEALS & LETTERS
+  {id:'seals',label:'Seals & Letters\nof Assurance',type:'branch',x:-260,y:280,
+   color:{bg:'#EAF3DE',border:'#3B6D11',text:'#27500A'},
+   tip:'Professional seal issued by the regulatory authority. Improper use is a disciplinary offence. Letters of assurance often required by government at project end. Both carry significant professional liability implications.'},
+  {id:'sealuse',label:'Proper Seal Use',type:'leaf',x:-380,y:380,
+   color:{bg:'#EAF3DE',border:'#639922',text:'#27500A'},
+   tip:'Seal used on: final drawings, specifications, plans, reports, documents. Sealing means you personally prepared, supervised, or reviewed the documents. Sealing without appropriate preparation/checking is the most common seal-related problem.'},
+  {id:'loa',label:'Letter of\nAssurance',type:'leaf',x:-200,y:400,
+   color:{bg:'#EAF3DE',border:'#639922',text:'#27500A'},
+   tip:'Determine BEFORE starting a project if a letter of assurance is required. If you cannot or will not sign it, do not take the project. Letters are broad — often certify building built per plans/specs. Used by future owners to assign liability to the professional.'},
+
+  // NATIONAL BODIES
+  {id:'national',label:'National\nOrganizations',type:'branch',x:-420,y:100,
+   color:{bg:'#F1EFE8',border:'#5F5E5A',text:'#444441'},
+   tip:'Provincial regulatory bodies have formed national organizations. Goals: coordinate mutual recognition, encourage commonality of operations. Membership in technical societies is voluntary but provides valuable training.'},
+  {id:'engcan',label:'Engineers Canada',type:'leaf',x:-570,y:30,
+   color:{bg:'#F1EFE8',border:'#888780',text:'#444441'},
+   tip:'National organization of provincial engineering regulatory bodies. Holds official marks: engineer, engineering, P.Eng., consulting engineer, ingenieur, ing., ingenieur conseil, genie, ingenerie. Coordinates mutual recognition and publishes national guidelines.'},
+  {id:'geocan',label:'Geoscientists\nCanada',type:'leaf',x:-580,y:130,
+   color:{bg:'#F1EFE8',border:'#888780',text:'#444441'},
+   tip:'National organization of provincial geoscience regulatory bodies (some provinces combine engineering and geoscience bodies). Coordinates geoscience mutual recognition across Canada.'},
+  {id:'raic',label:'Architecture\nCanada (RAIC)',type:'leaf',x:'570',y:220,
+   color:{bg:'#F1EFE8',border:'#888780',text:'#444441'},
+   tip:'Formerly Royal Architectural Institute of Canada — still uses acronym RAIC. Registers individual members voluntarily (unlike engineering/geoscience which are mandatory). Coordinates mutual recognition for architecture nationally.'},
+  {id:'techsoc',label:'Technical\nSocieties',type:'leaf',x:-420,y:230,
+   color:{bg:'#F1EFE8',border:'#888780',text:'#444441'},
+   tip:'Voluntary membership. Examples: CSCE (Civil Engineering), CSME (Mechanical), IEEE (Electrical/Electronics), ACEC (Consulting Engineering Companies), CSC (Construction Specs), CAC (Cement), CGS (Geotechnical). Many have own codes of ethics. Some hold copyright over specific titles.'},
+];
+
+// Fix the RAIC node x value (was a string)
+NODES.find(n=>n.id==='raic').x=-570;
+NODES.find(n=>n.id==='raic').y=220;
+
+const EDGES=[
+  ['root','selfreg'],['root','titledetail'],['root','scopebranch'],['root','reg'],['root','oblig'],['root','disc'],['root','seals'],['root','national'],
+  ['selfreg','rtt'],['selfreg','sop'],['selfreg','provjuris'],
+  ['titledetail','eit'],['titledetail','enforcement'],
+  ['scopebranch','engdef'],['scopebranch','geodef'],['scopebranch','archdef'],['scopebranch','exclusions'],
+  ['reg','requirements'],['reg','archexam'],['reg','reciprocity'],
+  ['oblig','cpd'],
+  ['disc','penalties'],['disc','quasicrim'],['disc','nonmember'],
+  ['seals','sealuse'],['seals','loa'],
+  ['national','engcan'],['national','geocan'],['national','raic'],['national','techsoc'],
+];
+
+let scale=1,tx=0,ty=0,dragging=false,lx=0,ly=0;
+const wrap=document.getElementById('canvas-wrap');
+const nodeLayer=document.getElementById('node-layer');
+const linesG=document.getElementById('lines');
+const tooltip=document.getElementById('tooltip');
+const ttTitle=document.getElementById('tt-title');
+const ttBody=document.getElementById('tt-body');
+const zoomDisplay=document.getElementById('zoom-display');
+const nodeMap={};
+NODES.forEach(n=>nodeMap[n.id]=n);
+
+function applyT(){
+  nodeLayer.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
+  zoomDisplay.textContent=Math.round(scale*100)+'%';
+  drawEdges();
+}
+
+function drawEdges(){
+  linesG.innerHTML='';
+  linesG.setAttribute('transform',`translate(${tx},${ty}) scale(${scale})`);
+  EDGES.forEach(([a,b])=>{
+    const na=nodeMap[a],nb=nodeMap[b];
+    if(!na||!nb)return;
+    const x1=na.x,y1=na.y,x2=nb.x,y2=nb.y;
+    const mx=(x1+x2)/2;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke',nb.color.border);
+    path.setAttribute('stroke-width',nb.type==='branch'?2:1.5);
+    path.setAttribute('opacity','0.45');
+    linesG.appendChild(path);
+  });
+}
+
+function buildNodes(){
+  NODES.forEach(n=>{
+    const d=document.createElement('div');
+    d.className='node '+n.type;
+    d.style.left=n.x+'px';
+    d.style.top=n.y+'px';
+    d.style.background=n.color.bg;
+    d.style.borderColor=n.color.border;
+    d.style.color=n.color.text;
+    d.textContent=n.label;
+    d.addEventListener('mouseenter',()=>{
+      ttTitle.textContent=n.label.replace(/\n/g,' ');
+      ttBody.textContent=n.tip;
+      tooltip.style.opacity='1';
+    });
+    d.addEventListener('mousemove',e=>{
+      const x=Math.min(e.clientX+16,window.innerWidth-310);
+      const y=Math.min(e.clientY-10,window.innerHeight-160);
+      tooltip.style.left=x+'px';
+      tooltip.style.top=y+'px';
+    });
+    d.addEventListener('mouseleave',()=>{tooltip.style.opacity='0';});
+    nodeLayer.appendChild(d);
+  });
+}
+
+function fitView(){
+  const xs=NODES.map(n=>n.x),ys=NODES.map(n=>n.y);
+  const minX=Math.min(...xs)-110,maxX=Math.max(...xs)+110;
+  const minY=Math.min(...ys)-80,maxY=Math.max(...ys)+80;
+  const W=window.innerWidth,H=window.innerHeight-50;
+  scale=Math.min(W/(maxX-minX),H/(maxY-minY))*0.9;
+  tx=W/2-(minX+maxX)/2*scale;
+  ty=(H/2+50)-(minY+maxY)/2*scale;
+  applyT();
+}
+
+wrap.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const f=e.deltaY<0?1.1:0.9;
+  const ox=e.clientX,oy=e.clientY-50;
+  const prev=scale;
+  scale=Math.min(5,Math.max(0.08,scale*f));
+  tx=ox-(ox-tx)*(scale/prev);
+  ty=oy-(oy-ty)*(scale/prev);
+  applyT();
+},{passive:false});
+
+wrap.addEventListener('mousedown',e=>{dragging=true;lx=e.clientX;ly=e.clientY;wrap.classList.add('dragging');});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  tx+=e.clientX-lx;ty+=e.clientY-ly;lx=e.clientX;ly=e.clientY;applyT();
+});
+window.addEventListener('mouseup',()=>{dragging=false;wrap.classList.remove('dragging');});
+
+document.getElementById('zin').onclick=()=>{scale=Math.min(5,scale*1.2);applyT();};
+document.getElementById('zout').onclick=()=>{scale=Math.max(0.08,scale/1.2);applyT();};
+document.getElementById('fit').onclick=fitView;
+document.getElementById('r1').onclick=()=>{scale=1;tx=window.innerWidth/2;ty=(window.innerHeight-50)/2;applyT();};
+
+buildNodes();
+setTimeout(fitView,100);
+</script>
+</body>
+</html>

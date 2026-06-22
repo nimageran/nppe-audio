@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.15 Reference Card: Risk, Responsibility, and Dispute Avoidance</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 15 — Risk, Responsibility, and Dispute Avoidance</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">4 Key Questions for Risk Assessment<span class="sec-count">4 items · example: technology contract</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">What losses would each party suffer for each day of delay?</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Who should bear the risk of the technology not working?</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">What if technological challenges are more difficult than expected?</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Who will complete the work if the technology provider defaults?</span></div></div>
+      </div>
+      <div class="info">Once risks are identified, parties decide whether to: (a) pass risk to third parties (subcontractors, suppliers, bonding companies, insurers), or (b) allocate it between the contracting parties by mutual agreement — e.g. insurance, performance bonds, bonus/liquidated damages clauses.</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#185FA5">2</div>
+      <div class="sec-title">3 Common Law Presumptions About Professional Contracts<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Professionals are sophisticated parties</span><span class="item-note">— terms presumed to be negotiated fairly; courts rarely accept "economic duress/hardship" arguments; "I would have refused if I'd understood" rarely succeeds</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">If a risk is addressed in the contract, courts let the contract decide</span><span class="item-note">— courts are reluctant to substitute their own risk allocation for the parties' choice</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">No presumption that professionals guarantee results</span><span class="item-note">— default standard = competence/care of the average practitioner. BUT if a professional represents (in contract, email, or conversation) that results are guaranteed, courts may hold them to it.</span></div></div>
+      </div>
+      <div class="info"><strong>Implied warranties:</strong> Despite no guarantee presumption, the law may still imply certain warranties — e.g. a residence must be fit for human habitation, and minimum standards of quality/workmanship/skill/care apply. These presumptions CAN be modified by contract terms (e.g. CCDC 2 GC 3.4.1 limits contractor's review obligations for design errors).</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#0F6E56">3</div>
+      <div class="sec-title">Risk Shifting — 3 Options (Case Study 15.1)<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Install the cheaper unit</span><span class="item-note">— risk: if it fails, client may sue and engineer could be found liable</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Install the more expensive unit</span><span class="item-note">— risk: client may complain about unnecessary cost once it becomes apparent</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Inform the client in writing of the trade-off</span><span class="item-note">— BEST option: explain the problem, consequences, and costs, and let the CLIENT make an informed decision. Client can no longer claim they'd have accepted a different outcome.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#0F6E56">4</div>
+      <div class="sec-title">2 Types of Client Dissatisfaction<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Justified Dissatisfaction</span><span class="item-note">— may result in the client winning the case</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Perceived Dissatisfaction</span><span class="item-note">— often a function of poor communication, unrelated to actual quality of service; may result in the opposite outcome (client loses)</span></div></div>
+      </div>
+      <div class="warn"><strong>Key principle:</strong> Explanations given BEFORE a result occurs are far more effective and credible than explanations given AFTER — especially after litigation begins, when statements carry much less weight.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#854F0B">5</div>
+      <div class="sec-title">Common Causes of Fee-Dispute Counterclaims<span class="sec-count">4 examples</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Underestimating extent of architectural involvement during construction</span><span class="item-note">— changes arise from contractor error, owner/tenant requests, unforeseen conditions, designer error</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Underestimating number of required site review visits</span><span class="item-note">— e.g. contract specifies 1–2 visits/week; extra visits billed as "extras" the client didn't budget for</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Underestimating extent of geophysical/geotechnical investigation needed</span><span class="item-note">— initial investigation may need costly supplementation</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Poorly drafted retainer agreements that don't specify scope of services</span><span class="item-note">— e.g. failing to distinguish "supervision" (daily presence) from "periodic review" (lesser involvement)</span></div></div>
+      </div>
+      <div class="warn"><strong>Typical scenario:</strong> Professional bills final fee instalment → client refuses, alleging errors/omissions exceeded budget → professional sues for fee → client counterclaims for negligence (often FAR larger than the original fee claim).</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#993C1D">6</div>
+      <div class="sec-title">Where Disclaimers Can Appear<span class="sec-count">5 forms</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Written into the contract itself</span><span class="item-note">— exclusion, limitation, or waiver clauses (consequential damages, no-damage-for-delay, pay-when-paid)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Posted in conspicuous places</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Contained in letters</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">A note or paragraph in a geotechnical/geoscience report</span><span class="item-note">— commonly addresses report accuracy and reliance limitations</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">On drawings or specifications (or stamps on shop drawings)</span><span class="item-note">— e.g. "review limited to general conformity with design intent, not a detailed review"</span></div></div>
+      </div>
+      <div class="list-title">2 Requirements for an Enforceable Disclaimer</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Must be brought to the attention of the party against whom it is intended</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Must be carefully drafted</span><span class="item-note">— if too broad, a court may find it unenforceable (see Zhu v. Merrill Lynch — disclaimer that effectively excused gross negligence was struck down)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#3B6D11">7</div>
+      <div class="sec-title">2 Methods to Authenticate Documents in Court<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Paper Documents</span><span class="item-note">— authentication tests developed through case law</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Electronic Documents</span><span class="item-note">— federal/provincial Evidence Acts assess accuracy, genuineness, and authenticity; requires proving the integrity of the system that created/stored the document</span></div></div>
+      </div>
+      <div class="info">Photographs/videos ARE considered "documents" for discovery purposes. Digital photos are less readily accepted due to ease of editing — a documented chain of custody is essential.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#3B6D11">8</div>
+      <div class="sec-title">8 Best Practices for Digital Photo Evidence<span class="sec-count">8 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Start a paper audit trail immediately</span><span class="item-note">— description, time, place, downloading, backups, and who performed each step</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Check equipment routinely</span><span class="item-note">— internal settings, time/date settings, storage space, battery</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Select image quality based on conditions, not storage capacity</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Never delete an image</span><span class="item-note">— intentional or accidental deletion raises questions</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Designate one computer for storing photos — with NO editing software</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Create an immediate backup on non-editable media (e.g. WORM CD)</span><span class="item-note">— maintain multiple copies; keep master and working copies separate, with recorded access to the master</span></div></div>
+        <div class="item"><div class="num">7</div><div><span class="item-title">Maintain printed and labelled versions of the photographs</span></div></div>
+        <div class="item"><div class="num">8</div><div><span class="item-title">Maintain masters of the backup with potential evidential value</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

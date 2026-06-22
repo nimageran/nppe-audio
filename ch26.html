@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 26: Visual Mechanics — Privacy Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.lifecycle { border-top-color: #0ea5e9; }
+    .framework-card.exception { border-top-color: #dc2626; }
+    .framework-card.split { border-top-color: #9333ea; }
+    .framework-card.expectation { border-top-color: #ca8a04; }
+    .framework-card.spam { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 26: VISUAL MECHANICS — PRIVACY LAW</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The PIPEDA Obligation Lifecycle</a>
+    <a href="#d2">2. The Disclosure Exception Gate</a>
+    <a href="#d3">3. The Provincial Legislation Split — Tort vs Quasi-Criminal</a>
+    <a href="#d4">4. The Reasonable Expectation of Privacy Test</a>
+    <a href="#d5">5. The Anti-Spam Compliance Gate</a>
+  </div>
+
+
+  <div class="framework-card lifecycle" id="d1">
+    <h2>1. The PIPEDA Obligation Lifecycle</h2>
+    <p>PIPEDA's eight obligations aren't a random checklist — they actually trace the LIFECYCLE of personal information as it moves through an organization, from before it's even collected to long after it's stored. Seeing them in sequence makes it obvious why each one exists at that particular stage.</p>
+
+    <div class="mermaid">
+      graph LR
+        Before[BEFORE COLLECTION] --> B1[Identify the<br/>PURPOSE of collection]
+        B1 --> B2[Obtain CONSENT<br/>of the individual]
+
+        During[AT COLLECTION] --> D1[Collect ONLY<br/>what's required]
+
+        During --> D2[Limit USE to the<br/>stated purpose]
+        D2 --> D3[Ensure information<br/>is ACCURATE]
+
+        Storage[ONGOING STORAGE] --> S1[PROTECT the<br/>information]
+        S1 --> S2[Maintain ADEQUATE<br/>SAFEGUARDS]
+
+        AnyTime[ANY TIME] --> A1[Allow easy ACCESS<br/>to one's own info +<br/>the privacy policy]
+
+        B2 -.-> During
+        D3 -.-> Storage
+
+        style Before fill:#1e293b,color:#fff
+        style During fill:#1e293b,color:#fff
+        style Storage fill:#1e293b,color:#fff
+        style AnyTime fill:#1e293b,color:#fff
+        style B1 fill:#e0f2fe,stroke:#0284c7
+        style B2 fill:#e0f2fe,stroke:#0284c7
+        style D1 fill:#fef3c7,stroke:#d97706
+        style D2 fill:#fef3c7,stroke:#d97706
+        style D3 fill:#fef3c7,stroke:#d97706
+        style S1 fill:#dcfce7,stroke:#16a34a
+        style S2 fill:#dcfce7,stroke:#16a34a
+        style A1 fill:#fde68a,stroke:#ca8a04
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Grouping PIPEDA's eight rules into four life-stage clusters rather than memorizing them as an unordered list of eight makes the underlying logic click — you literally cannot satisfy the later-stage rules without first satisfying the earlier ones, since you can't "limit use to the stated purpose" if you never identified a purpose in the first place. The "BEFORE COLLECTION" cluster is really the gate that makes everything downstream legitimate: PIPEDA's whole framework assumes an organization has already named WHY it wants the data and gotten a green light from the individual before a single piece of information is gathered. The "ANY TIME" box sits outside the linear flow on purpose — access rights aren't tied to any one stage, they're a standing right the individual holds throughout the entire relationship.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card exception" id="d2">
+    <h2>2. The Disclosure Exception Gate</h2>
+    <p>PIPEDA's default rule is "don't disclose personal information without consent" — but four specific situations open a gate through that default. This diagram treats consent as the default-closed gate and shows exactly what forces it open.</p>
+
+    <div class="mermaid">
+      graph TD
+        Request[Someone wants personal<br/>information about<br/>an individual] --> Default{DEFAULT RULE:<br/>Consent required<br/>— GATE CLOSED}
+
+        Default --> Check{Does one of FOUR<br/>exceptions apply?}
+
+        Check --> E1[LEGAL REQUIREMENT<br/>to disclose<br/>— e.g. court order]
+        Check --> E2[NATIONAL SECURITY<br/>issue]
+        Check --> E3[PERSONAL SAFETY<br/>situation<br/>— individual's safety<br/>is in serious jeopardy]
+        Check --> E4[Information is already<br/>PUBLICLY AVAILABLE]
+
+        E1 --> Open[GATE OPENS —<br/>disclosure permitted<br/>WITHOUT consent]
+        E2 --> Open
+        E3 --> Open
+        E4 --> Open
+
+        Check -->|None apply| Closed[GATE STAYS CLOSED —<br/>disclosure without consent<br/>is a PIPEDA breach<br/>e.g. sharing a client's info<br/>with other clients of the firm]
+
+        style Request fill:#1e293b,color:#fff
+        style Default fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Check fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Open fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Closed fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The gate metaphor matters because it reframes these four situations correctly — they are NARROW EXCEPTIONS to a strong default, not a menu of convenient excuses. The chapter's own chapter-question scenario sits directly in the "Closed" box: a consulting firm wanting to share a client's information with OTHER clients of the firm has no applicable exception (it's not a legal requirement, not national security, not a safety emergency, and the information presumably isn't public) — so consent is mandatory, full stop, regardless of how harmless or business-convenient the sharing might seem. Treating consent as the default and these four as the only valid keys to that gate prevents the common mistake of assuming "this seems like a reasonable business reason" is itself a sufficient justification — it isn't, unless it maps onto one of the four actual exceptions.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card split" id="d3">
+    <h2>3. The Provincial Legislation Split — Tort vs Quasi-Criminal</h2>
+    <p>Provincial privacy statutes aren't all built the same way — they split into two structurally different enforcement models. This diagram shows both models side by side and what each one actually gives an aggrieved person.</p>
+
+    <div class="mermaid">
+      graph TD
+        Provincial[Provincial Privacy<br/>Legislation] --> Type1[TYPE 1: 'Privacy Act'<br/>style — Breach = TORT]
+        Provincial --> Type2[TYPE 2: 'PIPA' style —<br/>Breach = QUASI-CRIMINAL<br/>OFFENCE]
+
+        Type1 --> T1Detail[Creates a PRIVATE<br/>RIGHT TO SUE<br/>— individual sues<br/>the violator directly]
+        T1Detail --> T1Example[Example: Saskatchewan's<br/>Privacy Act — only 11<br/>sections, brief and direct.<br/>'Actionable WITHOUT<br/>PROOF OF DAMAGE']
+
+        Type2 --> T2Detail[Resembles PIPEDA's<br/>structure — regulatory<br/>enforcement with<br/>potentially SERIOUS<br/>PENALTIES]
+        T2Detail --> T2Example[Example: BC's PIPA —<br/>Wild Coyote Club case:<br/>demanding/retaining<br/>unnecessary customer info<br/>= breach, even with<br/>NO further misuse]
+
+        BC[BC has BOTH<br/>a Privacy Act AND<br/>a PIPA] -.-> Type1
+        BC -.-> Type2
+
+        style Provincial fill:#1e293b,color:#fff
+        style Type1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Type2 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style BC fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The split matters because the two models give an aggrieved person completely different tools — Type 1 hands the individual a sword (sue directly, and notably without even needing to prove actual damage under Saskatchewan's wording), while Type 2 is more like calling in a regulator who can investigate and impose penalties on the organization's behalf. The BC box floating at the bottom is there specifically to prevent the mistaken assumption that a province must pick ONE model — BC runs both simultaneously, meaning a single privacy breach in BC could theoretically trigger exposure under two structurally different statutes at once. The Wild Coyote Club detail under Type 2 is worth holding onto as a standalone fact: the breach there wasn't about misusing data after collecting it — merely DEMANDING and RETAINING information beyond what was operationally necessary was, by itself, already a completed violation.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card expectation" id="d4">
+    <h2>4. The Reasonable Expectation of Privacy Test</h2>
+    <p>Courts don't apply privacy legislation mechanically — they first ask a threshold question that can end the analysis before it even starts. This diagram shows that gate using the chapter's own hidden-camera example.</p>
+
+    <div class="mermaid">
+      graph TD
+        Dispute[Privacy complaint<br/>arises — e.g. hidden<br/>camera surveillance] --> Threshold{THRESHOLD TEST:<br/>Did the complainant have a<br/>REASONABLE EXPECTATION<br/>OF PRIVACY in this<br/>specific context?}
+
+        Threshold -->|NO reasonable<br/>expectation| NoViolation[NO privacy violation —<br/>analysis essentially<br/>ENDS here]
+        Threshold -->|YES, reasonable<br/>expectation existed| Proceed[Proceed to assess<br/>whether the legislation<br/>was actually breached]
+
+        NoViolation --> Example[Richardson v. Davis Wire:<br/>hidden camera in a<br/>LUNCHROOM shared by<br/>OTHER employees — court found<br/>NO reasonable expectation<br/>of privacy in that<br/>shared space]
+
+        style Dispute fill:#1e293b,color:#fff
+        style Threshold fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style NoViolation fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Proceed fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Example fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagram is intentionally simple because the test itself is a genuine GATEKEEPER — courts use it as a threshold question precisely so they don't have to wade into the full substance of a privacy claim if the complainant never had a protectable privacy interest in that specific context to begin with. The lunchroom example sharpens exactly where the line falls: it's not that hidden surveillance is automatically fine, it's that a SHARED space used by multiple employees carries a lower baseline expectation of privacy than, say, a private office or a washroom would. The exam-relevant skill this builds is spotting WHERE in a fact pattern the surveillance or data-gathering happened, since the same act (recording someone) can have opposite legal outcomes purely based on whether the location/context supports a reasonable expectation of privacy.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card spam" id="d5">
+    <h2>5. The Anti-Spam Compliance Gate</h2>
+    <p>Sending a commercial electronic message isn't a single yes/no test — it has to clear two SEPARATE requirements, and missing either one creates exposure to genuinely severe penalties. This diagram also carves out the exemptions that bypass the entire gate.</p>
+
+    <div class="mermaid">
+      graph TD
+        Message[Want to send a commercial<br/>electronic message] --> Relationship{Exempt relationship<br/>or purpose?}
+
+        Relationship -->|Friends/family,<br/>product recall, existing<br/>employment relationship,<br/>or other listed exemption| Exempt[EXEMPT — statute<br/>does not apply]
+        Relationship -->|No exemption applies| Gate1{GATE 1: Is there<br/>EXPRESS or IMPLIED<br/>CONSENT from<br/>the recipient?}
+
+        Gate1 -->|No| Violation1[VIOLATION —<br/>cannot send]
+        Gate1 -->|Yes| Gate2{GATE 2: Does the<br/>message contain enough<br/>info to let the recipient<br/>READILY CONTACT<br/>the sender?}
+
+        Gate2 -->|No| Violation2[VIOLATION — content<br/>requirement not met,<br/>even though consent existed]
+        Gate2 -->|Yes| Compliant[COMPLIANT — message<br/>may be sent]
+
+        Violation1 --> Penalty[PENALTIES: up to<br/>$1 MILLION for individuals,<br/>up to $10 MILLION<br/>for corporations]
+        Violation2 --> Penalty
+
+        Message -.-> Relay{Separate prohibition:<br/>causing ANOTHER person's<br/>computer to send<br/>messages on your behalf}
+        Relay --> Penalty
+
+        style Message fill:#1e293b,color:#fff
+        style Relationship fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Exempt fill:#dcfce7,stroke:#16a34a
+        style Gate1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Gate2 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Compliant fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Violation1 fill:#fee2e2,stroke:#dc2626
+        style Violation2 fill:#fee2e2,stroke:#dc2626
+        style Penalty fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two-gate structure exists to correct a common shortcut in thinking — getting consent is necessary but NOT sufficient on its own; gate 2 is a completely independent content requirement that can still be violated even with valid consent in hand, since the recipient must always be able to easily identify and contact the sender regardless of how the consent was obtained. The exemption diamond sits BEFORE both gates because exempt messages skip the analysis entirely — friends, family, product recalls, and existing employment relationships were carved out by Parliament as situations where the underlying anti-spam concern (unwanted commercial intrusion) doesn't really apply. The relay branch at the bottom is structurally separate from the consent/content gates — it's not about whether YOUR message met the requirements, it's an independent prohibition on using someone else's computer/system to originate messages, closing off an obvious workaround where someone might try to dodge the rules by routing through another party's system.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

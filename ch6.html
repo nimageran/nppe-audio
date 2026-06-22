@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 6: Visual Mechanics — Contracts</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.formation { border-top-color: #0ea5e9; }
+    .framework-card.counter { border-top-color: #dc2626; }
+    .framework-card.consideration { border-top-color: #ca8a04; }
+    .framework-card.fresh { border-top-color: #9333ea; }
+    .framework-card.loi { border-top-color: #ef4444; }
+    .framework-card.void { border-top-color: #16a34a; }
+    .framework-card.duress { border-top-color: #f59e0b; }
+    .framework-card.waiver { border-top-color: #64748b; }
+    .framework-card.quantum { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 6: VISUAL MECHANICS — CONTRACTS</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Enforceable Contract Decision Tree</a>
+    <a href="#d2">2. The Counter-Offer Chain — Why Negotiation Kills Old Offers</a>
+    <a href="#d3">3. The Consideration Flow</a>
+    <a href="#d4">4. Past Consideration vs Fresh Consideration</a>
+    <a href="#d5">5. The Letter of Intent Trap</a>
+    <a href="#d6">6. Voiding a Contract — The Six Doors</a>
+    <a href="#d7">7. The Economic Duress Test</a>
+    <a href="#d8">8. Waiver and Estoppel — The One-Way Ratchet</a>
+    <a href="#d9">9. Quantum Meruit — When Contract Law Steps Aside</a>
+  </div>
+
+
+  <div class="framework-card formation" id="d1">
+    <h2>1. The Enforceable Contract Decision Tree</h2>
+    <p>This diagram converts the chapter's own Figure 6-2 into a sequential gauntlet. An enforceable contract has to pass SIX gates just to exist, and even a contract that passes all six can still be knocked down afterward by five further "voiding" doors.</p>
+
+    <div class="mermaid">
+      graph TD
+        Start([Did the parties reach<br/>a deal?]) --> G1{Was there an OFFER<br/>that was ACCEPTED?}
+        G1 -->|No| NoContract[NO ENFORCEABLE<br/>CONTRACT]
+        G1 -->|Yes| G2{Does the offer contain<br/>ALL ESSENTIAL TERMS?<br/>— parties, price, time,<br/>scope}
+
+        G2 -->|No| NoContract
+        G2 -->|Yes| G3{Is there<br/>CONSIDERATION?}
+
+        G3 -->|No| NoContract
+        G3 -->|Yes| G4{Was there INTENT to<br/>create LEGAL RELATIONS?}
+
+        G4 -->|No| NoContract
+        G4 -->|Yes| G5{Do the parties have<br/>LEGAL CAPACITY?}
+
+        G5 -->|No| NoContract
+        G5 -->|Yes| G6{Is the purpose<br/>LEGAL?}
+
+        G6 -->|No| NoContract
+        G6 -->|Yes| Exists[AN ENFORCEABLE<br/>CONTRACT EXISTS]
+
+        Exists --> Voidable{Can it still be<br/>VOIDED afterward?<br/>— see diagram 6}
+        Voidable -->|One of 5 grounds<br/>present| MayVoid[CONTRACT MAY<br/>BE VOIDABLE]
+        Voidable -->|None present| Final[ENFORCEABLE AND<br/>NOT VOIDABLE]
+
+        style Start fill:#1e293b,color:#fff
+        style NoContract fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Exists fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Voidable fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Final fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style MayVoid fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Treating contract formation as a strict sequential gauntlet (mirroring the same gauntlet structure used for negligence in Chapter 12 and performance bonds in Chapter 17) reinforces a pattern worth recognizing across the whole course: many legal questions in this material are NOT single yes/no tests, they're chains where failing ANY single link is fatal, regardless of how strongly the other links hold. Note the diagram's two-PHASE structure: gates 1 through 6 determine whether a contract EXISTS at all, but clearing all six doesn't mean the inquiry is over — the contract still has to survive the SEPARATE voidability inquiry (diagram 6) before it's genuinely bulletproof. This two-phase structure explains why "is there a contract" and "is the contract enforceable as written" are actually different questions that can have different answers.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card counter" id="d2">
+    <h2>2. The Counter-Offer Chain — Why Negotiation Kills Old Offers</h2>
+    <p>This diagram traces the chapter's own software developer negotiation example exactly, because the mechanical rule (a counter-offer destroys the prior offer) produces a result that surprises people who assume you can always just "go back" to an earlier number.</p>
+
+    <div class="mermaid">
+      graph LR
+        O1["Client OFFERS:<br/>$100,000 / 6 months"] --> R1{Developer's<br/>response?}
+        R1 -->|Counter-offer:<br/>'$110,000'| O1Dead[ORIGINAL OFFER<br/>IS NOW DEAD —<br/>counter-offer = rejection]
+
+        O1Dead --> O2["New offer on the table:<br/>$110,000 / 6 months<br/>— from DEVELOPER"]
+        O2 --> R2{Client's<br/>response?}
+        R2 -->|Counter-offer:<br/>'$110,000 but<br/>4 months'| O2Dead[DEVELOPER'S<br/>$110K OFFER NOW DEAD]
+
+        O2Dead --> O3["New offer on table:<br/>$110,000 / 4 months<br/>— from CLIENT"]
+        O3 --> R3{Developer's<br/>response?}
+        R3 -->|'I'll agree to your<br/>ORIGINAL offer:<br/>$100,000 / 6 months'| Trap[THIS IS A NEW<br/>COUNTER-OFFER, NOT<br/>AN ACCEPTANCE —<br/>the original $100K/6mo<br/>offer has been DEAD<br/>since Round 1]
+
+        Trap --> Result[NO CONTRACT EXISTS —<br/>client is free to ACCEPT<br/>or REJECT this new<br/>$100K/6mo proposal]
+
+        style O1 fill:#e0f2fe,stroke:#0284c7
+        style O1Dead fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style O2Dead fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Trap fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Result fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The word "Trap" at the third stage is deliberate, because this is exactly the kind of result that catches people off guard — the developer probably FEELS like they're simply "going back to" the original deal, but legally, that original $100K/6-month offer has been dead since the moment the developer counter-offered with $110K in round one. A counter-offer doesn't pause or shelve the prior offer for later use, it KILLS it outright, the same as an explicit rejection would. This is precisely why the chapter's own chapter question 7 answer is "No, there is no contract" — what looks like the developer "accepting the original deal" is actually the developer making a brand-new offer that happens to have the same terms as the long-dead original, and the client is completely free to accept, reject, or counter it again, with zero obligation to honor it just because it matches something said earlier in the conversation.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card consideration" id="d3">
+    <h2>3. The Consideration Flow</h2>
+    <p>Consideration has to flow in BOTH directions for a contract to be enforceable — a one-way flow is just a gift, and gifts aren't contracts. This diagram makes that bidirectional requirement, and its single exception, visible.</p>
+
+    <div class="mermaid">
+      graph LR
+        A((Party A)) -->|Consideration<br/>A → B<br/>e.g. promise to PAY| B((Party B))
+        B -->|Consideration<br/>B → A<br/>e.g. promise to<br/>PERFORM WORK| A
+
+        OneWay[ONE-WAY flow only<br/>— no consideration<br/>flows back] -.->|= THIS IS<br/>JUST A GIFT| NotEnforceable[NOT an enforceable<br/>contract — courts don't<br/>enforce promises<br/>to give gifts]
+
+        Exception{ONE recognized<br/>exception} --> Seal[Promise made in a<br/>WRITTEN document<br/>WITH A SEAL applied<br/>— seal SUBSTITUTES<br/>for consideration]
+
+        style A fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style B fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style OneWay fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NotEnforceable fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Exception fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Seal fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two-way arrow structure is the core image to internalize — consideration genuinely has to flow in BOTH directions, even if the value exchanged is wildly unequal (the chapter is explicit that courts rarely police whether the deal was a "good" one for either side, only whether SOMETHING of value moved each way). The "OneWay" branch captures the gift problem directly: a promise where nothing flows back is unenforceable no matter how sincerely it was made or how much the recipient relied on it emotionally, because without an exchange, courts treat it as a gift rather than a bargain. The seal exception at the bottom is worth remembering as a genuine legal workaround, not just historical trivia — it's literally a substitute mechanism the law created specifically to make ONE-directional promises enforceable when the formality of a seal (or, for individuals today, nominal consideration like one dollar) is used instead.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fresh" id="d4">
+    <h2>4. Past Consideration vs Fresh Consideration</h2>
+    <p>This is the chapter's highest-yield trap, built directly from the window contractor example and Smith v. Dawson. A mid-contract demand for more money is only enforceable if something genuinely NEW is being given in exchange — and "I won't abandon what I already owed you anyway" doesn't count.</p>
+
+    <div class="mermaid">
+      graph TD
+        MidContract[Mid-contract: one party<br/>demands MORE MONEY<br/>to continue] --> WhatGiven{What is being offered<br/>in exchange for<br/>the extra money?}
+
+        WhatGiven --> AlreadyOwed[Just a promise to do<br/>what they were ALREADY<br/>LEGALLY OBLIGATED<br/>to do anyway — e.g.<br/>install windows 'on time'<br/>as originally agreed]
+        WhatGiven --> NewPromise[A GENUINELY NEW<br/>promise — e.g. ACCELERATE<br/>the schedule by a week,<br/>beyond what was<br/>originally required]
+
+        AlreadyOwed --> PastConsideration[PAST CONSIDERATION<br/>— NOT valid. Smith v.<br/>Dawson: 'not the promise<br/>...of something the<br/>promisee is LEGALLY<br/>BOUND to perform' can<br/>support a NEW promise]
+        PastConsideration --> AmendFails[AMENDMENT FAILS<br/>for lack of consideration<br/>— extra payment promise<br/>NOT enforceable]
+
+        NewPromise --> FreshConsideration[FRESH CONSIDERATION<br/>— VALID]
+        FreshConsideration --> AmendWorks[Amendment IS<br/>enforceable —<br/>extra payment<br/>promise STANDS]
+
+        style MidContract fill:#1e293b,color:#fff
+        style WhatGiven fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style PastConsideration fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style AmendFails fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style FreshConsideration fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style AmendWorks fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The single diamond at the top is the entire test, and it's worth phrasing as a question you can run on any "demand for more money mid-contract" fact pattern: is the other side giving up or adding something they DIDN'T already legally owe? The window contractor scenario nails the failing case perfectly — threatening to not finish on time, then "agreeing" to finish on time after getting paid more, isn't really giving anything new at all, since finishing on time was already the contractor's existing legal obligation under the original deal. The Smith v. Dawson case adds a second layer worth remembering: even something as dramatic-sounding as "giving up my right to abandon the project" failed as consideration, because Riddell J.'s reasoning treated that "right" skeptically — the contractor's underlying legal duty to perform never actually disappeared just because he threatened not to, so there was nothing genuinely NEW being forfeited. Contrast that against the diagram's right branch: an actual schedule acceleration is something concretely beyond the original deal, which is exactly why the chapter notes that specific change WOULD have supported the price increase.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card loi" id="d5">
+    <h2>5. The Letter of Intent Trap</h2>
+    <p>A letter of intent is meant to be a safe, non-binding placeholder before the real contract gets negotiated. This diagram shows the three specific ways that safety assumption breaks down in practice.</p>
+
+    <div class="mermaid">
+      graph TD
+        LOI[Parties sign a LETTER<br/>OF INTENT / term sheet —<br/>basic terms only, detailed<br/>terms still to be negotiated] --> Assumption[ASSUMED: this is<br/>NOT a binding contract —<br/>just a preliminary<br/>roadmap]
+
+        Assumption --> Problem1{PROBLEM 1: Do BOTH<br/>parties actually<br/>UNDERSTAND it's<br/>non-binding?}
+        Problem1 -->|No, one party<br/>believes it IS binding| Confusion[Genuine confusion<br/>about contractual<br/>status]
+
+        Assumption --> Problem2{PROBLEM 2: Do the<br/>parties START<br/>PERFORMING before a<br/>formal contract<br/>is signed?}
+        Problem2 -->|Yes| Performance[Performance under an<br/>UNEXECUTED agreement<br/>can itself become PROOF<br/>of an enforceable<br/>contract]
+
+        Assumption --> Problem3{PROBLEM 3: Is the LOI<br/>worded like an<br/>ACCEPTANCE of a specific<br/>offer/bid, with NO further<br/>conditions to be met?}
+        Problem3 -->|Yes| Reclassified[LOI is RECLASSIFIED<br/>as an actual ACCEPTANCE<br/>— terms may be unclear<br/>but court will INFER<br/>missing details]
+
+        style LOI fill:#1e293b,color:#fff
+        style Assumption fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Problem1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Problem2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Problem3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Reclassified fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Performance fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Each of the three problem branches independently undermines the "safe placeholder" assumption people bring to letters of intent, which is why all three deserve separate attention rather than being treated as one vague risk. Problem 1 is purely about MUTUAL UNDERSTANDING — a document is only safely non-binding if BOTH sides actually share that understanding, and disputes often arise precisely because one side thought they had a deal. Problem 2 connects directly back to diagram 1's formation gauntlet — remember that performance of an unexecuted agreement can itself supply proof of contract formation, so starting work "just to keep momentum going" while detailed terms are still being hammered out can accidentally create exactly the binding contract the LOI was meant to defer. Problem 3 is the subtlest and most drafting-dependent: if a letter of intent is phrased in a way that looks like it's simply ACCEPTING an already-detailed offer or bid (rather than setting up a framework for future negotiation), a court may treat it as a real acceptance despite its label, then go on to infer whatever missing terms are needed to make that contract workable — turning a document meant to AVOID commitment into the very instrument that creates it.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card void" id="d6">
+    <h2>6. Voiding a Contract — The Six Doors</h2>
+    <p>Even a properly formed contract can later be voided through one of six recognized doors. This diagram lines them up together to show they're independent grounds — only ONE needs to apply, and each has its own specific trigger.</p>
+
+    <div class="mermaid">
+      graph TD
+        Formed[A validly FORMED<br/>contract exists] --> Doors{Six independent<br/>doors to VOIDING it<br/>— ANY one suffices}
+
+        Doors --> D1[MISTAKE: must be<br/>MATERIAL, MUTUAL,<br/>and existing AT<br/>the time of agreement]
+        Doors --> D2[MISREPRESENTATION:<br/>untrue statement<br/>INDUCED entry into<br/>the contract — innocent,<br/>negligent, or fraudulent]
+        Doors --> D3[DURESS: improper<br/>pressure removing<br/>any REAL CHOICE —<br/>see diagram 7]
+        Doors --> D4[UNCONSCIONABILITY:<br/>EXTREME inequality<br/>of bargaining power<br/>— rare in commercial deals]
+        Doors --> D5[FRUSTRATION /<br/>IMPOSSIBILITY: unforeseen<br/>event makes performance<br/>impossible or valueless —<br/>risk NOT already allocated]
+        Doors --> D6[ILLEGALITY of<br/>purpose — covered<br/>already in diagram 1's<br/>FORMATION gate]
+
+        D1 --> Outcome[CONTRACT MAY BE<br/>VOIDABLE — party NOT<br/>in breach can choose to<br/>END it OR continue<br/>with it]
+        D2 --> Outcome
+        D3 --> Outcome
+        D4 --> Outcome
+        D5 --> Outcome
+
+        style Formed fill:#1e293b,color:#fff
+        style Doors fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Outcome fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Treating these as independent doors (rather than a sequential checklist) reflects how they actually function — a contract doesn't need to fail multiple grounds simultaneously, ANY single door being proven is sufficient to make the whole contract voidable. The Outcome box at the bottom carries a detail worth remembering on its own: voidable does NOT mean automatically void — the INNOCENT party (the one not in breach or not responsible for the vitiating factor) gets to CHOOSE whether to walk away or continue performing, meaning even a textbook case of mistake or misrepresentation doesn't end a contract automatically; it just hands the wronged party an option they can exercise or decline. Mistake's three-part test deserves special attention as the most mechanically precise of the six doors — MATERIAL (not trivial, like the chapter's own $100-vs-$300,000 example in a $1 million deal), MUTUAL (both parties shared the same wrong assumption, not just one), and CONTEMPORANEOUS (existing at formation, not arising afterward) — all three conditions must hold together, and a unilateral mistake (only one party was wrong) generally gets no remedy unless the OTHER party knew or should have known about the error.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card duress" id="d7">
+    <h2>7. The Economic Duress Test</h2>
+    <p>Almost every contract amendment happens under some kind of pressure — that alone isn't duress. This diagram isolates the specific factors courts actually examine to distinguish ordinary "tough negotiating" from true coercion of the will.</p>
+
+    <div class="mermaid">
+      graph TD
+        Pressure[Party agrees to contract<br/>terms under PRESSURE<br/>from the other side] --> Threshold{Is mere COMMERCIAL<br/>PRESSURE enough<br/>to prove duress?}
+
+        Threshold -->|NO — Pao On v. Lau Yiu:<br/>'commercial pressure<br/>is not enough'| NeedMore[Need something MORE:<br/>genuine COERCION OF<br/>THE WILL that VITIATES<br/>true consent]
+
+        NeedMore --> Factors{Courts examine<br/>FOUR factors}
+        Factors --> F1[Did the party<br/>PROTEST at the time?]
+        Factors --> F2[Did the party have a<br/>PRACTICAL ALTERNATIVE<br/>— e.g. adequate<br/>legal remedy?]
+        Factors --> F3[Was the party<br/>INDEPENDENTLY ADVISED<br/>at the time?]
+        Factors --> F4[Did the party take<br/>STEPS TO AVOID the<br/>contract AFTERWARD?]
+
+        F1 --> Weigh{Weighing these<br/>factors together}
+        F2 --> Weigh
+        F3 --> Weigh
+        F4 --> Weigh
+
+        Weigh -->|Protested, no real<br/>alternative, no advice,<br/>acted to avoid it after| TrueDuress[GENUINE DURESS —<br/>contract VOIDABLE]
+        Weigh -->|No protest, had real<br/>alternatives, got advice,<br/>did nothing after| NoDuress[ORDINARY commercial<br/>pressure — NOT duress,<br/>contract STANDS]
+
+        style Pressure fill:#1e293b,color:#fff
+        style Threshold fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Factors fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style TrueDuress fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NoDuress fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The threshold diamond at the top is the single most important gate, because it eliminates the most common misconception about duress — feeling PRESSURED into a deal, even significant business pressure, is explicitly NOT enough on its own (per Pao On v. Lau Yiu). This connects directly back to the Modular Windows case from diagram 4: the owner there clearly felt pressured to pay more to avoid a delay, but the REAL legal question wasn't "did pressure exist" so much as "was there a genuine consideration problem" — duress and lack-of-consideration are related but separate angles on the same kind of fact pattern. The four factors at the bottom aren't a rigid checklist requiring all four to point the same way, they're things courts WEIGH together — but notice they all point toward the same underlying question: did the pressured party have genuine freedom to say no and pursue an alternative, or were they truly boxed in with no real options, no time to get advice, and no follow-up effort to undo the deal once the pressure was off?</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card waiver" id="d8">
+    <h2>8. Waiver and Estoppel — The One-Way Ratchet</h2>
+    <p>This diagram captures a mechanism that catches many parties off guard: consistently NOT enforcing a contractual right can permanently cost you the ability to enforce it later, even though the contract itself never changed on paper.</p>
+
+    <div class="mermaid">
+      graph TD
+        Right[Contract gives Party A<br/>a strict right —<br/>e.g. 'rent due on<br/>the 1st of the month'] --> Pattern{Does Party A<br/>CONSISTENTLY decline<br/>to enforce it?<br/>— e.g. accepts rent<br/>on the 3rd, repeatedly}
+
+        Pattern -->|No, A enforces<br/>strictly each time| StillStrict[Right remains fully<br/>enforceable as<br/>WRITTEN]
+        Pattern -->|Yes, consistent<br/>pattern of leniency| BeliefForms[Party B reasonably<br/>BELIEVES the strict<br/>right will NOT<br/>be enforced]
+
+        BeliefForms --> Reliance{Would enforcing the<br/>strict right NOW<br/>be UNFAIR to B,<br/>given that reliance?}
+        Reliance -->|Yes| Waived[WAIVER occurred —<br/>A is ESTOPPED from<br/>enforcing the strict<br/>term WITHOUT WARNING]
+
+        Waived --> Reset{Can A get the strict<br/>right back?}
+        Reset -->|Yes — IF A gives<br/>REASONABLE WRITTEN<br/>NOTICE of intent to<br/>resume strict<br/>enforcement| Restored[Strict right<br/>RESTORED going<br/>FORWARD]
+
+        Pattern --> Selective{Construction example:<br/>does a party enforce<br/>'written changes only'<br/>SELECTIVELY —<br/>sometimes yes,<br/>sometimes no?}
+        Selective -->|Yes, inconsistent| AlsoWaived[ALSO found to be<br/>a WAIVER — Kei-Ron,<br/>Banister, Keen cases:<br/>casual/inconsistent<br/>enforcement defeats<br/>the 'writing required'<br/>clause]
+
+        style Right fill:#1e293b,color:#fff
+        style Pattern fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style BeliefForms fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Waived fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Restored fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style AlsoWaived fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The structure shows this as a one-way ratchet with a specific RESET mechanism, which is the key insight — once a consistent pattern of leniency creates reasonable reliance, the strict right doesn't just temporarily pause, it becomes genuinely UNENFORCEABLE until the enforcing party deliberately and explicitly resets it through written notice. This explains the chapter's landlord/tenant example perfectly: years of accepting rent on the 3rd doesn't just mean "this one time is fine," it means the landlord has effectively rewritten the practical deal, and going back to strict enforcement requires an affirmative announcement, not just quietly reverting one month. The construction-specific branch at the bottom (Kei-Ron, Banister, Keen) extends this same mechanism to "written changes only" clauses — a clause requiring all changes in writing offers NO protection if both parties have a track record of casually ignoring it, because the clause itself can be waived by the very same conduct-based mechanism, regardless of how clearly it was originally drafted.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card quantum" id="d9">
+    <h2>9. Quantum Meruit — When Contract Law Steps Aside</h2>
+    <p>Quantum meruit isn't a backup contract theory available whenever someone feels underpaid — it only activates under one specific precondition. This diagram shows that gate and the two scenarios where it actually applies.</p>
+
+    <div class="mermaid">
+      graph TD
+        Work[One party performed<br/>work, the other party<br/>received the benefit] --> Gate{CRITICAL GATE: is there<br/>a VALID CONTRACT that<br/>ALREADY covers<br/>this work?}
+
+        Gate -->|YES, contract covers it<br/>— e.g. normal change<br/>order provisions apply| NoQM[QUANTUM MERUIT<br/>DOES NOT APPLY —<br/>the CONTRACT governs<br/>compensation instead]
+
+        Gate -->|NO valid contract<br/>applies to this work| QMApplies{Why might no<br/>contract apply?}
+
+        QMApplies --> S1[Contract was<br/>FUNDAMENTALLY<br/>ALTERED — change is<br/>BEYOND the scope of<br/>change order provisions]
+        QMApplies --> S2[CONSTRUCTIVE CHANGE<br/>— owner REFUSES to<br/>acknowledge a change<br/>occurred — e.g. denying<br/>site access, forcing<br/>costlier work methods]
+        QMApplies --> S3[Original contract<br/>VOIDED — mutual<br/>mistake, frustration,<br/>or abandonment]
+
+        S1 --> Pay[QUANTUM MERUIT<br/>APPLIES: party paid<br/>'the amount it is worth' —<br/>value of work PLUS a<br/>REASONABLE PROFIT]
+        S2 --> Pay
+        S3 --> Pay
+
+        style Work fill:#1e293b,color:#fff
+        style Gate fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style NoQM fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Pay fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The gate diamond at the top is the rule most often missed: quantum meruit is NOT a general fairness remedy available any time someone feels work was undervalued — it's specifically a gap-filler for situations where NO valid contract actually governs the work in question. This is why ordinary change orders, even informally documented or delayed in paperwork (as discussed in Chapter 9), don't trigger quantum meruit at all — the contract's own change order machinery already covers that situation, so quantum meruit has nothing to fill in. The three scenario branches show the genuinely different ROUTES to that gap appearing: S1 is about scope (the change is so large it falls outside what change orders were ever meant to cover), S2 is about denial (the owner won't even admit a change happened, so there's no change order process to invoke in the first place), and S3 is about validity (the original contract itself has been voided entirely through one of diagram 6's doors, leaving no contractual framework standing at all). All three converge on the same remedy: pay for the actual value delivered, including a reasonable profit margin, which is what "quantum meruit" literally means.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

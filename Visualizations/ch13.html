@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 13 Contract & Tort Mechanics</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f4f5f7', primaryBorderColor: '#1d4ed8', lineColor: '#1a1d26', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #e2e8f0; padding: 30px; margin: 0; }
+    .framework-card { background-color: white; padding: 25px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #534AB7; }
+    .framework-card.liability { border-left-color: #185FA5; }
+    .framework-card.vicarious { border-left-color: #185FA5; }
+    .framework-card.codes { border-left-color: #0F6E56; }
+    h2 { color: #0f172a; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; margin-top: 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+    .explanation { font-size: 14px; color: #334155; line-height: 1.6; margin-bottom: 20px; background-color: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; }
+    strong.label { color: #1a1d26; background-color: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .mermaid { margin-top: 20px; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="framework-card">
+    <h2>1. The Limitation Clock (Discoverability vs. The Wall)</h2>
+    <div class="explanation">
+      <p>
+The law gives people only a certain amount of time to sue. If a problem is easy to see (patent defect), the countdown starts right away. If the problem is hidden (latent defect), the countdown starts only when someone discovers it. However, there is a strict ultimate limitation period (often about 15 years) that acts as the final deadline. Once that maximum time passes, no lawsuit can be filed, even if the hidden problem was discovered only recently. In short, the final legal deadline overrides the discovery rule.Some problems are easy to see right away. These are called <strong>Patent Defects</strong>, and the time limit to sue starts immediately.
+</p>
+
+<p>
+Other problems are hidden, like inside a wall or software. These are called <strong>Latent Defects</strong>. In this case, the time limit to sue does not start until the problem is discovered.
+</p>
+
+<p>
+But there is still a final limit. The government sets an <strong>Ultimate Limitation Period</strong>, which is a strict maximum time (usually around 15 years). After this time, no one can sue anymore, even if they just found the problem.
+</p>
+
+<p>
+So basically:
+</p>
+
+<p>
+Visible problem → clock starts immediately<br>
+Hidden problem → clock starts when discovered<br>
+Too much time passed (max limit) → no lawsuit allowed anymore
+</p>The law does not let plaintiffs sue forever. If a mistake is obvious upon inspection, it is a <strong class="label">Patent Defect</strong>, and the legal countdown clock starts immediately. If the mistake is hidden inside a wall or software code, it is a <strong class="label">Latent Defect</strong>. Here, the clock is paused until the client actually discovers the damage. Because this could theoretically take decades, the government established the <strong class="label">Ultimate Limitation Period</strong>. This is an absolute, statutory brick wall (usually 15 years). Once you hit that wall, all lawsuits are blocked, even if the client just discovered the hidden defect yesterday. This ultimate limit completely trumps the discoverability rule.
+    </div>
+    <div class="mermaid">
+      graph TD
+        Start[Defect is Created] --> Check{Is it Hidden or Obvious?}
+        
+        Check -- "Obvious" --> Patent[Patent Defect]
+        Check -- "Hidden" --> Latent[Latent Defect]
+        
+        Patent --> Clock1[Clock Starts Immediately]
+        Latent --> Pause[Clock Paused]
+        Pause -. "Waits years" .-> Discovery{Client Discovers Damage}
+        Discovery --> Clock2[Clock Starts Now]
+        
+        Clock1 --> Standard[Standard Expiry: 2 Years]
+        Clock2 --> Standard
+        
+        Start ==> Absolute[Ultimate Limitation Period: 15 Years]
+        Absolute == "BRICK WALL: Blocks all claims, even hidden ones" ==> Standard
+        
+        style Patent fill:#ffedd5,stroke:#ea580c
+        style Latent fill:#e0f2fe,stroke:#0284c7
+        style Absolute fill:#fee2e2,stroke:#dc2626,stroke-width:3px,color:#991b1b
+    </div>
+  </div>
+
+  <div class="framework-card liability">
+    <h2>2. The Liability Distribution Engine</h2>
+    <div class="explanation">
+      <p>
+When several professionals make a mistake, the question is who pays and how much.
+</p>
+
+<p>
+If the owner is not at fault, <strong>Joint &amp; Several Liability</strong> applies. This means the owner can recover all damages from one responsible person, usually the one with the most money. That person may have to pay everything first, even if others were also responsible. After that, they can try to recover money from the other professionals. If one person cannot pay, the others still cover the loss.
+</p>
+
+<p>
+However, if the owner is even slightly at fault, <strong>Several Liability</strong> applies. In this case, each party only pays their exact share based on their percentage of responsibility. No one pays for anyone else. But if someone cannot pay their share, that missing amount is not spread to others, and the owner may end up absorbing the loss.
+</p>When multiple professionals mess up, the exam will test who pays what. It all hinges on the plaintiff (the owner). If the owner is perfectly innocent and contributed 0% to the problem, we use <strong class="label">Joint & Several Liability</strong>. This means the owner can point at the richest engineer, force them to pay 100% of the damages, and let the engineers fight amongst themselves for the rest. If an at-fault contractor goes bankrupt, the other engineers absorb that loss. However, if the owner is even 1% at fault, the rules flip to <strong class="label">Several Liability</strong>. Now, every party only pays their exact mathematical percentage of the blame. If a contractor goes bankrupt, the owner is forced to absorb the financial loss.
+    </div>
+    <div class="mermaid">
+      graph TD
+        Crash[Project Fails: Multiple Parties at Fault] --> Fault{Is the Owner partially at fault?}
+        
+        Fault -- "0% Fault" --> Joint[Joint & Several Liability]
+        Fault -- "1% or more Fault" --> Several[Several Liability]
+        
+        Joint --> Action1[Owner demands 100% payout from the deepest pockets]
+        Action1 --> Action2[Defendants fight each other to recover shares]
+        Action2 --> Result1[Bankrupt parties are absorbed by the surviving Defendants]
+        
+        Several --> Action3[Owner collects exact percentage from each Defendant]
+        Action3 --> Result2[Bankrupt parties are absorbed by the Owner]
+        
+        style Joint fill:#dcfce7,stroke:#16a34a
+        style Several fill:#fef08a,stroke:#ca8a04
+        style Result1 fill:#fee2e2,stroke:#dc2626
+        style Result2 fill:#fee2e2,stroke:#dc2626
+    </div>
+  </div>
+
+  <div class="framework-card vicarious">
+    <h2>3. The Vicarious Liability Filter</h2>
+    <div class="explanation">
+      Vicarious liability means an employer can be held responsible for mistakes made by an employee at work.
+
+<br>For this to apply, two conditions must be met:
+
+<br>1. The worker must be an <b>employee</b>, not an independent contractor.
+<br>2. The employee must have been doing their <b>job duties</b> when the mistake happened.
+
+<br>If the employee was doing something personal, such as a side job or a favor for a friend, they are outside the scope of employment. In that case, the employer is usually not responsible, and the employee may have to deal with the lawsuit on their own.
+
+<br>Easy way to remember:
+
+<br>Employee + Doing their job = Employer may pay.
+<br>Independent contractor or personal activity = Employee is usually responsible.
+
+<br>Example:
+<br>A delivery driver crashes into another car while making deliveries for the company. The employer could be liable. But if the driver uses the company vehicle after work to help a friend move furniture and causes an accident, the employer is usually not liable because the driver was not acting within their job duties. Vicarious liability forces deep-pocketed employers to pay for the careless mistakes of their workers. To trigger this, a plaintiff must push the scenario through a strict two-step filter. First, the worker must be a true employee, not an independent contractor. Second, the mistake must have occurred while the employee was actively doing their assigned job. If the employee is moonlighting on a side gig or doing personal favors, they fall outside the <strong class="label">Scope of Employment</strong>. When that happens, the employer's insurance blocks the claim, and the employee is left to face the lawsuit entirely alone.
+    </div>
+    <div class="mermaid">
+      graph TD
+        Mistake[Mistake Damages a 3rd Party] --> F1{Filter 1: Are they a real Employee?}
+        
+        F1 -- "No: Independent Contractor" --> Block1[Claim Blocked: Employer Not Liable]
+        F1 -- "Yes" --> F2{Filter 2: Was it in the Scope of Work?}
+        
+        F2 -- "No: Moonlighting / Side Gig" --> Block2[Claim Blocked: Employer Not Liable]
+        F2 -- "Yes" --> Boom[Employer is Vicariously Liable]
+        
+        style F1 fill:#f3e8ff,stroke:#9333ea
+        style F2 fill:#f3e8ff,stroke:#9333ea
+        style Block1 fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5
+        style Block2 fill:#f1f5f9,stroke:#64748b,stroke-dasharray: 5 5
+        style Boom fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+  </div>
+
+  <div class="framework-card codes">
+    <h2>4. The Code Compliance Shield (And How It Breaks)</h2>
+    <div class="explanation">
+      Engineers sometimes say, “<b>I followed the code, so I can’t be blamed.</b>” That’s not always true. Courts can ignore that defense in a few situations:
+
+<BR> 1. You knew the code wasn’t good enough:
+<BR> If you actually knew the rule was outdated or unsafe, you can’t hide behind it.
+<BR> 2. You should have known better:
+<BR> Even if you didn’t personally know, but any reasonable engineer would have seen warnings or new research, you’re still responsible.
+<BR> 3. The whole industry is being careless:
+<BR> If the normal way everyone does things is proven unsafe, the court won’t accept it as a defense.
+<BR> 4. Your project is special or unusual:
+<BR> If you’re designing something new or unusual where the code doesn’t really fit, you can’t rely on it as a shield.
+<BR> Engineers love to argue that they cannot be sued because they "followed the building code." The code is merely a baseline shield, and courts will pierce right through it under four specific conditions. A <strong class="label">Legislated Code</strong> is mandatory for everyone, but if you have actual knowledge that the code is outdated or inadequate, you are negligent if you blindly follow it. The shield also shatters if you reasonably should have known it was bad (e.g., a recent industry study was published), if the entire industry standard is proven careless, or if you are designing something so unique that traditional codes simply do not apply. 
+    </div>
+    <div class="mermaid">
+      graph TD
+        Core((The Code Standard Shield))
+        
+        Core --- E1[1. You had actual knowledge the code was inadequate]
+        Core --- E2[2. You reasonably should have known it was inadequate]
+        Core --- E3[3. The court rules the entire industry is careless]
+        Core --- E4[4. The design is unique / leading-edge]
+        
+        style Core fill:#e2e8f0,stroke:#475569,stroke-width:4px
+        style E1 fill:#fee2e2,stroke:#dc2626
+        style E2 fill:#fee2e2,stroke:#dc2626
+        style E3 fill:#fee2e2,stroke:#dc2626
+        style E4 fill:#fee2e2,stroke:#dc2626
+    </div>
+  </div>
+
+</body>
+</html>

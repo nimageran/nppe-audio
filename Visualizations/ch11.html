@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 11: Visualizing Specific Contracts and Clauses</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; text-transform: uppercase; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.payment { border-top-color: #64748b; }
+    .framework-card.gmp { border-top-color: #f59e0b; }
+    .framework-card.tercon { border-top-color: #ef4444; }
+    .framework-card.field { border-top-color: #10b981; }
+    .framework-card.clauses { border-top-color: #8b5cf6; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 11: DEEP SPECIFIC CONTRACTS & CLAUSES VISUALIZATION</h1>
+
+  <div class="framework-card payment">
+    <h2>1. The Financial Risk Spectrum (Payment Models)</h2>
+    <p>In construction, the method of payment fundamentally dictates who eats the cost when things go wrong. Standard forms (like CCDC documents) are built around these payment architectures.</p>
+
+    <div class="mermaid">
+      graph LR
+        subgraph Contractor Bears the Risk
+          FP[Fixed-Price / Stipulated Sum]
+        end
+        
+        subgraph Shared/Variable Risk
+          UP[Unit Price]
+        end
+        
+        subgraph Owner Bears the Risk
+          CP[Cost-Plus]
+        end
+        
+        FP -.-> |Contractor eats overruns, keeps savings| C1(e.g., CCDC 2)
+        UP -.-> |Price per unit fixed, but total quantity varies| C2(e.g., CCDC 4)
+        CP -.-> |Owner pays actual costs + overhead fee| C3(e.g., CCDC 3)
+        
+        style FP fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style UP fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style CP fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This outlines the shift of financial burden.</p>
+      <ul>
+        <li><strong>Fixed-Price (CCDC 2):</strong> The Contractor promises to build the project for a lump sum. The myth is that this price never changes. In reality, change orders and unforeseen conditions always alter it. However, base efficiency risks sit squarely on the Contractor.</li>
+        <li><strong>Unit Price (CCDC 4):</strong> Used when quantities are unknown (e.g., highway earthmoving). The Owner pays $100 per cubic meter of concrete. The risk is shared: the Contractor risks their efficiency per unit, but the Owner risks the final total quantity required.</li>
+        <li><strong>Cost-Plus (CCDC 3):</strong> Used when the scope is entirely uncertain. The Owner agrees to pay all actual costs plus a percentage fee. The danger is that the Contractor has zero incentive to work quickly or efficiently—in fact, a percentage fee actively incentivizes them to inflate costs.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card gmp">
+    <h2>2. The Guaranteed Maximum Price (GMP) Engine</h2>
+    <p>To fix the fatal flaw of Cost-Plus contracts (where the contractor has no incentive to save money), the industry created the "Target Price" or "GMP" hybrid model.</p>
+
+    <div class="mermaid">
+      graph TD
+        Target[Target Price Established e.g., $10 Million] --> Actual{Final Actual Cost}
+        
+        Actual -->|Cost is $8 Million| Under[UNDER BUDGET]
+        Actual -->|Cost is $12 Million| Over[OVER BUDGET]
+        
+        Under --> Share[Gainshare Mechanism]
+        Share -.->|Owner keeps 60%, Contractor gets 40% Bonus| Win[Incentivizes Contractor Efficiency]
+        
+        Over --> GMP{Is there a GMP Cap?}
+        GMP -->|Yes| Cap[Contractor Absorbs 100% of Overrun]
+        GMP -->|No| Pain[Painshare: Owner and Contractor split the penalty]
+        
+        style Target fill:#1e293b,color:#fff
+        style Actual fill:#f1f5f9,stroke:#64748b
+        style Under fill:#dcfce7,stroke:#16a34a
+        style Over fill:#fee2e2,stroke:#dc2626
+        style Share fill:#e0f2fe,stroke:#0284c7
+        style Win fill:#166534,color:#fff
+        style GMP fill:#fef3c7,stroke:#d97706
+        style Cap fill:#991b1b,color:#fff
+        style Pain fill:#991b1b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This demonstrates how to engineer financial incentives.</p>
+      <ul>
+        <li><strong>The Mechanism:</strong> A GMP (Guaranteed Maximum Price) blends the safety of a Fixed-Price contract for the Owner with the transparency of a Cost-Plus contract.</li>
+        <li><strong>Gainshare:</strong> If the contractor brings the project in under the target price, they receive a massive bonus (a percentage of the savings). This forces the contractor to hunt for efficiencies.</li>
+        <li><strong>The Hard Cap:</strong> If costs explode beyond the Target Price, the GMP acts as a ceiling. The Owner pays nothing above the cap, forcing the Contractor to eat the losses.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card tercon">
+    <h2>3. The Tercon Test (Exclusion Clauses)</h2>
+    <p>An Exclusion Clause is designed to completely shield a party from being

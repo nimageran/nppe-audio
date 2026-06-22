@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.25 Reference Card: Securities Law</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 25 — Securities Law</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">What Securities Legislation Covers<span class="sec-count">2 areas</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Registration and control of those trading securities</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Disclosure of MATERIAL information to the public</span><span class="item-note">— engineers/geoscientists are often involved here (resource discoveries, patentable inventions, project viability)</span></div></div>
+      </div>
+      <div class="info"><strong>Jurisdiction:</strong> Both federal and provincial governments have authority, but MOST securities legislation is PROVINCIAL (each province's securities commission). Multiple provincial rules can govern a single transaction. Securities commissions protect fair/efficient trading by prohibiting insider trading and governing material disclosure.</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">Prospectus — Key Requirements<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Full, true, and plain disclosure of all material facts</span><span class="item-note">— about the securities being issued</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Must be APPROVED by the relevant securities commission(s)</span><span class="item-note">— and made available to prospective purchasers BEFORE sales can take place</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">Ongoing Disclosure Obligations (Post-Prospectus)<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Disclosure of all MATERIAL CHANGES</span><span class="item-note">— an ongoing process (NI 51-102 — Continuous Disclosure Obligations)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Filing audited and unaudited financial statements</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Press releases and insider trading reports</span></div></div>
+      </div>
+      <div class="info"><strong>Disclosure does NOT end with the prospectus</strong> — it is a continuing obligation for the life of the public company.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#0F6E56">4</div>
+      <div class="sec-title">Key National Instruments (NI) for Engineers/Geoscientists<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">NI 43-101</div><div><span class="item-title">Standards of Disclosure for Mineral Projects</span><span class="item-note">— developed largely in response to mining disclosure scandals (notably BRE-X); has companion policy 43-101CP. Additional applicable standards: CIM Best Practices Guidelines, CIM Standards on Mineral Resources/Reserves, CIM Diamond Exploration Reporting Guidelines, GSC Paper 88-21 (coal).</span></div></div>
+        <div class="item"><div class="num">NI 51-101</div><div><span class="item-title">Standards of Disclosure for Oil and Gas Activities</span></div></div>
+        <div class="item"><div class="num">NI 51-102</div><div><span class="item-title">Continuous Disclosure Obligations</span><span class="item-note">— governs ongoing reporting of material changes</span></div></div>
+      </div>
+      <div class="warn"><strong>CSA = Canadian Securities Administrators</strong> — a forum of provincial securities commissions that creates National Instruments for cross-provincial consistency. Provinces CAN choose not to adopt them, but they still represent a common MINIMUM STANDARD OF PRACTICE. Always confirm you're using the LATEST version — these documents change.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#854F0B">5</div>
+      <div class="sec-title">The "Qualified Person" — Qualifications & Duties<span class="sec-count">2+4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="list-title">Qualifications (e.g. mineral projects)</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Geoscientist or engineer with ≥5 years' RELEVANT experience</span><span class="item-note">— relevant to the subject matter of the project AND the technical report</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Member in good standing with a professional association</span></div></div>
+      </div>
+      <div class="list-title">Required Duties</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Personally inspect the property</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Sign and seal the technical report</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Sign a consent document</span><span class="item-note">— stipulating the technical disclosure contains NO misrepresentations</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Act independently and follow CSA guidelines</span></div></div>
+      </div>
+      <div class="info"><strong>Who chooses the QP?</strong> Responsibility for SELECTING the qualified person and for PROPER USE of their information rests with the company's OFFICERS AND DIRECTORS. The QP should also review the prospectus/other disclosure to confirm their information was properly interpreted.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#993C1D">6</div>
+      <div class="sec-title">Liability for Technical Reports — Key Points<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Misrepresentation in a report, consent letter, or prospectus</span><span class="item-note">— creates a right of action for the company and its investors</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Negligent preparation (e.g. not following NI 43-101/51-101)</span><span class="item-note">— also creates a right of action. The NIs themselves don't CREATE a cause of action, but as MINIMUM PRACTICE STANDARDS they become highly relevant in court.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">DISCLAIMER CLAUSES are UNLIKELY to succeed</span><span class="item-note">— in this context, disclaimers have little chance of limiting liability</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Statutory liability (use in a prospectus or takeover attempt) CANNOT be disclaimed</span><span class="item-note">— separate cause of action under securities legislation; direct officer/director liability also possible (Ch.5)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#3B6D11">7</div>
+      <div class="sec-title">Insider Trading<span class="sec-count">Criminal Code s.382.1</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">"Insider" definition</span><span class="item-note">— a shareholder, professional advisor, director, or employee who POSSESSES inside knowledge AND uses it to (directly or indirectly) buy or sell a security</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Any professional providing advice can be considered an "insider"</span><span class="item-note">— engineers, geoscientists, and architects must be careful not to violate the prohibition</span></div></div>
+      </div>
+      <div class="warn"><strong>Practical scenario:</strong> A geoscientist learning of extremely positive (not-yet-public) test results CANNOT discuss them with anyone outside the confidentiality obligation (e.g. friends/family), and CANNOT have associates trade on it. Even AFTER public release, she must discuss ONLY what was actually disclosed publicly — adding extra color, tone ("it's REALLY good"), or non-verbal hints ("wink and a nudge") about non-disclosed details remains illegal.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.18 Reference Card: Construction Liens</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 18 — Construction Liens</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">2 Purposes of Construction Lien Statutes<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Provide security of payment</span><span class="item-note">— for suppliers of labour, materials, and equipment rentals on construction projects</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Facilitate credit in the construction industry</span><span class="item-note">— unlike cars/houses, materials like drywall/paint cannot be repossessed once installed</span></div></div>
+      </div>
+      <div class="info"><strong>A lien</strong> = a charge or claim against real property improved by construction, registered against title. Registration makes the property hard to sell/finance until removed. <strong>Note:</strong> A lien claim is NOT the only remedy — the unpaid party can also sue for breach of contract (against whoever hired them), though that's a hollow remedy against an insolvent/absent party.</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">4 Steps to Making and Proving a Lien Claim<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">File the Claim of Lien</span><span class="item-note">— register documents at the land registry within statutory time limits (e.g. relative to substantial completion, last day worked, or notice to owner)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Perfect the Lien</span><span class="item-note">— commence legal action within the limitation period (commonly ~1 year) to prove the work/material was supplied to that specific improvement and all statutory requirements were met. Some provinces also require filing a <strong>lis pendens</strong> (certificate of pending litigation) within a set time, or the lien may be dismissed.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Defendant Raises Defences</span><span class="item-note">— deficiencies in work, set-offs, proof of payment, limitation defences</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Enforce the Proven Lien</span><span class="item-note">— if substitute security (e.g. lien bond) is in place, claimant is paid from it; otherwise the claimant becomes a judgment creditor and may force a sale of the property (rarely happens in practice)</span></div></div>
+      </div>
+      <div class="warn"><strong>Always get legal advice:</strong> limitation periods vary by province and may be ABRIDGED (e.g. Alberta: 30 days via notice to commence action). Lien claims are frequently lost on technical/procedural grounds even when the underlying claim is valid.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">Who May Claim a Lien — BC Builders Lien Act Example<span class="sec-count">key definitions</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Workers, Contractors, Subcontractors, Material Suppliers</span><span class="item-note">— typical claimants. No privity with owner/GC required — claimant can be 2+ tiers removed.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">"Subcontractor" definition EXCLUDES subconsultants</span><span class="item-note">— a person engaged by an architect, engineer, or material supplier is NOT a "subcontractor" and has no lien right</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Prime architect/engineer CAN claim a lien</span><span class="item-note">— "services" includes architect/engineer services even before construction begins, AND equipment rental. Must relate to an actual "improvement" — drawings for a project never built ≠ lien right.</span></div></div>
+      </div>
+      <div class="warn"><strong>Material supplier challenge:</strong> Must often PROVE DELIVERY to the specific site. Suppliers serving multiple jobsites should designate separate orders per site and keep accurate delivery records, or risk being unable to prove the lien.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#0F6E56">4</div>
+      <div class="sec-title">3 Forms of Substitute Lien Security<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Cash</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Letter of Credit</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Lien Bond</span></div></div>
+      </div>
+      <div class="info">Substitute security replaces the land as security for the lien — allows the lien to be removed from title so funds can keep flowing. Security value = lien amount + security for costs (Ontario: lesser of $50,000 or 25% of the lien; BC has removed this requirement via case law). Held in trust/court until the claim is resolved or abandoned.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">Trust Provisions — Trustee/Beneficiary Chain<span class="sec-count">cascading structure</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Owner pays General Contractor</span><span class="item-note">— funds become impressed with a trust immediately upon receipt; GC = trustee, all subs/workers/suppliers directly below = beneficiaries</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">GC pays Subcontractor</span><span class="item-note">— the cycle repeats: subcontractor becomes trustee of those funds for ITS workers/suppliers</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Rule: pay beneficiaries before using funds for any other purpose</span><span class="item-note">— e.g. cannot use progress payment funds to pay down a bank loan or buy equipment if subs remain unpaid</span></div></div>
+      </div>
+      <div class="warn"><strong>Breach of trust consequences:</strong> Quasi-criminal penalties (fines/jail under the lien statute, not the Criminal Code). Directors/officers of a corporate breaching party may be PERSONALLY liable to repay trust funds + face sanctions. Anyone knowingly participating in the breach may also be liable. Best practice: maintain SEPARATE bank accounts per project — never co-mingle funds, even temporarily.</div>
+      <div class="info"><strong>Mackenzie Redi-Mix principle:</strong> A contractor who has paid a subcontractor IN FULL has discharged its trust obligation to those further down the chain (e.g. the sub's suppliers) — the contractor is NOT a guarantor of the subcontractor's debts to others.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#854F0B">6</div>
+      <div class="sec-title">2 Holdback Systems<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Multiple Holdback System</span><span class="item-note">— ON, SK, BC. Owner, GC, AND every subcontractor each retain 10% from the party below them.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Single Holdback System</span><span class="item-note">— Alberta. Only the OWNER retains the holdback from the GC. (Often trickles down contractually anyway — GC requires subs to accept the same % so it doesn't have to finance it.)</span></div></div>
+      </div>
+      <div class="info"><strong>Release trigger:</strong> Substantial completion (determined by consultant's certificate, who must act impartially), then a fixed period after (e.g. 45–55 days). <strong>Defence value:</strong> The party retaining holdback can discharge ALL liens against it by paying the holdback amount — its maximum liability to lien claimants is capped at the holdback, regardless of total lien value (claimants share pro rata).</div>
+      <div class="warn"><strong>Shimco principle (BC):</strong> A lien against the LAND and a lien against the HOLDBACK are now treated as two SEPARATE liens. If a claimant misses the land-lien deadline, it may still assert a lien against the holdback — but must do so via legal proceedings BEFORE the holdback is paid out.</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#993C1D">7</div>
+      <div class="sec-title">Lien Priority — Key Rules<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Registration order generally governs priority vs other charges</span><span class="item-note">— mortgages/judgments registered AFTER a lien rank below it; in some jurisdictions, lien priority "relates back" to the last date work was performed</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Construction lenders</span><span class="item-note">— in some provinces, rank ahead of liens only for funds advanced BEFORE the lien was filed. Lenders must search title before each progress draw; refuse to advance if a lien has been filed.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">CRA "Requirement to Pay" vs unpaid subcontractors (PCL v. Norex)</span><span class="item-note">— if the contractor has a valid RIGHT OF SET-OFF against the defaulting subcontractor, unpaid suppliers' claims take PRIORITY over the CRA</span></div></div>
+      </div>
+      <div class="warn"><strong>Critical drafting point:</strong> Always include a right of set-off in owner-contractor contracts — otherwise the owner may end up paying the holdback amount TWICE (once to CRA, once to unpaid claimants).</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#3B6D11">8</div>
+      <div class="sec-title">2 Precautions Against Paying Twice (GC/Owner)<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Require performance bonds and L&M payment bonds from subcontractors</span><span class="item-note">— if a sub defaults on paying its workers/suppliers, the sub's surety bears the responsibility instead of the GC</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Require monthly statutory declarations as a precondition to payment</span><span class="item-note">— sworn statement that all financial obligations (workers, subs, suppliers, WCB premiums, taxes) have been met. Knowingly swearing a FALSE declaration = criminal liability for perjury.</span></div></div>
+      </div>
+      <div class="info">Even if a GC has properly disbursed 100% of received funds, it can still face liens if a SUBCONTRACTOR breaches trust or becomes insolvent — the GC is typically still contractually responsible for removing all liens at its own expense.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

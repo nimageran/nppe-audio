@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.12 Reference Card: Torts</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 12 — Torts</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">2 Categories of Torts<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Unintentional Torts</span><span class="item-note">— negligence (largest category), negligent misrepresentation</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Intentional Torts</span><span class="item-note">— fraud (deceit), trespass, defamation</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">4 Elements to Prove Negligence<span class="sec-count">4 items · ALL must be proven</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Duty of Care</span><span class="item-note">— defendant owed a duty to the plaintiff (based on reasonable foreseeability)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Breach of Duty</span><span class="item-note">— defendant did not meet the standard of care of a reasonably competent professional in the same field</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Loss or Damage Suffered</span><span class="item-note">— plaintiff actually suffered a loss; if no loss, claim fails even if negligence occurred</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Proximate Cause</span><span class="item-note">— the breach was the proximate (legal) cause of the loss; must pass the "but for" test</span></div></div>
+      </div>
+      <div class="info"><strong>Defence:</strong> Defendant needs to disprove only ONE of the four elements to defeat the claim.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">2 Categories of Breach of Standard of Care<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Incompetence (Lack of Skill)</span><span class="item-note">— relatively rare; professionals generally avoid work they are unqualified to do; entering a new field without adequate training is a risk</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Lack of Care</span><span class="item-note">— most common; preventable through checklists, peer review, independent checking of calculations, and continuing education</span></div></div>
+      </div>
+      <div class="warn"><strong>Standard:</strong> NOT perfection — a reasonably competent member of the profession. Specialists are held to the specialist standard, not the average professional standard.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">3 Types of Misrepresentation<span class="sec-count">3 items · remedies differ</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Type</th><th>Definition</th><th>Remedy</th></tr></thead>
+        <tbody>
+          <tr><td>Innocent</td><td>False statement, no intent to deceive, no carelessness</td><td>Rescission only (cancellation of contract). No damages unless fraud or negligence.</td></tr>
+          <tr><td>Negligent</td><td>False statement made without due care or skill; plaintiff reasonably relied on it</td><td>Rescission + damages. Pure economic loss IS claimable (recognized exception).</td></tr>
+          <tr><td>Fraudulent</td><td>Statement known to be false OR made not caring if true or false; intended to induce action; plaintiff suffers damage</td><td>Rescission + damages (most powerful remedy). Can also result in criminal fraud charges.</td></tr>
+        </tbody>
+      </table>
+      <div class="info"><strong>Misrepresentation by omission:</strong> Failing to disclose information can also constitute misrepresentation — e.g. owner withholding soils report from bidders.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">4 Elements to Prove Fraud<span class="sec-count">4 items · ALL required</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Representation is untrue in fact</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Defendant knows it is untrue OR is indifferent as to its truth</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Intended or calculated to induce the plaintiff to act upon it</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Plaintiff acts upon it and suffers damage</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">4 Hallmarks of a Fiduciary Relationship<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">One party (fiduciary) has discretion or power</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Fiduciary can unilaterally exercise that power to affect the beneficiary's interests</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Beneficiary is peculiarly vulnerable or at the mercy of the fiduciary</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Does NOT normally arise between arm's length commercial parties</span></div></div>
+      </div>
+      <div class="warn"><strong>Key point:</strong> The A/E/G relationship with clients is NOT inherently fiduciary — courts look for these specific hallmarks. Breach of fiduciary duty is described as "carrying a stench of dishonesty."</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">4 Elements to Prove Nuisance (Rylands v. Fletcher)<span class="sec-count">4 items · ALL required</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Defendant made a non-natural use of land</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Defendant brought onto land something likely to do mischief if it escaped</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">The substance escaped</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Damage caused to plaintiff's property or person</span></div></div>
+      </div>
+      <div class="info">Nuisance is a strict liability tort — negligence does NOT need to be proven. Also applies to vibrations (e.g. pile driving). Trespass is also strict liability.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#854F0B">8</div>
+      <div class="sec-title">2 Categories of Product Defects<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Product not manufactured according to specifications</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Product was manufactured to spec, but the specifications were inadequate</span></div></div>
+      </div>
+      <div class="info"><strong>Canada vs USA:</strong> In Canada, consumer must prove NEGLIGENCE (all 4 elements). In the USA, strict liability applies — no negligence needed. Once plaintiff proves defect in Canada, burden shifts to manufacturer to disprove standard of care breach.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#993C1D">9</div>
+      <div class="sec-title">4 Methods to Reduce Negligence Claim Risk<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Checklists and standard procedures</span><span class="item-note">— professional associations and liability insurers often provide standard checklists</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Independent checking of calculations</span><span class="item-note">— hire someone else to verify</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Peer review</span><span class="item-note">— cost more than offset by claim reductions; some associations require it after a claim</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Continuing education</span><span class="item-note">— failure to keep up with changing standards = negligence; standard is measured at time of the act, not time of trial</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#3B6D11">10</div>
+      <div class="sec-title">Pure Economic Loss — Rule + 2 Key Exceptions<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="list-title">The Rule</div>
+      <div class="items">
+        <div class="item"><div class="num">–</div><div><span class="item-title">Pure economic loss is NOT claimable in negligence</span><span class="item-note">— loss of money only, no physical injury or property damage; to prevent "floodgates" problem</span></div></div>
+      </div>
+      <div class="list-title">2 Key Exceptions</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Negligent Misrepresentation</span><span class="item-note">— pure economic loss IS claimable (Hedley Byrne); plaintiff must have reasonably relied on the statement</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Substantial Danger to Health and Safety</span><span class="item-note">— Winnipeg Condominium: pure economic loss recoverable if there is a substantial danger to occupant health and safety</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

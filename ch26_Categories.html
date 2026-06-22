@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.26 Reference Card: Privacy Law</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 26 — Privacy Law</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">8 PIPEDA Obligations for Organizations<span class="sec-count">8 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Protect personal information</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Identify the PURPOSE for collection</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Obtain CONSENT prior to collection</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Collect only REQUIRED information</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Limit USE to the purpose for which it was collected</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Ensure information is ACCURATE</span></div></div>
+        <div class="item"><div class="num">7</div><div><span class="item-title">Ensure ADEQUATE SAFEGUARDS are in place</span></div></div>
+        <div class="item"><div class="num">8</div><div><span class="item-title">Allow individuals easy ACCESS to their information and the org's privacy policy</span></div></div>
+      </div>
+      <div class="info"><strong>Scope:</strong> PIPEDA is FEDERAL and governs private-sector organizations' collection/use/disclosure of personal information. Privacy legislation does NOT apply to information about CORPORATIONS — only individuals. PIPEDA does NOT apply to collection for domestic, journalistic, artistic, or literary purposes.</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">PIPEDA — Permitted Disclosure Situations<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Legal requirement to disclose</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">National security issues</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Personal safety situations</span><span class="item-note">— e.g. where an individual's safety is in serious jeopardy</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Information that is publicly available</span></div></div>
+      </div>
+      <div class="info"><strong>Enforcement:</strong> The PIPEDA Privacy Commissioner decides complaints, can impose fines, and can conduct compliance AUDITS. PIPEDA also creates a RIGHT OF ACTION for individuals to sue an organization for breach of its PIPEDA obligations.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">2 Categories of Provincial Privacy Legislation<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">"Privacy Act" Type — Breach as a TORT</span><span class="item-note">— creates a private right to sue for violation of privacy; typically brief statutes (e.g. Saskatchewan's Privacy Act: only 11 sections — "It is a tort, actionable without proof of damage, for a person wilfully and without a claim of right, to violate the privacy of another.")</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">"PIPA" Type — Breach as a QUASI-CRIMINAL Offence</span><span class="item-note">— Personal Information Protection Act-style statutes, similar in structure to PIPEDA, can carry serious penalties</span></div></div>
+      </div>
+      <div class="info">All provinces/territories have privacy legislation covering collection, access, and correction of personal information, each with a designated COMMISSIONER or OMBUDSPERSON for complaints. Some provinces (e.g. BC) have BOTH a Privacy Act AND a PIPA.</div>
+      <div class="warn"><strong>BC PIPA case (Cruz Ventures / Wild Coyote Club):</strong> Demanding customer information NOT NECESSARY for business operations — and collecting/retaining it — was found to BREACH PIPA, even without further misuse.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">"Reasonable Expectation of Privacy" Test<span class="sec-count">key principle</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="info">Provincial courts often resolve privacy disputes by asking whether the complainant had a REASONABLE EXPECTATION OF PRIVACY in the circumstances. <strong>Example (Richardson v. Davis Wire):</strong> An employer's use of a hidden camera in a lunchroom shared with other employees was found NOT to violate privacy — the employee had no reasonable expectation of privacy in that shared space.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">Anti-Spam Legislation (CASL) — Key Rules<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Express or implied CONSENT required</span><span class="item-note">— to send commercial electronic messages</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Content requirements</span><span class="item-note">— must include sufficient info to allow the recipient to readily CONTACT the sender</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Prohibits causing ANOTHER person's computer to send messages</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Exceptions</span><span class="item-note">— messages between friends/family relations; product recall notices; existing employment relationships; and certain other matters</span></div></div>
+      </div>
+      <div class="warn"><strong>Penalties are severe:</strong> Up to $1 MILLION for individuals and up to $10 MILLION for corporations. Take extreme care before sending unsolicited electronic messages to parties with NO existing relationship — get legal advice if there's any doubt.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 20 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 20 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — Employment Law vs. Labour Law</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 6</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — Employment Law vs. Labour Law (The Agency Model)",
+    text: "In a normal job, you bargain directly with your boss. The second a union forms, that relationship is completely destroyed. The union becomes your exclusive legal agent. Employment law ends, and Labour law takes over. The employer is legally banned from pulling you aside to negotiate a private deal, even if the deal is good for you. Every single discussion must go through the union.",
+    ex: "If you are an engineer in a union, and the CEO offers you a secret $10,000 bonus to work weekends to finish a project, accepting it or even negotiating it is illegal. The CEO must negotiate that bonus directly with your union representative."
+  },
+  {
+    title: "Diagram 2 — The Worker Classification Spectrum",
+    text: "The labor board strictly sorts you into buckets to see if you are allowed to unionize. True independent contractors cannot unionize because teaming up to demand higher wages is illegal price-fixing under anti-competition laws. Dependent contractors and regular employees can unionize. Managers are banned from the union because they discipline the workers, creating a conflict of interest. Most importantly, if you are a licensed professional, your duty to public safety legally overrides any union strike order.",
+    ex: "A union orders all engineers to walk off a dam construction site immediately for a strike. If walking away causes the dam to flood a town, your engineering code of ethics overrides the union. You must stay and secure the dam, even if the union threatens to punish you for crossing the picket line."
+  },
+  {
+    title: "Diagram 3 — Union Security & The Rand Formula",
+    text: "Unions need money to survive. When they negotiate a raise, everyone gets it. To stop people from taking the raise without paying for the work, the law uses the 'Rand Formula'. This forces you to pay union dues even if you refuse to officially join the union. In Canada, courts also allow 'Closed Shops', meaning you literally cannot be hired for the job unless you are already carrying a union membership card.",
+    ex: "You get a job at a unionized factory. You hate unions and refuse to sign the membership card. Under the Rand Formula, you don't have to go to union meetings, but the factory will still automatically deduct 2 percent of your paycheck and give it to the union every month to pay for the collective bargaining they do for you."
+  },
+  {
+    title: "Diagram 4 — Multi-Union Construction & Stoppages",
+    text: "Construction sites are chaotic because they have dozens of rival unions working side-by-side. The biggest threat isn't a strike against the boss; it is a 'Jurisdictional Dispute' where two unions fight over who gets to do a specific task. Because one angry trade can shut down a billion-dollar site, the law makes it strictly illegal to strike over a jurisdictional dispute. The labour board steps in and decides who gets the work based on historical industry practice.",
+    ex: "The plumbers union and the carpenters union both claim it is their exclusive right to install wooden pipe supports. Instead of dropping their tools and shutting down the entire site, they are legally forced to keep working while the labour board reviews past projects and declares which trade gets the task."
+  },
+  {
+    title: "Diagram 5 — The 'Corporate Charade' Shield",
+    text: "Employers constantly try to destroy unions by using corporate shell games. They will bankrupt a unionized company, buy the assets with a brand-new 'non-union' company name, and hire cheaper workers. The law crushes this using the 'Successor and Common Employer' rules. If the same key directors are secretly pulling the strings, or if you just bought the core business, the labour board pierces the corporate veil. They will brutally drag the old union contract and slap it right onto the new company.",
+    ex: "The directors of a unionized paving company shut it down, lay everyone off, change the logo on the trucks to 'New Paving Inc.', and try to hire non-union workers. The labour board sees the same directors are in charge, declares it a 'corporate charade', and legally forces 'New Paving Inc.' to rehire the old union workers at the exact same high union wages."
+  },
+  {
+    title: "Diagram 6 — Grievances, Layoffs, and Arbitrator Power",
+    text: "In a normal job, the boss can fire you for absolutely no reason, as long as they pay you severance money. Under a collective agreement, this power is completely destroyed. The boss can only fire you for 'Just Cause', meaning proven, severe misconduct. If they just run out of money and need to do layoffs, they cannot pick their favorite workers; they are legally forced to lay off the newest people first. If they fire you illegally, a labour arbitrator has the god-like power to force the boss to give you your exact job back.",
+    ex: "A factory manager hates a senior welder and fires him, offering him a $50,000 severance package to go away. In a normal non-union job, that is perfectly legal. But in a union, the arbitrator will refuse the severance, physically reinstate the welder back onto the factory floor the next day, and force the manager to pay him for the days he missed."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 14: Visualizing Dispute Resolution</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.spectrum { border-top-color: #64748b; }
+    .framework-card.litigation { border-top-color: #ef4444; }
+    .framework-card.thirdparty { border-top-color: #f59e0b; }
+    .framework-card.medarb { border-top-color: #8b5cf6; }
+    .framework-card.expert { border-top-color: #10b981; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 14: DEEP DISPUTE RESOLUTION VISUALIZATION</h1>
+
+  <div class="framework-card spectrum">
+    <h2>1. The Dispute Resolution Spectrum</h2>
+    <p>When parties clash, they have four recognized methods to resolve the issue: negotiation, mediation, arbitration, and litigation[cite: 1]. These methods sit on a spectrum ranging from completely voluntary and cheap to completely involuntary and extremely expensive[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Neg[Negotiation] --> Med[Mediation]
+        Med --> Arb[Arbitration]
+        Arb --> Lit[Litigation]
+        
+        style Neg fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Med fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Arb fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Lit fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This spectrum represents the loss of control and the increase in cost[cite: 1].</p>
+      <ul>
+        <li><strong>Negotiation:</strong> Purely voluntary discussion aimed at compromise, leaving the parties in total control[cite: 1]. If it fails, all evidence discussed is privileged and cannot be used in court[cite: 1].</li>
+        <li><strong>Mediation:</strong> Assisted negotiation using a neutral third party[cite: 1]. It is non-binding[cite: 1]. The mediator can meet separately with parties and hear confidential "bottom-line" info to provide a reality check[cite: 1].</li>
+        <li><strong>Arbitration:</strong> A private trial with a chosen judge[cite: 1]. It is voluntary to include in a contract, but once included, one party can force the other to arbitrate[cite: 1]. It offers privacy for trade secrets and allows for a technically expert judge, but it cannot force outside third parties to join unless they agree[cite: 1].</li>
+        <li><strong>Litigation:</strong> The use of the public court system[cite: 1]. It is completely involuntary for the defendant; ignoring it results in a default judgment against them[cite: 1]. It is the most expensive, time-consuming method, often viewed as a last resort[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card litigation">
+    <h2>2. The Litigation Machine</h2>
+    <p>Litigation is a rigid, formalized machine designed to eliminate surprises before the actual trial begins[cite: 1]. A party should not start this machine without understanding the massive cost and delay involved[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Pleadings[1. Pleadings Phase] --> Discovery[2. Discovery Phase]
+        Discovery --> Trial[3. Trial Phase]
+        Trial --> Costs[4. Cost Awards]
+        
+        Pleadings -.->|Notice of Claim & Defence| Doc1(Only docs the judge sees pre-trial)
+        Discovery -.->|Interrogatories & Exams| Doc2(Forces disclosure to prevent surprises)
+        Costs -.->|Loser pays a portion| Doc3(Disincentive for frivolous claims)
+        
+        style Pleadings fill:#e0f2fe,stroke:#0284c7
+        style Discovery fill:#e0f2fe,stroke:#0284c7
+        style Trial fill:#e0f2fe,stroke:#0284c7
+        style Costs fill:#fee2e2,stroke:#dc2626
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps the chronological stages of a lawsuit[cite: 1].</p>
+      <ul>
+        <li><strong>Pleadings:</strong> The plaintiff files a statement of claim outlining the allegations, and the defendant files a statement of defence[cite: 1]. These are the only documents the judge sees before the trial starts[cite: 1].</li>
+        <li><strong>Discovery:</strong> The most document-heavy phase, where parties demand documents, send written interrogatories, and conduct oral cross-examinations (examinations for discovery)[cite: 1]. The goal is to assess strengths and weaknesses to promote settlement and avoid trial surprises[cite: 1].</li>
+        <li><strong>Cost Awards:</strong> The losing party usually has to pay a percentage of the winning party's legal costs[cite: 1]. This rule acts as a strict deterrent against launching frivolous lawsuits[cite: 1]. However, the winner usually only recovers a portion (e.g., one-third) of their actual legal bills[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card thirdparty">
+    <h2>3. The Third-Party Claim & Inconsistent Findings</h2>
+    <p>Construction disputes rarely involve just two people[cite: 1]. If an engineer is sued by an owner, but the engineer believes a supplier caused the error, the engineer must use a "Third-Party Claim" to pull the supplier into the exact same lawsuit[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Owner[Owner / Plaintiff] -->|Sues for Design Error| Engineer[Engineer / Defendant]
+        
+        Engineer -->|Separate Lawsuit Later| Supplier1[Supplier]
+        Engineer -->|Third-Party Claim NOW| Supplier2[Supplier]
+        
+        Supplier1 -.->|Not bound by first trial's facts| Risk[RISK: Inconsistent Findings & Lost Case]
+        Supplier2 -.->|Bound by the main action's facts| Safe[SAFE: All parties judged together]
+        
+        style Owner fill:#f1f5f9,stroke:#64748b
+        style Engineer fill:#fef3c7,stroke:#d97706
+        style Supplier1 fill:#fee2e2,stroke:#dc2626
+        style Supplier2 fill:#dcfce7,stroke:#16a34a
+        style Risk fill:#991b1b,color:#fff
+        style Safe fill:#166534,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This illustrates the lethal danger of fighting multiple, separated lawsuits over the same issue[cite: 1].</p>
+      <ul>
+        <li><strong>The Problem:</strong> If the engineer waits until after they lose to the owner to sue the supplier, the supplier is not bound by anything decided in the first trial because they were not there[cite: 1]. The supplier might introduce new evidence or defences, causing the engineer to lose both lawsuits[cite: 1].</li>
+        <li><strong>The Solution:</strong> The engineer issues a third-party claim inside the original lawsuit[cite: 1]. This binds the supplier to the exact same findings of fact, preventing an inconsistent result[cite: 1].</li>
+        <li><strong>The Arbitration Trap:</strong> Arbitration is private and voluntary, meaning you generally cannot force a third-party supplier into your arbitration with the owner unless the supplier explicitly agreed to it beforehand[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card medarb">
+    <h2>4. The Med-Arb Trap (Case Study 14.1)</h2>
+    <p>Sometimes parties try to be clever by combining Mediation and Arbitration[cite: 1]. They hire one person to act as a Mediator, but agree that if mediation fails, that same person will become the Arbitrator and force a binding decision[cite: 1]. This creates massive structural flaws[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Phase1[Mediation Phase] -->|Fails to Settle| Phase2[Arbitration Phase]
+        
+        Phase1 -.->|Mediator hears private, unchallengeable secrets| Flaw1[Flaw 1: Biased Arbitrator]
+        Phase1 -.->|Parties terrified to share secrets knowing a trial might happen| Flaw2[Flaw 2: Destroyed Candor]
+        
+        style Phase1 fill:#e0f2fe,stroke:#0284c7
+        style Phase2 fill:#fee2e2,stroke:#dc2626
+        style Flaw1 fill:#991b1b,color:#fff
+        style Flaw2 fill:#991b1b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagrams the core lessons of Case Study 14.1 regarding combined Med-Arb clauses[cite: 1].</p>
+      <ul>
+        <li><strong>Biased Arbitrator:</strong> In mediation, the mediator meets privately with each side to hear confidential information[cite: 1]. If that mediator becomes an arbitrator, they possess secret knowledge that the opposing side has no opportunity to challenge[cite: 1].</li>
+        <li><strong>Destroyed Candor:</strong> Mediation only works because it is "off the record," encouraging parties to be radically honest[cite: 1]. If parties know the mediator will soon become the judge who forces a ruling on them, they will hide their weaknesses, destroying the very mechanism that makes mediation succeed[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="framework-card expert">
+    <h2>5. The Expert Witness Rules</h2>
+    <p>Engineers are frequently hired as expert witnesses to explain technical concepts to a judge or arbitrator[cite: 1]. The law treats experts differently than standard witnesses, but imposes strict ethical boundaries[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Expert[Expert Witness] --> Rule1{Must remain neutral?}
+        Expert --> Rule2{Can charge contingent fees?}
+        
+        Rule1 -->|Yes| Good[Helps court understand facts]
+        Rule2 -->|Yes| Bad[Opinion becomes INADMISSIBLE]
+        
+        Bad -.->|Why?| Reason[Creates incentive to put personal/client interest ahead of public interest]
+        
+        style Expert fill:#1e293b,color:#fff
+        style Rule1 fill:#fef3c7,stroke:#d97706
+        style Rule2 fill:#fef3c7,stroke:#d97706
+        style Good fill:#dcfce7,stroke:#16a34a
+        style Bad fill:#fee2e2,stroke:#dc2626
+        style Reason fill:#991b1b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This outlines the legal and ethical guardrails for providing technical testimony[cite: 1].</p>
+      <ul>
+        <li><strong>The Role of the Expert:</strong> Unlike normal witnesses who just state what they saw, experts are allowed to provide <em>opinions</em> because the subject matter is too technical for a non-professional to understand[cite: 1].</li>
+        <li><strong>Strict Neutrality:</strong> An expert cannot act as a "hired gun" advocating for their client[cite: 1]. They must be factual, unbiased, and present the most credible theory, even if that opinion damages the client's case[cite: 1].</li>
+        <li><strong>The Contingent Fee Ban:</strong> An expert must never agree to be paid only if their client wins the case (a contingent fee)[cite: 1]. Doing so provides a strong incentive to abandon neutrality and put personal wealth above the public interest[cite: 1]. If a court discovers a contingent fee arrangement, the expert's testimony will likely be thrown out as inadmissible, and the expert could face professional disciplinary suspension[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

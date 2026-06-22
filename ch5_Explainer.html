@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 5 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 5 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Liability Cascade Across Four Structures</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 8</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Liability Cascade Across Four Structures",
+    text: "Business structures are entirely about who takes the bullet when things go wrong. In a Sole Proprietorship, you and the business are exactly the same; your house is on the line. In a Partnership, you are jointly liable, meaning your partner's catastrophic mistake can drain your personal bank account. A Limited Liability Partnership fixes this by protecting your personal assets from your partner's negligence. Finally, a Corporation puts a total shield around your personal assets, trapping the liability completely inside the company.",
+    ex: "You and a buddy start a standard engineering partnership. Your buddy completely botches a structural design while you are on vacation, and a roof collapses. Even though you did zero work on that project, the client can legally sue you and take your personal vehicle and your savings to pay for your buddy's mistake."
+  },
+  {
+    title: "Diagram 2 — Partnership Formation: You Can Be a Partner Without Knowing It",
+    text: "You do not need to sign a fancy legal document to be in a partnership. The law can force you into one against your will based entirely on your actions. If you and someone else consistently share profits, split costs, and manage an ongoing business together, the law declares you are partners. A single, one-off collaboration won't trigger this, but an ongoing pattern of working together absolutely will.",
+    ex: "You and another engineer rent a cheap office to split the cost. You start helping each other with drafting overflow and splitting the profits from those specific jobs every month, without ever signing a contract. You are now legally a partnership, meaning you are completely liable for their bad engineering advice."
+  },
+  {
+    title: "Diagram 3 — The Limited Partner Trap",
+    text: "A limited partner gets the ultimate sweet deal: they invest money, and their liability is strictly capped at that exact amount. But there is one fatal trap. To keep this shield, they must be totally passive. The exact second a limited partner starts giving management orders, directing the project, or providing engineering services, the shield vaporizes. They instantly become a general partner with unlimited personal liability.",
+    ex: "You invest $10,000 as a limited partner in a startup building automated assembly lines. One day, you walk onto the floor and tell the crew to change the robotics wiring to speed things up. Because you gave a direct management order, you just blew up your limited liability. If the robot breaks and kills someone, you can be sued personally for millions."
+  },
+  {
+    title: "Diagram 4 — Piercing the Corporate Veil",
+    text: "The corporate shield is incredibly strong. People think judges will 'pierce the veil' just because a company is broke and it feels unfair to leave creditors unpaid. That is totally false. A judge will only pierce the corporate veil and attack the owners personally if the company was deliberately set up or used to commit outright fraud. If the company just went bankrupt because of stupid business decisions, the veil holds.",
+    ex: "Your corporation buys $50,000 of CNC tooling but goes bankrupt before paying the invoice. The supplier begs the judge to pierce the veil and make you pay from your personal account because they desperately need the cash. The judge refuses. You were just bad at business, not a fraudster, so your personal bank account stays perfectly safe."
+  },
+  {
+    title: "Diagram 5 — The Fiduciary Duty Enforcement Gap",
+    text: "Company directors owe a strict duty of loyalty, but there is a massive structural flaw in who enforces it. The duty is owed to the corporation, not the shareholders. So, only the corporation can sue a corrupt director. But the corrupt directors are the ones controlling the corporation! To fix this absurd loop, the law created the 'Derivative Action,' which lets oppressed minority shareholders step up and sue the corrupt directors on behalf of the helpless company.",
+    ex: "The CEO of your machine tool company secretly gives a massive, overpriced supply contract to a shell company he personally owns. You only own 5 percent of the shares. The company itself refuses to sue the CEO because the CEO controls the board. You use a derivative action to bypass the board and sue the CEO yourself on behalf of the company."
+  },
+  {
+    title: "Diagram 6 — The Officer/Director Statutory Liability Web",
+    text: "Beyond corporate shields, the government casts a massive web of direct statutory liability over directors. If the company fails to pay wages, ignores environmental rules, skips paying taxes, or violates safety codes, the directors are personally hunted down by the government. The only way to survive is the 'Due Diligence' defense: proving you took active, reasonable steps to prevent the failure. Passive ignorance is never a defense.",
+    ex: "Your manufacturing plant dumps toxic solvent into the local river. As a director, you cannot defend yourself by saying, 'I didn't know the guys on the floor were doing that.' If you didn't proactively set up a strict hazardous waste training protocol, you failed the due diligence test and will be held personally liable for the environmental fines."
+  },
+  {
+    title: "Diagram 7 — Two Imperfect Shields: Indemnity vs Insurance",
+    text: "Directors try to protect themselves with two tools: Corporate Indemnities and D&O Liability Insurance. Both have fatal gaps. An indemnity is just a promise that the company will pay your legal bills, but if the company goes bankrupt, that promise is worthless. Insurance will pay out even if the company is bankrupt, but insurance only covers money. Neither an indemnity nor an insurance policy can serve prison time for you if you commit a criminal offense.",
+    ex: "A worker dies because you criminally ignored safety codes at the machine shop. The company has a massive insurance policy, so the insurance pays the millions of dollars in civil fines to the family. But the government also hits you with criminal negligence causing death. The insurance cannot sit in a jail cell for you; you go to prison."
+  },
+  {
+    title: "Diagram 8 — Insider Trading: The Public Disclosure Timing Test",
+    text: "Insider trading is incredibly simple. It is entirely about timing. It doesn't matter that you know a company secret; what matters is if you trade stocks before the general public finds out. If you buy or sell while the information is still a secret, that is illegal. If you wait until the company announces it on the news, it is perfectly legal to trade. Also, simply telling your friend the secret so they can trade is illegal 'stock tipping.'",
+    ex: "You are an engineer at a tech firm, and you find out your new lithium battery design failed safety testing. You instantly sell all your company stock. That is illegal insider trading. But if you wait until three days after the CEO announces the failure on the public news, you can sell your stock legally, because the secret is already public knowledge."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

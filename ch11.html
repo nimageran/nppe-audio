@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 11: Visual Mechanics — Specific Contracts and Clauses</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.risk { border-top-color: #0ea5e9; }
+    .framework-card.fixed { border-top-color: #dc2626; }
+    .framework-card.costplus { border-top-color: #ca8a04; }
+    .framework-card.gmp { border-top-color: #9333ea; }
+    .framework-card.unit { border-top-color: #16a34a; }
+    .framework-card.cm { border-top-color: #f59e0b; }
+    .framework-card.alliance { border-top-color: #15803d; }
+    .framework-card.field { border-top-color: #64748b; }
+    .framework-card.damages { border-top-color: #ef4444; }
+    .framework-card.exclusion { border-top-color: #0ea5e9; }
+    .framework-card.drp { border-top-color: #9333ea; }
+    .framework-card.bankable { border-top-color: #dc2626; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 11: VISUAL MECHANICS — SPECIFIC CONTRACTS AND CLAUSES</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. Risk Allocation by Payment Method</a>
+    <a href="#d2">2. The Fixed-Price Myth vs Reality</a>
+    <a href="#d3">3. The Cost-Plus Transfer Pricing Trap</a>
+    <a href="#d4">4. GMP Contracts — The Hybrid Mechanism</a>
+    <a href="#d5">5. Unit Price — The Quantity Adjustment Logic</a>
+    <a href="#d6">6. Construction Management — The Conflict-of-Interest Switch</a>
+    <a href="#d7">7. Alliance/IPD — The Shared Risk Pool</a>
+    <a href="#d8">8. Field Review — The Expectation Gap</a>
+    <a href="#d9">9. Penalty vs Liquidated Damages</a>
+    <a href="#d10">10. The Tercon Three-Stage Exclusion Clause Test</a>
+    <a href="#d11">11. The Dispute Resolution Provision — Escalating Stages</a>
+    <a href="#d12">12. What Makes a Contract "Bankable"</a>
+  </div>
+
+
+  <div class="framework-card risk" id="d1">
+    <h2>1. Risk Allocation by Payment Method</h2>
+    <p>The chapter's core organizing idea is that payment method ISN'T just about how money flows — it's actually a risk allocation device. This diagram lines up the three core payment-based contract types on a single spectrum to show who absorbs cost risk in each.</p>
+
+    <div class="mermaid">
+      graph LR
+        Fixed[FIXED-PRICE /<br/>STIPULATED SUM<br/>Lump sum, includes<br/>overhead + profit] --> FixedRisk[CONTRACTOR bears<br/>cost overrun risk —<br/>but KEEPS savings<br/>from efficiency]
+
+        Unit[UNIT PRICE<br/>Paid per unit<br/>regardless of actual<br/>cost per unit] --> UnitRisk[SHARED —<br/>contractor bears unit-cost<br/>risk, owner bears<br/>QUANTITY risk]
+
+        CostPlus[COST-PLUS /<br/>COST REIMBURSABLE<br/>Actual costs + fee<br/>for overhead/profit] --> CostRisk[OWNER bears<br/>cost risk —<br/>contractor has<br/>LITTLE incentive<br/>to control costs]
+
+        style Fixed fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Unit fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style CostPlus fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style FixedRisk fill:#dcfce7,stroke:#16a34a
+        style UnitRisk fill:#fef3c7,stroke:#d97706
+        style CostRisk fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Reading these three side by side rather than as separate definitions reveals the real pattern: as you move from fixed-price to cost-plus, the RISK OF UNKNOWN COSTS systematically shifts from contractor to owner, while the contractor's INCENTIVE to be efficient moves in the opposite direction. Fixed-price gives the contractor maximum incentive to control costs (they keep the difference) but also maximum exposure if they estimated wrong. Cost-plus removes that exposure entirely, but the chapter is blunt about the tradeoff — a contractor "has no incentive to save money for the owner, other than the prospect of repeat business and a sense of ethics," and may even be incentivized to INFLATE costs if the fee is percentage-based. Unit price sits in the middle because it isolates ONE specific kind of uncertainty (quantity) while still pricing each unit firmly, which is exactly why it's the standard choice for projects like road-building where total volume is uncertain but unit cost is predictable.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fixed" id="d2">
+    <h2>2. The Fixed-Price Myth vs Reality</h2>
+    <p>"Fixed price" sounds like a literal guarantee, and many owners budget as if it were one. This diagram contrasts that belief against what actually happens on real projects, and shows the two genuinely different ways a sophisticated owner can use fixed pricing well.</p>
+
+    <div class="mermaid">
+      graph TD
+        Belief[OWNER BELIEF:<br/>'Fixed price' means the<br/>price truly stays fixed<br/>throughout the project] --> BadBudget[Owner budgets<br/>accordingly with<br/>NO contingency]
+
+        Reality[REALITY: change orders<br/>from scope changes,<br/>design errors, changed<br/>conditions ALMOST<br/>ALWAYS occur] --> PriceShifts[Final price ends up<br/>looking VERY different<br/>from the original]
+
+        BadBudget --> Crisis[Owner faces a<br/>FINANCIAL CRISIS<br/>by project end]
+        PriceShifts --> Crisis
+
+        Sophisticated[SOPHISTICATED OWNER<br/>understands: fixed price is<br/>just a STARTING POINT] --> Choice{How to handle<br/>unknowable risks?}
+
+        Choice --> C1[Make contractor price IN<br/>contingencies for unknowns<br/>e.g. subsurface conditions —<br/>OFTEN costs MORE long-run<br/>than the actual risk]
+        Choice --> C2[Owner retains some risk,<br/>budgets a REALISTIC<br/>contingency separately]
+
+        style Belief fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Crisis fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Sophisticated fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Choice fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diagram is split top-to-bottom into "what naive owners assume" versus "what sophisticated owners understand," because the chapter frames this exact gap as the single biggest practical risk in fixed-price contracting — not the contract TYPE itself, but the MISUNDERSTANDING of what it actually guarantees. The bottom "Choice" diamond captures a genuinely counterintuitive point: forcing a contractor to price every unknowable risk into a fixed number isn't automatically the prudent move, because contractors will reasonably pad pricing for true unknowns (like subsurface conditions), and that padding can exceed the ACTUAL eventual cost of the risk materializing. A sophisticated owner sometimes does better by accepting some risk directly rather than paying a stranger to absorb uncertainty they can't accurately price either.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card costplus" id="d3">
+    <h2>3. The Cost-Plus Transfer Pricing Trap</h2>
+    <p>This diagram walks through the chapter's own trailer example step by step, because the mechanism only becomes obvious once you trace exactly how money moves and who ends up owning what at the end.</p>
+
+    <div class="mermaid">
+      graph TD
+        Need[Contractor needs an<br/>office trailer for a<br/>12-MONTH project] --> Option{Two ways to<br/>get the trailer}
+
+        Option --> RentOutside[OPTION A: Rent from<br/>an OUTSIDE source<br/>— owner pays rental fee,<br/>contractor owns nothing<br/>after the project]
+        Option --> BuySelf[OPTION B: Contractor<br/>PURCHASES the trailer,<br/>then 'rents' it to the<br/>project under the<br/>cost-plus agreement]
+
+        BuySelf --> Reimbursed[Owner reimburses the<br/>'rental' cost under<br/>cost-plus terms —<br/>same as Option A<br/>on paper]
+        Reimbursed --> EndState[AFTER 12 MONTHS:<br/>Owner has paid roughly<br/>the FULL PURCHASE PRICE<br/>— but CONTRACTOR<br/>OWNS the trailer]
+
+        EndState --> WhyHappens{Why does this<br/>happen?}
+        WhyHappens --> NoControl[Owner failed to exercise<br/>COST CONTROL or never<br/>built a CONTRACTUAL<br/>mechanism to prevent it]
+
+        style Need fill:#1e293b,color:#fff
+        style BuySelf fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style EndState fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style NoControl fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Comparing Option A and Option B side by side, even though they look financially IDENTICAL to the owner on a month-to-month invoice, is exactly how this trap stays hidden until the project ends — the owner's monthly cash outflow doesn't change, but the END STATE is completely different: in one scenario nobody owns anything extra, in the other the contractor walks away with a physical asset the owner essentially paid for. This is the textbook definition of "transfer pricing" risk in a cost-plus context, and the diagram's final box is the real lesson: this isn't really a flaw of cost-plus contracting as a concept, it's a flaw of cost-plus contracting WITHOUT active cost oversight — the fix isn't avoiding cost-plus entirely, it's building in contractual cost-control mechanisms (audit rights, pre-approval for purchases, defined "cost" terms) from the start.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card gmp" id="d4">
+    <h2>4. GMP Contracts — The Hybrid Mechanism</h2>
+    <p>A Guaranteed Maximum Price contract is described as a "hybrid," but that word alone doesn't show HOW the hybrid actually works. This diagram traces what happens to costs as they grow, showing the exact point where GMP behavior switches from cost-plus-like to fixed-price-like.</p>
+
+    <div class="mermaid">
+      graph LR
+        Start[Project begins<br/>under GMP /<br/>Target Price contract] --> BelowTarget{Actual cost vs<br/>TARGET price}
+
+        BelowTarget -->|Costs come in<br/>BELOW target| Savings[SAVINGS split between<br/>owner and contractor<br/>per formula — e.g.<br/>50/50 or 60/40]
+        BelowTarget -->|Costs EXCEED<br/>the target| Capped{Behavior switches:<br/>now acts like a<br/>FIXED-PRICE contract}
+
+        Capped --> OwnerProtected[OWNER PROTECTED:<br/>total price will NOT<br/>exceed the GMP —<br/>contractor absorbs<br/>the excess]
+
+        Savings --> AuditRight[Owner RETAINS audit<br/>rights over contractor's<br/>costs — cost-plus<br/>DNA still present]
+        OwnerProtected --> AuditRight
+
+        style Start fill:#1e293b,color:#fff
+        style BelowTarget fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Savings fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style OwnerProtected fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style AuditRight fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diamond in the middle is the entire concept of "hybrid" made concrete — below the target, the contract behaves like a cost-plus arrangement with a profit-sharing twist (both parties want costs low because both share in the savings); above the target, it behaves exactly like a fixed-price contract (contractor eats the overage, owner's exposure is capped). This explains precisely why the chapter says GMP contracts give owners "the primary advantage of a fixed-price contract" — that's only true ABOVE the target line; below it, the dynamics are genuinely different. The audit-right box at the bottom is the detail that completes the picture: even though GMP looks fixed-price-like from the cap's perspective, the owner still needs cost-plus-style oversight tools (the right to audit cost claims) specifically to verify the contractor isn't manipulating reported costs to inflate its claimed share of "savings."</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card unit" id="d5">
+    <h2>5. Unit Price — The Quantity Adjustment Logic</h2>
+    <p>Unit price contracts feel simple — price times quantity — until quantities shift dramatically from the original estimate. This diagram shows why large swings in EITHER direction create real cost consequences that a flat per-unit price doesn't capture on its own.</p>
+
+    <div class="mermaid">
+      graph TD
+        Estimate[Original quantity<br/>ESTIMATE in the contract] --> Actual{How much does<br/>ACTUAL quantity<br/>deviate?}
+
+        Actual -->|Within normal range| NoAdjust[Standard per-unit<br/>price applies —<br/>no issue]
+        Actual -->|SIGNIFICANTLY<br/>LOWER than estimated| LowQty[Contractor has FEWER<br/>units to spread fixed<br/>MOBILIZATION costs<br/>across — under-recovers<br/>fixed costs]
+        Actual -->|SIGNIFICANTLY<br/>HIGHER than estimated| HighQty[Contractor's per-unit<br/>OVERHEAD may drop —<br/>but may also face<br/>INCLEMENT WEATHER or<br/>other added costs<br/>doing the extra work]
+
+        LowQty --> Formula{Does the contract contain<br/>an ADJUSTMENT FORMULA<br/>for quantity swings beyond<br/>a stated percentage?}
+        HighQty --> Formula
+
+        Formula -->|Yes| Adjusted[Per-unit price ADJUSTS —<br/>fair to both parties]
+        Formula -->|No| Dispute[Risk of a CHANGED<br/>CONDITIONS CLAIM]
+
+        style Estimate fill:#1e293b,color:#fff
+        style Actual fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Formula fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Adjusted fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Dispute fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two "significantly" branches deliberately show that BOTH directions of quantity change create cost problems, just different ones — this is the part of unit pricing people most often get wrong by assuming only a quantity INCREASE could possibly hurt a contractor. A quantity decrease is just as real a risk because fixed costs like mobilization don't shrink proportionally — fewer units means each remaining unit has to absorb a bigger slice of those fixed costs, effectively eating into the contractor's margin even though the per-unit PRICE never changed. The chapter's separate warning about the arena seating example connects directly to this same diagram from the OTHER side: a contractor who inflates a unit price (anticipating they'll need to ADD units) can get burned if the owner instead chooses to DELETE units at that same inflated price, so unit pricing has to be set honestly in BOTH directions, not strategically padded assuming only one direction of change will occur.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card cm" id="d6">
+    <h2>6. Construction Management — The Conflict-of-Interest Switch</h2>
+    <p>A construction manager's basic job is to oversee trades on the owner's behalf. This diagram shows exactly what breaks structurally the moment that same construction manager also starts performing construction work themselves.</p>
+
+    <div class="mermaid">
+      graph TD
+        Pure[PURE CONSTRUCTION<br/>MANAGEMENT —<br/>CCDC 5A] --> PureRole[CM does NO physical work —<br/>acts purely as OWNER'S<br/>AGENT overseeing all trades]
+        PureRole --> Clean[CLEAN STRUCTURE:<br/>CM has no stake in any<br/>trade's performance —<br/>objective oversight]
+
+        Hybrid[CM ALSO PERFORMS<br/>some construction work<br/>— CCDC 5B, 'at-risk'] --> HybridRole{CM is now BOTH:<br/>overseer of trades<br/>AND a trade<br/>performing work}
+
+        HybridRole --> SelfOversight[CM ends up<br/>OVERSEEING ITS OWN<br/>WORK on the<br/>owner's behalf]
+        SelfOversight --> ConflictBox[STRUCTURAL CONFLICT<br/>OF INTEREST — same<br/>party judging its<br/>own performance]
+
+        ConflictBox --> Resolution{Can this be<br/>managed?}
+        Resolution -->|Yes, IF| Disclosed[Owner UNDERSTANDS<br/>and AGREES to the<br/>implications upfront]
+
+        style Pure fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Clean fill:#dcfce7,stroke:#16a34a
+        style Hybrid fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style ConflictBox fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Disclosed fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two top branches show the SAME role title ("construction manager") producing structurally opposite relationships depending on one fact: does the CM touch any physical construction work itself? In the pure model, the CM has no stake in any trade's outcome, which is precisely what makes it a clean, low-conflict oversight arrangement. The moment the CM becomes "at-risk" and starts performing some of the actual construction (the CCDC 5B scenario), the CM is now positioned to oversee and effectively grade its own work — a structural conflict that exists regardless of how honest or competent that specific CM happens to be. The bottom resolution box reflects the chapter's actual answer to its own chapter question on this exact topic: this conflict doesn't make the hybrid model illegal or automatically improper, it just means the owner needs to go in with eyes open and explicitly accept that tradeoff, rather than assuming they're getting the same objective oversight a pure CM arrangement would provide.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card alliance" id="d7">
+    <h2>7. Alliance/IPD — The Shared Risk Pool</h2>
+    <p>Alliance agreements and Integrated Project Delivery both try to solve the SAME underlying problem — adversarial relationships between project parties — using the same core mechanism. This diagram isolates that shared mechanism and shows where it breaks down.</p>
+
+    <div class="mermaid">
+      graph TD
+        Problem[Traditional contracts create<br/>ADVERSARIAL relationships —<br/>each party optimizes for<br/>its OWN risk/reward] --> Solution{Alliance/IPD<br/>Solution}
+
+        Solution --> NoBlame[NO-BLAME CLAUSE —<br/>parties agree NOT to sue<br/>each other for poor<br/>performance/defects]
+        Solution --> SharedPool[SHARED RISK/REWARD POOL<br/>— gainshare/painshare based<br/>on PROJECT-WIDE success,<br/>not individual performance]
+
+        NoBlame --> Aligned[Incentives ALIGNED:<br/>everyone wins together<br/>or loses together]
+        SharedPool --> Aligned
+
+        Aligned --> Limit{Where does this<br/>STILL go wrong?}
+        Limit --> L1[Owner still bears risk of<br/>team failure ABOVE the<br/>profit pool — no guarantee<br/>of staying on budget]
+        Limit --> L2[Delayed performance risk<br/>remains DIFFICULT to<br/>allocate]
+        Limit --> L3[Maintaining PROFESSIONAL<br/>LIABILITY INSURANCE access<br/>creates a COMPLEX<br/>contractual matrix —<br/>insurers expect to know<br/>who's liable for what]
+
+        style Problem fill:#1e293b,color:#fff
+        style Solution fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Aligned fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Limit fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two-part "Solution" box exists because alliance/IPD agreements rely on BOTH mechanisms working together, not either alone — removing blame (no-blame clause) without also sharing financial outcomes (gainshare/painshare) would just mean nobody bears consequences for poor work, while sharing financial outcomes without removing blame would still leave the door open to litigation undermining the collaborative spirit. The "Limit" branch at the bottom matters because the chapter is explicit that there's "no perfect form of delivery method" — the L3 box specifically flags a real practical tension worth remembering: insurance fundamentally depends on being able to identify WHO is liable for WHAT, while alliance/IPD's whole design philosophy is to blur exactly that line for collaborative reasons, creating a genuine structural friction between the contract's design goals and how professional liability insurance actually works.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card field" id="d8">
+    <h2>8. Field Review — The Expectation Gap</h2>
+    <p>Disputes over field review clauses happen because two parties read the SAME words and walk away with two fundamentally different mental models of what's being promised. This diagram puts those two mental models side by side.</p>
+
+    <div class="mermaid">
+      graph TD
+        Clause[Contract contains a<br/>field review/inspection<br/>clause] --> ClientView{CLIENT'S MENTAL MODEL}
+        Clause --> ProfView{PROFESSIONAL'S<br/>MENTAL MODEL}
+
+        ClientView --> CV1[Expects professional to be<br/>a GUARANTOR — 'inspection'<br/>means confirming work is<br/>FULLY in accordance<br/>with the contract]
+
+        ProfView --> PV1[Intends periodic review for<br/>GENERAL CONFORMANCE only<br/>— not continuous,<br/>not exhaustive]
+
+        CV1 --> Gap{THE GAP}
+        PV1 --> Gap
+
+        Gap --> Unreasonable1[Client's expectation is<br/>UNREASONABLE: full<br/>guarantee would require<br/>enormous cost/review,<br/>even if humanly possible]
+        Gap --> Unreasonable2[Professional's expectation<br/>is ALSO unreasonable if it<br/>means choosing review level<br/>AND only being responsible<br/>for what was 'noticed']
+
+        Unreasonable1 --> Middle[RESOLUTION: balance<br/>sits SOMEWHERE IN<br/>THE MIDDLE — both<br/>parties must address this<br/>explicitly BEFORE signing]
+        Unreasonable2 --> Middle
+
+        style Clause fill:#1e293b,color:#fff
+        style Gap fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Middle fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diagram deliberately refuses to declare either party simply "right," because the chapter itself doesn't — it explicitly criticizes BOTH extreme positions. The client's "guarantor" expectation fails because true comprehensive guarantee-level inspection is cost-prohibitive and arguably impossible to deliver perfectly even with unlimited budget. But the professional's opposite extreme — claiming sole discretion over review level AND limiting responsibility only to defects actually noticed — is flagged as equally unreasonable, since it would let a professional effectively define away their own liability. The "Middle" box is the chapter's actual prescription, and it doubles as practical drafting advice: this expectation gap is foreseeable and common enough that it should be explicitly negotiated and written into the contract BEFORE signing, rather than left to be litigated after a dispute arises over what "periodic review" or "general conformance" was actually supposed to mean.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card damages" id="d9">
+    <h2>9. Penalty vs Liquidated Damages</h2>
+    <p>These two clause types can look almost identical on the page — both specify a dollar amount tied to late performance — but only one is enforceable in Canada. This diagram isolates the single test that separates them.</p>
+
+    <div class="mermaid">
+      graph TD
+        Clause[Contract specifies a $<br/>amount for late<br/>performance] --> Test{HOW was the<br/>amount determined?}
+
+        Test -->|Amount is an ACCURATE<br/>PRE-ESTIMATE of actual<br/>likely damages| Liquidated[LIQUIDATED DAMAGES<br/>— ENFORCEABLE]
+        Test -->|Amount is an ARBITRARY<br/>punishment chosen to<br/>incentivize performance| Penalty[PENALTY CLAUSE<br/>— UNENFORCEABLE]
+
+        Liquidated --> Rule[GENERAL RULE: the<br/>liquidated amount is<br/>AWARDED regardless of<br/>whether actual damages<br/>turn out higher or lower]
+
+        Myth{URBAN MYTH:<br/>'must have a matching<br/>EARLY-performance<br/>bonus clause'} --> NoSuchRule[NO SUCH REQUIREMENT<br/>exists in Canadian law —<br/>liquidated damages clauses<br/>are valid WITHOUT a<br/>bonus clause]
+
+        style Clause fill:#1e293b,color:#fff
+        style Test fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Liquidated fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Penalty fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Myth fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style NoSuchRule fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The single diamond at the top is the ENTIRE legal test, and it's worth noting how narrow it is — it's not about the SIZE of the number, it's purely about the METHODOLOGY behind choosing it. A clause setting damages at "$10,000/day" could be either liquidated damages or a penalty depending entirely on whether that number reflects genuine pre-estimated harm or was just picked to scare the contractor into compliance, which is exactly why the chapter advises parties to keep and retain the CALCULATION showing how a liquidated amount was derived — that calculation is the evidence that proves which category the clause falls into if it's ever challenged. The myth box at the bottom is included as its own separate diagram element because it's explicitly called out as a common misconception, and it tests cleanly as a standalone fact: a liquidated damages clause needs no symmetrical bonus clause to remain valid, the "fairness" of including one is a business choice, not a legal requirement.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card exclusion" id="d10">
+    <h2>10. The Tercon Three-Stage Exclusion Clause Test</h2>
+    <p>An exclusion clause being present in a contract doesn't automatically mean it will be enforced. Tercon gives a precise sequential test, and this diagram shows that a clause can fail at any one of three stages even after surviving the previous ones.</p>
+
+    <div class="mermaid">
+      graph TD
+        Clause[Exclusion clause<br/>exists in the contract] --> Stage1{STAGE 1: Does the clause,<br/>as worded, APPLY to<br/>these exact circumstances?}
+
+        Stage1 -->|No — clause doesn't<br/>cover this situation,<br/>OR ambiguous, construed<br/>against the drafter| Fails1[CLAUSE DOES NOT APPLY<br/>— claim proceeds normally]
+        Stage1 -->|Yes, clearly applies| Stage2{STAGE 2: Was the clause<br/>UNCONSCIONABLE at the<br/>time the contract<br/>was made?}
+
+        Stage2 -->|Yes| Fails2[CLAUSE UNENFORCEABLE<br/>— unconscionability]
+        Stage2 -->|No| Stage3{STAGE 3: Should the<br/>COURT OVERRIDE the<br/>clause for PUBLIC<br/>POLICY reasons?}
+
+        Stage3 -->|Yes| Fails3[CLAUSE OVERRIDDEN<br/>— public policy]
+        Stage3 -->|No| Enforced[CLAUSE IS<br/>ENFORCED IN FULL]
+
+        style Clause fill:#1e293b,color:#fff
+        style Stage1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Stage2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Stage3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Enforced fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style Fails1 fill:#e0f2fe,stroke:#0284c7
+        style Fails2 fill:#fee2e2,stroke:#dc2626
+        style Fails3 fill:#fee2e2,stroke:#dc2626
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The chain structure makes a point that's easy to lose in prose: passing stage 1 (the clause clearly covers this scenario) is necessary but absolutely not sufficient — a perfectly clear, perfectly applicable clause can still be struck down at stage 2 or stage 3 for reasons that have nothing to do with whether the wording covers the situation. Stage 1 connects directly to the B.G. Linton principle (a clause drafted clearly enough leaves "no doubt about its meaning" and gets full effect, but ambiguity gets construed against whoever drafted it — the contra proferentem rule). Stages 2 and 3 are where the Coles v. Clarenville case actually lives: that clause may well have clearly covered the situation (stage 1 pass), but the court still found ways to avoid enforcing it given the circumstances of a fundamental breach depriving the plaintiff of substantially the whole benefit of the contract — illustrating that clear drafting alone is not a guarantee of enforceability.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card drp" id="d11">
+    <h2>11. The Dispute Resolution Provision — Escalating Stages</h2>
+    <p>A typical contractual dispute resolution clause isn't one mechanism — it's a sequence of escalating stages, each with its own timing rules, and a claimant can get knocked out early if procedural requirements aren't followed.</p>
+
+    <div class="mermaid">
+      graph LR
+        Trigger[Potential claim<br/>identified] --> Notice{NOTICE OF CLAIM —<br/>given within a<br/>REASONABLE TIME}
+
+        Notice -->|Notice MISSED or late| Barred[CLAIM MAY BE<br/>PROCEDURALLY BARRED<br/>— strict time limits<br/>are common]
+        Notice -->|Notice given properly| Negotiate[NEGOTIATION STAGE<br/>— time-constrained,<br/>may or may not require<br/>GOOD FAITH]
+
+        Negotiate --> Settled{Settled?}
+        Settled -->|Yes| Binding[BINDING<br/>SETTLEMENT]
+        Settled -->|No| Referee[REFEREE PROCESS<br/>— may or may not<br/>be binding]
+
+        Referee --> StillUnresolved{Still<br/>unresolved?}
+        StillUnresolved -->|Yes, and clause<br/>requires it| Arbitration[BINDING ARBITRATION —<br/>if contractually required,<br/>generally CANNOT go<br/>to court instead]
+
+        style Trigger fill:#1e293b,color:#fff
+        style Notice fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Barred fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Arbitration fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "Barred" box is placed right at the very first gate deliberately — it's the most consequential and most commonly overlooked failure point in this whole sequence, since a party can have a completely valid underlying claim and still lose simply by missing a notice deadline, before the substance of the dispute is ever even discussed. The chapter's rationale for strict notice timing matters here too: the other party wants the CHANCE to remedy or mitigate the issue early, rather than being informed of a claim only after the relevant remedial window has closed. The arbitration box at the end carries a separate, important warning from the chapter: a MANDATORY arbitration clause can force a multi-party dispute into a SINGLE forum with only the two original contracting parties, even when the real dispute genuinely involves other project participants — which is exactly why the chapter says many lawyers actively dislike mandatory arbitration clauses despite arbitration remaining freely available by mutual agreement at any time, mandatory or not.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card bankable" id="d12">
+    <h2>12. What Makes a Contract "Bankable"</h2>
+    <p>"Bankability" sounds like a vague lender preference, but it's actually a specific, checkable property of a contract's risk allocation. This diagram shows what a lender is really testing for, and why the consultant has a direct role in achieving it.</p>
+
+    <div class="mermaid">
+      graph TD
+        Lender[Lender evaluating<br/>whether to finance<br/>the project] --> Question{Will the borrower be<br/>able to REPAY the loan<br/>even if difficulties<br/>are encountered?}
+
+        Question --> Sufficient{Does the borrower have<br/>SUFFICIENT ASSETS or<br/>ASSURED CASH FLOW<br/>already?}
+        Sufficient -->|Yes| Simple[Lender simply takes<br/>SECURITY on that<br/>property/cash flow —<br/>bankability less of an issue]
+        Sufficient -->|No| NeedBankable[Lender needs the<br/>CONTRACTS THEMSELVES<br/>to provide assurance —<br/>'bankability' becomes<br/>critical]
+
+        NeedBankable --> ConsultantRole{Consultant's role<br/>in achieving this}
+        ConsultantRole --> R1[Feasibility study]
+        ConsultantRole --> R2[Design that meets<br/>project needs]
+        ConsultantRole --> R3[Contract documents<br/>drafted to be<br/>'bankable']
+        ConsultantRole --> R4[Contract administration<br/>— may include<br/>reporting to lender]
+
+        R3 --> RiskCheck{Is risk allocated to<br/>parties BEST able<br/>to bear it —<br/>insurers, bonding<br/>companies?}
+        RiskCheck -->|Yes| Bankable[CONTRACT IS<br/>BANKABLE — debt<br/>protected even if<br/>problems arise]
+        RiskCheck -->|No| NotBankable[Lender sees<br/>unacceptable risk —<br/>financing harder<br/>to obtain]
+
+        style Lender fill:#1e293b,color:#fff
+        style Question fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style NeedBankable fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Bankable fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style NotBankable fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "Sufficient assets?" diamond near the top exists to sharpen exactly WHEN bankability becomes a critical concept at all — the chapter is explicit that bankability matters specifically "when the borrower does not have sufficient assets or assured cash flow," because if they did, the lender wouldn't need to scrutinize the contract web this closely; they'd just take a direct security interest in something tangible. Once bankability IS the relevant concern, the diagram traces the consultant's four concrete contributions to it, which is worth remembering because it reframes the engineer/architect's role beyond pure technical design — feasibility studies and contract administration are explicitly part of the FINANCING process, not just the construction process. The final risk-allocation diamond connects this whole chapter back to Chapters 16 and 17: a lender's comfort ultimately depends on seeing risk pushed toward parties built to absorb it (insurers, bonding companies) rather than left sitting on the borrower or the project itself, which is the same underlying risk-shifting logic running through the entire chapter's payment-method discussion in diagram 1.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

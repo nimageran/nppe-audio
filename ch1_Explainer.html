@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 1 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Division of Powers</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 11</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Division of Powers",
+    text: "Before you argue about a law, you must know which level of government is legally allowed to write it. The federal government handles big national issues like criminal law and patents. The provincial governments handle almost all private business law, including contracts, negligence, liens, and the regulation of engineers. The only major exceptions where the federal government controls business law are competition law, like bid-rigging, and labor law for specific industries like airlines.",
+    ex: "If you sign a contract to build a warehouse in Winnipeg, provincial laws govern the deal. But if you try to illegally rig the bidding process with a competitor, the federal government arrests you under the national Competition Act."
+  },
+  {
+    title: "Diagram 1b — Territories vs Provinces",
+    text: "Legally, territories and provinces are different. Provinces get their power directly from the Constitution, while territories only get their power because the federal government temporarily delegates it to them. However, practically speaking, you can ignore this difference. Territorial governments pass laws regulating engineers and contracts that act exactly the same as provincial laws.",
+    ex: "If you move to the Yukon to manage a mine, you must register with the Yukon's engineering association and follow their territorial building acts, exactly as if you were working in Ontario."
+  },
+  {
+    title: "Diagram 2 — The Federal-Provincial Conflict Rule",
+    text: "When a federal law and a provincial law touch on the same topic, they usually both apply. But if there is a direct operational conflict—meaning it is physically impossible to obey both laws at the same time—the federal law automatically crushes the provincial law. This is a strict constitutional override.",
+    ex: "A province passes a law saying all environmental reports must be kept strictly secret. A federal law demands those exact same reports be published online. Because you cannot simultaneously hide and publish the report, the federal law wins, and you must publish it."
+  },
+  {
+    title: "Diagram 3 — The Canadian Court Hierarchy",
+    text: "Canada has different levels of courts, but the provincial systems are totally independent from each other. At the bottom are provincial courts handling small claims. In the middle are superior trial courts, which have 'inherent jurisdiction'—meaning they have deep historical powers to force people to do things even without a specific modern statute. At the top are courts of appeal. Because systems are independent, an Ontario judge has zero power to order a Manitoba bank to do anything.",
+    ex: "You sue a client for $15,000 of unpaid CAD drafting work and go to the lower Small Claims Court. If you sue for $5 million over a factory fire, you must go to the Superior Court. If the client lives in Alberta, you cannot use a Manitoba court to automatically seize their Calgary assets without filing extra paperwork across the border."
+  },
+  {
+    title: "Diagram 4 — The Supreme Court Leave-to-Appeal Gate",
+    text: "If you lose a massive lawsuit at your provincial Court of Appeal, you do not have an automatic right to complain to the Supreme Court of Canada. You must first beg them for permission, which is called asking for 'leave.' The Supreme Court will instantly reject your request unless your case proves a point of national importance. Most engineering and construction disputes are just fights over money and never pass this gate.",
+    ex: "Your firm loses a brutal $10 million lawsuit over a cracked foundation and the provincial Court of Appeal rules against you. You try to appeal to the Supreme Court. They reject your application in two minutes because a cracked foundation in one city is not a matter of national importance."
+  },
+  {
+    title: "Diagram 5 — The Charter: Government Acts Only",
+    text: "People falsely assume the Charter of Rights and Freedoms protects them from everything. It does not. The Charter only restrains the government. It protects you from the police, the military, or federal lawmakers. It does absolutely nothing to protect you from private companies or other individuals. If a private company discriminates against you, you must use provincial Human Rights statutes, not the Charter.",
+    ex: "If the government passes a law saying engineers cannot practice certain religions, the Charter strikes the law down immediately. But if your private engineering firm fires you because of your religion, the Charter is useless; you must sue them under the provincial Human Rights Code."
+  },
+  {
+    title: "Diagram 6 — Statute Law vs Common Law",
+    text: "Canadian law is fed by two rivers. Statutes are written by politicians. Common Law is built from centuries of decisions made by judges. Officially, judges just 'interpret' what the politicians wrote in the statutes. Practically, when a judge interprets a vague statute, they are unavoidably creating new rules and expanding the law. Where politicians haven't written any statutes at all, like in basic contract formation, judge-made common law rules everything.",
+    ex: "Politicians write a vague statute saying 'all major builders must be licensed.' A judge later rules that software engineers programming robotic assembly lines count as 'major builders.' The judge just used common law interpretation to expand the political statute's reach."
+  },
+  {
+    title: "Diagram 7 — Common Law vs Civil Law: Why Quebec is Different",
+    text: "Most of Canada uses English Common Law, built on past judge decisions. Quebec uses the French Civil Law system, which relies on a massive, comprehensive book called the Civil Code. However, this difference only applies to private business law, like contracts and negligence. For federal matters like criminal law and patents, Quebec uses the exact same law as the rest of Canada. Ultimately, the basic outcomes of a business dispute in Quebec are usually very similar to the rest of Canada.",
+    ex: "If you patent a new high-pressure valve in Montreal, the federal patent rules are exactly the same as in Winnipeg. But if you get sued for breaching a supplier contract in Montreal, the judge will look up the specific rules in the Civil Code of Quebec, rather than looking at old English case law."
+  },
+  {
+    title: "Diagram 8 — Contract vs Tort: The Voluntary/Involuntary Split",
+    text: "The two biggest areas of law you will face are contracts and torts. A contract is entirely voluntary; you chose to sign it and take on the obligation. A tort, like negligence, is completely involuntary; the law forces you to be careful whether you agreed to it or not. If you mess up badly enough, a client can sue you for both at the exact same time.",
+    ex: "You sign a contract to build a conveyor belt. You carelessly bolt it together, and it explodes, injuring the factory owner. The owner sues you for breach of contract because you broke your voluntary promise to build it properly, AND they sue you in tort for negligence because the law forces you not to blow people up."
+  },
+  {
+    title: "Diagram 9 — NAFTA TN Visa: Right to Work vs Right to Practise",
+    text: "Getting legal authorization to enter a country to work is completely different from getting legal authorization to practice engineering. They are two totally separate locked doors. A NAFTA TN Visa is a federal immigration tool; it simply means the border guards will not deport you. It gives you zero right to actually stamp a blueprint until you pass the specific licensing requirements of the local state engineering board.",
+    ex: "You get a TN Visa to move to Texas. That just means you are allowed to live and work there. If you immediately start offering public engineering services without passing the Texas Board of Professional Engineers licensing exam, you are committing a crime and will be prosecuted."
+  },
+  {
+    title: "Diagram 10 — Decoding a Case Citation",
+    text: "When lawyers reference past cases, they use a specific code to tell you exactly where to find the document. The older style points to a physical book; it lists the year, the volume number, the printed reporting series, and the page number. The newer 'neutral' style points to digital records; it simply lists the year, the specific court, and the chronological decision number for that year.",
+    ex: "You read a textbook citing '2000 SCC 60'. You don't need to hunt through a physical law library. That simple code tells you it was the 60th decision published digitally by the Supreme Court of Canada in the year 2000, and you can pull it up online instantly."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

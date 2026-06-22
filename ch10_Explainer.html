@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 10 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 10 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — Choosing a Process</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 10</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — Choosing a Process: Matching Method to Project Need",
+    text: "Picking the right procurement process is critical. If you only care about the absolute lowest price, use a formal Tender, where you accept the cheapest bid without negotiating. If you care more about the quality of the solution and want to negotiate with the top candidates, use an RFP (Request for Proposals). Do not confuse these two, because mixing up a strict Tender with a flexible RFP causes massive legal liability.",
+    ex: "You need exactly 500 standard steel pipes. You use a Tender, picking the cheapest supplier without arguing. But if you need a custom robotics sorting system, you use an RFP, so you can review three different designs and negotiate the final software features before signing the contract."
+  },
+  {
+    title: "Diagram 2 — The Contract A / Contract B Formation Mechanism",
+    text: "Tendering law revolves around a unique mechanical trap. When an owner issues a call for bids, and contractors submit compliant bids, a small, binding contract instantly forms with each compliant bidder. This is called Contract A. If five compliant contractors bid, five separate Contract A's exist simultaneously. The owner then picks exactly one winner to actually do the work. That final construction agreement is Contract B. If a bid is non-compliant or late, no Contract A ever forms.",
+    ex: "Five builders submit bids to build a new school. Five distinct Contract A's instantly snap into existence, legally binding all five builders to keep their prices locked. The school board picks Builder number two. Only Builder two signs Contract B to actually build the school."
+  },
+  {
+    title: "Diagram 3 — Ron Engineering, MJB, and Tercon: The Evolving Test",
+    text: "The rules for Contract A evolved over three massive Supreme Court cases. Ron Engineering created the concept. MJB clarified that Contract A isn't always automatic; it depends on the exact wording of the tender. Finally, the Tercon case proved that the legal label on the front page doesn't matter. Even if you call your document an 'RFP' and explicitly write 'this is not a tender,' if it has strict deadlines, bid bonds, and mandatory rules, a judge will legally treat it as a formal tender and enforce Contract A anyway.",
+    ex: "A city issues an 'Informal Request for Proposals' and puts a bold disclaimer saying 'No Contract A is formed.' But they also require a $50,000 bid bond and a strict 2:00 PM Tuesday deadline. A judge will ignore the disclaimer, look at the strict rules, and legally enforce Contract A anyway."
+  },
+  {
+    title: "Diagram 4 — The Fairness Paradox: Process vs Application of Process",
+    text: "Canadian law has a bizarre paradox regarding fairness in bidding. When you are designing the rules and picking the evaluation criteria, you do not have to be fair. You can legally favor local contractors or past relationships. But once those criteria are published, applying the rules must be perfectly fair and strictly consistent. You cannot break your own rules.",
+    ex: "You write a tender document that gives a 20 percent bonus score to contractors located within your city. That is totally unfair to outside contractors, but completely legal. However, once you receive the bids, if you secretly give the bonus to a contractor from a different city because you are friends, you just broke your own rules and will be sued."
+  },
+  {
+    title: "Diagram 5 — The Privilege Clause Boundary",
+    text: "Almost all tenders contain a privilege clause saying, 'the lowest or any bid may not be accepted.' This looks like a blank check to pick whoever you want, but it is not. This clause only protects the owner from picking a higher bid if the real reason for picking them was openly disclosed in the tender rules. You cannot use secret, hidden criteria.",
+    ex: "You get three bids for a demolition job. You skip the lowest bidder because they have a terrible safety record, and pick the second lowest. If your tender document explicitly said 'safety records will be evaluated,' the privilege clause protects you. If you never mentioned safety in the document, you will lose the lawsuit for using an undisclosed secret rule."
+  },
+  {
+    title: "Diagram 6 — Bid Shopping: Improper but Not Illegal",
+    text: "Bid shopping is when a general contractor takes a subcontractor's private price and uses it to pressure another subcontractor into offering a lower price. It is universally considered highly unethical. However, shockingly, Canadian courts have often ruled that it is not technically illegal. Because the practice is so widespread in the industry, courts struggle to find a legal theory to punish it, leaving victims without a remedy.",
+    ex: "A roofing subcontractor quotes you $50,000. You secretly call a second roofer and say, 'I have a quote for $50k, if you can do $45k, the job is yours.' This is unethical bid shopping, but the first roofer will likely lose in court if they try to sue you, because the practice is so common that it breaks no specific legal rule."
+  },
+  {
+    title: "Diagram 7 — The Mistake-Withdrawal Test",
+    text: "If a bidder makes a massive mistake in their math, they cannot just walk away. To withdraw a bid, the error must pass a strict two-part test: it must be an obvious mistake that the owner should have noticed, and it must be financially material. Furthermore, a bad judgment call is not a mistake. If you deliberately picked a cheap, risky method that failed, you are legally bound to your price.",
+    ex: "You bid $10,000 to dig a tunnel because you planned to use standard shovels. You hit solid granite and realize you need a $50,000 tunnel boring machine. You cannot withdraw your bid. You made a bad judgment call on the digging method, not a mathematical typo, so you must absorb the $40,000 loss yourself."
+  },
+  {
+    title: "Diagram 8 — Subcontract Crystallization: When Is a Sub Actually Bound?",
+    text: "When does a subcontractor actually become legally bound to a general contractor? If the general contractor explicitly names the subcontractor in their winning bid, the subcontract crystallizes and becomes binding the exact second the owner accepts the bid. However, if the general contractor just uses the subcontractor's price to build their math, but never actually names them in the document, neither side owes the other anything.",
+    ex: "You are a general contractor bidding on a hospital. You use an electrician's $100,000 quote to build your total price, but you never write the electrician's name on your final submission. When you win the hospital job, you can legally ignore that electrician and hire someone else for $90,000, because you never officially named them."
+  },
+  {
+    title: "Diagram 9 — The Bid Depository Anti-Shopping Mechanism",
+    text: "A bid depository is a physical system designed to completely eliminate bid shopping. Subcontractors submit their sealed bids into a literal locked box a day before the main deadline. The general contractor opens the box and is legally forced to use the lowest conforming bid they receive. If the general contractor wants to use their own internal crew, they must submit their own sealed bid into the same blind competition.",
+    ex: "A drywall subcontractor drops their $40,000 sealed quote into the locked depository box. The general contractor opens it an hour later. The general contractor is now physically prevented from showing that $40,000 price to a rival drywaller, effectively killing any chance of unethical bid shopping."
+  },
+  {
+    title: "Diagram 10 — The Trade Agreement Threshold Gate",
+    text: "Government contracts are governed by strict international trade agreements, but only if the contract value crosses a massive dollar threshold. If the project crosses that line, the government must follow brutal transparency rules. If a contractor catches the government cheating or using local bias on these massive projects, they must file a complaint with an international trade tribunal within an incredibly aggressive 10-day window, or they lose their rights entirely.",
+    ex: "You are bidding on a $5 million federal highway project, crossing the trade agreement threshold. You notice the government unfairly rigged the rules to favor a local company. You have exactly 10 days to file a formal complaint with the trade tribunal. If you wait 12 days, you are permanently blocked from complaining and the courts will ignore you."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 13: Visual Mechanics — Common Issues in Contract and Tort</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.concurrent { border-top-color: #0ea5e9; }
+    .framework-card.clock { border-top-color: #ca8a04; }
+    .framework-card.decision { border-top-color: #ef4444; }
+    .framework-card.protections { border-top-color: #16a34a; }
+    .framework-card.cashflow { border-top-color: #dc2626; }
+    .framework-card.contributory { border-top-color: #9333ea; }
+    .framework-card.vicarious { border-top-color: #f59e0b; }
+    .framework-card.codes { border-top-color: #64748b; }
+    .framework-card.compliance { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 13: VISUAL MECHANICS — COMMON ISSUES IN CONTRACT AND TORT</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. Concurrent Liability — Why a Contract Doesn't Block a Tort Claim</a>
+    <a href="#d2">2. The Discoverability Clock</a>
+    <a href="#d3">3. The Limitation Period Decision Tree</a>
+    <a href="#d4">4. The Three Protections Against Indefinite Liability</a>
+    <a href="#d5">5. The Joint and Several Liability Cash-Flow Disaster</a>
+    <a href="#d6">6. Contributory Negligence — The Switch That Changes Everything</a>
+    <a href="#d7">7. The Vicarious Liability Boundary</a>
+    <a href="#d8">8. Codes as a Floor, Not a Ceiling</a>
+    <a href="#d9">9. The Code-Compliance Liability Matrix</a>
+  </div>
+
+
+  <div class="framework-card concurrent" id="d1">
+    <h2>1. Concurrent Liability — Why a Contract Doesn't Block a Tort Claim</h2>
+    <p>For decades, the rule was simple: if you had a contract with someone, that contract was your ONLY relationship — you couldn't also sue them in tort. Central Trust v. Rafuse blew that up. This diagram shows the old world, the new world, and the one guardrail that stops the new world from being abused.</p>
+
+    <div class="mermaid">
+      graph TD
+        Old[OLD RULE pre-1986:<br/>Contract exists between parties] --> OldResult[Tort duty BLOCKED.<br/>Only contract remedies available]
+        New[NEW RULE — Central Trust v. Rafuse:<br/>Contract exists between parties] --> NewResult[BOTH contract AND tort<br/>duties can exist simultaneously]
+        NewResult --> Guardrail{Does the tort claim try to<br/>CIRCUMVENT what the<br/>contract actually says?}
+        Guardrail -->|Yes| Blocked[Tort claim BLOCKED<br/>— contract terms govern]
+        Guardrail -->|No, contract is SILENT<br/>on this issue| Filled[Court fills the gap:<br/>implies a contract term OR<br/>imposes a tort duty of care]
+
+        style Old fill:#f1f5f9,stroke:#64748b
+        style OldResult fill:#fee2e2,stroke:#dc2626
+        style New fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style NewResult fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Guardrail fill:#fef3c7,stroke:#d97706
+        style Blocked fill:#fee2e2,stroke:#dc2626
+        style Filled fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The top branch is history — it's there only so you recognize the OLD rule if the exam quotes it. The bottom branch is the law today. The key gate is the guardrail diamond: tort cannot be used as a backdoor to rewrite or escape what the contract clearly says (e.g., you can't sue in tort for a problem the contract has already explicitly priced and allocated). But where the contract is SILENT — like a contract that simply forgot to specify payment terms — the court doesn't leave a vacuum. It either invents a reasonable implied contract term, or it says the paying party owed (and breached) a tort duty of care by not paying promptly. Lesson for drafting: the less your contract leaves silent, the less room a court has to impose terms you didn't choose.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card clock" id="d2">
+    <h2>2. The Discoverability Clock</h2>
+    <p>This is the single most exam-relevant mechanism in the chapter. A limitation period clock does NOT necessarily start ticking the day the negligent act happens — for latent (hidden) defects, it can sit frozen for years until someone notices a problem. This diagram shows exactly when the clock starts for each defect type.</p>
+
+    <div class="mermaid">
+      graph TD
+        Defect{What kind of<br/>defect occurred?} -->|PATENT —<br/>obvious on reasonable inspection| PatentClock[Clock starts at the<br/>NEGLIGENT ACT /<br/>substantial completion]
+        Defect -->|LATENT —<br/>hidden, undiscoverable| LatentClock{Kamloops v. Nielsen Rule:<br/>Clock starts when plaintiff<br/>KNEW or OUGHT TO HAVE<br/>KNOWN of the damage}
+
+        LatentClock --> Frozen[Clock can sit FROZEN<br/>for years — e.g. a building<br/>foundation defect undiscovered<br/>until the building shows cracks]
+        Frozen --> Discovered[Discovery happens]
+        Discovered --> NowRunning[NOW the standard limitation<br/>period starts running<br/>e.g. 2 years in ON/AB/BC/SK]
+
+        NowRunning --> UltimateCheck{But has the ULTIMATE<br/>limitation period already<br/>expired? 10-30 years from<br/>the original act, varies by province}
+        UltimateCheck -->|Yes| TooLate[CLAIM IS BARRED<br/>— ultimate period trumps<br/>discoverability, no matter how<br/>recently discovered]
+        UltimateCheck -->|No| StillLive[Claim can proceed]
+
+        style PatentClock fill:#e0f2fe,stroke:#0284c7
+        style LatentClock fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Frozen fill:#fef3c7,stroke:#d97706
+        style UltimateCheck fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style TooLate fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style StillLive fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Read this as two different stopwatches. The patent defect stopwatch starts immediately because anyone reasonably inspecting would have caught it right away. The latent defect stopwatch can sit at zero for years — the Kamloops case is the rule that decides exactly when it finally starts (discovery, or "ought to have discovered" through reasonable diligence). But the diagram's real exam trap is the bottom diamond: even a perfectly latent defect that was discovered yesterday can still be COMPLETELY BARRED if the ultimate limitation period (often contractual — see the Howe Sound School District case in the chapter, a 6-year contractual cutoff) already expired years ago. Discoverability protects the plaintiff from an unfair clock — but the ultimate limitation period protects the defendant from infinite exposure, and ultimate periods always win.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card decision" id="d3">
+    <h2>3. The Limitation Period Decision Tree</h2>
+    <p>This collapses diagrams 1 and 2 into a single decision path you can run during the exam when a fact pattern gives you a timeline and asks "is this claim still alive?"</p>
+
+    <div class="mermaid">
+      graph TD
+        Start([Fact pattern gives you a timeline.<br/>Is the claim still alive?]) --> Q1{Is the defect<br/>PATENT or LATENT?}
+        Q1 -->|Patent| T1[Clock started at the act.<br/>Check standard limitation period<br/>— commonly 2 years]
+        Q1 -->|Latent| T2[Clock started at DISCOVERY<br/>— Kamloops rule]
+
+        T1 --> Q2{Has the standard<br/>period expired?}
+        T2 --> Q2
+
+        Q2 -->|No| Alive1[CLAIM ALIVE so far]
+        Q2 -->|Yes| Dead1[CLAIM BARRED]
+
+        Alive1 --> Q3{Has the ULTIMATE<br/>limitation period expired?<br/>— statutory OR contractual}
+        Q3 -->|Yes| Dead2[CLAIM BARRED<br/>— regardless of discovery date]
+        Q3 -->|No| Final[CLAIM IS LIVE]
+
+        style Start fill:#1e293b,color:#fff
+        style Q1 fill:#fef3c7,stroke:#d97706
+        style Q2 fill:#fef3c7,stroke:#d97706
+        style Q3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Dead1 fill:#fee2e2,stroke:#dc2626
+        style Dead2 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Final fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Three gates, in order. Gate 1 just classifies the defect type, because that decides WHEN the clock started. Gate 2 checks if the standard period (the 2-year-style limitation) has run out from that start date. Gate 3 is the override gate — it doesn't care what gate 2 said. Even a claim that's perfectly alive under gates 1 and 2 dies instantly if the ultimate limitation period has expired. Practical exam habit: whenever a question gives you a timeline with a defect discovered "years later," your first move should be checking gate 3 before anything else, because it's the gate most likely to flip an otherwise-obvious answer.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card protections" id="d4">
+    <h2>4. The Three Protections Against Indefinite Liability</h2>
+    <p>Latent defects mean a professional could theoretically be sued decades after finishing a project. This diagram shows the three tools professionals actually use to cap that exposure — and importantly, shows that they stack together rather than being alternatives.</p>
+
+    <div class="mermaid">
+      graph LR
+        Risk[Indefinite Latent<br/>Defect Exposure] --> P1[1. CONTRACTUAL<br/>TIME LIMIT<br/>shorter or longer<br/>than the statute]
+        Risk --> P2[2. CONTRACTUAL<br/>SCOPE LIMITS<br/>$ cap, insurance cap,<br/>re-performance only]
+        Risk --> P3[3. ULTIMATE<br/>LIMITATION PERIOD<br/>statutory hard stop,<br/>10-30 years]
+
+        P1 --> Catch1[CAUTION: some provinces'<br/>Limitation Acts BLOCK<br/>shortening the period<br/>— check local statute]
+        P3 --> Catch3[Applies even WITHOUT<br/>a contract clause —<br/>this one is automatic]
+
+        style Risk fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style P1 fill:#dcfce7,stroke:#16a34a
+        style P2 fill:#dcfce7,stroke:#16a34a
+        style P3 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Catch1 fill:#fef3c7,stroke:#d97706
+        style Catch3 fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Three independent levers, but note the asymmetry: protections 1 and 2 require the parties to actually NEGOTIATE and WRITE them into the contract — they don't exist unless someone drafted them in. Protection 3 is different — it exists automatically in the governing statute whether or not the contract mentions it at all, which is why it's the ultimate backstop even in poorly drafted contracts. The caution box under protection 1 matters: in some provinces (the chapter cites Alberta) you can EXTEND a limitation period by agreement but you cannot SHORTEN it — "contracting out of the statute" the wrong direction simply won't be enforced. Also remember: these protections only work between CONTRACTING parties. A professional has essentially no contractual tool to protect against claims from third parties they never signed anything with.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card cashflow" id="d5">
+    <h2>5. The Joint and Several Liability Cash-Flow Disaster</h2>
+    <p>This is the chapter's most dangerous-feeling concept, and a flowchart of money moving through the system makes it click instantly. Watch what happens to the engineer in this exact textbook example when the contractor goes bankrupt.</p>
+
+    <div class="mermaid">
+      graph TD
+        Collapse[Building Collapses] --> Apportion[Court apportions fault:<br/>Contractor 70% — Engineer 30%]
+        Apportion --> Plaintiff{Plaintiff/Owner chooses<br/>who to collect from}
+        Plaintiff -->|Joint & Several Liability:<br/>can collect 100% from EITHER| Engineer100[Owner collects<br/>100% from Engineer]
+
+        Engineer100 --> EngPays[Engineer pays<br/>the FULL damages]
+        EngPays --> Seek[Engineer must now seek<br/>CONTRIBUTION — try to recover<br/>the Contractor's 70% share]
+        Seek --> Bankrupt{Is the Contractor<br/>bankrupt / defunct?}
+        Bankrupt -->|Yes| Stuck[ENGINEER IS STUCK paying<br/>100% of damages despite<br/>being only 30% at fault]
+        Bankrupt -->|No| Recovers[Engineer recovers the<br/>70% share from Contractor]
+
+        style Collapse fill:#1e293b,color:#fff
+        style Apportion fill:#e0f2fe,stroke:#0284c7
+        style Plaintiff fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Engineer100 fill:#fee2e2,stroke:#dc2626
+        style Stuck fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Recovers fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Follow the money, not the fault percentages — that's the entire trick of joint and several liability. Fault is apportioned at 70/30, but PAYMENT doesn't have to follow that split. The plaintiff is allowed to collect the FULL amount from whichever defendant is easiest to collect from (usually whoever still has money or insurance), then that defendant is left holding the bag, forced to chase the other defendant for reimbursement. The diamond at the bottom is where this becomes a real risk for engineers specifically: contractors going bankrupt mid-litigation is common, and when that happens, the "30% at fault" engineer can end up paying 100% of the damages with no realistic way to recover the difference. This is precisely why professional liability insurance and careful contractual risk allocation matter so much in practice.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card contributory" id="d6">
+    <h2>6. Contributory Negligence — The Switch That Changes Everything</h2>
+    <p>Diagram 5 showed what happens when the PLAINTIFF is blameless. This diagram shows what happens the moment the plaintiff is even slightly at fault — because in some provinces, that single fact flips joint and several liability off entirely.</p>
+
+    <div class="mermaid">
+      graph TD
+        Switch{Is the PLAINTIFF<br/>partially at fault too?<br/>— even just 1%} -->|NO — plaintiff blameless| JS[JOINT & SEVERAL LIABILITY APPLIES<br/>Plaintiff can collect 100% from<br/>any one at-fault defendant<br/>— see diagram 5]
+        Switch -->|YES — even 1% contributory<br/>negligence, depending on province| SV[SEVERAL LIABILITY ONLY<br/>Each defendant pays ONLY<br/>their own percentage share]
+
+        SV --> Example[Example: Contractor 69%,<br/>Engineer 30%, Owner 1% at fault.<br/>If Contractor goes bankrupt,<br/>the OWNER absorbs that<br/>69% loss — not the Engineer]
+
+        style Switch fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style JS fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style SV fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Example fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This is a literal switch — one fact (was the plaintiff even slightly at fault?) flips the entire payment structure in provinces that have eliminated joint and several liability for contributorily negligent plaintiffs. Compare the bottom example directly against diagram 5: same bankrupt contractor, same 30%-at-fault engineer — but because the owner is now 1% at fault instead of 0%, the engineer is protected and the OWNER eats the contractor's unrecoverable share instead. The dramatic swing in outcome from one percentage point of plaintiff fault is exactly the kind of twist NPPE scenario questions love to test — always check whether the plaintiff carries ANY fault before assuming joint and several liability applies.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card vicarious" id="d7">
+    <h2>7. The Vicarious Liability Boundary</h2>
+    <p>An employer is on the hook for an employee's actions — but only inside a specific boundary. This diagram draws that boundary as a literal fence, showing what's inside (employer liable) versus outside (employee personally exposed, employer protected).</p>
+
+    <div class="mermaid">
+      graph TD
+        Gate{Is there an<br/>EMPLOYER-EMPLOYEE<br/>relationship?<br/>— NOT independent contractor} -->|No| NoVicarious[NO vicarious liability possible<br/>— employers generally not liable<br/>for independent contractors]
+        Gate -->|Yes| Fence{Was the employee acting<br/>WITHIN the course and<br/>scope of employment?}
+
+        Fence -->|YES — inside the fence:<br/>assigned tasks, work duties| Inside[EMPLOYER IS VICARIOUSLY LIABLE<br/>to the injured third party]
+        Fence -->|NO — outside the fence:<br/>after-hours activity, drunk driving,<br/>side consulting work| Outside[Employee PERSONALLY liable.<br/>Employer NOT liable.<br/>Employer's insurance likely<br/>EXEMPT too]
+
+        Inside --> Separate[Separate question: can the employer<br/>then sue ITS OWN employee for the<br/>loss? Rare in practice — but the<br/>employee's duty of competence<br/>theoretically allows it]
+
+        style Gate fill:#fef3c7,stroke:#d97706
+        style NoVicarious fill:#e0f2fe,stroke:#0284c7
+        style Fence fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Inside fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Outside fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Separate fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Two gates control whether vicarious liability ever applies at all. The first gate filters out independent contractors entirely — vicarious liability is an employment-relationship concept, full stop (cross-reference Ch.20's employee/independent-contractor test for HOW that's determined). The second gate is the fence, and it's the one exam questions love to test with fact patterns like "the engineer was at a bar after work" or "doing private consulting on the side" — both land OUTSIDE the fence, meaning the employer walks away clean and the employee's personal assets (and likely their own, not the employer's, insurance) are exposed. The bottom box is a separate and rarely-tested point: vicarious liability is about what the THIRD PARTY can collect from the employer; it does NOT automatically mean the employer can turn around and collect from the employee — that's a different, much rarer lawsuit.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card codes" id="d8">
+    <h2>8. Codes as a Floor, Not a Ceiling</h2>
+    <p>A simple but critical mental model: codes and standards set a MINIMUM, not a target. This diagram shows the three tiers of "mandatory-ness" a code can have, and where professional judgment sits relative to all of them.</p>
+
+    <div class="mermaid">
+      graph TD
+        Codes[Codes & Standards] --> Legislated[LEGISLATED CODES<br/>e.g. Building Code]
+        Codes --> Contractual[CODES REQUIRED<br/>BY CONTRACT]
+        Codes --> Voluntary[ALL OTHER CODES<br/>— industry/society guidelines]
+
+        Legislated --> L1[MANDATORY for everyone<br/>in the industry.<br/>Violation = near-automatic<br/>breach of statute/contract]
+        Contractual --> L2[MANDATORY between<br/>the CONTRACTING parties only]
+        Voluntary --> L3[Compliance NOT mandatory<br/>— BUT becomes the practical<br/>minimum standard in court<br/>if a failure occurs]
+
+        L3 --> Judgment[Professional CAN exceed any code<br/>using independent judgment —<br/>but departing BELOW it creates<br/>a difficult-to-overcome<br/>presumption of fault]
+
+        style Legislated fill:#e0f2fe,stroke:#0284c7
+        style Contractual fill:#fef3c7,stroke:#d97706
+        style Voluntary fill:#f3e8ff,stroke:#9333ea
+        style L1 fill:#fee2e2,stroke:#dc2626
+        style L2 fill:#fee2e2,stroke:#dc2626
+        style L3 fill:#fee2e2,stroke:#dc2626
+        style Judgment fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Three different SOURCES of "mandatory-ness" converge on the same practical reality at the bottom. Legislated codes bind everyone regardless of contract. Contractual codes only bind the people who signed that specific contract. Voluntary/industry codes technically bind no one — but the moment something goes wrong, courts treat them as the practical floor anyway (the Bevan Investments case: a design that departs substantially from code is "prima facie faulty" unless you can show it rationally conforms to accepted practice another way). The green box captures the asymmetry that matters most: going ABOVE a code is always safe and entirely within a professional's discretion; going BELOW any applicable code creates a presumption against you that's very hard to overcome in court, even if the code itself wasn't legally mandatory.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card compliance" id="d9">
+    <h2>9. The Code-Compliance Liability Matrix</h2>
+    <p>This is the trickiest concept in the chapter: can you be liable even when you followed the code exactly? The textbook says "unlikely, except in four situations" — this diagram turns that list into a 2x2-style matrix so you can instantly classify any fact pattern.</p>
+
+    <div class="mermaid">
+      graph TD
+        Compliant{Professional FULLY<br/>complied with the<br/>applicable code} --> General[GENERAL RULE:<br/>Liability is UNLIKELY]
+
+        General --> Check{Does one of these<br/>4 exceptions apply?}
+
+        Check --> E1[1. ACTUAL knowledge<br/>the code was inadequate]
+        Check --> E2[2. SHOULD HAVE KNOWN<br/>— e.g. known industry research,<br/>accident, or draft revision<br/>not yet finalized]
+        Check --> E3[3. Industry standard itself<br/>is careless — courts can<br/>reject an entire industry's<br/>self-set standard]
+        Check --> E4[4. LEADING-EDGE / unique design<br/>— traditional codes may not<br/>even apply; informed client<br/>consent becomes critical]
+
+        E1 --> Liable[LIABILITY POSSIBLE<br/>despite code compliance]
+        E2 --> Liable
+        E3 --> Liable
+        E4 --> Liable
+
+        style Compliant fill:#e0f2fe,stroke:#0284c7
+        style General fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Check fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Liable fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Start from the green box — that's your default assumption whenever a fact pattern says the professional followed code. Then actively test the fact pattern against all four red boxes before concluding the professional is safe, because each one independently defeats the "I followed code" defence. Exceptions 1 and 2 are about KNOWLEDGE — did the professional know, or reasonably should have known (through current research, a recent accident, or a draft revision in progress), that the code itself was outdated or insufficient? A specialist is held to a higher version of this duty since they're expected to track developments more closely. Exception 3 is rare but important — courts occasionally refuse to let an entire industry hide behind its own self-policed standard if that standard is itself careless. Exception 4 connects to the chapter's "new approach" discussion: leading-edge designs sit partly outside the code system entirely, which shifts the protection mechanism away from "I followed code" and toward "I fully informed my client of the risks and they accepted them" — a defence against the CLIENT, but explicitly not against third parties who never agreed to take on that risk.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

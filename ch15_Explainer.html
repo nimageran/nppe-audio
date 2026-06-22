@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 15 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 15 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Risk Assessment Mindset Shift</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 8</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Risk Assessment Mindset Shift",
+    text: "When starting a project, engineers are usually enthusiastic and optimistic. But before signing a contract, you must force a psychological switch into a pessimistic mindset. You must explicitly ask, 'What could possibly go wrong?' You identify risks like delays, failed methods, or defaults. Then, you do not just write them down—you allocate them. You either pass the risk outward to a third party, like an insurance or bonding company, or you allocate it mutually between the contracting parties.",
+    ex: "You are designing a bridge over a river known to flood. Instead of just hoping it does not flood, you assume it will. You allocate the risk by requiring the contractor to buy specific flood insurance before construction begins, passing the risk to a third-party insurer."
+  },
+  {
+    title: "Diagram 2 — The Common Law Presumption Shield",
+    text: "If a contract is silent on an issue, courts do not just guess. They apply a protective shield of presumptions, treating professionals as sophisticated parties. They presume you negotiated fairly, that you addressed known risks, and that you only promised an average level of competence. But this shield breaks instantly if you ever explicitly guarantee a perfect result. Once you guarantee an outcome, even in an email, you are held to that impossible standard.",
+    ex: "You tell a client, 'I guarantee this new HVAC design will cut your energy bill by exactly 40 percent.' If it only cuts it by 30 percent, the protective shield is gone. You can be sued for the difference because you guaranteed a result, even if your engineering work was perfectly competent."
+  },
+  {
+    title: "Diagram 3 — The Risk-Shifting Documentation Pattern",
+    text: "When a client rejects a safer, expensive option to save money, you cannot just silently install the cheap option. Silently picking the cheap one exposes you to liability if it fails. Silently picking the expensive one will make the client sue you for going over budget. The only correct path is to write to the client, clearly explain the risks and costs of both, and have them choose in writing. This shifts the liability entirely off your shoulders.",
+    ex: "A client refuses to pay for corrosion-resistant steel. You send an email warning them the cheap steel will rust in five years, and they reply, 'Understood, use the cheap steel anyway to save money.' If it rusts in five years, they cannot blame you because they made an informed decision."
+  },
+  {
+    title: "Diagram 4 — Client Dissatisfaction: Justified vs Perceived",
+    text: "Client complaints fall into two buckets: justified and perceived. You cannot talk your way out of justified bad work. But perceived dissatisfaction is usually just poor communication. If you explain a scary-looking physical process to a client before it happens, you look like a trusted expert. If you wait to explain it until after they are already angry, it sounds like a self-serving excuse, even if you are telling the truth.",
+    ex: "A freshly poured concrete floor will look warped before it finishes settling. If you warn the client about this camber on Monday, they will not panic on Tuesday. If you say nothing, and they complain on Tuesday, your perfectly scientific explanation will just sound like you are covering up a mistake."
+  },
+  {
+    title: "Diagram 5 — The Unpaid-Fee Counterclaim Spiral",
+    text: "A tiny unpaid final invoice can quickly spiral into a massive financial disaster. You ask for your final fee, the client refuses, so you sue them for the fee. To defend themselves, the client files a massive counterclaim alleging you made negligent errors that cost them a fortune. This spiral almost always happens because the original retainer never clearly defined the scope of work. The fix is absolute clarity at the very beginning of the project.",
+    ex: "You sue a client for an unpaid $5,000 final invoice. The client gets angry, hires a lawyer, and counterclaims you for $500,000, claiming your 'supervision' was negligent. If your contract had clearly stated you were only doing 'periodic reviews,' not full-time site supervision, this entire spiral could have been prevented."
+  },
+  {
+    title: "Diagram 6 — The Disclaimer Enforceability Test",
+    text: "A disclaimer that says 'we are not liable' is not a magic shield. To be enforced by a judge, it must pass two strict gates. First, it must be clearly brought to the other party's attention. Second, the wording must be reasonable. If a disclaimer is so broad that it tries to excuse gross negligence or reckless behavior, the judge will strike it down and throw it in the trash, even if the client signed it.",
+    ex: "You put a disclaimer on your engineering report saying, 'We are not responsible for any errors, including if our engineer shows up drunk and guesses the math.' The court will completely ignore this disclaimer because it attempts to excuse gross negligence, leaving you fully exposed."
+  },
+  {
+    title: "Diagram 7 — Document Authentication: Two Tracks",
+    text: "Paper documents and electronic documents are authenticated differently in court. Paper documents rely on old case law, usually requiring a human witness to swear they created it. Electronic documents, however, are governed by specific Evidence Acts. Because digital files can be easily hacked, altered, or deleted, you do not just need a witness; you must prove the entire computer system that created and stored the file is secure and has genuine integrity.",
+    ex: "To submit a paper logbook in court, the site manager just swears they wrote it. But to submit an automated digital sensor log, you must prove your server network requires strong passwords, cannot be easily tampered with, and accurately records timestamps without interference."
+  },
+  {
+    title: "Diagram 8 — The Digital Photo Chain of Custody",
+    text: "Taking photos for legal evidence requires a strict eight-step chain of custody. A single weak link destroys the evidence. You must check equipment, choose the right quality, and use a dedicated computer with no editing software. Most importantly, you must never delete a photo, even a blurry one, and back everything up to a non-editable format like a CD. If you delete anything, the court will suspect you are hiding evidence.",
+    ex: "You take 50 photos of a collapsed trench. 5 are blurry, so you delete them on your camera. Three years later in court, the opposing lawyer discovers the missing file numbers and accuses you of deleting the photos that proved it was your fault. The judge agrees, and your entire photo collection is thrown out as suspicious."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

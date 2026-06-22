@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 9: Visual Mechanics — Selected Contract Issues</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.authority { border-top-color: #0ea5e9; }
+    .framework-card.imputed { border-top-color: #9333ea; }
+    .framework-card.indemnity { border-top-color: #dc2626; }
+    .framework-card.changeorder { border-top-color: #ca8a04; }
+    .framework-card.impact { border-top-color: #ef4444; }
+    .framework-card.protest { border-top-color: #f59e0b; }
+    .framework-card.payif { border-top-color: #16a34a; }
+    .framework-card.incorporation { border-top-color: #64748b; }
+    .framework-card.unforeseen { border-top-color: #15803d; }
+    .framework-card.fieldreview { border-top-color: #9333ea; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 9: VISUAL MECHANICS — SELECTED CONTRACT ISSUES</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Dual-Source Authority Test</a>
+    <a href="#d2">2. Imputed Knowledge — When the Agent's Knowledge Becomes the Principal's</a>
+    <a href="#d3">3. The Indemnity Direction Flip</a>
+    <a href="#d4">4. Extras vs Credits — Who Pays for a Change</a>
+    <a href="#d5">5. The Impact Cost Reservation Trap</a>
+    <a href="#d6">6. Change Order vs Change Directive</a>
+    <a href="#d7">7. Performance Under Protest — The Three Forced Situations</a>
+    <a href="#d8">8. Pay-If-Paid vs Pay-When-Paid</a>
+    <a href="#d9">9. Incorporation by Reference — The Hidden Risk Chain</a>
+    <a href="#d10">10. The Unforeseen Conditions Disclaimer Failure</a>
+    <a href="#d11">11. Coast Hotels — Number of Reviews vs Timing of Reviews</a>
+  </div>
+
+
+  <div class="framework-card authority" id="d1">
+    <h2>1. The Dual-Source Authority Test</h2>
+    <p>An agent can bind a principal through two completely independent legal routes, and only ONE needs to be satisfied. This diagram shows both routes and the critical rule about who is allowed to CREATE apparent authority.</p>
+
+    <div class="mermaid">
+      graph TD
+        Agent[Agent takes an action<br/>on behalf of a principal] --> Q{Does EITHER form<br/>of authority exist?}
+
+        Q --> Express[EXPRESS / ACTUAL AUTHORITY<br/>— created by agreement<br/>between PRINCIPAL and AGENT<br/>— may be written or unwritten]
+        Q --> Apparent[APPARENT / OSTENSIBLE AUTHORITY<br/>— created by representations<br/>from the PRINCIPAL to the<br/>THIRD PARTY]
+
+        Express --> Bound1[PRINCIPAL IS BOUND]
+        Apparent --> Bound1
+
+        Apparent --> WhoCreates{WHO can create<br/>apparent authority?}
+        WhoCreates -->|The PRINCIPAL, by words,<br/>conduct, or even by simply<br/>APPOINTING the agent| Valid[VALID — creates real<br/>apparent authority]
+        WhoCreates -->|The AGENT, claiming<br/>'I have authority' —<br/>with NO principal<br/>involvement| Invalid[INVALID — agent's own<br/>say-so NEVER creates<br/>apparent authority]
+
+        Invalid --> AgentBound[If agent acted without ANY<br/>real authority: PRINCIPAL<br/>NOT bound, but AGENT<br/>PERSONALLY bound to<br/>the third party]
+
+        style Agent fill:#1e293b,color:#fff
+        style Q fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style WhoCreates fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style Valid fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Invalid fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style AgentBound fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The top diamond captures the "OR, not AND" structure of authority — express and apparent authority are independent paths to the same destination (principal bound), and neither needs the other to exist. The lower diamond is where the chapter's cited case (Pacific National Leasing v. Marina Travel) does its real work: apparent authority is fundamentally about what the PRINCIPAL represented, never about what the AGENT claims about themselves. An agent loudly insisting "don't worry, I'm authorized to sign this" creates ZERO apparent authority on its own — the representation has to trace back to something the principal said, did, or permitted (even passively, by appointing the agent into a role where having that authority would seem natural). The bottom box captures the consequence that actually punishes a rogue agent: if neither authority type exists, the THIRD PARTY isn't left empty-handed — the agent who falsely held themselves out becomes personally bound to honor the deal instead of the principal.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card authority" id="d1b">
+    <h2>1b. The Authority Limit Disclosure Rule</h2>
+    <p>This is a direct continuation of diagram 1, focused on a specific scenario the chapter's own chapter question tests: an agent with a MONETARY LIMIT on their authority who exceeds it. Whether the principal is bound depends entirely on one fact.</p>
+
+    <div class="mermaid">
+      graph TD
+        Limit[Agent has EXPRESS<br/>authority limit —<br/>e.g. approve changes<br/>under $10,000] --> Exceed[Agent approves a<br/>change ABOVE that<br/>limit — e.g. $8,000<br/>when owner secretly<br/>capped it at $5,000]
+
+        Exceed --> Disclosed{Was the LOWER limit<br/>made KNOWN to the<br/>THIRD PARTY<br/>— the contractor?}
+
+        Disclosed -->|NO — third party only<br/>knew the ORIGINAL<br/>$10,000 limit| StillBound[PRINCIPAL IS BOUND —<br/>the agent acted within<br/>APPARENT authority<br/>even though outside the<br/>narrower ACTUAL authority]
+        Disclosed -->|YES — third party<br/>was told the real,<br/>lower limit| NotBound[PRINCIPAL NOT BOUND<br/>— third party knew the<br/>TRUE limit and exceeded<br/>it knowingly]
+
+        style Limit fill:#1e293b,color:#fff
+        style Disclosed fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style StillBound fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NotBound fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This single diamond resolves the chapter's own chapter question 2 and demonstrates a critical principle: actual authority and apparent authority can be DIFFERENT widths, and the THIRD PARTY's knowledge of which width applies decides the outcome. The owner's INTERNAL instruction to the engineer (cap changes at $5,000) only narrows actual authority — it does nothing to the engineer's apparent authority unless that narrower limit was actually communicated to the contractor. If the contractor only ever saw the broader $10,000 limit in the contract, that broader number IS the operative apparent authority as far as the contractor is concerned, and the owner remains bound despite their own secret, stricter instruction never having been disclosed.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card imputed" id="d2">
+    <h2>2. Imputed Knowledge — When the Agent's Knowledge Becomes the Principal's</h2>
+    <p>This diagram isolates a rule that's easy to forget exists at all: a principal can be legally deemed to "know" something they never personally learned, simply because their agent knew it.</p>
+
+    <div class="mermaid">
+      graph TD
+        Fact[A fact or piece of<br/>information exists] --> Channel{HOW did the<br/>AGENT learn it?}
+
+        Channel --> C1[Notice was formally<br/>GIVEN TO the agent]
+        Channel --> C2[Agent gained the<br/>knowledge IN THE COURSE<br/>of performing their duties]
+
+        C1 --> Imputed[KNOWLEDGE IS IMPUTED<br/>to the PRINCIPAL]
+        C2 --> Imputed
+
+        Imputed --> Deemed[Principal is DEEMED to know<br/>this fact — REGARDLESS of<br/>whether the principal<br/>actually, personally,<br/>learned of it]
+
+        style Fact fill:#1e293b,color:#fff
+        style Channel fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Imputed fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Deemed fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two channel boxes matter because they're the ONLY two routes the chapter recognizes for imputed knowledge — knowledge an agent picks up entirely outside both of these channels (purely personal, off-duty knowledge with no connection to formal notice or the agent's actual job duties) would NOT automatically transfer to the principal. The "Deemed" box at the bottom is the practical sting of this doctrine: a principal cannot defend a claim by genuinely, honestly saying "I personally never knew that" if their agent knew it through proper notice or through the agent's normal duties — the law simply doesn't care that the knowledge never physically reached the principal's own awareness, it treats the agent's knowledge as legally equivalent to the principal's own.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card indemnity" id="d3">
+    <h2>3. The Indemnity Direction Flip</h2>
+    <p>An indemnity clause can point in two opposite directions, and which direction it points completely changes who is protecting whom. This diagram shows the standard Canadian direction and the flipped, riskier American-style alternative.</p>
+
+    <div class="mermaid">
+      graph TD
+        Clause[Indemnity Clause<br/>in the contract] --> Direction{WHICH party's<br/>negligence is<br/>being covered?}
+
+        Direction --> Standard[STANDARD CANADIAN<br/>DIRECTION — CCDC 2 style:<br/>'I'll pay YOU if I — the<br/>CONTRACTOR — am negligent<br/>and it causes you a loss']
+        Direction --> Flipped[FLIPPED — more common in<br/>the US: 'I'll pay you if<br/>YOU — the INDEMNITEE —<br/>are negligent and<br/>incur a loss']
+
+        Standard --> Normal[Reflects the DEFAULT<br/>common law position:<br/>each party bears the risk<br/>of its OWN failures —<br/>clause mostly RESTATES<br/>existing liability]
+
+        Flipped --> Insurer[INDEMNITOR effectively<br/>BECOMES AN INSURER<br/>for the OTHER party's<br/>own negligence]
+        Insurer --> PublicPolicy{Some US courts<br/>REFUSE to enforce —<br/>why?}
+        PublicPolicy --> Reason[Concern: may PROMOTE<br/>DISREGARD FOR SAFETY<br/>— violates public policy]
+
+        style Clause fill:#1e293b,color:#fff
+        style Direction fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Standard fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Flipped fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Reason fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The direction diamond is the single most important thing to check when reading any indemnity clause, because the two branches produce nearly opposite real-world effects despite looking grammatically similar on the page. The standard direction is almost redundant with what common law already provides — each party already bears responsibility for their own negligence, so this version of the clause mostly just makes that pre-existing rule explicit and adds remedies like covering legal costs. The flipped direction is structurally different and much riskier: it turns the indemnitor into something like an insurance policy for the OTHER side's mistakes, which is precisely why some American courts have refused to enforce such clauses on public policy grounds — the worry being that if you know someone else will pay for YOUR negligence, you have less incentive to be careful in the first place.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card indemnity" id="d3b">
+    <h2>3b. Indemnity Can Add Liability But Cannot Remove It</h2>
+    <p>A short but high-value rule connects directly to diagram 3: indemnity clauses are a one-way ratchet in terms of what they can do to liability that already exists at law.</p>
+
+    <div class="mermaid">
+      graph LR
+        Existing[Liability that ALREADY<br/>exists at common law<br/>e.g. contractor liable<br/>for own negligence] --> Indemnity{Indemnity clause<br/>is added}
+
+        Indemnity --> CanExpand[CAN expand/create<br/>NEW liability —<br/>e.g. covering design<br/>errors not otherwise<br/>the contractor's fault]
+        Indemnity --> CannotRemove[CANNOT remove existing<br/>liability — UNLESS the<br/>clause contains an<br/>EXPRESS statement<br/>doing so]
+
+        style Existing fill:#1e293b,color:#fff
+        style Indemnity fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style CanExpand fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style CannotRemove fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This asymmetry is worth holding as a standalone rule because it's counterintuitive in one specific direction — people often assume a contractual clause can cut both ways (expand OR limit liability) with equal ease, but indemnity clauses default to ONE-DIRECTIONAL ratcheting. They readily ADD exposure (an indemnity not limited to "contractor negligence" can sweep in design errors too, expanding what the contractor is on the hook for), but they do NOT subtract from what already exists unless the clause goes out of its way to say so explicitly — many standard forms (like CCDC 2's GC 1.3.1) even include language reinforcing that the contract's remedies are "in addition to" rather than a replacement for existing legal rights.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card changeorder" id="d4">
+    <h2>4. Extras vs Credits — Who Pays for a Change</h2>
+    <p>Whether a change becomes an "extra" (owner pays more) hinges on tracing the change back to its ROOT CAUSE. This diagram sorts the chapter's own list of common causes by who typically bears the cost.</p>
+
+    <div class="mermaid">
+      graph TD
+        Change[A change to the<br/>scope of work occurs] --> Cause{What CAUSED<br/>the change?}
+
+        Cause --> C1[Owner wants to<br/>ENHANCE/CHANGE<br/>the design]
+        Cause --> C2[UNFORESEEN<br/>conditions appear]
+        Cause --> C3[Cost-saving measure<br/>SUGGESTED by<br/>a party]
+        Cause --> C4[DESIGN ERROR<br/>necessitates change]
+        Cause --> C5[Municipal authority<br/>demands a code<br/>interpretation change]
+
+        C1 --> OwnerPays[OWNER typically<br/>RESPONSIBLE —<br/>requested enhancement]
+        C2 --> OwnerPays2[OWNER typically<br/>RESPONSIBLE for<br/>hidden conditions<br/>— unless risk was<br/>shifted contractually]
+        C4 --> DesignerQ{Was the design<br/>interpretation<br/>UNREASONABLE,<br/>or reasonable inquiries<br/>NOT made?}
+
+        DesignerQ -->|Reasonable interpretation,<br/>reasonable inquiries made| NotNegligent[NOT negligence —<br/>but CONTRACTOR still<br/>generally gets an EXTRA<br/>for the cost increase]
+        DesignerQ -->|Unreasonable, or no<br/>proper inquiry made| Negligent[Designer NEGLIGENCE<br/>— owner THEORETICALLY<br/>can recover from designer,<br/>but in PRACTICE rarely<br/>does if within the normal<br/>5-10% CONTINGENCY range]
+
+        style Change fill:#1e293b,color:#fff
+        style Cause fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style DesignerQ fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style NotNegligent fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Negligent fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The DesignerQ diamond is where this diagram does its real work, because it separates two questions that are easy to conflate: "is the contractor entitled to an extra" and "is the designer negligent" are NOT the same question and don't always have the same answer. A designer can make a perfectly reasonable, defensible interpretation of an ambiguous code provision that nonetheless turns out to differ from the official's interpretation — that's not negligence, but the contractor STILL generally gets paid extra for the resulting cost increase, because someone has to bear that cost and it isn't the contractor's fault either. The practical contingency box reveals an interesting gap between LEGAL entitlement and ACTUAL practice: even where a designer's error theoretically opens them up to an owner's recovery claim, owners typically don't bother pursuing it if the cost falls within the normal, expected 5-10% contingency range that's built into most project budgets anyway.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card impact" id="d5">
+    <h2>5. The Impact Cost Reservation Trap</h2>
+    <p>This diagram traces the Doyle Construction case mechanism precisely, because it shows a contractor losing a claim not because the claim was invalid, but because of WHEN and HOW it was raised relative to pricing the change.</p>
+
+    <div class="mermaid">
+      graph TD
+        ChangeRequest[Owner requests a<br/>change, asks for<br/>a FIRM PRICE] --> Quote{How does the<br/>contractor quote it?}
+
+        Quote --> CleanQuote[Contractor quotes a<br/>FIRM PRICE with<br/>NO reservation —<br/>owner approves]
+        Quote --> ReservedQuote[Contractor quotes a price<br/>BUT adds: 'reserves the<br/>right to claim impact<br/>costs LATER']
+
+        CleanQuote --> LaterClaim{Contractor later tries<br/>to claim EXTRA impact<br/>costs not in the<br/>original quote}
+        LaterClaim --> Doyle[DOYLE PRINCIPLE: Owner<br/>had a right to assume ALL<br/>costs — direct AND indirect<br/>— were included in the<br/>agreed price. Claim<br/>generally FAILS]
+
+        ReservedQuote --> OwnerChoice{Does owner ACCEPT<br/>the quote WITH this<br/>reservation attached?}
+        OwnerChoice -->|Yes, accepted AS-IS| ClaimSurvives[Impact claim is NOT<br/>barred — but owner also<br/>gets NO real price<br/>certainty, since the<br/>claim stays open]
+        OwnerChoice -->|Owner instead requires:<br/>'price MUST include ALL<br/>costs including impact,<br/>identified BEFORE approval'| MustDisclose[Contractor MUST quantify<br/>and disclose impact<br/>costs UP FRONT or<br/>lose the right to<br/>claim them later]
+
+        style ChangeRequest fill:#1e293b,color:#fff
+        style Quote fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Doyle fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style OwnerChoice fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style ClaimSurvives fill:#e0f2fe,stroke:#0284c7
+        style MustDisclose fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two branches under "Quote" represent the contractor's fork in the road, and the diagram is built to show that the SAFEST path for a contractor is the reservation branch — but only if the owner actually agrees to accept it. The Doyle principle box captures exactly why silent, unreserved pricing is dangerous for contractors: once an owner approves a firm price with no caveats, they're entitled to assume that number is genuininely complete and final, including indirect costs the contractor might not have fully appreciated at the time. The OwnerChoice diamond at the bottom shows the owner's own countermove, which the chapter explicitly describes as common practice — rather than passively accepting a reservation clause that leaves pricing open-ended, sophisticated owners build a requirement directly into the RFQ or contract that forces contractors to quantify and disclose impact costs BEFORE approval, closing off the reservation tactic entirely and restoring the price certainty the owner originally wanted. The cumulative-impact rationale (100 small unreserved changes potentially adding up to 10%+ of contract value) is exactly why both sides care so much about which of these paths gets used.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card changeorder" id="d6">
+    <h2>6. Change Order vs Change Directive</h2>
+    <p>These two mechanisms solve the SAME underlying problem (work needs to happen before pricing is finalized) but with opposite default assumptions about approval, timing, and pricing method.</p>
+
+    <div class="mermaid">
+      graph LR
+        Need[Work needs to change<br/>— but price/method<br/>not yet agreed] --> Agreement{Can owner and<br/>contractor AGREE<br/>on price BEFORE<br/>work starts?}
+
+        Agreement -->|YES| CO[CHANGE ORDER]
+        Agreement -->|NO — time doesn't<br/>permit, no agreement<br/>reached, or dispute over<br/>whether it's even a<br/>change at all| CD[CHANGE DIRECTIVE]
+
+        CO --> CODetails[Must be SIGNED by<br/>OWNER. Cost AGREED<br/>BEFORE work starts.<br/>Typically LUMP SUM.]
+        CD --> CDDetails[MAY be issued by<br/>CONSULTANT, but also<br/>signed by owner. Cost<br/>determined LATER.<br/>Typically COST-PLUS.]
+
+        style Need fill:#1e293b,color:#fff
+        style Agreement fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style CO fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style CD fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The single diamond at the top is the entire decision point — both mechanisms exist to let work proceed, but a Change Order requires the harder thing (genuine prior agreement on price) while a Change Directive is the escape valve specifically built for the three situations where that agreement isn't realistically achievable yet: urgency, genuine pricing disagreement, or even disagreement about whether this is a "change" at all versus already-included scope. The pricing-method difference at the bottom (lump sum vs cost-plus) isn't incidental — it follows logically from the timing: you can only commit to a firm lump sum once you actually know and agree on the price, whereas a directive that starts work before pricing is settled almost has to default to cost-plus, since there's no other way to compensate fairly for work whose final scope and price aren't yet pinned down.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card protest" id="d7">
+    <h2>7. Performance Under Protest — The Three Forced Situations</h2>
+    <p>This diagram shows why "just don't do the work until you agree on price" isn't always realistic, and traces the actual resolution path from a disputed extra through to formal dispute resolution.</p>
+
+    <div class="mermaid">
+      graph TD
+        Forced{THREE situations forcing<br/>work to proceed WITHOUT<br/>a finalized change order} --> S1[Time does NOT permit<br/>proper pricing before<br/>the change must<br/>be implemented]
+        Forced --> S2[NO AGREEMENT reached<br/>on price]
+        Forced --> S3[Fundamental disagreement:<br/>is this even a CHANGE,<br/>or already part of the<br/>ORIGINAL scope?]
+
+        S1 --> Path[Contractor performs the<br/>work, submits a claim<br/>for extra]
+        S2 --> Path
+        S3 --> Path
+
+        Path --> ConsultantView{Consultant's<br/>position?}
+        ConsultantView -->|Agrees: OUTSIDE<br/>contractual scope| Negotiate{Parties agree on<br/>price/schedule?}
+        ConsultantView -->|Says: ALREADY part<br/>of contractual scope| Protest[Contractor issues<br/>NOTICE OF DISPUTE +<br/>NOTICE OF WORK<br/>UNDER PROTEST]
+
+        Negotiate -->|Yes| Issued[CHANGE ORDER issued]
+        Negotiate -->|No| Directive[CHANGE DIRECTIVE issued]
+
+        Protest --> DR[Parties proceed to<br/>DISPUTE RESOLUTION<br/>— mediation, arbitration,<br/>or litigation]
+
+        Kiewit[KIEWIT WARNING:<br/>without protest, simply<br/>PERFORMING the disputed<br/>work can be treated as an<br/>ADMISSION it was already<br/>in scope — compensation<br/>DENIED] -.-> Protest
+
+        style Forced fill:#1e293b,color:#fff
+        style ConsultantView fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Protest fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Kiewit fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style DR fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "Forced" box at the top exists to validate why this entire mechanism is even necessary — real construction projects routinely can't wait for tidy upfront agreement, so the law had to develop a path for proceeding anyway without the contractor simply forfeiting their right to be paid. The right-hand branch is the one carrying the real legal danger, flagged directly by the Kiewit case dangling off "Protest": if a contractor disputes that something is in scope but proceeds WITHOUT formally protesting, that silent performance can itself be read by a court as an implicit admission that the work was already covered by the original contract — destroying the very claim the contractor was trying to preserve. This is precisely why some provinces enacted "performance under protest" legislation, and why the chapter specifically advises contractors in provinces without such legislation (it names Alberta) to negotiate explicit protest provisions directly into their contracts rather than relying on uncertain common law protection.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card payif" id="d8">
+    <h2>8. Pay-If-Paid vs Pay-When-Paid</h2>
+    <p>These two clause types look nearly identical in casual reading but produce opposite outcomes if the owner never pays at all. This diagram isolates the precise drafting signal courts look for to tell them apart.</p>
+
+    <div class="mermaid">
+      graph TD
+        Clause[Subcontract payment<br/>clause references<br/>owner's payment] --> Type{What KIND<br/>of clause<br/>is this?}
+
+        Type --> PayIf[PAY-IF-PAID:<br/>owner's payment is a<br/>CONDITION PRECEDENT<br/>to ANY obligation<br/>to pay the sub]
+        Type --> PayWhen[PAY-WHEN-PAID:<br/>affects only the<br/>TIMING of payment —<br/>NOT whether payment<br/>is ultimately owed]
+
+        PayIf --> NeverPaid{Owner NEVER pays<br/>the prime contractor<br/>at all}
+        PayWhen --> NeverPaid2{Owner NEVER pays<br/>the prime contractor<br/>at all}
+
+        NeverPaid -->|If clause is genuinely<br/>enforced as written| SubUnpaid[SUBCONTRACTOR<br/>may NEVER get paid —<br/>risk fully SHIFTED<br/>to subcontractor]
+        NeverPaid2 --> StillOwed[Prime contractor STILL<br/>must eventually pay<br/>the subcontractor —<br/>after a REASONABLE<br/>time trying to collect]
+
+        PayIf --> CourtCaution{Courts' actual<br/>tendency}
+        CourtCaution --> Reluctant[Often RELUCTANT to enforce<br/>as a true condition<br/>precedent — non-payment by<br/>owner involves NO breach<br/>by the subcontractor and is<br/>beyond EITHER party's control]
+        Reluctant --> NeedsClarity[To be enforced: needs EXPLICIT<br/>'condition precedent' wording<br/>PLUS explicit RISK-ASSUMPTION<br/>language — e.g. 'Subcontractor<br/>accepts the financial risk<br/>of insolvency by the Owner']
+
+        style Clause fill:#1e293b,color:#fff
+        style Type fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style SubUnpaid fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style StillOwed fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style CourtCaution fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style NeedsClarity fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The top diamond's split is the entire legal distinction, and it hinges on one conceptual question: does owner non-payment affect WHETHER the sub gets paid, or only WHEN? The "NeverPaid" stress test under each branch is the cleanest way to see the practical difference — under a genuine pay-if-paid clause, total owner non-payment could mean the subcontractor is NEVER paid at all (the risk has fully transferred), while under pay-when-paid, the sub is always entitled to payment eventually, just possibly delayed while the prime makes reasonable efforts to collect. The CourtCaution branch is worth special attention because it reveals the practical reality: courts are skeptical of treating these clauses as true conditions precedent given how harsh and seemingly unfair the result is for a subcontractor who did nothing wrong, which is exactly why the chapter specifies that EXPLICIT condition-precedent language plus EXPLICIT risk-assumption wording is needed to have a real chance at enforcement — vague or ambiguous language gets reinterpreted by courts as the much gentler pay-when-paid version.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card incorporation" id="d9">
+    <h2>9. Incorporation by Reference — The Hidden Risk Chain</h2>
+    <p>A subcontractor agreeing to "be bound by the prime contract" is agreeing to terms they may never have actually read. This diagram traces exactly how that exposure compounds, and the one boundary that limits it.</p>
+
+    <div class="mermaid">
+      graph TD
+        Clause[Subcontract contains<br/>'incorporation by<br/>reference' clause] --> Bound[Subcontractor is bound<br/>by prime contract terms,<br/>'where applicable']
+
+        Bound --> AccessIssue{Did the subcontractor<br/>actually HAVE TIME/ACCESS<br/>to review the prime<br/>contract before bidding?}
+
+        AccessIssue -->|No — not attached to bid<br/>docs, only viewable at<br/>consultant's office, OR<br/>not even negotiated yet| StillBound[STILL legally bound if<br/>documents WERE available<br/>somewhere — 'no legal excuse<br/>for failure to review.'<br/>If prime contract didn't exist<br/>yet, sub may argue they only<br/>agreed to a STANDARD<br/>FORM prime contract]
+        AccessIssue -->|Yes, reviewed it| KnowinglyBound[Knowingly bound by<br/>whatever onerous terms<br/>exist — e.g. no-damages-<br/>for-delay clauses]
+
+        Bound --> ScopeLimit{What does 'incorporation<br/>by reference' actually<br/>COVER?}
+        ScopeLimit --> Physical[PHYSICAL WORK and<br/>MATERIALS — courts have<br/>held this is COVERED]
+        ScopeLimit --> Commercial[COMMERCIAL TERMS<br/>e.g. dispute resolution<br/>clauses — courts have<br/>sometimes held this is<br/>NOT automatically covered<br/>— Dynatec case]
+
+        style Clause fill:#1e293b,color:#fff
+        style AccessIssue fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style StillBound fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style ScopeLimit fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Commercial fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The AccessIssue diamond captures a genuinely harsh result the chapter flags explicitly: practical inability to review a document under bidding time pressure does NOT excuse a subcontractor from being bound by it, as long as the documents were technically AVAILABLE somewhere (even if only at the consultant's office, never physically attached to the bid package). The "StillBound" box's secondary note about standard form contracts is the subcontractor's one real escape hatch in this scenario — if the actual prime contract wasn't even finalized yet at bid time, the sub has a real argument that their blanket agreement only contemplated a reasonably standard, expected version of that contract, not whatever unusually onerous terms eventually got negotiated. The ScopeLimit diamond at the bottom is a separate, narrower protection worth remembering on its own: even a broad incorporation clause doesn't automatically sweep in EVERY type of term — the Dynatec case shows courts willing to distinguish between physical scope-of-work terms (clearly incorporated) and purely commercial/procedural terms like dispute resolution clauses (not automatically incorporated), meaning the WORDING of the incorporation clause itself needs careful scrutiny rather than assuming it's all-or-nothing.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card unforeseen" id="d10">
+    <h2>10. The Unforeseen Conditions Disclaimer Failure</h2>
+    <p>Owners often try to shift hidden-condition risk onto bidders through aggressive disclaimer language. This diagram traces why courts have repeatedly refused to let that risk transfer work as cleanly as owners intend.</p>
+
+    <div class="mermaid">
+      graph TD
+        Disclaimer[Owner's tender documents:<br/>'Bidder must investigate<br/>everything, cannot rely<br/>on ANY data provided'] --> Intent[INTENT: shift ALL<br/>unforeseen-condition<br/>risk to the contractor]
+
+        Intent --> Flaw1{FLAW 1: Can bidders<br/>REALISTICALLY do detailed<br/>investigation in the<br/>short bid period?}
+        Flaw1 -->|No — Edgeworth case:<br/>2 years of engineering<br/>review compressed into<br/>2 WEEKS of bid time| Unreasonable[Courts find this<br/>UNREASONABLE to expect<br/>— shifts risk back<br/>toward OWNER despite<br/>the disclaimer]
+
+        Intent --> Flaw2{FLAW 2: What do PRUDENT<br/>bidders do anyway when<br/>information is thin?}
+        Flaw2 --> Contingency[They build in a<br/>CONTINGENCY — and this<br/>contingency typically<br/>EXCEEDS what the owner<br/>would have paid by simply<br/>RETAINING the risk itself]
+
+        Intent --> Flaw3{FLAW 3: Did the owner<br/>WITHHOLD known<br/>information — e.g. a report<br/>showing rock below grade?}
+        Flaw3 -->|Yes| Begro[BEGRO PRINCIPLE: owner<br/>CANNOT withhold known<br/>vital information and then<br/>claim 'due diligence would<br/>have found it' — all<br/>available reports MUST<br/>be shared]
+
+        style Disclaimer fill:#1e293b,color:#fff
+        style Intent fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Unreasonable fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Contingency fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Begro fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Each "Flaw" branch represents a SEPARATE, independent reason this risk-shifting strategy backfires, meaning an owner doesn't need all three to fail — any ONE of them undermines the disclaimer's intended effect. Flaw 1 is about REALISM: Edgeworth makes the point vivid by contrasting the owner's original 2-YEAR engineering process against a 2-WEEK bidding window, making clear that demanding equivalent diligence from every single bidder would be absurd and massively wasteful (effectively requiring the engineering to be redone by every bidder rather than once by the owner's own team). Flaw 2 is about ECONOMIC IRONY: forcing contractors to price unknowable risk usually backfires on the owner financially, since contractors pad their bids MORE heavily for genuine unknowns than the actual risk turns out to cost — meaning the owner often pays a premium for "protection" that wasn't economically efficient to buy in the first place. Flaw 3 is the most damning because it's not about REASONABLENESS at all, it's about GOOD FAITH — Begro shows a court actively condemning an owner who had information in hand and chose not to share it, refusing to let "you should have done more diligence" serve as a defence when the missing information was sitting right there, undisclosed, the whole time.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fieldreview" id="d11">
+    <h2>11. Coast Hotels — Number of Reviews vs Timing of Reviews</h2>
+    <p>This case proves a critical, counterintuitive point: doing MORE site visits than the contract required can still mean LIABILITY, because the real legal question isn't "how many" but "were they timed and conducted to actually catch problems."</p>
+
+    <div class="mermaid">
+      graph TD
+        Contract[Contract specified<br/>10 site visits] --> Actual[Engineer ACTUALLY<br/>performed 13 site visits<br/>— MORE than contracted]
+
+        Actual --> SoundsGood{Sounds adequate<br/>on its face — but<br/>was it?}
+
+        SoundsGood --> TimingCheck{WHEN did the<br/>13 visits actually<br/>occur?}
+        TimingCheck --> Bad[Only 4 of 13 occurred<br/>WHILE WORK was<br/>actively being done.<br/>Most occurred at the<br/>START, before significant<br/>work, or at the END,<br/>AFTER walls were<br/>already closed in]
+
+        Bad --> RiskFactors{Were there RISK<br/>SIGNALS that should have<br/>triggered MORE vigilance?}
+        RiskFactors --> RF1[No current as-built<br/>drawings — alterations<br/>had been made]
+        RiskFactors --> RF2['Aggressive' water known<br/>to cause corrosive<br/>pitting in OLD system]
+
+        RF1 --> Failed[COURT FINDING: duty of<br/>care NOT met — engineer<br/>placed UNDUE RELIANCE<br/>on owner/contractor staff<br/>instead of independently<br/>verifying given these<br/>known risk factors]
+        RF2 --> Failed
+
+        Failed --> Apportion[LIABILITY: 80% Contractor<br/>— poor workmanship/<br/>supervision — 20% Engineer<br/>— inadequate review TIMING,<br/>not inadequate review<br/>QUANTITY]
+
+        Failed --> BudgetNote[IMPORTANT: Court did NOT<br/>consider the FEE/BUDGET<br/>for reviews — professional<br/>standard applies REGARDLESS<br/>of what was paid for]
+
+        style Contract fill:#1e293b,color:#fff
+        style SoundsGood fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Bad fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style RiskFactors fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Failed fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style BudgetNote fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "SoundsGood" diamond is placed deliberately to mirror the trap a reader falls into on first hearing the facts — 13 visits against a contracted 10 LOOKS like over-performance, and that's exactly the wrong intuition this diagram is built to correct. The real legal test only emerges once you check WHEN those visits happened: clustering reviews at the very beginning (before meaningful work existed to inspect) and the very end (after walls were already closed, hiding everything) means the reviews largely missed the actual WINDOW during which problems could have been caught and corrected. The RiskFactors branch adds a second dimension — the court didn't just fault generic timing, it specifically pointed to known risk signals (missing as-built drawings, known aggressive/corrosive water conditions) that should have triggered HEIGHTENED vigilance, and faulted the engineer for instead leaning on the owner's and contractor's own staff rather than independently confirming the work. The BudgetNote at the bottom is a separate, standalone principle worth remembering on its own: professionals can't defend inadequate reviews by pointing to what they were paid for — the professional standard of care is owed regardless of contract economics, meaning if the appropriate fee isn't available, the right move is to decline the engagement or absorb the extra review cost personally, not to quietly under-deliver.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

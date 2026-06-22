@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 2: Visualizing Regulation of the Professions</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; text-transform: uppercase; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.pillars { border-top-color: #64748b; }
+    .framework-card.registration { border-top-color: #f59e0b; }
+    .framework-card.jurisdiction { border-top-color: #ef4444; }
+    .framework-card.discipline { border-top-color: #10b981; }
+    .framework-card.seal { border-top-color: #8b5cf6; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; list-style-type: none; }
+    li { margin-bottom: 12px; position: relative; padding-left: 15px; }
+    li::before { content: "■"; position: absolute; left: 0; color: #3b82f6; font-size: 1.2em; line-height: 1; top: 2px; }
+    strong { color: #0f172a; }
+    .level-1 { border-left: 3px solid #cbd5e1; padding-left: 10px; margin-bottom: 5px; }
+    .level-2 { border-left: 3px solid #94a3b8; padding-left: 10px; margin-bottom: 5px; }
+    .level-3 { border-left: 3px solid #475569; padding-left: 10px; margin-bottom: 5px; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 2: DEEP REGULATION VISUALIZATION</h1>
+
+  <div class="framework-card pillars">
+    <h2>1. The Pillars of Self-Regulation</h2>
+    <p>In Canada, the government hands the power of regulation directly to the professions. This power is split into two distinct, heavily guarded monopolies[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Gov[Provincial Government] --> |Delegates Statutory Authority| Reg[Regulatory Body e.g., PEO, APEGA]
+        
+        Reg --> Title[Right to Title]
+        Reg --> Scope[Scope of Practice]
+        
+        Title -.-> |Prevents public deception| Shield1(Exclusive use of 'P.Eng.' or 'Architect')
+        Scope -.-> |Prevents public harm| Shield2(Exclusive right to perform specific technical tasks)
+        
+        style Gov fill:#1e293b,color:#fff
+        style Reg fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Title fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Scope fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Shield1 fill:#f8fafc,stroke:#94a3b8
+        style Shield2 fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Gradual Explanation:</span></p>
+      <div class="level-1"><strong>Basic:</strong> The government lets engineers and architects govern themselves to protect the public[cite: 1].</div>
+      <div class="level-2"><strong>Intermediate:</strong> This self-regulation creates two monopolies: "Right to Title" means only members can call themselves engineers, and "Scope of Practice" means only members can legally do the work[cite: 1]. Other professions (like interior design) only have title protection, not scope protection[cite: 1].</div>
+      <div class="level-3"><strong>Complex:</strong> Scope of practice is defined in provincial legislation using either generic definitions (e.g., "application of engineering principles") or specific task lists[cite: 1]. These statutory definitions are binding and feature specific exclusions (like allowing natural scientists to practice without breaking the engineering act) to prevent overlapping jurisdictional conflicts between different regulated professions[cite: 1].</div>
+    </div>
+  </div>
+
+
+  <div class="framework-card registration">
+    <h2>2. The Registration Funnel</h2>
+    <p>Getting an engineering degree does not make someone an engineer. The path to professional licensure is a strict, multi-stage filter[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Deg[University Degree] --> |Interim Phase| EIT[Engineer-in-Training EIT]
+        EIT --> Exp[4 Years Qualifying Experience]
+        Exp --> Exam[Law & Ethics Exam]
+        Exam --> PEng(((P.Eng. Status)))
+        
+        PEng --> |Reciprocity Agreements| Mobility[Inter-provincial & International Mobility]
+        
+        style Deg fill:#f1f5f9,stroke:#64748b
+        style EIT fill:#fef3c7,stroke:#d97706
+        style Exp fill:#e0f2fe,stroke:#0284c7
+        style Exam fill:#e0f2fe,stroke:#0284c7
+        style PEng fill:#166534,color:#fff,stroke-width:3px
+        style Mobility fill:#f3e8ff,stroke:#9333ea
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Gradual Explanation:</span></p>
+      <div class="level-1"><strong>Basic:</strong> You need a degree, four years of experience, and a passing grade on an ethics exam to get your license[cite: 1].</div>
+      <div class="level-2"><strong>Intermediate:</strong> During the four-year apprenticeship, graduates must use interim titles like "Engineer-in-Training" (EIT) and cannot practice independently[cite: 1]. Calling yourself an engineer before completing this funnel is illegal and invites enforcement proceedings[cite: 1].</div>
+      <div class="level-3"><strong>Complex:</strong> Once registered, professionals can leverage reciprocity agreements (like NAFTA for Texas/Mexico, or inter-provincial agreements) to facilitate multiple registrations[cite: 1]. However, a critical legal requirement remains: a professional MUST be explicitly registered in <em>each and every</em> province where they practice or where their project is located, regardless of reciprocity[cite: 1].</div>
+    </div>
+  </div>
+
+
+  <div class="framework-card discipline">
+    <h2>3. The Dual Justice System (Discipline vs. Enforcement)</h2>
+    <p>Regulatory bodies wield significant quasi-criminal powers, but they deploy two completely different weapons depending on whether you are an insider or an outsider[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Violation[Illegal or Incompetent Act] --> Q1{Are they a licensed member?}
+        
+        Q1 -->|Yes| Disc[DISCIPLINE]
+        Q1 -->|No| Enf[ENFORCEMENT]
+        
+        Disc -.->|Internal Process| T1(Hearings for incompetence or ethics breaches)
+        Enf -.->|External Process| T2(Court actions for faking titles or illegal practice)
+        
+        T1 --> Pen1[Penalties: Reprimands, Fines, License Revocation]
+        T2 --> Pen2[Penalties: Civil Injunctions, Fines]
+        
+        style Violation fill:#1e293b,color:#fff
+        style Q1 fill:#fef3c7,stroke:#d97706
+        style Disc fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Enf fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Pen1 fill:#991b1b,color:#fff
+        style Pen2 fill:#991b1b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Gradual Explanation:</span></p>
+      <div class="level-1"><strong>Basic:</strong> If a registered engineer messes up, the association disciplines them. If an unregistered person fakes being an engineer, the association enforces the law against them[cite: 1].</div>
+      <div class="level-2"><strong>Intermediate:</strong> "Discipline" is the internal process of charging a member and holding a hearing. "Enforcement" is the process of prosecuting non-members who violate the right to title or scope of practice[cite: 1].</div>
+      <div class="level-3"><strong>Complex:</strong> Disciplinary proceedings are quasi-criminal in nature[cite: 1]. Because a guilty verdict can result in the termination of a professional's livelihood (license revocation), the standards of proof and procedural rigors are exceptionally strict, and penalties are deliberately severe to protect the public interest[cite: 1].</div>
+    </div>
+  </div>
+
+
+  <div class="framework-card seal">
+    <h2>4. The Professional Seal & Letters of Assurance</h2>
+    <p>Your seal is not a rubber stamp; it is a legally binding transfer of liability. Applying it without doing the actual work is a major disciplinary offense[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Doc[Final Drawings / Reports] --> Check{Level of Involvement?}
+        
+        Check -->|Personally Prepared| Seal[Apply Professional Seal]
+        Check -->|Directly Supervised| Seal
+        Check -->|Thoroughly Reviewed| Seal
+        Check -->|Did not look closely at it| Ban[DO NOT SEAL]
+        
+        Seal --> Liab(((Accepts Full Legal Liability)))
+        Ban --> Disc[Sealing = Severe Disciplinary Offense]
+        
+        style Doc fill:#1e293b,color:#fff
+        style Check fill:#fef3c7,stroke:#d97706
+        style Seal fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Ban fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Liab fill:#166534,color:#fff,stroke-width:2px
+        style Disc fill:#991b1b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Gradual Explanation:</span></p>
+      <div class="level-1"><strong>Basic:</strong> When you stamp a drawing, you are telling the world that you made it, supervised it, or checked it, and that it is safe[cite: 1].</div>
+      <div class="level-2"><strong>Intermediate:</strong> Using your seal improperly (like stamping a junior's drawing without actually checking their math) is a direct disciplinary offense[cite: 1]. The seal proves professional involvement and transfers the liability for that work directly onto you[cite: 1].</div>
+      <div class="level-3"><strong>Complex:</strong> Furthermore, municipalities often require "Letters of Assurance" at the end of a project, certifying that the building was constructed perfectly in accordance with the plans[cite: 1]. These letters are incredibly broad and are routinely used by owners to shift massive liability onto the professional[cite: 1]. You must rigorously evaluate what services and costs are necessary before agreeing to sign such a legally binding document[cite: 1].</div>
+    </div>
+  </div>
+
+</body>
+</html>

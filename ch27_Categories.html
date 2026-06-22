@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.27 Reference Card: Internet Law</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 27 — Internet Law</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">Jurisdiction (Conflict of Laws) — Key Challenges<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Contracts must specify GOVERNING LAW and COURTS</span><span class="item-note">— e.g. a contract signed in BC and Washington, with work done in India for use in Sweden — must clearly state which jurisdiction's laws/courts apply. But this alone may not resolve LOCAL law issues (employment, taxation, safety, privacy) that can still apply to the work performed.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Borderless nature of the Internet → multiple jurisdictions may claim authority</span><span class="item-note">— courts (especially US courts) may take jurisdiction simply because a wrongful activity affected residents in their jurisdiction. A business may face risk from unknown laws/court systems applying to its online activity.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">Defamation Online — Key Rules<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Defamation = communication that injures another's reputation</span><span class="item-note">— includes SLANDER (oral) and LIBEL (written); definitions vary by jurisdiction</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Merely unflattering/annoying/embarrassing ≠ actionable</span><span class="item-note">— the communication must injure the party in a SIGNIFICANT way, not just hurt feelings</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Website communications treated like radio/TV broadcasts</span><span class="item-note">— defamatory posts/emails can result in libel or slander actions; negligent advice posted online can support a MISREPRESENTATION claim, same as any other medium</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">Copyright Online — ISP Liability & Protection<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">US: ISPs liable only if they ACTIVELY ENGAGE/PARTICIPATE in infringement</span><span class="item-note">— Digital Millennium Copyright Act (DMCA) protects ISPs for activities BEYOND their knowledge/control</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">CANADA has NO equivalent legislation to the DMCA</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Courts remain the only real recourse</span><span class="item-note">— copyright holders should: register the copyright (proves publication), have licensing agreements in place, use proper copyright markings throughout documents, and consider electronic fingerprinting/technological tools as evidence</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">Trademarks & Domain Names — Cybersquatting<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Domain names = first-come, first-served via approved registrars</span><span class="item-note">— subject to the same trademark laws as corporate names. Owners must ACTIVELY police/protect trademarks or risk losing them.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Cybersquatting = unlawful trademark use</span><span class="item-note">— pre-emptively registering domain names containing well-known trademarks/trade names, then offering to sell to the rightful owner. Courts have found this (a) likely to confuse/mislead Internet users, AND (b) constitutes MISREPRESENTATION regarding the trademark owner's approval/authorization/endorsement.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">Privacy & Securities Regulation — Governing Principles<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Privacy (Ch.26 / PIPEDA) APPLIES to Internet activities</span><span class="item-note">— especially relevant for e-commerce (rapid electronic collection/transmission of personal info). "Click to agree" policies should be CLEAR and meet privacy legislation requirements, even though most users don't read them.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Securities laws (Ch.25) apply EQUALLY to the Internet as to any other medium</span><span class="item-note">— the governing principle: no special carve-out for online securities activity</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#854F0B">6</div>
+      <div class="sec-title">Electronic Contracts — Key Rules<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Canadian electronic commerce/evidence laws follow the Uniform Electronic Commerce Act</span><span class="item-note">— provide certainty for formation, performance, enforcement of e-contracts (don't solve EVERY issue, but give a framework)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">"I Agree" contracts are valid and binding</span><span class="item-note">— the software making the offer acts as an ELECTRONIC AGENT for the offeror, treated as effective as a human agent</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Timing rules for delivery/receipt</span><span class="item-note">— DELIVERY = instant the message enters a computer system BEYOND the sender's control; RECEIPT = instant it enters a system the receiver CAN access. Parties may set their OWN rules by contract.</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">"Notice and acceptance by conduct" agreements</span><span class="item-note">— users deemed to accept by engaging in conduct (e.g. using a site, downloading software) — but must be CLEAR and UNAMBIGUOUS to be enforceable</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Unusual/onerous terms must be drawn to the user's attention</span><span class="item-note">— same rule as conventional unsigned standard-form contracts (Ch.6). Parties should also verify identity/capacity/authority and authenticity — via e-signatures, cryptography, passwords, PINs, or traditional backups (phone confirmation, signed paper copies, credit card verification). Residual risk → contractual risk allocation + insurance.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#993C1D">7</div>
+      <div class="sec-title">Website Development Lifecycle<span class="sec-count">5 stages</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Assess the purpose of the website</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Design and plan</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Develop</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Receive client feedback</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Deploy the finished product</span></div></div>
+      </div>
+      <div class="info">Role does NOT end at deployment — ongoing MAINTENANCE (keeping content current) and TECHNICAL SUPPORT are critical, since lost business from a non-functioning website can be significant. A proper development contract is recommended to reduce risk for both parties.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#3B6D11">8</div>
+      <div class="sec-title">8 Email Risks for a Communications System Policy (CSP)<span class="sec-count">8 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Casual/spontaneous tone</span><span class="item-note">— created with less care than formal communications; often contains ill-considered statements</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Effortless mass reproduction/distribution</span><span class="item-note">— damaging communications spread quickly at virtually no cost</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">One click → irretrievable distribution to unintended recipients</span><span class="item-note">— including unintended forwarding</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Easy to forge ("spoofing") or alter before forwarding</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Can be lost or delayed beyond sender/recipient control</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Detailed transmittal metadata</span><span class="item-note">— who sent it, when, to whom, sometimes when received/read</span></div></div>
+        <div class="item"><div class="num">7</div><div><span class="item-title">Almost always recoverable</span><span class="item-note">— harder to truly eliminate than paper; data forensics can recover deleted emails</span></div></div>
+        <div class="item"><div class="num">8</div><div><span class="item-title">Susceptible to unauthorized access</span><span class="item-note">— at every computer/filing location where a copy resides</span></div></div>
+      </div>
+      <div class="info"><strong>CSP best practice:</strong> A written Communications System Policy should govern internet/intranet/extranet, email, and voicemail use; educate users on these risks; be drafted with LEGAL and TECHNICAL advice (consistent with applicable laws and any collective bargaining agreements); and have a SENIOR MANAGEMENT owner responsible for implementation. Vmail shares most of these risks but is generally easier to erase than email.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

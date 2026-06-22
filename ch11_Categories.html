@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.11 Reference Card: Specific Contracts and Clauses</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 11 — Specific Contracts and Clauses</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">5 Types of Construction Contracts (by payment method)<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Contract Type</th><th>How Payment Works</th><th>Key Feature</th></tr></thead>
+        <tbody>
+          <tr><td>Fixed Price / Stipulated Sum</td><td>Lump sum including overhead and profit</td><td>Owner cannot direct means/methods. Contractor keeps savings, bears overruns. Price rarely stays fixed (change orders).</td></tr>
+          <tr><td>Cost-Plus</td><td>Actual cost + fee (fixed or % of cost)</td><td>No incentive to save; % fee rewards higher cost. Owner bears cost risk. Used when scope is uncertain.</td></tr>
+          <tr><td>Guaranteed Maximum Price (GMP)</td><td>Cost-plus up to a cap; savings shared</td><td>Hybrid of fixed-price and cost-plus. Owner audits costs if contractor claims savings.</td></tr>
+          <tr><td>Unit Price</td><td>Set price per unit of work (e.g. $/m³ concrete)</td><td>Common for roads, earthmoving, pipelines. Quantity adjustments may apply if totals vary significantly from estimate.</td></tr>
+          <tr><td>Alliance Agreement</td><td>Cost-plus with painshare / gainshare</td><td>No-blame clause; all parties share success/failure; no litigation allowed. Contractor's exposure limited to overhead and profit.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">3 Crucial Elements of an Alliance Agreement<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">A "no blame" clause</span><span class="item-note">— operates between ALL parties including the owner (with possible limited exceptions)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">A clearly defined gainshare / painshare</span><span class="item-note">— determines how profits and losses are shared based on project performance</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">A clear understanding of the roles of all participants</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">Standard CCDC Contract Forms — Which to Use When<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">CCDC 2</div><div><span class="item-title">Fixed-Price (Stipulated Price)</span><span class="item-note">— most common construction contract in Canada; de facto leader for stipulated price</span></div></div>
+        <div class="item"><div class="num">CCDC 3</div><div><span class="item-title">Cost-Plus</span><span class="item-note">— popular but has weaknesses (rework clause, mandatory schedule despite undefined scope); needs revision</span></div></div>
+        <div class="item"><div class="num">CCDC 4</div><div><span class="item-title">Unit Price</span><span class="item-note">— not recently updated; rarely used</span></div></div>
+        <div class="item"><div class="num">CCDC 5A</div><div><span class="item-title">Construction Management (manager only)</span><span class="item-note">— CM acts solely as manager, no construction risk</span></div></div>
+        <div class="item"><div class="num">CCDC 5B</div><div><span class="item-title">Construction Management (at-risk)</span><span class="item-note">— CM takes on cost/time risk at some point</span></div></div>
+      </div>
+      <div class="info">Also: <strong>CCDC 14</strong> = Design-Build contract (based on CCDC 2 but may not fully address DB-specific issues). <strong>CCA 17</strong> = Trade contract for individual trades through a construction manager.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#0F6E56">4</div>
+      <div class="sec-title">9 Standard Clauses Found in Most Contracts<span class="sec-count">9 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">a</div><div><span class="item-title">Scope of Work</span><span class="item-note">— must clearly define services and materials; more accurate = fewer claims</span></div></div>
+        <div class="item"><div class="num">b</div><div><span class="item-title">Contract Time</span><span class="item-note">— "time is of the essence" applies to BOTH parties; schedule must be realistic with contingency time</span></div></div>
+        <div class="item"><div class="num">c</div><div><span class="item-title">Changes</span><span class="item-note">— must follow written change procedures; oral changes create a new contract and undermine the original</span></div></div>
+        <div class="item"><div class="num">d</div><div><span class="item-title">Damages and Bonuses</span><span class="item-note">— liquidated damages are enforceable; penalty clauses are NOT. No requirement to include a bonus clause alongside liquidated damages.</span></div></div>
+        <div class="item"><div class="num">e</div><div><span class="item-title">Warranty</span><span class="item-note">— time-limited promise to repair defects; must be clear if it is IN ADDITION TO or IN PLACE OF rights at law</span></div></div>
+        <div class="item"><div class="num">f</div><div><span class="item-title">Termination</span><span class="item-note">— early termination requires fundamental breach + notice + opportunity to remedy. "Termination for convenience" requires reasonable compensation.</span></div></div>
+        <div class="item"><div class="num">g</div><div><span class="item-title">Indemnification</span><span class="item-note">— only as good as the financial strength of the indemnifying party</span></div></div>
+        <div class="item"><div class="num">h</div><div><span class="item-title">Exclusion / Limitation / Waiver Clauses</span><span class="item-note">— construed strictly against the drafter; ambiguity resolved in favour of other party; 3-stage Tercon test applies</span></div></div>
+        <div class="item"><div class="num">i</div><div><span class="item-title">Dispute Resolution</span><span class="item-note">— notice of claim provisions must be followed strictly; mandatory arbitration vs litigation: consider carefully before including</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">3-Stage Tercon Test for Exclusion Clauses<span class="sec-count">3 items · must pass all 3</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Does the exclusion clause apply to the circumstances of the case?</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Was the exclusion clause unconscionable at the time the contract was made?</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Should the court override the clause for public policy reasons?</span></div></div>
+      </div>
+      <div class="warn"><strong>Key rule:</strong> Exclusion clauses must clearly define the exact contingency to be excluded. If clearly drafted with no ambiguity, courts give full effect. Ambiguity → construed against the drafter (contra proferentem).</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#854F0B">6</div>
+      <div class="sec-title">Key Clauses in a Professional Service Agreement<span class="sec-count">8 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Scope of services</span><span class="item-note">— what is included and excluded</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Limitation of liability</span><span class="item-note">— often limits claims to insurance limits; must understand what insurance covers</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Level of field services</span><span class="item-note">— periodic review vs. inspection/guarantee; must be agreed before signing</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Pricing</span><span class="item-note">— fixed price, cost-plus, or % of construction cost</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Time for performance</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Dispute resolution options</span></div></div>
+        <div class="item"><div class="num">7</div><div><span class="item-title">Termination</span></div></div>
+        <div class="item"><div class="num">8</div><div><span class="item-title">Ownership of the work product</span><span class="item-note">— who owns the designs, drawings, reports</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#993C1D">7</div>
+      <div class="sec-title">4 Geoscience-Specific Contract Types<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Syndication</span><span class="item-note">— raises funds from multiple investors for exploration</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Grubstake Agreement</span><span class="item-note">— provides funds/supplies to prospector in exchange for a share of any discovery; many now subject to securities legislation</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Royalty Agreement</span><span class="item-note">— provides return on investment as a percentage of production/revenue</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Option Agreement</span><span class="item-note">— gives optionee the right (but not obligation) to buy land/rights; often involves money + shares + work commitment in exchange for an interest in the property</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#3B6D11">8</div>
+      <div class="sec-title">4 Consultant Roles in Project Finance<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Assist owner in developing a feasibility study</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Provide a design that meets the project's needs</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Work with owner and lawyers to create "bankable" contract documents</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Provide appropriate contract administration services</span><span class="item-note">— may include reporting to the lender</span></div></div>
+      </div>
+      <div class="info"><strong>Bankable contract:</strong> Terms acceptable to the lender. Lender must be satisfied that risks are allocated such that the debt is protected even if difficulties arise. Lenders prefer risks allocated to insurers and bonding companies.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

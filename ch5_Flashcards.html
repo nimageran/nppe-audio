@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 5 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Sole Proprietorship</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> A business owned and run by exactly one person.<br><br><strong>The Trap:</strong> There is absolutely zero legal separation between you and the business. If the business goes bankrupt or gets sued, the court can seize your personal bank accounts and your house.</div>
+        <div class="mnem">Unlimited Personal Liability</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">General Partnership</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> Two or more people running a business together to make a profit.<br><br><strong>The Trap:</strong> Every single partner is an agent of the other. If your partner signs a terrible contract behind your back, you are legally bound to pay for it.</div>
+        <div class="mnem">You Bleed for Their Mistakes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Joint and Several Liability</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Your firm gets sued for $1 Million. Your partner goes bankrupt and runs away.<br><br><strong>The Rule:</strong> The plaintiff does not just take your 50%. "Joint and Several" means the plaintiff can demand the entire $1 Million directly from YOU.</div>
+        <div class="mnem">100% on the Hook</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Limited Partnership</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> A business with at least one General Partner (who runs things) and Limited Partners (who just provide money).<br><br><strong>The Trap:</strong> If a Limited Partner starts making management decisions or acting like a boss, they instantly lose their liability shield and become a General Partner.</div>
+        <div class="mnem">Silent Investors Must Stay Silent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Limited Liability Partnership (LLP)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Used by professionals like accountants, lawyers, and sometimes engineers.<br><br><strong>The Rule:</strong> It protects your personal assets from the professional negligence of your partners. BUT, you are still personally liable for your *own* negligence.</div>
+        <div class="mnem">Protects You from YOUR Partner</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Corporation (The Concept)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> A corporation is a fictional "legal person" created by the government.<br><br><strong>The Rule:</strong> It is completely separate from its owners. It can own property, sign contracts, sue, and be sued in its own name. It does not die when the owners die.</div>
+        <div class="mnem">A Separate Legal Person</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Shareholders vs.<br>Directors vs. Officers</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>Shareholders:</strong> The owners. They elect directors. They have limited liability.<br><strong>Directors:</strong> The brains. They make high-level decisions and hire officers.<br><strong>Officers:</strong> The hands (CEO, CFO). They run the daily operations.</div>
+        <div class="mnem">Own -> Guide -> Operate</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Piercing the Corporate Veil</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You set up a fake corporation just to commit fraud or hide stolen money.<br><br><strong>The Rule:</strong> A judge can "pierce the veil," ignoring the corporate shield completely, and go straight after your personal house and bank accounts.</div>
+        <div class="mnem">Fraud Breaks the Shield</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Director's Fiduciary Duty</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Trick:</strong> If you are a Director, who do you owe your ultimate loyalty to?<br><br><strong>The Rule:</strong> You owe your fiduciary duty to the <strong>Corporation itself</strong>, NOT to the shareholders. If the shareholders want to do something that kills the company, you must protect the company.</div>
+        <div class="mnem">Loyalty to the Company First</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Personal Liability of Directors</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Threat:</strong> Being a director is dangerous. The corporate shield does NOT protect directors from everything.<br><br><strong>The Rule:</strong> Directors can be personally sued or jailed for unpaid employee wages, unpaid taxes, and environmental damage caused by the company.</div>
+        <div class="mnem">Directors Pay for Taxes & Spills</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Director's Conflict of Interest</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You are a director of TechCorp, and TechCorp wants to buy land that you personally own.<br><br><strong>The Rule:</strong> You MUST declare your conflict of interest, and you are legally forbidden from voting on the decision.</div>
+        <div class="mnem">Declare and Step Back</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Insider Trading</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You know your company is about to win a massive government contract, so you buy stock before the news hits the public.<br><br><strong>The Rule:</strong> Using undisclosed, material information to trade shares is a criminal offense.</div>
+        <div class="mnem">Trading on Secrets = Prison</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Public vs. Private Corporations</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>Public:</strong> Shares are traded openly on the stock market. Highly regulated by securities commissions.<br><br><strong>Private:</strong> Shares are closely held (often by founders/family). You cannot sell your shares to the public, and transfer is heavily restricted.</div>
+        <div class="mnem">Public = Open Market | Private = Restricted</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 12: Visual Tort Mechanics</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    .top-nav { max-width: 900px; margin: 0 auto 20px; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.universe { border-top-color: #64748b; }
+    .framework-card.gauntlet { border-top-color: #ef4444; }
+    .framework-card.web { border-top-color: #f59e0b; }
+    .framework-card.chain { border-top-color: #10b981; }
+    .framework-card.spectrum { border-top-color: #9333ea; }
+    .framework-card.fraud { border-top-color: #dc2626; }
+    .framework-card.fiduciary { border-top-color: #0ea5e9; }
+    .framework-card.nuisance { border-top-color: #ca8a04; }
+    .framework-card.economic { border-top-color: #15803d; }
+    .framework-card.shield { border-top-color: #64748b; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 12: DEEP TORT VISUALIZATION</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Tort Taxonomy</a>
+    <a href="#d2">2. The Negligence Gauntlet</a>
+    <a href="#d3">3. The Duty of Care Web</a>
+    <a href="#d4">4. The Breach Spectrum (Incompetence vs Lack of Care)</a>
+    <a href="#d5">5. The Misrepresentation Spectrum</a>
+    <a href="#d6">6. The Fraud Chain</a>
+    <a href="#d7">7. The Fiduciary Trapdoor Test</a>
+    <a href="#d8">8. The Nuisance / Strict Liability Bypass</a>
+    <a href="#d9">9. The Pure Economic Loss Gatekeeper</a>
+    <a href="#d10">10. The Negligence Shield (Risk Reduction Cycle)</a>
+    <a href="#d11">11. The Learned Intermediary Chain (Product Liability)</a>
+  </div>
+
+
+  <div class="framework-card universe" id="d1">
+    <h2>1. The Tort Taxonomy</h2>
+    <p>A tort is just a civil wrong where someone gets hurt or loses money without a contract being broken. You need to map out exactly how the law divides these wrongs. They split into two completely different mindsets: accidents versus intentional attacks. The court punishes these very differently.</p>
+
+    <div class="mermaid">
+      graph TD
+        Root[THE TORT UNIVERSE] --> Unintentional[Unintentional Torts]
+        Root --> Intentional[Intentional Torts]
+        
+        Unintentional --> Neg[Negligence]
+        Unintentional --> NegMis[Negligent Misrepresentation]
+        
+        Intentional --> Fraud[Fraud / Deceit]
+        Intentional --> Trespass[Trespass]
+        Intentional --> Nuisance[Nuisance]
+        Intentional --> Defame[Defamation]
+        
+        style Root fill:#1e293b,color:#fff,stroke:none
+        style Unintentional fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Intentional fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This map separates honest mistakes from deliberate actions. The entire left side is about carelessness. You did not mean to cause damage, but you failed to meet professional standards. The right side is strict and aggressive. If you commit an intentional tort like trespass or nuisance, the court does not care how careful you were being — these are strict liability. You crossed a hard boundary, and you are automatically liable once the basic elements are proven.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card gauntlet" id="d2">
+    <h2>2. The Negligence Gauntlet</h2>
+    <p>This is the core engine of liability. To successfully sue you for negligence, a plaintiff must force your actions through four specific filters. If your lawyer can break even one of these connections, the lawsuit dies immediately. You are looking for the exact point of failure.</p>
+
+    <div class="mermaid">
+      graph LR
+        Start((Lawsuit)) --> D{1. Duty of Care?}
+        D -->|Yes| B{2. Breach?}
+        D -->|No| Safe[Claim Fails]
+        B -->|Yes| C{3. Proximate Cause?}
+        B -->|No| Safe
+        C -->|Yes| L{4. Actual Loss?}
+        C -->|No| Safe
+        L -->|Yes| Payout((You Pay Damages))
+        L -->|No| Safe
+
+        style Start fill:#f1f5f9,stroke:#64748b
+        style D fill:#fef3c7,stroke:#d97706
+        style B fill:#fef3c7,stroke:#d97706
+        style C fill:#fef3c7,stroke:#d97706
+        style L fill:#fef3c7,stroke:#d97706
+        style Safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Payout fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This is a sequential trap. You must understand that making a mistake does not equal paying money. First, the court asks if you even owed a duty to the random person suing you. If yes, they ask if your work was actually sloppy compared to a normal engineer (breach of the standard of care). If yes, they ask if your specific sloppy work is the direct trigger for the accident, ignoring other weird events (the "but for" test). Finally, they ask if real financial or physical damage actually happened. The easiest defense for an engineer is often proving the final step never happened, meaning the error was caught in time before it cost anyone anything.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card web" id="d3">
+    <h2>3. The Duty of Care Web</h2>
+    <p>You need to know exactly who can sue you and how. The legal connections you have with the owner, the public, and the contractors are entirely different. Do not confuse your contractual obligations with your tort obligations.</p>
+
+    <div class="mermaid">
+      graph TD
+        Eng[The Engineer] <-->|Contract + Tort| Owner[The Owner]
+        Eng -->|Tort Only| Public[The Public / Tenants]
+        Eng -.->|Rare Tort Liability| Contractor[The Contractor]
+        
+        style Eng fill:#1e293b,color:#fff
+        style Owner fill:#e0f2fe,stroke:#0284c7
+        style Public fill:#f3e8ff,stroke:#9333ea
+        style Contractor fill:#ffedd5,stroke:#ea580c
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This shows your risk vectors. The solid double arrow means the owner has two weapons against you: they can sue you for breaking the written contract, or they can sue you in tort for being negligent. The solid single arrow shows the public can only sue you in tort because they never signed a deal with you. The dotted arrow to the contractor is the trickiest part of the exam. Normally, you owe zero duty to the contractor regarding their construction methods. However, if you step out of your lane and start giving the workers direct safety instructions, that dotted line becomes solid, and you instantly inherit their liability.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card spectrum" id="d4">
+    <h2>4. The Breach Spectrum (Incompetence vs Lack of Care)</h2>
+    <p>Once you clear "Duty of Care" in the gauntlet, the next gate is "Breach." But not all breaches look the same. There are really only two roads into a breach finding, and one of them is far more common than the other. Knowing which road you are on tells you how to defend yourself.</p>
+
+    <div class="mermaid">
+      graph TD
+        Breach{Breach of Standard of Care} --> Incompetence[Incompetence<br/>Lack of Skill]
+        Breach --> LackCare[Lack of Care<br/>Carelessness]
+
+        Incompetence --> IncNote[Rare. Working outside your<br/>field without training.]
+        LackCare --> CareNote[Common. Rushed work,<br/>skipped checks, no review.]
+
+        CareNote --> Fix[Preventable via checklists,<br/>peer review, independent checking]
+
+        style Breach fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Incompetence fill:#fee2e2,stroke:#dc2626
+        style LackCare fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style IncNote fill:#f8fafc,stroke:#94a3b8
+        style CareNote fill:#f8fafc,stroke:#94a3b8
+        style Fix fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The thick border on "Lack of Care" tells you where the real exam danger is. Incompetence is rare because most professionals stay inside their lane and only take on work they are trained for. Lack of care is the everyday trap — rushing, skipping a calculation check, not getting a second opinion. The bottom box is your defensive toolkit. Also remember the standard is "a reasonably competent member of the profession," not perfection, and a specialist is judged against the specialist standard, not the average practitioner.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card spectrum" id="d5">
+    <h2>5. The Misrepresentation Spectrum</h2>
+    <p>A false statement is not just "false" — the LAW cares about the STATE OF MIND behind it. As you slide from left to right on this spectrum, the defendant's mental state gets worse, and so does the remedy available against them.</p>
+
+    <div class="mermaid">
+      graph LR
+        A[Innocent<br/>Misrepresentation] --> B[Negligent<br/>Misrepresentation]
+        B --> C[Fraudulent<br/>Misrepresentation]
+
+        A -.->|Mental state: honest mistake,<br/>no carelessness| A2[Remedy: Rescission ONLY]
+        B -.->|Mental state: careless,<br/>didn't check the facts| B2[Remedy: Rescission + Damages.<br/>Pure economic loss IS claimable]
+        C -.->|Mental state: knew it was false,<br/>or didn't care if true| C2[Remedy: Rescission + Damages.<br/>Possible criminal fraud charge]
+
+        style A fill:#dcfce7,stroke:#16a34a
+        style B fill:#fef3c7,stroke:#d97706
+        style C fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style A2 fill:#f8fafc,stroke:#94a3b8
+        style B2 fill:#f8fafc,stroke:#94a3b8
+        style C2 fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Read this left to right as "getting worse." Innocent means you genuinely had no idea and were not careless — the only fix is to unwind the deal (rescission), no damages. Negligent means you should have checked but didn't — now damages are on the table, AND this is one of the few situations where "pure economic loss" (pure money loss with no physical damage) can actually be recovered. Fraudulent is the worst — you knew, or you flat-out didn't care whether it was true — full damages plus potential criminal exposure. Also remember: silence can count too. Withholding information (like an owner hiding a soils report from bidders) can itself BE a misrepresentation.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fraud" id="d6">
+    <h2>6. The Fraud Chain</h2>
+    <p>Fraud is the most serious form of misrepresentation, and it has its own strict four-link chain. Unlike the misrepresentation spectrum above (which is about degrees of carelessness), fraud requires every one of these four specific links to be present — break any link and the fraud claim collapses (though a lesser misrepresentation claim might survive).</p>
+
+    <div class="mermaid">
+      graph LR
+        L1[1. Statement is<br/>UNTRUE in fact] --> L2[2. Defendant KNEW it was false<br/>OR didn't care if true]
+        L2 --> L3[3. Statement was meant to<br/>INDUCE the plaintiff to act]
+        L3 --> L4[4. Plaintiff ACTED on it<br/>and SUFFERED DAMAGE]
+        L4 --> Result((FRAUD<br/>PROVEN))
+
+        style L1 fill:#fef3c7,stroke:#d97706
+        style L2 fill:#fef3c7,stroke:#d97706
+        style L3 fill:#fef3c7,stroke:#d97706
+        style L4 fill:#fef3c7,stroke:#d97706
+        style Result fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Treat this as a literal chain — pull any link out and the whole thing falls apart. Link 1 is about the FACTS (is it actually false?). Link 2 is about the MIND (did the defendant know, or were they reckless about the truth?). Link 3 is about INTENT (was the lie aimed at making the plaintiff do something?). Link 4 is about RESULT (did the plaintiff actually rely on it AND get hurt financially because of it?). All four must hold for "fraud" specifically — this is what separates fraud from the milder "negligent misrepresentation" in diagram 5, where the defendant didn't necessarily know the statement was false.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fiduciary" id="d7">
+    <h2>7. The Fiduciary Trapdoor Test</h2>
+    <p>Most client relationships are NOT fiduciary — they are ordinary commercial relationships governed by contract and tort. But sometimes a relationship quietly slides into something much more serious: a fiduciary relationship, where the consequences of breach carry what the courts call "a stench of dishonesty." This diagram is a trapdoor test — if you answer "yes" to all three questions, you've fallen through into fiduciary territory.</p>
+
+    <div class="mermaid">
+      graph TD
+        Start{Is this an arm's-length<br/>commercial relationship?} -->|Yes, normal deal| Normal[NOT Fiduciary<br/>Standard contract/tort rules apply]
+        Start -->|Something feels different...| Q1{Does one party hold<br/>discretion or power<br/>over the other?}
+        Q1 -->|No| Normal
+        Q1 -->|Yes| Q2{Can that party UNILATERALLY<br/>exercise that power to affect<br/>the other's interests?}
+        Q2 -->|No| Normal
+        Q2 -->|Yes| Q3{Is the other party<br/>PECULIARLY VULNERABLE<br/>or at their mercy?}
+        Q3 -->|No| Normal
+        Q3 -->|Yes| Fiduciary((FIDUCIARY<br/>RELATIONSHIP))
+
+        style Normal fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Fiduciary fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Q1 fill:#e0f2fe,stroke:#0284c7
+        style Q2 fill:#e0f2fe,stroke:#0284c7
+        style Q3 fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Most exam scenarios involving an architect, engineer, or geoscientist and their client should land in the green box — a normal commercial relationship. The trapdoor only opens if ALL THREE conditions stack up: one side has real power over the other, that power can be used unilaterally (without the other side's input or consent), AND the weaker side is genuinely vulnerable — not just "less informed," but truly at the other party's mercy. Falling through the trapdoor matters because fiduciary breaches are treated far more harshly by courts than an ordinary breach of contract or negligence claim.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card nuisance" id="d8">
+    <h2>8. The Nuisance / Strict Liability Bypass</h2>
+    <p>Everything in diagram 2 (the Negligence Gauntlet) revolves around proving the defendant was CARELESS. Nuisance and trespass completely bypass that requirement. This diagram shows the "side door" plaintiffs can use — the Rylands v. Fletcher test — where carelessness is irrelevant and only four factual conditions matter.</p>
+
+    <div class="mermaid">
+      graph TD
+        Q1{Did the defendant make a<br/>NON-NATURAL use of their land?} -->|No| Fails[No Strict Liability]
+        Q1 -->|Yes| Q2{Did they bring onto the land<br/>something likely to cause<br/>mischief if it escaped?}
+        Q2 -->|No| Fails
+        Q2 -->|Yes| Q3{Did that thing<br/>ACTUALLY ESCAPE?}
+        Q3 -->|No| Fails
+        Q3 -->|Yes| Q4{Did it cause damage to the<br/>plaintiff's property or person?}
+        Q4 -->|No| Fails
+        Q4 -->|Yes| Liable((STRICTLY LIABLE<br/>— Negligence<br/>NOT required))
+
+        style Fails fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Liable fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Q1 fill:#fef3c7,stroke:#ca8a04
+        style Q2 fill:#fef3c7,stroke:#ca8a04
+        style Q3 fill:#fef3c7,stroke:#ca8a04
+        style Q4 fill:#fef3c7,stroke:#ca8a04
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Notice there is NO "Duty of Care" or "Breach" box anywhere in this chain — that is the entire point. A classic example is an underground reservoir on a neighbouring property that causes a mine shaft to collapse: the defendant wasn't careless, but they still pay because all four boxes are checked. For engineering practice, the most common real-world trigger is VIBRATION — pile driving or blasting that escapes onto a neighbouring property and causes damage is a textbook nuisance/strict-liability scenario, completely separate from whether the work was performed competently.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card economic" id="d9">
+    <h2>9. The Pure Economic Loss Gatekeeper</h2>
+    <p>This is one of the highest-yield exam concepts and one of the most counterintuitive. As a GENERAL RULE, you cannot sue someone in negligence for PURE money loss — meaning a loss of money with no physical injury and no property damage. But there are two narrow doors through this wall. This diagram is a gatekeeper showing exactly which losses get through.</p>
+
+    <div class="mermaid">
+      graph TD
+        Loss{What kind of loss<br/>occurred?} -->|Physical injury or<br/>property damage| Normal[Proceed through the normal<br/>Negligence Gauntlet]
+        Loss -->|PURE money loss only<br/>— no physical damage| Wall{THE WALL:<br/>Pure economic loss is<br/>generally NOT recoverable}
+
+        Wall --> Door1{Was the loss caused by<br/>NEGLIGENT MISREPRESENTATION<br/>that was reasonably relied upon?}
+        Door1 -->|Yes| Through1((RECOVERABLE<br/>— Hedley Byrne exception))
+        Door1 -->|No| Door2{Is there a SUBSTANTIAL DANGER<br/>to health and safety of occupants<br/>— e.g. defective building?}
+        Door2 -->|Yes| Through2((RECOVERABLE<br/>— Winnipeg Condominium exception))
+        Door2 -->|No| Blocked[NOT RECOVERABLE<br/>— "floodgates" concern]
+
+        style Wall fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Door1 fill:#fef3c7,stroke:#d97706
+        style Door2 fill:#fef3c7,stroke:#d97706
+        style Through1 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Through2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Blocked fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Normal fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Think of "the wall" as the default answer to "can I sue for lost profits / reduced value / extra costs with no physical damage?" — the default is NO, because courts worry about opening "floodgates" of unlimited claims from anyone remotely affected by an error. But two specific doors are cut into that wall. Door 1 is for bad advice/statements someone reasonably relied on (this connects directly back to diagram 5's "negligent misrepresentation" branch). Door 2 is the Winnipeg Condominium principle — if a building defect is so bad it poses a real danger to people's health and safety, the cost of FIXING it before someone gets hurt becomes recoverable, even though the loss is "only" money (repair costs) at the point of the lawsuit.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card shield" id="d10">
+    <h2>10. The Negligence Shield (Risk Reduction Cycle)</h2>
+    <p>If diagram 2 is the gauntlet attacking you, this diagram is your armour. These four practices are not independent tips — they work together as a continuous cycle that keeps the "Breach" box in diagram 2 from ever being triggered.</p>
+
+    <div class="mermaid">
+      graph LR
+        A[Checklists &<br/>Standard Procedures] --> B[Independent Checking<br/>of Calculations]
+        B --> C[Peer Review]
+        C --> D[Continuing<br/>Education]
+        D --> A
+
+        Center((Lower Risk of<br/>Breaching the<br/>Standard of Care))
+        A -.-> Center
+        B -.-> Center
+        C -.-> Center
+        D -.-> Center
+
+        style A fill:#e0f2fe,stroke:#0284c7
+        style B fill:#e0f2fe,stroke:#0284c7
+        style C fill:#e0f2fe,stroke:#0284c7
+        style D fill:#e0f2fe,stroke:#0284c7
+        style Center fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> These four feed into each other in a loop rather than sitting as a flat list. Checklists catch routine errors before they leave your desk. Independent checking catches errors checklists miss. Peer review catches systemic or judgment errors that one person — checking their own work twice — would never catch. Continuing education feeds back into all three by keeping your checklists, your reviewer's knowledge, and your own judgment current. The critical exam point buried in the "Continuing Education" box: the standard of care is measured at the TIME OF THE ACT, not at the time of trial — so falling behind on current standards is itself a form of negligence, even if your work was fine by yesterday's standards.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card chain" id="d11">
+    <h2>11. The Learned Intermediary Chain</h2>
+    <p>Product liability in Canada forces the consumer to prove negligence. When dealing with complex technical products, the manufacturer cannot realistically explain the dangers to an average consumer. That is where you come in as the technical shield.</p>
+
+    <div class="mermaid">
+      sequenceDiagram
+        participant M as Manufacturer
+        participant E as Engineer (Learned Intermediary)
+        participant C as End Consumer
+        
+        M->>E: Supplies complex equipment & technical warnings
+        Note over E: Analyzes data using professional expertise
+        E->>C: Specifies product & translates warnings into safety limits
+        Note over C,E: If Engineer fails to pass on warnings, Engineer is liable.
+        Note over M,E: If Manufacturer hides defect from Engineer, Manufacturer is liable.
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This sequence maps the flow of information and blame. The manufacturer hands you highly technical data and warnings. Because you are the expert, the law designates you as the "learned intermediary" standing between the manufacturer and the end consumer — your job is to translate raw technical warnings into practical safety limits the consumer can actually act on. Liability follows whoever broke the chain: if the manufacturer hid a known defect from you, the manufacturer is on the hook; if you received proper warnings but failed to pass the relevant safety information along (or specified the product outside its safe limits), the liability shifts to you. This connects back to diagram 1's "product defect" categories — was the PRODUCT defective (manufacturer's problem), or was the SPECIFICATION/translation of warnings defective (your problem)?</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

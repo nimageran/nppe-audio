@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 7 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 7 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Kiewit Trap and the Performance-Under-Protest Fix</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 9</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Kiewit Trap and the Performance-Under-Protest Fix",
+    text: "When an owner demands work that you believe is an extra, you face a brutal trap. If you just silently do the work to be a team player, the Supreme Court's Kiewit decision says your silence is an admission that the work was already in your contract. You lose the right to bill for it. To fix this, you must issue a written Notice of Protest, stating you are performing 'without prejudice' to your right to claim extra money later. In provinces like Alberta without a protest statute, you must negotiate this right directly into the contract.",
+    ex: "The owner points to a steel beam and says 'paint it.' You think painting is extra. If you just grab a brush, the court says you admitted it was part of your original job. You must email the owner saying 'I am painting this under protest and reserving my right to bill you' before you open the paint can."
+  },
+  {
+    title: "Diagram 2 — The Three Limitations on Damages",
+    text: "Even if you win a breach of contract lawsuit, the court will filter your damages through three strict gates. First is Mitigation: did you try to reduce the bleeding? If you sat around doing nothing, your payout drops. Second is Speculation: can you mathematically prove the loss, or are you just guessing? Third is Remoteness: was this bizarre financial chain reaction actually foreseeable to the other guy when you signed the deal? If you fail any gate, that chunk of money is denied.",
+    ex: "A supplier is a week late delivering steel. You rent a crane for an extra week—that passes all three filters, and you get paid for the rental. But you also claim the delay caused you to miss a bid for a mega-project in Dubai and forced you into bankruptcy. The judge throws out the mega-project claim because it is highly speculative and far too remote for the supplier to have foreseen."
+  },
+  {
+    title: "Diagram 3 — Consequential Damages: The Pricing Problem",
+    text: "Exclusion clauses that ban 'consequential damages' exist for pure economic efficiency. If a cheap, five-dollar part fails and causes a million-dollar factory shutdown, forcing the manufacturer to absorb that million-dollar risk would require them to price the five-dollar part at a hundred thousand dollars. Instead, the buyer accepts the massive downtime risk via an exclusion clause, keeping the part cheap and putting the risk on the party best able to monitor it.",
+    ex: "You manufacture a $50 pump valve. If it breaks, a petroleum refinery shuts down, costing $5 million a day. If you don't use a consequential damages exclusion, you'd go bankrupt selling one valve. With the exclusion, the refinery accepts the risk of their own downtime, and you just owe them a new $50 valve."
+  },
+  {
+    title: "Diagram 4 — Liquidated Damages vs Penalty",
+    text: "If a contract charges a massive daily fee for being late, it is only legally enforceable if it is a genuine, mathematical pre-estimate of actual loss, called Liquidated Damages. If the number was just pulled out of thin air to terrify the contractor into working faster, the court classifies it as an illegal Penalty and will strike it down. Also, a myth says you must include a bonus clause for early completion to make liquidated damages legal. That is totally false.",
+    ex: "You are building a toll bridge. The owner calculates they will lose exactly $10,000 a day in toll fees if you are late. Setting the late fee at $10,000 a day is a legal Liquidated Damage. If the owner sets the fee at $500,000 a day just to punish you, the judge will tear up the clause as an illegal penalty."
+  },
+  {
+    title: "Diagram 5 — Fundamental Breach vs Simple Breach: The High-Stakes Fork",
+    text: "A fundamental breach strikes at the very root of the contract, giving you the right to terminate the deal and walk away. A simple breach is a minor issue where you can only sue for damages, but you must keep working. If you get mad over a simple breach and wrongly terminate the contract, you trigger a catastrophic role reversal. By walking away illegally, YOU have just committed a fundamental breach, and the other guy can sue you for millions.",
+    ex: "An owner is one day late paying a minor $500 invoice. You furiously declare a fundamental breach and walk your entire crew off a $10 million skyscraper project. The judge rules that a one-day delay was only a simple breach. By walking off the job, YOU committed the fundamental breach, and you now owe the owner millions for abandoning the site."
+  },
+  {
+    title: "Diagram 6 — Repudiation and Anticipatory Breach: Timing on a Line",
+    text: "These overlap but deal with timing. Anticipatory breach happens strictly before the deadline arrives—someone announces early that they will not perform. Repudiation is broader; it means showing by words or actions that you intend to abandon the contract completely, which can happen before or during the deadline. An anticipatory breach of a massive, core requirement is automatically a repudiation, allowing the victim to terminate immediately instead of waiting for the deadline to pass.",
+    ex: "You are hired to pour concrete on Friday. On Monday, the contractor emails you saying, 'We are bankrupt and never coming to the site.' This is an anticipatory breach AND a repudiation. You do not have to wait around until Friday to see if they show up; you can legally fire them on Monday and hire a replacement."
+  },
+  {
+    title: "Diagram 7 — The Termination Decision Tree",
+    text: "Deciding if you can terminate requires a strict procedural checklist. If the contract has a termination clause, you absolutely must follow its exact notice periods and cure windows, or your termination is illegal. If there is no clause, you must rely on proving a fundamental breach occurred at common law. Alternatively, a 'termination for convenience' clause lets an owner fire you for no reason at all, but they usually have to pay you a massive exit fee or your lost profits.",
+    ex: "Your contract says you can terminate a bad subcontractor, but you must give them 7 days' written notice to fix their mistake. The sub installs a crooked pipe. You get angry and fire them on the spot. You just breached the contract because you skipped the mandatory 7-day cure window. Your righteous termination is now legally wrongful."
+  },
+  {
+    title: "Diagram 8 — Cost of Performance vs Diminution in Value",
+    text: "When a contractor builds something slightly wrong, the owner demands the cost to rip it down and rebuild it perfectly. The contractor argues they should only pay the tiny drop in property value. The court's true deciding factor is whether the owner actually intends to do the repair, and if the massive cost of repair is reasonable. Courts will not award a massive repair check if they know the owner just wants to pocket the cash as a windfall and live with the slight defect.",
+    ex: "A contractor pours a warehouse floor 4 inches thick instead of 5 inches. It costs $1 million to rip it out and replace it, but the property value only dropped by $10,000, and the warehouse still perfectly supports the forklifts. Because spending $1 million to fix a functional floor is absurd, the judge denies the repair cost to prevent a windfall, and just awards the $10,000 loss in value."
+  },
+  {
+    title: "Diagram 9 — Chapter Question 1: The Waiver-Within-a-Breach Trap",
+    text: "When dealing with a missed deadline, entertaining excuses can accidentally destroy your rights. If the other side commits a fundamental breach by missing a noon deadline, and you threaten to quit but stay around arguing until 4 PM, you have legally waived the original noon deadline. By not enforcing the execution instantly, you effectively reset the clock. You cannot later sue them for missing the noon deadline when you implicitly agreed to keep negotiating.",
+    ex: "The client misses a massive payment at noon. You threaten to pack up your surveying gear and leave. Instead of leaving, you stay in the trailer arguing with them until 4 PM, when they finally hand you a check. If you try to quit at 4:30 PM claiming they fundamentally breached the noon deadline, the judge will laugh at you. Your lingering presence waived the noon deadline entirely."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

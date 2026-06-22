@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 12 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 12 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Tort Taxonomy</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 11</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Tort Taxonomy",
+    text: "A tort is a civil wrong where someone gets hurt or loses money, completely independent of any contract. The law aggressively splits these into two mindsets. The first is unintentional torts, like negligence, where you made an honest mistake or were careless. The second is intentional torts, where you deliberately crossed a boundary. The courts do not care how careful you were being if you commit an intentional tort; you are automatically strictly liable for the damage.",
+    ex: "Accidentally dropping a heavy wrench off a catwalk onto a delivery truck is negligence. Deliberately throwing that same wrench through the truck's windshield because you are angry is an intentional tort. The physical damage is identical, but the legal categories are completely different."
+  },
+  {
+    title: "Diagram 2 — The Negligence Gauntlet",
+    text: "Making a mistake does not mean you automatically owe someone money. A plaintiff must drag your actions through four sequential filters. First, did you owe them a duty of care? Second, did you actually breach the standard of care? Third, was your specific mistake the direct, proximate cause of the accident? And fourth, did they suffer an actual financial or physical loss? If your lawyer can break even one of those links, the lawsuit dies immediately.",
+    ex: "You approve a faulty mechanical assembly design, completely breaching your standard of care. But before the machines are shipped, an inspector catches your error and the parts are replaced at the factory's expense, not the client's. The client tries to sue you, but the lawsuit instantly dies at gate four because they suffered zero actual loss."
+  },
+  {
+    title: "Diagram 3 — The Duty of Care Web",
+    text: "As an engineer, you have different legal connections with different people. You are tied to the owner by both a written contract and tort law, giving them two ways to attack you. You are tied to the general public only by tort law, since they never signed a contract with you. Most importantly, you normally owe zero duty of care to the contractor regarding how they build things, unless you recklessly step out of your lane and start giving them direct safety instructions.",
+    ex: "If you walk onto the factory floor and tell the rigging crew exactly how to chain up a massive stamping press, and the press falls, you just inherited their liability. By stepping outside your design role and giving instructions, you instantly created a tort duty of care to the contractor."
+  },
+  {
+    title: "Diagram 4 — The Breach Spectrum",
+    text: "Not all standard of care breaches are the same. Incompetence means you took on work completely outside your training. This is rare. Lack of care is the everyday killer. It means you were perfectly capable of doing the math, but you rushed, skipped a check, or worked while exhausted. The law judges you against an average, reasonably competent engineer in your specific field, not against a standard of absolute perfection.",
+    ex: "Designing a hydraulic pump without double-checking your pressure tolerances because you were rushing to leave early on a Friday is a textbook 'Lack of Care' breach. A simple peer review checklist would have prevented it entirely."
+  },
+  {
+    title: "Diagram 5 — The Misrepresentation Spectrum",
+    text: "When you make a false statement, the law focuses entirely on your state of mind. If it was an honest mistake, it is an innocent misrepresentation, and the only remedy is to cancel the deal. If you were sloppy and should have checked your facts, it is negligent misrepresentation, meaning you now have to pay damages. If you outright lied, or simply did not care whether it was true, that is fraudulent misrepresentation, which brings massive damages and possible criminal charges.",
+    ex: "You sell a used CNC machine. If you accidentally misread the operating hours, the buyer just returns it. But if you knowingly use software to roll back the operating hours to trick the buyer into paying more, that is fraud, and you will pay heavy damages."
+  },
+  {
+    title: "Diagram 6 — The Fraud Chain",
+    text: "Fraud is a severe, targeted accusation that requires four specific links. One: the statement was factually untrue. Two: you knew it was false or were reckless about the truth. Three: you made the statement specifically to induce the other person to act. Four: they acted on it and lost money. If you pull any single link out of this chain, the accusation of fraud completely collapses.",
+    ex: "You falsely tell an investor that a new production line will produce ten thousand units a day, knowing it can only do five. You do this so they give you funding. They write the check, the factory fails to meet quotas, and they lose their investment. All four links connect perfectly. You committed fraud."
+  },
+  {
+    title: "Diagram 7 — The Fiduciary Trapdoor Test",
+    text: "Most business deals are just arm's-length commercial relationships. But if you hold unilateral power over someone, and they are peculiarly vulnerable and entirely at your mercy, you fall through a legal trapdoor into a fiduciary relationship. This is a massive upgrade in liability. If you breach a fiduciary duty, the courts will punish you ruthlessly because it carries the stench of betrayal, not just a simple mistake.",
+    ex: "If a busy project manager gives you full control of their budget to buy machinery parts at your absolute discretion, you are now a fiduciary. If you secretly buy the parts from a company you own at a markup, you have breached a fiduciary duty of loyalty, which is treated far worse than a standard contract breach."
+  },
+  {
+    title: "Diagram 8 — The Nuisance / Strict Liability Bypass",
+    text: "Normally, someone has to prove you were careless to sue you. The rule in Rylands versus Fletcher creates a bypass door called strict liability. If you bring something unnatural and dangerous onto your property, and it escapes and causes damage, you pay for it. The court does not care if you were being perfectly safe and careful. Carelessness is completely irrelevant; if it escapes and breaks something, you write a check.",
+    ex: "Your firm is using heavy explosives to blast bedrock for a new foundation. You follow every safety code perfectly. However, the ground vibrations escape your property line and shatter the glass windows of a nearby office. Because blasting is inherently dangerous, you are strictly liable and must pay for the windows immediately."
+  },
+  {
+    title: "Diagram 9 — The Pure Economic Loss Gatekeeper",
+    text: "The general rule is that you cannot sue someone for pure money loss unless there is physical damage or injury. But there are two narrow doors through this wall. Door one: someone lost money relying on your negligent misrepresentation. Door two: your negligent design created a substantial danger to health and safety, forcing the owner to spend money fixing the dangerous defect before someone got killed.",
+    ex: "You design a faulty structural column. It has not fallen on anyone, so there is no physical injury yet. But because it is a massive, life-threatening safety hazard, the owner has to spend $50,000 immediately to reinforce it. They are legally allowed to sue you for that $50,000 in pure economic loss to cover the repair."
+  },
+  {
+    title: "Diagram 10 — The Negligence Shield (Risk Reduction Cycle)",
+    text: "The best way to survive the negligence gauntlet is to never breach the standard of care in the first place. You do this through a continuous cycle: use standard checklists to catch easy errors, have someone independently check your math, run a peer review to catch bad judgment calls, and constantly take continuing education. The standard of care is measured at the exact time you did the work, so falling behind on industry knowledge is a fast track to negligence.",
+    ex: "To avoid careless errors, you create a mandatory checklist ensuring every single Action Request explicitly references the correct Bill of Materials assembly number before submission. By standardizing the process, you make it almost impossible to breach the standard of care through a simple clerical mistake."
+  },
+  {
+    title: "Diagram 11 — The Learned Intermediary Chain",
+    text: "When a manufacturer creates complex technical equipment, they cannot easily explain the safety limits to a regular consumer. The law expects you, the engineer, to act as a 'learned intermediary.' The manufacturer gives you the technical data, and it is your legal duty to translate those warnings into safe limits for the end user. If you fail to pass those warnings along, the liability shifts entirely onto you.",
+    ex: "A supplier sells you high-speed bearings and provides a dense manual stating they will shatter if run continuously for over ten hours. You specify these bearings for a client's assembly line but never warn the client about the ten-hour limit. The bearings shatter and destroy the line. The manufacturer is safe; you are liable."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

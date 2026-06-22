@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 4 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Real Property vs. Personal Property</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> "Real Property" is land and anything permanently attached to it (like a building). <br><br><strong>The Rule:</strong> "Personal Property" (also called <strong>Chattels</strong>) is anything movable, like a truck, a laptop, or an unbolted machine.</div>
+        <div class="mnem">Real = Dirt | Personal = Movable</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Chattels vs. Fixtures</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You bring a heavy generator (a chattel) into a factory and bolt it permanently to the concrete foundation.<br><br><strong>The Rule:</strong> It is now a "Fixture." It has legally become part of the Real Property and transfers to the new owner if the building is sold.</div>
+        <div class="mnem">Bolted Down = Real Estate</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Fee Simple</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Concept:</strong> The absolute highest, most complete level of land ownership you can hold in Canada.<br><br><strong>The Catch:</strong> It is not perfect. The Crown (government) still has the right to expropriate it for public use, like building a highway.</div>
+        <div class="mnem">The Best Ownership Possible</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Joint Tenancy vs.<br>Tenancy in Common</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>Joint Tenancy:</strong> Co-owners have a "Right of Survivorship." If you die, your partner automatically gets your half. You cannot put it in a will.<br><br><strong>Tenancy in Common:</strong> You own a distinct share. If you die, your share goes to your heirs, not your partner.</div>
+        <div class="mnem">Joint = Survivor Takes All</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Easements</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Manitoba Hydro needs to run a power line across your farmland.<br><br><strong>The Rule:</strong> An easement is a legal right to use someone else's land for a specific, limited purpose. It stays attached to the land even if the land is sold.</div>
+        <div class="mnem">Legal Right to Cross Land</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Restrictive Covenants</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You buy a lot in a subdivision, and the deed says you cannot build a fence taller than 4 feet.<br><br><strong>The Rule:</strong> A condition attached to the land that restricts what the owner can do. It must be negative (restricting action) to be valid.</div>
+        <div class="mnem">Rules Tied to the Dirt</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Patents</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Target:</strong> Protects new, useful, and non-obvious <strong>inventions</strong> (like a new gear mechanism).<br><br><strong>The Deal:</strong> The government gives you a 20-year monopoly to make money off it, but in exchange, you MUST publish the design to the public.</div>
+        <div class="mnem">Inventions: 20 Years + Full Disclosure</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Copyright</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Target:</strong> Protects the physical <strong>expression</strong> of an idea (like engineering drawings, written reports, or software code), not the idea itself.<br><br><strong>The Rule:</strong> It is automatic the moment you write it down. Lasts for the life of the author plus 50 (or 70) years.</div>
+        <div class="mnem">Protects Expression, Not Ideas</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Who owns the Copyright?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You write a brilliant software script while sitting at your desk at your engineering firm.<br><br><strong>The Rule:</strong> Your employer automatically owns the copyright to anything you create during the course of your employment, unless your contract says otherwise.</div>
+        <div class="mnem">Created at Work = Boss Owns It</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Moral Rights (Copyright)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You design a beautiful bridge. The client buys the copyright but decides to paint it hot pink with polka dots, ruining your reputation.<br><br><strong>The Catch:</strong> The creator always keeps "Moral Rights" to prevent the work from being distorted, even after selling the copyright, unless explicitly waived.</div>
+        <div class="mnem">You Can Stop Them Ruining Your Art</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Trademarks</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Target:</strong> Protects words, symbols, logos, or designs used to identify a brand (like the Nike swoosh or "Coca-Cola").<br><br><strong>The Goal:</strong> To protect the public from being confused or tricked by knock-offs.</div>
+        <div class="mnem">Protects Brands and Logos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Industrial Designs</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Target:</strong> Protects the visual appearance, shape, or pattern of an object.<br><br><strong>The Catch:</strong> It ONLY protects how it looks, not how it works. (e.g., The cool shape of a sports car hood, but not the engine underneath it).</div>
+        <div class="mnem">Protects the Look, Not the Function</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Trade Secrets</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> The Coca-Cola recipe or Google's search algorithm.<br><br><strong>The Rule:</strong> You do NOT register it with the government. It is only protected by NDAs and strict security. It lasts forever, but if someone legally reverse-engineers it, you lose your protection completely.</div>
+        <div class="mnem">No Registration, Just Secrecy</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Software Protection</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Source code is protected by <strong>Copyright</strong> (like a book). However, if the software controls a physical process or hardware in a novel way, that process might be protected by a <strong>Patent</strong>.</div>
+        <div class="mnem">Code = Copyright | Process = Patent</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

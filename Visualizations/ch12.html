@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 12: Visual Tort Mechanics</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.universe { border-top-color: #64748b; }
+    .framework-card.gauntlet { border-top-color: #ef4444; }
+    .framework-card.web { border-top-color: #f59e0b; }
+    .framework-card.chain { border-top-color: #10b981; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 12: DEEP TORT VISUALIZATION</h1>
+
+  <div class="framework-card universe">
+    <h2>1. The Tort Taxonomy</h2>
+    <p>A tort is just a civil wrong where someone gets hurt or loses money without a contract being broken. You need to map out exactly how the law divides these wrongs. They split into two completely different mindsets: accidents versus intentional attacks. The court punishes these very differently.</p>
+
+    <div class="mermaid">
+      graph TD
+        Root[THE TORT UNIVERSE] --> Unintentional[Unintentional Torts]
+        Root --> Intentional[Intentional Torts]
+        
+        Unintentional --> Neg[Negligence]
+        Unintentional --> NegMis[Negligent Misrepresentation]
+        
+        Intentional --> Fraud[Fraud / Deceit]
+        Intentional --> Trespass[Trespass]
+        Intentional --> Nuisance[Nuisance]
+        Intentional --> Defame[Defamation]
+        
+        style Root fill:#1e293b,color:#fff,stroke:none
+        style Unintentional fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Intentional fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This map separates honest mistakes from deliberate actions. The entire left side is about carelessness. You did not mean to cause damage, but you failed to meet professional standards. The right side is strict and aggressive. If you commit an intentional tort like trespass, the court does not care how careful you were being. You crossed a hard boundary, and you are automatically liable.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card gauntlet">
+    <h2>2. The Negligence Gauntlet</h2>
+    <p>This is the core engine of liability. To successfully sue you for negligence, a plaintiff must force your actions through four specific filters. If your lawyer can break even one of these connections, the lawsuit dies immediately. You are looking for the exact point of failure.</p>
+
+    <div class="mermaid">
+      graph LR
+        Start((Lawsuit)) --> D{1. Duty of Care?}
+        D -->|Yes| B{2. Breach?}
+        D -->|No| Safe[Claim Fails]
+        B -->|Yes| C{3. Proximate Cause?}
+        B -->|No| Safe
+        C -->|Yes| L{4. Actual Loss?}
+        C -->|No| Safe
+        L -->|Yes| Payout((You Pay Damages))
+        L -->|No| Safe
+
+        style Start fill:#f1f5f9,stroke:#64748b
+        style D fill:#fef3c7,stroke:#d97706
+        style B fill:#fef3c7,stroke:#d97706
+        style C fill:#fef3c7,stroke:#d97706
+        style L fill:#fef3c7,stroke:#d97706
+        style Safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Payout fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This is a sequential trap. You must understand that making a mistake does not equal paying money. First, the court asks if you even owed a duty to the random person suing you. If yes, they ask if your work was actually sloppy compared to a normal engineer. If yes, they ask if your specific sloppy work is the direct trigger for the accident, ignoring other weird events. Finally, they ask if real financial or physical damage actually happened. The easiest defense for an engineer is often proving the final step never happened, meaning the error was caught in time.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card web">
+    <h2>3. The Duty of Care Web</h2>
+    <p>You need to know exactly who can sue you and how. The legal connections you have with the owner, the public, and the contractors are entirely different. Do not confuse your contractual obligations with your tort obligations.</p>
+
+    <div class="mermaid">
+      graph TD
+        Eng[The Engineer] <-->|Contract + Tort| Owner[The Owner]
+        Eng -->|Tort Only| Public[The Public / Tenants]
+        Eng -.->|Rare Tort Liability| Contractor[The Contractor]
+        
+        style Eng fill:#1e293b,color:#fff
+        style Owner fill:#e0f2fe,stroke:#0284c7
+        style Public fill:#f3e8ff,stroke:#9333ea
+        style Contractor fill:#ffedd5,stroke:#ea580c
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This shows your risk vectors. The solid double arrow means the owner has two weapons against you: they can sue you for breaking the written contract, or they can sue you in tort for being negligent. The solid single arrow shows the public can only sue you in tort because they never signed a deal with you. The dotted arrow to the contractor is the trickiest part of the exam. Normally, you owe zero duty to the contractor regarding their construction methods. However, if you step out of your lane and start giving the workers direct safety instructions, that dotted line becomes solid, and you instantly inherit their liability.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card chain">
+    <h2>4. The Learned Intermediary Chain</h2>
+    <p>Product liability in Canada forces the consumer to prove negligence. When dealing with complex technical products, the manufacturer cannot realistically explain the dangers to an average consumer. That is where you come in as the technical shield.</p>
+
+    <div class="mermaid">
+      sequenceDiagram
+        participant M as Manufacturer
+        participant E as Engineer (Learned Intermediary)
+        participant C as End Consumer
+        
+        M->>E: Supplies complex equipment & technical warnings
+        Note over E: Analyzes data using professional expertise
+        E->>C: Specifies product & translates warnings into safety limits
+        Note over C,E: If Engineer fails to pass on warnings, Engineer is liable.
+        Note over M,E: If Manufacturer hides defect from Engineer, Manufacturer is liable.
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This sequence maps the flow of information and blame. The manufacturer hands you highly technical data and warnings. Because you are the expert, the law designates you as the Learned Intermedi

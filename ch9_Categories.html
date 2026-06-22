@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.9 Reference Card: Selected Contract Issues</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 9 — Selected Contract Issues</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">3 Parties in an Agency Relationship<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Principal</span><span class="item-note">— the party on whose behalf the agent acts (typically the Owner)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Agent</span><span class="item-note">— authorized to act on behalf of the principal (typically the Architect / Engineer)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Third Party</span><span class="item-note">— the other party dealt with (typically the Contractor)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">2 Types of Agent Authority<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Express Authority (Actual Authority)</span><span class="item-note">— created by contract between principal and agent; explicitly defines limits of authority</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Apparent Authority (Ostensible / Implied Authority)</span><span class="item-note">— created by representations made by the PRINCIPAL to the third party (NOT by the agent's own claim). If principal knows agent is exceeding authority and does nothing, apparent authority may expand.</span></div></div>
+      </div>
+      <div class="warn"><strong>Key rule:</strong> An agent claiming their own authority does NOT create apparent authority. The representation must come from the principal.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#534AB7">3</div>
+      <div class="sec-title">2 Circumstances When Knowledge Is Imputed to a Principal<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">When notice is given to the agent</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">When the agent gained knowledge in the course of their duties</span></div></div>
+      </div>
+      <div class="info">Imputed knowledge = principal is deemed to have gained knowledge whether or not they personally learned of the facts.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">Change Order vs Change Directive — 3 Dimensions<span class="sec-count">comparison table</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Feature</th><th>Change Order</th><th>Change Directive</th></tr></thead>
+        <tbody>
+          <tr><td>Approval</td><td>Must be signed by owner</td><td>May be issued by consultant; also signed by owner</td></tr>
+          <tr><td>Pricing timing</td><td>Cost must be agreed PRIOR to work commencing</td><td>Cost determined at a LATER date</td></tr>
+          <tr><td>Pricing type</td><td>Typically lump sum</td><td>Typically cost-plus</td></tr>
+        </tbody>
+      </table>
+      <div class="list-title">3 Situations Where a Change Directive Is Necessary</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Time does not permit pricing before the change must be implemented</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">No agreement reached on price</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Fundamental disagreement on whether work is a change or part of original scope</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#185FA5">5</div>
+      <div class="sec-title">2 Types of Changes (Extras vs Credits)<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Extras</span><span class="item-note">— changes that result in an INCREASE in contract price</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Credits</span><span class="item-note">— changes that result in a DECREASE in contract price</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">5 Additional Issues Specific to Subcontracts<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Subcontract formation through the bidding process</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Pay-if-paid clauses</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Incorporation by reference</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">One-tier bonds</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Project delivery</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#0F6E56">7</div>
+      <div class="sec-title">Pay-if-Paid vs Pay-when-Paid — 2 Distinctions<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Pay-if-Paid</span><span class="item-note">— condition PRECEDENT to payment; if owner never pays prime contractor, prime contractor is NOT obligated to pay subcontractor. Shifts risk of owner non-payment to subcontractor. Not always enforced — courts interpret narrowly.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Pay-when-Paid</span><span class="item-note">— affects TIMING only; prime contractor must still eventually pay subcontractor even if owner never pays. Only delays (does not eliminate) the obligation.</span></div></div>
+      </div>
+      <div class="warn"><strong>To enforce pay-if-paid:</strong> Must explicitly create a condition precedent AND ideally include words that the subcontractor accepts the financial risk of owner insolvency.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#854F0B">8</div>
+      <div class="sec-title">2 Types of Specifications<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Performance Specification</span><span class="item-note">— sets out operating parameters / outcomes required (e.g. elevator speed, number of cars). Trade contractor designs and constructs. Do NOT mix detailed components into a performance spec.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Standard Specification</span><span class="item-note">— describes in detail all individual components of the final product. Designer prescribes the methodology.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#854F0B">9</div>
+      <div class="sec-title">8 Common Challenges in Interpreting Specifications<span class="sec-count">8 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Inconsistency of terms and language</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Repetition of material, often containing different information</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Incorrect or inconsistent drawing notations</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Lack of coordination between drawings, between specifications, and between drawings and specifications</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Use of drawings/specifications without appropriate amendment</span><span class="item-note">— especially common with CAD and word processors</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Incorrect use of legal jargon</span></div></div>
+        <div class="item"><div class="num">7</div><div><span class="item-title">Describing not just the required result but also mandating methodology</span><span class="item-note">— methodology should be left to the contractor</span></div></div>
+        <div class="item"><div class="num">8</div><div><span class="item-title">Using drawings and notes with no written specifications</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#993C1D">10</div>
+      <div class="sec-title">2 Most Common Situations for Unforeseen Conditions Claims<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Renovation projects</span><span class="item-note">— existing structures often not accurately documented; detailed investigation not possible until demolition</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Projects involving subsurface (soil) conditions</span></div></div>
+      </div>
+      <div class="warn"><strong>Owner's obligation:</strong> Must disclose ALL pertinent subsurface/site information to bidders. Cannot withhold information to keep bid prices down.</div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggle('s11')">
+      <div class="sec-num" style="background:#3B6D11">11</div>
+      <div class="sec-title">One-Tier vs Two-Tier Payment Bonds<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">One-Tier Bond (Canada — CCDC 222)</span><span class="item-note">— covers only direct subcontractors, suppliers, and workers under the principal. Sub-subcontractors cannot claim.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Two-Tier Bond (common in USA)</span><span class="item-note">— covers both subcontractors AND sub-subcontractors</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

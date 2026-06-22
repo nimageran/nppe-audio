@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 16 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 16 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — Operating Without Insurance</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 9</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — Operating Without Insurance: The Judgment-Proofing Trap",
+    text: "Going uninsured and trying to judgment-proof yourself both look like clever risk-avoidance shortcuts, but they quietly fail[cite: 6]. Even a frivolous claim is costly to defend, and a single large claim can cause bankruptcy[cite: 6]. If you try to transfer assets to a spouse after becoming aware a lawsuit is imminent, a court will reverse it as a fraudulent transfer[cite: 6]. If you incorporate to hide assets, the corporate veil could be pierced, or you can still be sued personally for negligence even as an employee or officer[cite: 6].",
+    ex: "An engineer transferring their house to their husband after a bridge they designed collapses is fraud; doing it years before any project fails is normal planning[cite: 6]."
+  },
+  {
+    title: "Diagram 2 — Duty to Defend vs Duty to Indemnify",
+    text: "The duty to defend and the duty to indemnify are legally separate obligations[cite: 6]. The duty to defend is triggered by the allegation; if a claim alleges conduct at least partially within coverage, the insurer must pay legal fees and appoint counsel[cite: 6]. If the insured is ultimately not liable, or liable for something outside coverage, the insurer still had to pay the defense costs, which can be enormous[cite: 6].",
+    ex: "Someone sues you claiming a negligent design error. The insurance company pays your lawyer to fight it in court, fulfilling the duty to defend[cite: 6]. If you win, they don't have to pay the plaintiff, meaning no duty to indemnify, but paying your lawyer saved you from massive legal fees[cite: 6]."
+  },
+  {
+    title: "Diagram 3 — The Subrogation Step-Into-Shoes Flow",
+    text: "Subrogation happens when an insurer pays a judgment and then steps into the insured's legal shoes to sue the party actually responsible to recover the payout[cite: 6]. This right is blocked if there is a waiver of subrogation clause in the contract[cite: 6]. It is also prohibited if the target is an insured under the same policy, as seen in the Commonwealth versus Imperial Oil case[cite: 6].",
+    ex: "If your insurer pays a massive claim because a specification writer you hired messed up, the insurer becomes you and sues that writer to get the money back, unless you all share the exact same project insurance policy[cite: 6]."
+  },
+  {
+    title: "Diagram 4 — Insurable Interest: Why a Subcontractor Insures the Whole Project",
+    text: "A subcontractor performing a limited scope of work has an insurable interest in the entire project[cite: 6]. Courts reject the narrow view that interest is limited only to the sub's own work[cite: 6]. The reasoning is that every tradesman on a jobsite can foreseeably damage another's work or the whole structure, and that real possibility creates the interest[cite: 6]. The goal is to avoid tradespeople fighting each other in court by sharing one common policy[cite: 6].",
+    ex: "A plumber installing cheap pipes in a skyscraper accidentally starts a fire that burns the whole tower down. They have an insurable interest in the whole building because their mistake could foreseeably destroy it all[cite: 6]."
+  },
+  {
+    title: "Diagram 5 — Claims-Made vs Occurrence: The Timing Puzzle",
+    text: "The claims-made test asks which policy was in force when the claim was actually made, not when the work was done[cite: 6]. A policy that covered the actual work years ago will provide no coverage if it is not in force when the third party sues[cite: 6]. The policy currently in force is the one that covers the claim[cite: 6].",
+    ex: "You designed a faulty roof in 2015 under Policy A, but switch to Policy B in 2020. If the roof collapses and you get sued in 2022, Policy B pays because that is the active claims-made policy on the day the lawsuit lands on your desk[cite: 6]."
+  },
+  {
+    title: "Diagram 6 — The Notice Trap When Changing Insurers",
+    text: "Changing jobs, switching insurers, or retiring can create a dangerous coverage gap[cite: 6]. An old insurer no longer covers claims made after a switch unless notified in time[cite: 6]. The fix is to notify the relevant insurer of all known potential claims before the policy lapses or changes[cite: 6]. If retiring, you must purchase tail coverage to remain insured for past work[cite: 6].",
+    ex: "You are retiring. If you just cancel your insurance, you are unprotected if a client from five years ago suddenly sues you. You must buy tail coverage so the insurance company keeps protecting your past work while you sit on the beach[cite: 6]."
+  },
+  {
+    title: "Diagram 7 — Material Non-Disclosure: Even Unrelated Facts Can Void Coverage",
+    text: "Failing to disclose material facts, like a past negligence claim against one employee, can allow an insurer to deny a completely unrelated new claim[cite: 6]. The insurer can argue they would have charged a higher premium or refused coverage entirely had they known the full risk profile[cite: 6]. The relatedness of the claim to the non-disclosure is not the test[cite: 6].",
+    ex: "You hide the fact that your firm was sued twice last year to get cheaper insurance. A year later, a brand new employee makes a completely unrelated mistake. The insurer can refuse to pay because your initial lie robbed them of the chance to charge you the correct, higher premium[cite: 6]."
+  },
+  {
+    title: "Diagram 8 — Insurer-Insured Conflict: When You Need Your Own Lawyer",
+    text: "Insurer and insured interests usually align, but conflict arises if the insurer denies coverage, the claim exceeds policy limits, or the insured wants to fight a settlement[cite: 6]. In these cases, the insured should retain separate counsel[cite: 6]. If a claim exceeds limits, the insured faces personal liability for the excess[cite: 6]. The insured should formally notify the insurer they want a settlement within limits, which sets up a bad faith claim if the insurer refuses and loses[cite: 6].",
+    ex: "You have a one million dollar policy but get sued for two million. The insurance company wants to gamble at trial, but if they lose, you personally owe the extra million. You need your own lawyer to force the insurer to settle within your limits to protect your personal bank account[cite: 6]."
+  },
+  {
+    title: "Diagram 9 — The Faulty-Design Exclusion + Resultant Damage Carve-Out",
+    text: "On an all-risks builders' risk policy, you must ask if the loss was caused by faulty design, materials, or workmanship[cite: 6]. Under the state-of-the-art test, if the design met the then-current state of the art, it is not considered faulty[cite: 6]. If it is faulty, the cost of making good the faulty work itself is excluded[cite: 6]. However, damage to other, genuinely separate property may be covered as resultant damage, unless courts view it as part of the same integrated contractual obligation[cite: 6].",
+    ex: "You build a faulty brick wall and it collapses onto a parked car. The insurance will absolutely not pay to rebuild your bad wall, because fixing faulty work is excluded[cite: 6]. But the crushed car is resultant damage to other property, so the insurance will pay to replace the car[cite: 6]."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  // Combine the main text and the example for the audio read-out
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

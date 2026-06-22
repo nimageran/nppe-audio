@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 6 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 6 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Enforceable Contract Decision Tree</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 9</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Enforceable Contract Decision Tree",
+    text: "Think of a contract like a brutal obstacle course. To even exist, it must survive six specific gates in a row. First, there must be an offer and an acceptance. Second, that offer has to contain all the essential details, like price and scope. Third, value must be exchanged, which is called consideration. Fourth, the parties must actually intend to create legal relations. Fifth, they must have legal capacity. And finally, the purpose of the deal must be legal. If you fail even one of these gates, there is zero enforceable contract. But passing all six gates only means the contract exists; you then have to check if it can be killed or 'voided' through the back door.",
+    ex: "For example, you offer to pay a contractor $5,000 to assemble a machine, they accept, you shake hands, and building the machine is perfectly legal. You passed the gates. But if that contractor was secretly a 15-year-old high school student, it instantly fails the 'capacity' gate. The contract never legally existed."
+  },
+  {
+    title: "Diagram 2 — The Counter-Offer Chain: Why Negotiation Kills Old Offers",
+    text: "Here is a common trap people fall into during negotiations. Let's say a client offers you one hundred thousand dollars for a six-month project. You say, I want one hundred and ten thousand dollars. The exact legal moment you make that counter-offer, the original one hundred thousand dollar offer is completely dead. It is killed. If the client refuses your higher price, you cannot suddenly say, fine, I will accept your original offer. That original offer does not exist anymore. Legally, when you say you want the original deal back, you are actually making a brand new counter-offer to the client.",
+    ex: "For example, if I offer to sell you my used CNC mill for $10,000, and you reply 'I will give you $8,000,' my $10,000 offer is dead. If I say no to the $8,000, you cannot come back tomorrow and say 'Okay fine, I'll pay the $10,000.' You have to make me a brand new offer for the $10,000, and I can just say no."
+  },
+  {
+    title: "Diagram 3 — The Consideration Flow",
+    text: "For a contract to be valid, value has to flow in both directions. This is called consideration. You promise to pay money, and the other person promises to do the work. If value only flows one way, for example, if you just promise to give your friend a car for nothing in return, that is just a gift. Courts do not enforce promises to give gifts. There is only one exception to this rule. If you write down a promise to give a gift and put a formal legal seal on the document, the law accepts that seal as a substitute for consideration.",
+    ex: "For example, if I promise to give you my old AutoCAD software license for free just because you are a good friend, and then I change my mind, you cannot sue me. But if you promised to give me $50 for it, value flows both ways, and it becomes a legally binding contract."
+  },
+  {
+    title: "Diagram 4 — Past Consideration vs Fresh Consideration",
+    text: "This is the most highly tested trap on the exam. Imagine you are in the middle of a project, and the contractor demands more money to finish on time. You reluctantly agree. After the job is done, do you legally have to pay that extra money? No. Why? Because the contractor did not give you anything new. They were already legally obligated to finish on time. Promising to do what you are already legally bound to do is called past consideration, and it is useless. To make an amendment enforceable, the contractor must give fresh consideration, offering something totally new.",
+    ex: "For example, a machine shop agrees to machine 100 parts for $5,000 by Friday. On Thursday, they say they will only finish them if you pay an extra $1,000. You agree just to get the parts. Later, you only owe the original $5,000. They gave you past consideration—doing exactly what they already promised to do. The $1,000 promise is legally void."
+  },
+  {
+    title: "Diagram 5 — The Letter of Intent Trap",
+    text: "A letter of intent is supposed to be a safe, non-binding placeholder before you sign the real, complex contract. But in reality, it is a legal trap that fails in three ways. One: one side might actually think it is a binding deal. Two: you might start working while waiting for the final contract, and courts will look at your performance and decide a real contract has been formed simply because you started acting like it. Three: if you write the letter of intent too clearly, a judge might decide it is an actual contract and force the deal through.",
+    ex: "For example, you sign a quick Letter of Intent to design a complex automated assembly line, assuming you will work out the heavy liability and payment terms later. But the owner tells you to start buying materials right away. Because you started the physical work, a court will likely rule that you accidentally locked yourself into a binding contract before you even figured out the payment terms."
+  },
+  {
+    title: "Diagram 6 — Voiding a Contract: The Six Doors",
+    text: "Even if a contract perfectly survives the first gauntlet of creation, it can still be killed through one of six doors. These are mistake, misrepresentation, duress, unconscionability, frustration, or illegality. You only need to prove one door to break the contract. But remember this very important rule: if a contract is voidable, it does not die automatically. The innocent party gets to choose. You can choose to walk away and cancel the deal, or you can choose to ignore the issue and keep the contract going.",
+    ex: "For example, if an owner hires you to dig a foundation, and explicitly lies saying there is no solid bedrock, you can void the contract when you hit rock. But if you have special drilling equipment and the price of digging rock is suddenly highly profitable for you, you can choose to ignore their lie and keep the contract alive to make money."
+  },
+  {
+    title: "Diagram 7 — The Economic Duress Test",
+    text: "Almost every business deal involves pressure. Someone is always threatening to walk away. But normal commercial pressure is not legal duress. To prove duress and void a contract, you have to prove true coercion of the will. You must prove you had absolutely no real choice. The court will look at whether you protested, if you had any other practical option, if you got legal advice, and if you tried to avoid the contract after the pressure lifted. If you had other options but just made a tough call, the contract stands.",
+    ex: "For example, if a supplier threatens to cut off your critical custom-machined parts right before a massive shipment deadline unless you sign a terrible new contract, and you cannot buy those specific parts anywhere else in the world, that is economic duress. You signed because you were trapped with zero alternatives."
+  },
+  {
+    title: "Diagram 8 — Waiver and Estoppel: The One-Way Ratchet",
+    text: "This is a trap where your own nice behavior is used against you. If you consistently ignore a strict rule in your contract, you waive your right to use it. The other party legally relies on your leniency, and you are now estopped from suddenly enforcing it. The strict rule is completely dead. To get your strict right back, you must give clear, reasonable written notice that you will start enforcing it again. This exact rule applies to construction contracts that say changes must be in writing; verbally approving changes kills the written-only rule.",
+    ex: "For example, your master agreement says the client must pay a penalty if they miss the 30-day invoice deadline. But you let them pay at 45 days for an entire year without charging the penalty. You have waived your right. You cannot suddenly surprise them with a massive late fee next month without giving them a strict written warning first."
+  },
+  {
+    title: "Diagram 9 — Quantum Meruit: When Contract Law Steps Aside",
+    text: "Quantum meruit is Latin for 'what it is worth.' Many people mistakenly think this is just a backup rule to get paid when they feel cheated. That is wrong. Quantum meruit only triggers if there is absolutely zero valid contract covering the work you did. This happens if the scope is fundamentally changed, if the owner forces you to work differently but denies it is a change, or if the original contract is entirely voided. When contract law steps aside, quantum meruit forces them to pay the fair market value of your work, plus profit.",
+    ex: "For example, your engineering firm is hired to design a simple manual conveyor belt. Halfway through, the owner verbally tells you to add a massive robotics sorting arm, but refuses to sign a formal change order and denies that it is a change. Quantum meruit allows a judge to step in, look at the value of your complex robotics work, and force the owner to pay you a fair market rate."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

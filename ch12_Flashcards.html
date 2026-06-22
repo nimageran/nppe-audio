@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 12 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px; /* Taller card to fit the story */
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto; /* Adds scrollbar if text is too long */
+  }
+  /* Hide scrollbar visually but allow scrolling */
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; /* Gold color for emphasis on the blue background */
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is a "Tort"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> You make a mistake that physically hurts someone or costs them money. <br><br><strong>The Catch:</strong> You can be sued for a tort even if you never signed a contract with the person you hurt.</div>
+        <div class="mnem">Mistake = Lawsuit (No Contract Needed)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What are the two main types of Torts?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>1. Intentional:</strong> You meant to do it (like lying on purpose or parking equipment on a neighbor's land). <br><br><strong>2. Unintentional:</strong> It was an accident (like making a math error on a drawing). This is called "Negligence."</div>
+        <div class="mnem">On Purpose vs. By Accident</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The "Snail in the Bottle" Case<br>(Donoghue v. Stevenson)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A woman found a dead snail in her drink and sued the factory. <br><br><strong>The Rule:</strong> The court said the factory must protect the final user, even without a direct contract. This invented modern Negligence law.</div>
+        <div class="mnem">Protect the Final User</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">How do you prove "Negligence"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The 4 Steps:</strong> A person suing you must prove you had a <strong>D</strong>uty to protect them, you <strong>B</strong>reached that duty, they suffered a <strong>L</strong>oss, and your mistake <strong>C</strong>aused it. If they cannot prove all 4, they lose.</div>
+        <div class="mnem">DBLC: Duty, Breach, Loss, Causation</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Who do you owe a "Duty of Care" to?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> You must protect anyone you can reasonably guess might be hurt by your actions. If you design a building, you owe a duty to the future people walking inside it, not just the owner.</div>
+        <div class="mnem">Protect Your "Neighbour"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is the "Standard of Care"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> You do not have to be perfect. You just need to be as good as a normal, average engineer. <br><br><strong>The Catch:</strong> The court judges you based on the rules that existed when you did the work, not years later.</div>
+        <div class="mnem">Average Competence, Not Perfection</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What if you call yourself an "Expert"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Catch:</strong> If you tell the public you are a "specialist," the court will judge you harder. You will be compared to other top experts, not just average engineers.</div>
+        <div class="mnem">Claim Expert = Judged as Expert</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Proximate Cause"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The "But For" Test:</strong> Ask yourself: "But for my mistake, would the building still have fallen?" If it would have fallen anyway, your mistake did not trigger the damage, so you are not liable.</div>
+        <div class="mnem">Did YOUR mistake pull the trigger?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">How does the court calculate damages?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Goal:</strong> Put the victim back where they started. The court will make you pay either the <strong>Cost of Repair</strong> (fixing the physical mistake) OR the <strong>Diminution</strong> (the amount of value the property lost).</div>
+        <div class="mnem">Fix It OR Pay the Lost Value</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Can you sue just for losing money?<br>(Pure Economic Loss)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Usually, no. If nothing physically broke and nobody got hurt, you cannot sue for just lost money. <br><br><strong>Exception:</strong> You CAN sue if the mistake creates a real danger to health and safety, or if it involves bad advice.</div>
+        <div class="mnem">Must Have Damage OR Danger</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Can an injured construction worker sue the engineer?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Shield:</strong> Usually, no. "Workers' Compensation" laws stop injured workers from suing their boss or the project engineers. They get a payout from a government fund instead.</div>
+        <div class="mnem">Workers' Comp Blocks Lawsuits</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Negligent Misrepresentation"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You accidentally give bad professional advice. If a client reasonably trusts your advice, uses it, and loses money, they can sue you. It is an honest mistake that causes financial ruin.</div>
+        <div class="mnem">Bad Advice + Trust = Liability</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Fraudulent Misrepresentation"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You lie on purpose, or you do not care if what you say is true, to trick a client into signing a contract. <br><br><strong>The Result:</strong> The client can cancel the contract AND sue you for money damages.</div>
+        <div class="mnem">Lie on Purpose = Cancel + Damages</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Innocent Misrepresentation"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You give false information, but it was a complete, honest mistake with no carelessness at all. <br><br><strong>The Result:</strong> The client can cancel the contract, but they CANNOT sue you for extra money.</div>
+        <div class="mnem">Honest Mistake = Cancel Only (No Money)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Can staying silent be a lie?<br>(Misrepresentation by Omission)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Yes. If the law says you must share a report (like finding bad soil) and you stay quiet to keep the deal going, the court treats your silence exactly the same as a spoken lie.</div>
+        <div class="mnem">Hiding Facts is Fraud</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is an "Entire Agreement" Clause?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Shield:</strong> A line in a contract that says: "Anything we talked about before signing doesn't matter unless it's written in this paper." It is meant to stop people from suing over verbal promises.</div>
+        <div class="mnem">If it is not in writing, it does not exist</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is a "Fiduciary Duty"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> It is a special, extremely high level of trust where you must put a vulnerable client's needs completely above your own. <br><br><strong>The Catch:</strong> Regular engineering contracts usually do NOT require this.</div>
+        <div class="mnem">Total, Unselfish Loyalty</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What counts as "Trespass" in construction?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Crossing property lines without asking. This includes putting rock anchors deep underground or swinging a crane in the air over a neighbor's yard. <br><br><strong>The Catch:</strong> You are liable even if you cause zero damage.</div>
+        <div class="mnem">Crossing the Line = Strict Liability</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is a "Nuisance"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Ruining your neighbor's peace. If you bring something dangerous to your site (like a water tank or heavy pile-driving vibrations) and it escapes to their land to cause damage, you are strictly liable.</div>
+        <div class="mnem">The Escaping Mischief</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is your "Duty to Warn"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> If you see something dangerous on a site that could hurt someone, you MUST speak up. Even if safety is not your specific job or in your contract, you must warn the owner or authorities.</div>
+        <div class="mnem">See Danger, Speak Up</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">How does "Product Liability" work in Canada?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Unlike the US, if a product hurts a Canadian, they must prove the factory was negligent. <br><br><strong>The Catch:</strong> Once the user proves the product was defective, the burden shifts, and the factory is forced to prove they weren't careless.</div>
+        <div class="mnem">Prove Defect, Shift Blame</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is a "Learned Intermediary"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You are the technical middleman (the engineer) standing between the factory and the public. <br><br><strong>The Rule:</strong> You have a legal duty to read the factory's warnings and explain the technical risks to the consumer.</div>
+        <div class="mnem">The Technical Middleman</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Do "Limitation Clauses" protect you from everyone?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Shield:</strong> You can write a contract that limits how much you can be sued for. <br><br><strong>The Catch:</strong> This ONLY stops the person who signed it. A stranger walking down the street can still sue you for everything you have.</div>
+        <div class="mnem">Contracts Do Not Block Strangers</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Is following the "Code" always a safe defense?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Normally, yes. <br><br><strong>The Exception:</strong> If you know the minimum code is outdated and a design is actually dangerous, you cannot hide behind the code. Minimum codes do not excuse ignoring obvious risks.</div>
+        <div class="mnem">Minimum Code ≠ Maximum Safety</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 9: Visualizing Selected Contract Issues</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; text-transform: uppercase; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.agency { border-top-color: #64748b; }
+    .framework-card.indemnity { border-top-color: #f59e0b; }
+    .framework-card.changes { border-top-color: #ef4444; }
+    .framework-card.subcontract { border-top-color: #10b981; }
+    .framework-card.admin { border-top-color: #8b5cf6; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 9: DEEP CONTRACT ISSUES VISUALIZATION</h1>
+
+  <div class="framework-card agency">
+    <h2>1. The Agency & Authority Triangle</h2>
+    <p>In construction, the Architect/Engineer acts as the "Agent" for the Owner. Understanding exactly how the Agent's power is granted is critical, because an Agent can legally bind the Owner to contracts and massive expenses.</p>
+
+    <div class="mermaid">
+      graph TD
+        Principal[The Principal: OWNER] -->|1. Actual/Express Authority| Agent[The Agent: CONSULTANT]
+        Principal -.->|2. Apparent/Implied Authority| Third[The Third Party: CONTRACTOR]
+        
+        Agent <-->|Negotiates & Approves Work| Third
+        
+        style Principal fill:#1e293b,color:#fff
+        style Agent fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Third fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps out how power flows in an agency relationship.</p>
+      <ul>
+        <li><strong>Actual (Express) Authority:</strong> Created by the direct contract between the Owner and the Consultant. (e.g., "The Consultant can approve changes up to $10,000").</li>
+        <li><strong>Apparent (Implied) Authority:</strong> Created by representations the Owner makes to the Contractor. If the Owner tells the Contractor the Consultant is in charge, but secretly tells the Consultant not to approve changes over $5,000, the Owner is STILL BOUND if the Consultant approves an $8,000 change, because the Contractor relied on the <em>Apparent</em> authority.</li>
+        <li><strong>The Agent's Trap:</strong> An Agent cannot create their own Apparent Authority. If someone simply walks onto a site and claims to be the Owner's Agent, the Owner is not bound, but the fake Agent is personally liable.</li>
+        <li><strong>Imputed Knowledge:</strong> If the Agent learns a fact on site, the law considers that the Owner also instantly knows that fact, even if the Agent forgets to tell them.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card indemnity">
+    <h2>2. Indemnities ("Hold Harmless" Agreements)</h2>
+    <p>An indemnity is a contractual promise to bear the financial loss of another party. It is essentially private insurance written into a contract.</p>
+
+    <div class="mermaid">
+      graph LR
+        Contractor[The Indemnitor: CONTRACTOR] --> |Promises to Pay| Owner[The Indemnitee: OWNER]
+        
+        Third[Third Party e.g., Pedestrian] --> |Sues| Owner
+        
+        Owner -.-> |Activates Indemnity Clause| Contractor
+        
+        style Contractor fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Owner fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Third fill:#1e293b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This illustrates the flow of liability under a standard CCDC 2 indemnity clause.</p>
+      <ul>
+        <li><strong>The Standard Indemnity:</strong> The Contractor is saying, "If my negligence injures a pedestrian, and the pedestrian sues you (the Owner), I will pay for your legal defense and the damages."</li>
+        <li><strong>The Danger of Broad Indemnities:</strong> Some contracts contain broad clauses where the Contractor must pay even if the loss is partially caused by the <em>Owner's or Designer's</em> negligence. This overrides "comparative negligence" statutes, exposing the Contractor to 100% of the loss even if they were only 10% at fault. These clauses require extreme scrutiny.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card changes">
+    <h2>3. The Change Order vs. Change Directive Engine</h2>
+    <p>Changes are inevitable. Because construction moves faster than paperwork, the contract provides two distinct tools to force work to proceed.</p>
+
+    <div class="mermaid">
+      graph TD
+        Need[Change is Needed] --> Agree{Can Owner & Contractor agree on Price/Schedule?}
+        
+        Agree -->|Yes| CO[Change Order]
+        Agree -->|No / Urgent| CD[Change Directive]
+        
+        CO -.-> Rule1(Signed by Owner & Contractor)
+        CO -.-> Rule2(Price is fixed BEFORE work starts)
+        
+        CD -.-> Rule3(Signed by Owner or Consultant)
+        CD -.-> Rule4(Forces work to proceed immediately)
+        CD -.-> Rule5(Price is tracked as Cost-Plus and resolved later)
+        
+        style Need fill:#1e293b,color:#fff
+        style Agree fill:#fef3c7,stroke:#d97706
+        style CO fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style CD fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Rule1 fill:#f8fafc,stroke:#94a3b8
+        style Rule2 fill:#f8fafc,stroke:#94a3b8
+        style Rule3 fill:#f8fafc,stroke:#94a3b8
+        style Rule4 fill:#f8fafc,stroke:#94a3b8
+        style Rule5 fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps the mechanics of project alterations.</p>
+      <ul>
+        <li><strong>Change Order:</strong> A mutual agreement. The trap here is that if a Contractor quotes a firm price, the Owner legally assumes that price includes all "Impact Costs" (inefficiencies, delays). If the Contractor wants impact costs later, they must explicitly reserve that right in the quote.</li>
+        <li><strong>Change Directive:</strong> Used when negotiations fail but the project must move forward. The Contractor is forced to build it, but they are protected because they will be paid for their actual time and materials (cost-plus).</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card subcontract">
+    <h2>4. Subcontractor Kill-Switches</h2>
+    <p>Subcontractors sit lower on the contractual food chain and face immense risks regarding payment and hidden contractual terms.</p>
+
+    <div class="mermaid">
+      graph TD
+        Prime[Prime Contract: Owner & General Contractor] --> Sub[Subcontract: GC & Subcontractor]
+        
+        Sub --> Risk1{Pay-if-Paid Clauses}
+        Sub --> Risk2{Incorporation by Reference}
+        Sub --> Risk3{One-Tier Bonds}
+        
+        Risk1 -.-> |Condition Precedent| Effect1(If the Owner goes bankrupt, the GC NEVER has to pay the Sub)
+        Risk2 -.-> |Blind Liability| Effect2(The Sub is legally bound by the harsh terms of the Prime Contract, even if they never read it)
+        Risk3 -.-> |Limited Shield| Effect3(A Labour & Material bond only protects the DIRECT Subs. Sub-subcontractors get nothing)
+        
+        style Prime fill:#1e293b,color:#fff
+        style Sub fill:#e0f2fe,stroke:#0284c7
+        style Risk1 fill:#fef3c7,stroke:#d97706
+        style Risk2 fill:#fef3c7,stroke:#d97706
+        style Risk3 fill:#fef3c7,stroke:#d97706
+        style Effect1 fill:#fee2e2,stroke:#dc2626
+        style Effect2 fill:#fee2e2,stroke:#dc2626
+        style Effect3 fill:#fee2e2,stroke:#dc2626
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This details the three primary traps for sub-trades.</p>
+      <ul>
+        <li><strong>Pay-If-Paid:</strong> This shifts the catastrophic risk of an Owner's bankruptcy onto the Subcontractor. Courts hate these clauses and try to interpret them as "Pay-When-Paid" (which only delays payment), unless the clause explicitly states the Sub assumes the risk of the Owner's insolvency.</li>
+        <li><strong>Incorporation by Reference:</strong> A Subcontractor's bid binds them to the main Prime Contract. If the Prime Contract contains a "No-Damages-For-Delay" clause, the Subcontractor is trapped by it, even if they never looked at it.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card admin">
+    <h2>5. The Contract Administrator's Field Review Liability</h2>
+    <p>Contract Administrators (Engineers/Architects) face intense liability during field reviews. Your contract budget does not dictate your legal duty of care.</p>
+
+    <div class="mermaid">
+      graph LR
+        Admin[Contract Administrator] --> Duty[Duty to Inspect]
+        
+        Duty --> Factor1[Budgeted Visits vs. Required Visits]
+        Duty --> Factor2[Timing of the Visits]
+        
+        Factor1 -.-> |Rule| Fail1(You must conduct sufficient reviews to meet professional standards, regardless of what the Owner agreed to pay you)
+        Factor2 -.-> |Rule| Fail2(Visits must occur while work is actually exposed, not after walls are closed in)
+        
+        style Admin fill:#1e293b,color:#fff
+        style Duty fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Factor1 fill:#fee2e2,stroke:#dc2626
+        style Factor2 fill:#fee2e2,stroke:#dc2626
+        style Fail1 fill:#991b1b,color:#fff
+        style Fail2 fill:#991b1b,color:#fff
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This breaks down the stark ruling in <em>Coast Hotels Ltd. v. Bruskiewich</em>.</p>
+      <ul>
+        <li><strong>The Court's Logic:</strong> In the Coast Hotels case, an engineer was sued after a plumbing system leaked. The engineer conducted 13 site visits, which was more than the contract required. However, the court found the engineer 20% liable for the failure.</li>
+        <li><strong>The Standard of Care:</strong> The court ruled the <em>timing</em> of the visits was terrible. Most visits happened before work started or after walls were sealed, placing undue reliance on the contractor. Crucially, the court does not care if the Owner refused to pay for more visits; if professional standards dictate 20 visits to properly inspect a risky job, the professional must do 20 visits or decline the job entirely.</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

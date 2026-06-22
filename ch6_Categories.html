@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.6 Reference Card: Contracts</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 6 — Contracts</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">5 Requirements for an Enforceable Contract<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Offer and Acceptance</span><span class="item-note">— a valid offer capable of acceptance, and an unequivocal acceptance of that offer</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Consideration</span><span class="item-note">— something of value exchanged by each party; must flow both ways</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Legal Capacity</span><span class="item-note">— parties must have the legal ability to contract</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Intention to Create Legal Relations</span><span class="item-note">— parties must intend to be legally bound</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Lawful Purpose</span><span class="item-note">— contract cannot be for an illegal purpose</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">2 Types of Contract Terms<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Express Terms</span><span class="item-note">— words, phrases, or conditions discussed and agreed to by parties (written or oral)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Implied Terms</span><span class="item-note">— never discussed but taken for granted; implied by law or custom</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">4 Essential Terms an Offer Must Define<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Identity of the contracting parties</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Price</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Time for performance</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Scope of work</span></div></div>
+      </div>
+      <div class="warn"><strong>Note:</strong> A statement missing these terms is likely too vague to be an offer. A request for offers = "invitation to treat" — NOT an offer and cannot be accepted.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">3 Forms a Valid Contract Can Take<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Entirely written</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Entirely oral</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Partly written and partly oral</span></div></div>
+      </div>
+      <div class="info"><strong>Exception:</strong> Some contracts must be in writing — e.g. purchase and sale of land, surety contracts (in some provinces).</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">6 Grounds for Voiding / Making a Contract Voidable<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Mistake</span><span class="item-note">— must be material, mutual, and existing at time of agreement</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Misrepresentation</span><span class="item-note">— untrue factual statement that induced the other party to contract (innocent, negligent, or fraudulent)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Duress</span><span class="item-note">— improper pressure or coercion; party had no real choice but to comply</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Unconscionability</span><span class="item-note">— contract so one-sided that enforcing it would be offensive; requires extreme inequality of bargaining power</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Frustration</span><span class="item-note">— unforeseen event makes performance impossible or of no value; risk must not have been originally allocated to one party</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Impossibility</span><span class="item-note">— same doctrine as frustration; often used interchangeably</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">3 Types of Misrepresentation<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Innocent Misrepresentation</span><span class="item-note">— false statement, no intent to deceive, not careless. Hardest to get damages for.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Negligent Misrepresentation</span><span class="item-note">— false statement made without due care or skill. Damages generally available.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Fraudulent Misrepresentation</span><span class="item-note">— party knows the statement is false. Easiest to rescind contract and get damages.</span></div></div>
+      </div>
+      <div class="info"><strong>Also:</strong> Misrepresentation by omission — misrepresentation created by failure to disclose information (e.g. owner withholding subsurface data from bidders).</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">3 Requirements for a Mistake to Void a Contract<span class="sec-count">3 items · ALL must be present</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Material</span><span class="item-note">— significant, not trivial</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Mutual</span><span class="item-note">— made by BOTH parties (not just one)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Existing at time of agreement</span><span class="item-note">— a mistake made AFTER the agreement is insufficient</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#854F0B">8</div>
+      <div class="sec-title">2 Types of Consideration That Do NOT Work<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Past Consideration</span><span class="item-note">— promising to do something you were already legally obligated to do. NOT valid (e.g. window installer demanding extra money to do work already contracted)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">A Promise Without Consideration (Gift)</span><span class="item-note">— courts do not enforce a promise to give a gift. Exception: seal on a written document can act as consideration.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#993C1D">9</div>
+      <div class="sec-title">3 Problems with Letters of Intent / Agreements to Agree<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Not all parties may know it is unenforceable</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Both parties may commence performance without a formal contract</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">If worded as an acceptance, it may be treated as one by a court</span><span class="item-note">— even though many contract terms are still unclear</span></div></div>
+      </div>
+      <div class="warn"><strong>Rule:</strong> An agreement to agree in the future is NOT an enforceable contract.</div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#3B6D11">10</div>
+      <div class="sec-title">Quantum Meruit — 2 Key Conditions<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">The other party received the benefit of the work</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">No valid contract exists that applies to the work</span><span class="item-note">— if a change order provision covers it, quantum meruit does NOT apply</span></div></div>
+      </div>
+      <div class="info"><strong>Quantum meruit</strong> = "the amount it is worth." Payment approximating the value of work performed including reasonable profit. Also applies to constructive changes — changes the owner refuses to acknowledge.</div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggle('s11')">
+      <div class="sec-num" style="background:#3B6D11">11</div>
+      <div class="sec-title">Offer & Acceptance — 4 Key Rules<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Counter-offer = Rejection</span><span class="item-note">— a counter-offer terminates the previous offer; offeree cannot later accept the original offer unless revived</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Revocation must be communicated</span><span class="item-note">— offeror can revoke any time before acceptance, but must communicate the revocation</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Postal Acceptance Rule</span><span class="item-note">— when regular mail is used, acceptance is deemed communicated when placed into the mail system</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Acceptance by conduct</span><span class="item-note">— beginning performance of the work constitutes acceptance (e.g. consultant starting site inspection)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

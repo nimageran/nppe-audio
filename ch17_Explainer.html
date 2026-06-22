@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 17 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 17 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Three-Party Structure</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 10</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Three-Party Structure and Two Separate Agreements",
+    text: "A bond is not a single three-way contract; it is two separate agreements. Agreement 1 is the primary contract between the contractor and the owner. Agreement 2 is the bond itself, where the surety guarantees the owner that the contractor will perform. The surety's promise is completely secondary; it only matters if the primary contract is broken. And ironically, the contractor pays the premium for this bond, meaning the owner essentially funds their own protection through the bid price.",
+    ex: "You hire a contractor to build a warehouse. Contract 1 is their promise to build it. Contract 2 is a bond company promising to finish it if the contractor runs away. If the contractor builds it perfectly, Contract 2 sits in a drawer and does absolutely nothing."
+  },
+  {
+    title: "Diagram 2 — Bond vs Insurance: Why a Bond Is Not Insurance",
+    text: "People confuse bonds with insurance because both cover losses, but their mechanics are opposite. Insurance involves two parties, does not always need an original physical document, and most importantly, an insurer does not expect you to pay them back. A bond involves three parties, requires the original physical document to enforce, and the surety absolutely expects to be paid back. A bond functions like a bank co-signing a loan; if they pay out, they are coming after you for the money.",
+    ex: "If your car insurance pays for a crash, they do not ask you to refund the payout. But if a surety bond pays an owner a million dollars because your construction firm failed, the surety will aggressively sue your firm to get that million dollars back."
+  },
+  {
+    title: "Diagram 3 — Surety's Recourse After Paying Out: Two Parallel Tracks",
+    text: "When a surety pays out money on a bond, it has two ways to get it back. Track 1 is subrogation, meaning the surety steps into the owner's shoes to sue the contractor. But if the contractor is bankrupt, subrogation is worthless. That is why they rely heavily on Track 2: personal indemnity. Sureties force the contractor's owners or shareholders to sign a personal guarantee, allowing the surety to bypass the bankrupt company and drain the owners' personal bank accounts.",
+    ex: "Your construction company goes bankrupt and abandons a job. The surety pays to finish it. They cannot sue your empty company to get their money back, so they use the personal indemnity agreement you signed to seize your personal house and savings account."
+  },
+  {
+    title: "Diagram 4 — The Bid Bond Defence-Dependency Rule",
+    text: "The ultimate rule of bonds is that the surety's position can never be worse than the contractor's position. If an owner makes a claim against the surety, the surety instantly checks to see if the contractor has a valid excuse. If the contractor has a legal defence, like the owner waited too long to sue or the bid was validly revoked, the surety automatically gets to use that exact same defence to avoid paying.",
+    ex: "An owner sues a surety because a contractor refused to honor a bid. The surety investigates and finds out the owner illegally changed the project design after the bid was submitted. Because the contractor has the right to walk away from a changed design, the surety uses that same right to deny the owner's claim and pays nothing."
+  },
+  {
+    title: "Diagram 5 — The Surety's Six Options on Default",
+    text: "When a contractor defaults, the surety has six options, ranging from safe to dangerous. The safest options are paying the face value of the bond or getting new bids, because the surety's financial loss is strictly capped. The most dangerous option is for the surety to step in and complete the work themselves. If they do this, they effectively become the contractor, losing their financial cap and inheriting all open-ended costs and long-term warranty liabilities.",
+    ex: "A contractor walks off a half-finished bridge project. The surety can safely just write a check for the $2 million bond limit and walk away. But if the surety hires their own crews to finish the bridge, and the bridge collapses five years later, the surety is on the hook for a massive lawsuit because they took on the role of the contractor."
+  },
+  {
+    title: "Diagram 6 — Case Study 17.1: Tracing the Money",
+    text: "A bond's face value is just a maximum ceiling; the actual payout is usually much smaller and strictly tied to the real mathematical loss. Furthermore, if a third party's negligence made the loss worse, the surety will hunt them down. In the chapter's case study, a surety lost 1.3 million dollars finishing a job, but discovered that the architect had negligently over-certified the early work, causing the owner to overpay the defaulting contractor. The surety sued the architect directly to recover that specific portion of the loss.",
+    ex: "An architect rubber-stamps an invoice saying a contractor finished 80 percent of a building, when really they only did 50 percent. The contractor takes the money and runs. The surety has to pay to finish the building, but they will actively sue the architect for negligence because the architect's lazy inspection is what improperly drained the project's bank account."
+  },
+  {
+    title: "Diagram 7 — The Volunteer Trap",
+    text: "A surety must be absolutely certain a contractor is actually in default before paying out money. If a surety panics, assumes the contractor is guilty, and pays the owner to finish the job, they expect to get their money back through indemnity. But if a court later proves the contractor was actually right, the surety is classified as a 'volunteer.' A volunteer is someone who pays money they had no legal obligation to pay, and the law permanently strips them of their right to recover it.",
+    ex: "An owner screams that the contractor abandoned the site, so the surety steps in and spends $100,000 to finish it. Later, a judge rules the contractor legally stopped work because the owner stopped paying invoices. Because the surety paid the $100,000 when they did not legally have to, they are trapped. They cannot force the contractor to pay them back."
+  },
+  {
+    title: "Diagram 8 — The Performance Bond Defence Chain",
+    text: "A performance bond claim must survive a brutal gauntlet of conditions to trigger a payout. If the owner failed to pay the contractor, gave late notice to the surety, overpaid the contractor early, or significantly changed the risk of the project without telling the surety, the claim is dead. The surety is discharged from their obligation because the owner's own sloppy behavior ruined the safety of the bond.",
+    ex: "You have a bond to build a two-story school. Halfway through, the owner verbally tells you to add a third story and a swimming pool, completely changing the risk. The owner never tells the surety. If you go bankrupt, the surety will refuse to pay a single dime, arguing that the massive secret changes completely voided their guarantee."
+  },
+  {
+    title: "Diagram 9 — Payment Bond Trust Structure: One-Tier Chain",
+    text: "A Labour and Material Payment Bond ensures subcontractors get paid if the main contractor goes bankrupt. It is structured as a trust, where the owner is the trustee holding the bond for the benefit of the workers. However, standard Canadian bonds only protect a 'one-tier' chain. This means only people who signed a direct contract with the main contractor are protected. Anyone lower down the chain is completely out of luck.",
+    ex: "A main contractor goes bankrupt. The electrician, who was hired directly by the main contractor, claims against the payment bond and gets paid. The drywall supplier, who sold drywall to a subcontractor, claims against the bond and gets absolutely nothing, because they are on the second tier and have no direct contract with the main contractor."
+  },
+  {
+    title: "Diagram 10 — Lien Bond vs L&M Payment Bond: Timing Difference",
+    text: "A Labour and Material Payment Bond and a Lien Bond both deal with unpaid bills, but their timing and purpose are totally different. An L&M bond is proactive; it is put in place at the very start of a project to prevent unpaid trades from ever needing to file liens. A Lien Bond is reactive; it only comes into existence after a disaster has happened and a lien is already slapped on the property. The Lien bond acts as a surgical tool to replace the land as security, freeing up the property's title to be sold or financed.",
+    ex: "To prevent mechanics from locking up your new factory, you buy an L&M bond on Day 1. But let's say you didn't, and a plumber slaps a lien on your factory in Year 2, legally preventing you from selling the building. You buy a Lien Bond that day. The court moves the plumber's claim off your factory and onto the bond, instantly cleaning your title so you can sell the building."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

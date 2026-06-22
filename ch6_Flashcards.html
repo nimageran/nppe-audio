@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 6 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The 5 Elements of a Contract</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> To be legally binding, a contract MUST have all five: 1. Offer 2. Acceptance 3. Consideration 4. Capacity 5. Lawful Purpose.<br><br><strong>The Catch:</strong> If even one is missing, the contract simply does not exist.</div>
+        <div class="mnem">O-A-C-C-L</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Offer vs. Invitation to Treat</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You see an ad selling a generator for $10. You walk in and say "I accept!"<br><br><strong>The Rule:</strong> They do not have to sell it to you. Advertisements, catalogs, and store displays are NOT legal offers. They are "Invitations to Treat" (requests for YOU to make an offer).</div>
+        <div class="mnem">Ads Are Not Offers</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Revoking an Offer</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A contractor says "My quote is good for 30 days." Two days later, he changes his mind and cancels it.<br><br><strong>The Rule:</strong> This is perfectly legal. An offer can be revoked ANYTIME before acceptance, even if they promised to keep it open.</div>
+        <div class="mnem">Promises Are Cheap</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Option Contract</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Catch:</strong> How do you legally force someone to keep an offer open?<br><br><strong>The Rule:</strong> You must buy an "Option." If you pay them $1 to keep the offer open for 30 days, it creates a mini-contract. Now they cannot revoke it.</div>
+        <div class="mnem">Options Cost Money</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Mirror Image Rule</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Someone offers to sell you a truck for $5k. You say "I accept, but wash it first."<br><br><strong>The Rule:</strong> You did not accept. You destroyed their offer and created a Counter-Offer. Acceptance MUST perfectly mirror the original offer.</div>
+        <div class="mnem">Change a Word, Kill the Offer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Postal Acceptance Rule</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Trap:</strong> You mail a signed contract on Tuesday. It arrives on Thursday.<br><br><strong>The Rule:</strong> The contract became legally binding <strong>the exact moment it was dropped in the mailbox</strong> on Tuesday, regardless of when it is received.</div>
+        <div class="mnem">The Mailbox Trap</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">What is "Consideration"?</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> The "price" paid for a promise. It is the exchange of value (money, goods, or doing something you didn't have to do).<br><br><strong>The Rule:</strong> A "Gratuitous Promise" (promising to do something for free) is completely unenforceable in court because it lacks consideration.</div>
+        <div class="mnem">No Exchange = No Contract</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The "Peppercorn" Theory</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> You sell a $1 Million factory to your friend for $1.<br><br><strong>The Rule:</strong> The court will enforce this contract. Consideration only has to exist; it does NOT have to be fair. The court does not protect you from making a bad deal.</div>
+        <div class="mnem">Courts Do Not Protect Fools</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Equitable Estoppel</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Trap:</strong> You tell a contractor, "Don't worry about the deadline, take an extra week for free." Later, you try to sue them for being late.<br><br><strong>The Rule:</strong> The court will "estop" (block) you from enforcing your strict contract rights because you made a promise they relied on, and it would be unfair to change your mind.</div>
+        <div class="mnem">You Cannot Go Back On Your Word</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Capacity (Minors & Drunks)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Rule:</strong> Minors, intoxicated people, and the mentally incompetent lack the capacity to contract.<br><br><strong>The Catch:</strong> If a minor signs a contract, it is <strong>voidable</strong> by the minor, but strictly binding on the adult.</div>
+        <div class="mnem">Protects the Weak</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Statute of Frauds</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> Verbal contracts are generally 100% legal.<br><br><strong>The Exception:</strong> The Statute of Frauds says certain contracts MUST be in writing to be enforced. This includes <strong>buying land</strong> and <strong>guaranteeing someone else's debt</strong>.</div>
+        <div class="mnem">Land & Guarantees = Ink Required</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Privity of Contract</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> Owner A hires General Contractor B. Contractor B hires Subcontractor C.<br><br><strong>The Rule:</strong> Owner A CANNOT sue Subcontractor C for breach of contract, because they never signed a contract together. Only parties to a contract can sue on it.</div>
+        <div class="mnem">Strangers Cannot Sue</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Void vs. Voidable</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>Void:</strong> The contract never legally existed (e.g., a contract to commit a crime). It is dead immediately.<br><br><strong>Voidable:</strong> The contract is valid, but one party has the option to cancel it (e.g., a contract signed because of a lie or signed by a minor).</div>
+        <div class="mnem">Void = Dead | Voidable = Optional</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

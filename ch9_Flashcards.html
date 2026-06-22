@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 9 Flashcards</title>
+<style>
+  :root {
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --accent: #2056C8;
+    --text: #1A1F35;
+    --text2: #5B6585;
+    --text3: #9AA0B8;
+    --green: #1D9B6A;
+    --radius: 12px;
+    --shadow: 0 2px 8px rgba(26,31,53,.08);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: transparent;
+    perspective: 1000px;
+    height: 320px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+  }
+  .card-face::-webkit-scrollbar { width: 4px; }
+  .card-face::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  
+  .front {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--text);
+  }
+  .back {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+    border: 2px solid var(--accent);
+  }
+  .back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .desc strong {
+    color: #FFD700; 
+  }
+  .front .desc strong {
+    color: var(--accent);
+  }
+  .mnem {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(29, 155, 106, 0.15);
+    color: var(--green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .back .mnem {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+  .hint {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .back .hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">The Law of Agency</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A client (Principal) hires an engineer (Agent) to negotiate with a contractor (Third Party).<br><br><strong>The Rule:</strong> The Agent is just a middleman. Any contract the Agent signs binds the Principal directly to the Third Party. The Agent steps completely out of the legal picture.</div>
+        <div class="mnem">The Middleman Binds the Boss</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Actual Authority</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Basics:</strong> The legal power an employer specifically gives to an employee.<br><br><strong>The Rule:</strong> It can be written (a contract saying "You can buy up to $50k in steel") or implied (the normal duties an engineer in your position would normally handle).</div>
+        <div class="mnem">What You Are Actually Allowed To Do</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Apparent Authority</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Trap:</strong> Your boss secretly tells you NOT to buy steel. But you wear the company hardhat and order steel from a supplier anyway.<br><br><strong>The Rule:</strong> The company MUST pay the supplier. The supplier had a reasonable right to believe you had authority. (Your boss can fire you later, but the contract stands).</div>
+        <div class="mnem">Looking Like a Boss = Binding the Boss</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Indemnification Clauses<br>(Hold Harmless)</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> An owner says, "If I get sued because your crane dropped a beam, you pay my lawyers."<br><br><strong>The Rule:</strong> A contractual agreement where one party legally promises to absorb the financial losses or legal fees of the other party.</div>
+        <div class="mnem">You Pay My Lawsuits</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Change Orders</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> The owner decides to add a third floor to a two-story building after construction starts.<br><br><strong>The Rule:</strong> A Change Order is literally a mini-amendment to the contract. It is only valid if both sides agree on the new scope, the new price, and the new schedule.</div>
+        <div class="mnem">Agreed Change to the Contract</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Change Directive</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> The owner demands the new floor be built TODAY, but you cannot agree on a price yet.<br><br><strong>The Rule:</strong> A legal command forcing the contractor to do the work immediately so the project doesn't stall. The exact payment amount will be fought over and decided later.</div>
+        <div class="mnem">Do It Now, Argue Price Later</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">"Pay-When-Paid" Clauses</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Trap:</strong> A General Contractor (GC) tells a Subcontractor, "I'll pay you when the Owner pays me." The Owner goes bankrupt.<br><br><strong>The Rule:</strong> Courts treat this as a timing delay, NOT an escape hatch. The GC must still pay the Subcontractor eventually, even if the GC never gets paid.</div>
+        <div class="mnem">Just a Delay, Not an Excuse</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">"Pay-If-Paid" Clauses</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Exception:</strong> The GC uses extremely strict, brutal language saying the Subcontractor takes 100% of the risk of the Owner going bankrupt.<br><br><strong>The Rule:</strong> Courts hate this, but if the language is perfectly clear, they will enforce it. If the Owner doesn't pay, the Sub gets nothing.</div>
+        <div class="mnem">Strict Words Transfer the Risk</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Unjust Enrichment</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A contractor paves your driveway by accident. You watch them do it from your window, say nothing, and get a free driveway.<br><br><strong>The Rule:</strong> The court will force you to pay for it. You cannot knowingly and unfairly benefit from someone else's labor at their expense.</div>
+        <div class="mnem">No Free Rides</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('flip')">
+    <div class="card-inner">
+      <div class="card-face front">
+        <div class="title">Waiver</div>
+        <div class="hint">Click to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="desc"><strong>The Story:</strong> A contract says "All extras must be in writing." The owner asks for 5 verbal changes and pays for them. On the 6th, he refuses because it wasn't in writing.<br><br><strong>The Rule:</strong> By ignoring the rule 5 times, the owner "waived" his right to suddenly enforce it. He must pay.</div>
+        <div class="mnem">Ignoring the Rule Kills the Rule</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

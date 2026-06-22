@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 25: Visual Mechanics — Securities Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.jurisdiction { border-top-color: #64748b; }
+    .framework-card.timeline { border-top-color: #0ea5e9; }
+    .framework-card.qualified { border-top-color: #9333ea; }
+    .framework-card.liability { border-top-color: #dc2626; }
+    .framework-card.insider { border-top-color: #ca8a04; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 25: VISUAL MECHANICS — SECURITIES LAW</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. Who Regulates What — Federal vs Provincial Patchwork</a>
+    <a href="#d2">2. The Disclosure Timeline — It Never Actually Ends</a>
+    <a href="#d3">3. The Qualified Person Independence Chain</a>
+    <a href="#d4">4. The Liability Source Matrix</a>
+    <a href="#d5">5. The Insider Trading Decision Tree</a>
+  </div>
+
+
+  <div class="framework-card jurisdiction" id="d1">
+    <h2>1. Who Regulates What — Federal vs Provincial Patchwork</h2>
+    <p>Before any disclosure rule matters, you need to know WHO is actually making the rules. This diagram shows why a single securities transaction can be governed by more than one set of rules simultaneously, and how the CSA tries to patch that problem without actually unifying it.</p>
+
+    <div class="mermaid">
+      graph TD
+        Authority{Constitutional authority<br/>over securities} --> Federal[FEDERAL government<br/>has SOME authority]
+        Authority --> Provincial[PROVINCIAL governments<br/>hold the MAJORITY<br/>of actual securities legislation]
+
+        Provincial --> EachProvince[EACH province has its<br/>OWN securities commission<br/>with potentially DIFFERENT rules]
+        EachProvince --> MultiRule[A SINGLE transaction spanning<br/>provinces can be governed by<br/>MULTIPLE different rule sets<br/>at once]
+
+        MultiRule --> CSA{Canadian Securities<br/>Administrators CSA}
+        CSA --> Forum[NOT a regulator itself —<br/>a FORUM where provincial<br/>commissions coordinate]
+        Forum --> NI[Creates National Instruments<br/>NI — e.g. NI 43-101, NI 51-101 —<br/>for cross-provincial consistency]
+
+        NI --> Optional{Must a province<br/>adopt an NI?}
+        Optional -->|No| Choice[Each province CAN<br/>choose NOT to adopt it]
+        Choice --> StillMinimum[BUT it still represents a<br/>common MINIMUM STANDARD<br/>of practice — relevant in court<br/>even where not formally adopted]
+
+        style Authority fill:#1e293b,color:#fff
+        style Provincial fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style MultiRule fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style CSA fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Optional fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style StillMinimum fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The structure here is deliberately messy because the REAL system is messy — there's no single national securities regulator in Canada, which is precisely why the "multiple rules can govern a single transaction" problem exists at all. The CSA box is positioned as a coordination layer, not a top-down authority, which matters for a subtle reason: a National Instrument has no independent legal force in a province that hasn't adopted it, yet the bottom box shows it still matters practically, because courts treat it as the baseline of "what a reasonably careful professional would have done" even where it was never formally legislated — the same "minimum practice standard" logic from Chapter 13's codes-and-standards material applies here directly.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card timeline" id="d2">
+    <h2>2. The Disclosure Timeline — It Never Actually Ends</h2>
+    <p>A prospectus feels like a one-time hurdle to clear before a company can sell securities. This diagram shows that the prospectus is actually just the FIRST checkpoint in a disclosure obligation that continues for as long as the company is public.</p>
+
+    <div class="mermaid">
+      graph LR
+        Draft[Company drafts<br/>PROSPECTUS] --> Standard{Meets the standard?<br/>Full, true, and plain<br/>disclosure of ALL<br/>material facts}
+        Standard -->|No| Rejected[Securities commission<br/>does NOT approve it]
+        Standard -->|Yes| Approved[APPROVED by relevant<br/>securities commission]
+
+        Approved --> Sales[Securities can now<br/>be SOLD to the public]
+        Sales --> Ongoing{Is disclosure now<br/>COMPLETE?}
+
+        Ongoing -->|NO — common<br/>misconception| Continuing[CONTINUOUS DISCLOSURE<br/>OBLIGATION begins<br/>— NI 51-102]
+
+        Continuing --> Material[Disclose ALL<br/>material CHANGES]
+        Continuing --> Financial[File audited AND<br/>unaudited financial<br/>statements on schedule]
+        Continuing --> Press[Issue press releases<br/>as required]
+        Continuing --> InsiderReport[Report insider trading<br/>activity]
+
+        style Draft fill:#1e293b,color:#fff
+        style Standard fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Rejected fill:#fee2e2,stroke:#dc2626
+        style Approved fill:#dcfce7,stroke:#16a34a
+        style Ongoing fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style Continuing fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diamond labeled "Is disclosure now complete?" is placed deliberately right after the moment most people would assume the job is done — the chapter explicitly opens chapter question 1 with exactly this misconception, and the answer is a hard no. Once a company crosses into "approved and selling," the obligation doesn't switch off, it switches MODE — from a one-time comprehensive document to an ongoing stream of updates anytime something material changes. The four boxes under "Continuing" aren't four separate optional tasks; they're four different TRIGGERS for the same underlying duty (keep the market accurately informed), which is why an engineer or geoscientist involved in any one of these — financial statements, press releases, material change disclosures — needs to understand that their technical sign-off responsibility doesn't end when the prospectus is approved.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card qualified" id="d3">
+    <h2>3. The Qualified Person Independence Chain</h2>
+    <p>The "qualified person" (QP) role under NI 43-101/51-101 comes with a specific qualification bar AND a specific chain of personal obligations. This diagram separates "are you even allowed to be the QP" from "what must you personally DO once you are."</p>
+
+    <div class="mermaid">
+      graph TD
+        Candidate[Potential Qualified Person] --> Gate{QUALIFICATION GATE}
+        Gate --> G1[Geoscientist or engineer<br/>with 5+ years experience<br/>RELEVANT to this project<br/>and report]
+        Gate --> G2[Member in GOOD STANDING<br/>with a professional<br/>association]
+
+        G1 --> Pass{Both conditions met?}
+        G2 --> Pass
+        Pass -->|No| Disqualified[Cannot serve as<br/>Qualified Person<br/>for this disclosure]
+        Pass -->|Yes| QP[Now serving as<br/>Qualified Person]
+
+        QP --> Duty1[MUST personally INSPECT<br/>the property]
+        QP --> Duty2[MUST sign and SEAL<br/>the technical report]
+        QP --> Duty3[MUST sign a CONSENT<br/>document — no<br/>misrepresentations]
+        QP --> Duty4[MUST act<br/>INDEPENDENTLY]
+
+        Who{Who is responsible for<br/>SELECTING the QP and<br/>USING their info correctly?} --> Officers[The company's<br/>OFFICERS AND DIRECTORS<br/>— NOT the QP]
+
+        style Candidate fill:#1e293b,color:#fff
+        style Gate fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Pass fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Disqualified fill:#fee2e2,stroke:#dc2626
+        style QP fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Who fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Officers fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diagram splits into two halves that test two different things and are easy to conflate. The top half (Gate → Pass) is a credentials check — relevant experience PLUS good professional standing, both required, and notice "relevant" is doing real work in G1: a geoscientist with 5 years of unrelated experience doesn't qualify, the experience has to match the specific subject matter of THIS project and report. The bottom half is about ONGOING CONDUCT once qualified — inspect personally (no relying entirely on someone else's fieldwork), sign and seal (personal professional accountability), sign consent (an explicit no-misrepresentation promise), and act independently (not as an advocate for the company's preferred narrative). The "Who" box on the side exists to correct a common misreading: even though the QP does all the technical work, the company's OFFICERS AND DIRECTORS are the ones legally responsible for choosing a properly qualified person and for using that person's output correctly — accountability for the SYSTEM sits above the technical contributor.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card liability" id="d4">
+    <h2>4. The Liability Source Matrix</h2>
+    <p>A geoscientist or engineer involved in securities disclosure can become liable through several genuinely different legal routes at once. This diagram sorts those routes by source, since each one behaves differently — especially regarding whether a disclaimer can help.</p>
+
+    <div class="mermaid">
+      graph TD
+        Professional[Engineer/Geoscientist prepares<br/>a technical report,<br/>consent letter, or<br/>contributes to a prospectus] --> Route{Which liability<br/>route applies?}
+
+        Route --> R1[MISREPRESENTATION<br/>in the report/consent/prospectus]
+        Route --> R2[NEGLIGENT PREPARATION<br/>— including not following<br/>NI 43-101 / NI 51-101]
+        Route --> R3[STATUTORY LIABILITY<br/>— report used to support<br/>a prospectus or a<br/>TAKEOVER attempt]
+
+        R1 --> Common[COMMON LAW route —<br/>company AND investors<br/>likely have a right of action]
+        R2 --> Common
+        Common --> NIRole[NOTE: the NI itself doesn't<br/>CREATE the cause of action —<br/>but as a MINIMUM PRACTICE<br/>STANDARD it becomes highly<br/>relevant evidence in court]
+
+        R3 --> Statutory[STATUTORY route —<br/>separate cause of action<br/>under securities legislation]
+
+        NIRole --> Disclaim1{Can a disclaimer<br/>clause help?}
+        Statutory --> Disclaim2{Can a disclaimer<br/>clause help?}
+
+        Disclaim1 -->|UNLIKELY to succeed<br/>in this context| WeakShield[Weak protection]
+        Disclaim2 -->|CANNOT disclaim<br/>statutory liability<br/>at all| NoShield[No protection<br/>whatsoever]
+
+        Route --> R4[Direct OFFICER/DIRECTOR<br/>liability — separate,<br/>see Chapter 5]
+
+        style Professional fill:#1e293b,color:#fff
+        style Route fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Common fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Statutory fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style WeakShield fill:#fef3c7,stroke:#d97706
+        style NoShield fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The reason this is drawn as a matrix rather than a list is that the SAME piece of work (one technical report) can simultaneously trigger multiple independent liability routes, and each route has a DIFFERENT relationship to disclaimers — which is the detail most likely to be tested. The common law route (misrepresentation or negligent preparation) treats the National Instruments as evidence of the minimum standard, not as a rule that itself creates liability — a subtle distinction that matters because it means even in a jurisdiction that never formally adopted NI 43-101, a court can still use it to judge whether the work was negligent. The statutory route is structurally different and strictly worse for the professional from a defence standpoint: it's a freestanding cause of action created directly by securities legislation, completely independent of common law negligence, and the chapter is explicit that this kind of liability CANNOT be disclaimed away under any circumstances — making disclaimers essentially useless as a defence anywhere in this chapter's territory, not just weak.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card insider" id="d5">
+    <h2>5. The Insider Trading Decision Tree</h2>
+    <p>The chapter's own chapter-question scenario — a geoscientist learning of extremely positive but non-public test results — is the cleanest possible test case for insider trading rules. This diagram turns that scenario into a general decision tree for "can I act on this information yet?"</p>
+
+    <div class="mermaid">
+      graph TD
+        Info[You possess confidential<br/>inside information<br/>e.g. extremely positive<br/>test results] --> Public{Is this information<br/>PUBLIC yet?}
+
+        Public -->|No, still confidential| NoAct{What are you<br/>considering doing?}
+        Public -->|Yes, now public| AfterPublic{Are you discussing<br/>ONLY what was<br/>actually disclosed?}
+
+        NoAct --> N1[Discuss with friends/<br/>teammates NOT bound<br/>by the same duty]
+        NoAct --> N2[Have a family member<br/>trade on it indirectly]
+        N1 --> Illegal1[ILLEGAL — disclosure to<br/>anyone outside the<br/>confidentiality obligation]
+        N2 --> Illegal2[ILLEGAL — indirect use<br/>still counts as using<br/>inside knowledge to trade]
+
+        AfterPublic -->|Yes — sticking strictly<br/>to the public disclosure| Legal[LEGAL — e.g. confirming<br/>'there was a positive<br/>gold test result']
+        AfterPublic -->|No — adding extra color,<br/>tone, or hints beyond<br/>what was disclosed| StillIllegal[STILL ILLEGAL — e.g. saying<br/>it was an 'EXTREMELY good'<br/>result, or hinting with a<br/>wink and a nudge]
+
+        style Info fill:#1e293b,color:#fff
+        style Public fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Illegal1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Illegal2 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Legal fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style StillIllegal fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The first diamond is the obvious gate everyone expects — confidential information cannot be shared with or acted on by anyone outside the obligation, full stop, whether directly (telling teammates) or indirectly (a spouse trading on your behalf). The second diamond is the one people get wrong, and it's exactly why this diagram exists: becoming public does NOT mean the insider trading rules switch off completely — it shifts the test from "is this shared at all" to "are you ADDING anything beyond what was actually released." Confirming a fact that's already public (a positive test result happened) is fine; layering on extra emphasis, qualitative spin, or non-verbal signals about information that ISN'T yet public — even while technically discussing something "already disclosed" — crosses straight back into illegal territory. The practical habit this should build: after a public release, mentally rehearse exactly what words were used in the official disclosure, and never go beyond that wording, no matter how harmless an extra adjective might feel.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

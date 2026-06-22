@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.17 Reference Card: Bonds</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 17 — Bonds</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">3 Parties to a Suretyship Agreement<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Principal (Obligor)</span><span class="item-note">— the party whose performance is guaranteed (usually the contractor)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Surety (Bonding Company)</span><span class="item-note">— guarantees the principal's performance</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Obligee</span><span class="item-note">— the party to whom the obligation is owed (usually the project owner)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">2 Sets of Obligations Involved in a Bond<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Primary Obligations</span><span class="item-note">— found in the contract between PRINCIPAL and OBLIGEE (e.g. timely performance of the work)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Secondary Obligations</span><span class="item-note">— found in the BOND itself; depend on the existence of the primary obligations</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">Bond vs Insurance — Key Differences<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Indemnity from the principal</span><span class="item-note">— sureties require the principal (and often its shareholders) to indemnify the surety; insurers generally do not require this from the insured</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Must be in writing</span><span class="item-note">— surety contracts must be in writing to be enforceable; not all contracts generally require this</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Original document required</span><span class="item-note">— to enforce a bond, the obligee must have the ORIGINAL; a photocopy is worthless. Keep it secure.</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Three-party structure</span><span class="item-note">— a bond always involves principal, surety, and obligee; insurance is typically two-party</span></div></div>
+      </div>
+      <div class="info">Both share the right of <strong>subrogation</strong> — after paying out, the surety/insurer can assume the obligee's/insured's rights to recover from a responsible third party.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">3 Types of Bonds Used on Construction Projects<span class="sec-count">3 items · with CCDC forms</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">CCDC 220</div><div><span class="item-title">Bid Bond</span><span class="item-note">— guarantees the contractor will enter into the contract if its bid is accepted; typically 10% of bid amount</span></div></div>
+        <div class="item"><div class="num">CCDC 221</div><div><span class="item-title">Performance Bond</span><span class="item-note">— guarantees the contractor's performance of the construction contract; face value typically 50% of contract value</span></div></div>
+        <div class="item"><div class="num">CCDC 222</div><div><span class="item-title">Labour and Material (L&M) Payment Bond</span><span class="item-note">— guarantees payment to subcontractors/suppliers/workers; one-tier (claimants = those with a direct contract with the contractor)</span></div></div>
+      </div>
+      <div class="info">Outside construction: <strong>fidelity bonds</strong> and performance bonds are also common (e.g. environmental clean-up work).</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">Bid Bond — Key Mechanics<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Primary obligation guaranteed</span><span class="item-note">— that the contractor will ENTER INTO THE CONTRACT if its bid is accepted</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Payout if contractor refuses</span><span class="item-note">— surety pays the difference between the defaulting contractor's bid and the bid actually accepted, up to the FACE VALUE of the bond</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Surety's position ≤ principal's position</span><span class="item-note">— the surety can never be in a WORSE position than the principal. Any defence available to the contractor (e.g. valid bid revocation) is available to the surety too.</span></div></div>
+      </div>
+      <div class="warn"><strong>Owner's duty to mitigate:</strong> The owner cannot simply accept any bid after a default — it must take the next lowest bid from a qualified contractor (mitigation is implied even where not explicit, as in the CCDC bond). CCDC bid bond claims must be made within 7 months of the bond date.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">6 Options for the Surety Once the Principal Is in Default<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Require the principal to remedy the default</span><span class="item-note">— principal performs its obligations</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Complete the contract itself</span><span class="item-note">— surety risk: NO financial limit (open-ended), plus takes on warranty obligations</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Solicit bids for completion</span><span class="item-note">— pay obligee the difference between the new bid and amount remaining owed, capped at face value of bond</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Pay the obligee the face value of the bond</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Assert a defence and refuse to act</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">"Wait and see"</span><span class="item-note">— used when there's genuine dispute over whether the principal was actually in default; avoids becoming a "volunteer"</span></div></div>
+      </div>
+      <div class="warn"><strong>Volunteer risk:</strong> If a surety pays out believing the principal is in default, but it turns out the OBLIGEE was actually in default, the surety becomes a "volunteer" — it cannot recover from the principal under its indemnity. Canadian case law tends to find sureties NOT liable for delay damages (Lac La Ronge), though the issue remains unsettled.</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">5 Defences Available to a Surety Under a Performance Bond<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Any defence available to the principal</span><span class="item-note">— mistake, economic duress, misrepresentation, frustration, lack of consideration, etc.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">No default has actually occurred</span><span class="item-note">— it is a condition precedent that the principal be in default; consultant's "default" finding can be challenged</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Obligee failed to perform its own obligations (e.g. non-payment)</span><span class="item-note">— condition precedent: obligee must have performed ITS obligations first</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Late notice of claim</span><span class="item-note">— if notice deprives the surety of its ability to mitigate or act</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Significant change in risk</span><span class="item-note">— material change in scope, type of work, schedule, or substantial overpayment to the principal can discharge the surety's obligations. Minor changes (normal in construction) do NOT count.</span></div></div>
+      </div>
+      <div class="info"><strong>Time limitation:</strong> CCDC 222-2002 requires suit within 2 years of the date final payment under the bond is due. <strong>Prudent practice:</strong> obtain the surety's prior approval before making significant project changes.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#993C1D">8</div>
+      <div class="sec-title">Payment Bonds — 2 Common Situations<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Owner requires a payment bond from the contractor</span><span class="item-note">— protects against liens by unpaid subcontractors/suppliers/workers</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">General contractor requires a payment bond from major subcontractors</span></div></div>
+      </div>
+      <div class="info"><strong>Trust structure:</strong> The obligee is named as TRUSTEE for claimants. A claimant under a one-tier CCDC bond = anyone with a DIRECT contract with the contractor (sub-subcontractors are excluded). Surety can raise defences such as deficiencies/set-offs, the bond's face-value cap, and any applicable limitation period.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#3B6D11">9</div>
+      <div class="sec-title">Lien Bond vs L&M Payment Bond<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">L&M Payment Bond</span><span class="item-note">— put in place at the START of the contract; protects against future non-payment claims</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Lien Bond</span><span class="item-note">— put in place AFTER a lien has already been filed; substitutes for the land as security so the lien can be removed from title. Surety pays the lien claimant only if the lien is valid AND the principal doesn't pay.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

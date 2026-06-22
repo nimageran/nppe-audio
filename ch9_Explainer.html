@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 9 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 9 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — The Dual-Source Authority Test</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 13</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — The Dual-Source Authority Test",
+    text: "An agent can bind their boss—the principal—through two completely different paths. Express authority is given directly by the boss behind closed doors. Apparent authority is created by what the boss tells the outside world. An agent screaming 'I am authorized!' creates zero apparent authority. Only the boss's actions can create it. If an agent acts with absolutely no authority, the boss is entirely safe, but the rogue agent becomes personally and legally bound to pay for the deal.",
+    ex: "You are a junior engineer. Your firm's CEO emails a supplier saying you are leading the new project, creating apparent authority. If you order $50,000 of steel, the firm must pay. But if you walk into a heavy machinery dealership with no CEO email and falsely claim you can buy trucks for the firm, the firm owes nothing, and the dealer will sue you personally for the trucks."
+  },
+  {
+    title: "Diagram 1b — The Authority Limit Disclosure Rule",
+    text: "This covers secret, internal limits. If an agent has a secret monetary limit on what they can approve, but the outside world only sees a broader, public limit, the principal is legally bound by the broader public limit. The owner's secret instructions mean absolutely nothing to the contractor unless they were explicitly disclosed to the contractor.",
+    ex: "The prime contract says the site engineer can approve changes up to $10,000. The owner secretly texts the engineer, 'Do not approve anything over $5,000.' The engineer ignores the text and approves an $8,000 change. The owner is legally bound to pay the $8,000 because the contractor only knew about the $10,000 limit printed in the contract."
+  },
+  {
+    title: "Diagram 2 — Imputed Knowledge",
+    text: "A principal can be legally deemed to know something they never actually heard. If an agent learns a fact while doing their normal job, or receives formal notice of a problem, the law automatically pretends the boss knows it too. The boss cannot defend themselves in court by crying that their employee never relayed the message.",
+    ex: "A site inspector sees a massive crack in a concrete pillar but forgets to tell the project owner. The pillar collapses. The owner tries to argue they had no idea the crack was there. The judge rules that because the inspector knew, the owner legally knew, and the owner is held fully liable."
+  },
+  {
+    title: "Diagram 3 — The Indemnity Direction Flip",
+    text: "Indemnity clauses protect people, but you must check which direction the protection points. The standard Canadian direction says 'I will pay you if my negligence causes you a loss.' The flipped, American-style direction says 'I will pay you even if YOUR negligence causes a loss.' Flipped indemnity turns you into a free insurance policy for the other guy's mistakes, which courts hate because it encourages reckless behavior.",
+    ex: "You sign a flipped American-style indemnity clause with a developer. The developer drunkenly drives their own bulldozer into a wall and destroys it. Under this brutal clause, you have to pay to rebuild the wall out of your own pocket, even though the developer's own stupidity caused the damage."
+  },
+  {
+    title: "Diagram 3b — Indemnity Can Add Liability But Cannot Remove It",
+    text: "Indemnity clauses are a one-way street. They can easily expand your liability to cover things you normally would not be responsible for at common law. But they absolutely cannot remove or erase your existing legal liabilities unless the contract uses extremely explicit language stating they are replacing your existing exposure.",
+    ex: "You are normally only liable for your own negligence. You sign an indemnity clause covering 'all design errors on the project.' This expands your liability to cover the architect's errors too. But the clause does not magically erase your original negligence liability; it just stacks the new massive risk directly on top of the old one."
+  },
+  {
+    title: "Diagram 4 — Extras vs Credits: Who Pays for a Change",
+    text: "When a change happens, someone pays based on the root cause. If the owner enhances the design or hits hidden site conditions, the owner pays. If a design error causes the change, it depends on negligence. If the designer made a reasonable interpretation of a vague code, it is not negligence, but the contractor still gets paid extra by the owner. Even if it is pure negligence, owners usually just absorb the cost if it falls within the standard five to ten percent project contingency budget.",
+    ex: "An engineer reasonably interprets a vague fire code to require 10 sprinklers. The city fire marshal shows up and demands 15. The engineer was not negligent, but the extra 5 sprinklers cost money. The owner has to pay the contractor for the extra work as a valid change order."
+  },
+  {
+    title: "Diagram 5 — The Impact Cost Reservation Trap",
+    text: "The Doyle case established a brutal trap for quoting changes. If an owner asks for a firm price on a change, and you give a number without explicitly reserving the right to claim impact costs later, you lose the right to claim them forever. The owner is entitled to assume your quote covered everything. To survive, you must clearly state your reservation, or quantify the ripple-effect costs upfront.",
+    ex: "The owner asks to move a wall. You quote $5,000 for the bricks and they approve it. Later, you realize moving the wall delayed the whole project by a week, costing $20,000 in impact delays for rented equipment. You try to bill the owner. The judge rejects it completely because you hid the $20,000 impact from your original firm quote."
+  },
+  {
+    title: "Diagram 6 — Change Order vs Change Directive",
+    text: "Both mechanisms deal with changes, but the pricing is totally different. A Change Order is used when both sides have the time to sit down and agree on a firm lump sum price before the work starts. A Change Directive is an emergency valve. When there is no time, or the parties violently disagree on the price, the owner issues a Change Directive. Work starts immediately, and it is usually billed later as cost-plus.",
+    ex: "The owner wants a new roof. You sit down, agree on $100,000, and sign a Change Order. Alternatively, a main pipe bursts and floods the site. There is no time to negotiate prices. The owner issues a Change Directive, forcing you to fix it immediately, and you just bill them for all your hourly costs and materials later."
+  },
+  {
+    title: "Diagram 7 — Performance Under Protest",
+    text: "What happens if the owner demands work, but you insist it is an extra, and they insist it was already in your original contract? You cannot just stop working and walk off the job. But the Kiewit case gives a terrifying warning: if you silently do the work without protesting, the court treats your silence as an admission that the owner was right. You must issue a formal Notice of Protest before touching the tools.",
+    ex: "The owner tells you to paint the ceiling. You think painting is an extra outside your scope. If you just grab a brush and paint it to be nice, the court will rule you admitted it was part of your original job, and you get paid nothing extra. You must send an email saying 'I am doing this under formal protest' before picking up the brush to save your right to get paid."
+  },
+  {
+    title: "Diagram 8 — Pay-If-Paid vs Pay-When-Paid",
+    text: "These two clauses sound identical but are mathematically opposite. Pay-When-Paid just affects timing; the general contractor will delay paying the subcontractor until the owner pays, but if the owner goes bankrupt, the general contractor still owes the money. Pay-If-Paid is a brutal condition precedent; if the owner never pays, the subcontractor gets absolutely nothing. Courts hate Pay-If-Paid and will strike it down to Pay-When-Paid unless it has incredibly explicit risk-transfer language.",
+    ex: "The owner goes bankrupt and doesn't pay the $100,000 general contractor invoice. Under a Pay-When-Paid clause, the general contractor still has to write a $20,000 check to the drywall subcontractor from their own savings. Under a strict Pay-If-Paid clause, the drywaller absorbs the loss and gets exactly zero dollars."
+  },
+  {
+    title: "Diagram 9 — Incorporation by Reference: The Hidden Risk Chain",
+    text: "Subcontractors are routinely bound by the massive prime contract between the owner and the general contractor, even if they never read it. The law says if the document was available to read somewhere, the sub is bound by the physical scope of work clauses. However, courts will sometimes rescue subcontractors from sneaky, purely commercial clauses, like forced arbitration, if they are buried in unread documents.",
+    ex: "You are a flooring sub bidding on a hospital. You sign a one-page document saying 'bound by the prime contract.' You never drove to the architect's office to read the 500-page prime contract. You are still legally bound by the prime contract's strict rules on drywall thickness, because you had the theoretical opportunity to go read them."
+  },
+  {
+    title: "Diagram 10 — The Unforeseen Conditions Disclaimer Failure",
+    text: "Owners try to dodge liability for hidden site conditions by putting disclaimers like 'bidder must investigate everything' in the tender. Courts routinely strike these down for three reasons. One: giving a bidder two weeks to do a two-year soil investigation is absurd. Two: forcing contractors to price unknowns makes them pad their bids heavily, costing the owner more anyway. Three: the Begro principle says an owner cannot actively hide a soil report and then blame the contractor for not finding the bad soil.",
+    ex: "The owner has a secret geotechnical report showing massive underground boulders. They hide the report and put a disclaimer saying 'contractor assumes all subsurface risk.' You hit the boulders and lose millions. The judge ignores the disclaimer entirely, ruling the owner acted in bad faith by hiding the report, and forces the owner to pay for the rock removal."
+  },
+  {
+    title: "Diagram 11 — Coast Hotels: Number of Reviews vs Timing of Reviews",
+    text: "Doing more site reviews than your contract requires does not make you safe. The law cares about when the reviews happened and whether you paid attention to red flags. If you do 13 reviews, but cluster them all at the beginning and the end after the walls are closed, you missed the critical window. Also, you can never defend a sloppy review by claiming the client didn't pay you enough; the professional standard applies regardless of your budget.",
+    ex: "Your contract requires 10 inspections. You do 15. But you do 5 before they pour the concrete, and 10 after the building is painted. You totally skipped the middle phase where they installed the pipes, and the pipes burst. You are completely liable because the timing of your 15 reviews was totally useless for catching the actual error."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

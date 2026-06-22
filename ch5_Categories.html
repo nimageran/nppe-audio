@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.5 Reference Card: Business Organizations</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 5 — Business Organizations</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">4 Principal Forms of Business Organization<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Sole Proprietorship</span><span class="item-note">— individual carrying on business; unlimited personal liability</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Partnership</span><span class="item-note">— group pooling resources; jointly liable for all debts</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Corporation</span><span class="item-note">— separate legal person; owned by shareholders; liability limited to corporate assets</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Joint Venture</span><span class="item-note">— two or more parties act together but retain separate legal status</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">Advantages & Disadvantages — All 3 Forms<span class="sec-count">comparison table</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Form</th><th>Advantages</th><th>Disadvantages</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Sole Proprietorship</td>
+            <td>Low start-up costs · Freedom from regulation · Owner controls decisions · Minimal capital needed · Tax advantages (low income) · All profits to owner</td>
+            <td>Unlimited liability · Lack of continuity · Difficulty raising capital</td>
+          </tr>
+          <tr>
+            <td>Partnership</td>
+            <td>Ease of formation · Low start-up costs · Additional investment capital · Possible tax advantages · Limited regulation · Broader management base</td>
+            <td>Unlimited liability · Lack of continuity · Divided authority · Difficult to raise capital · Hard to find suitable partners · Possible conflict between partners</td>
+          </tr>
+          <tr>
+            <td>Corporation</td>
+            <td>Limited liability · Specialized management · Transferable ownership · Continuous existence · Separate legal entity · Possible tax advantage · Easier to raise capital</td>
+            <td>Closely regulated · Most expensive to organize · Charter restrictions · Extensive record keeping · Possible shareholder/executive conflict</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">3 Types of Partnerships<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">General Partnership</span><span class="item-note">— all partners have unlimited joint liability for all debts; each can enter contracts on behalf of all</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Limited Partnership</span><span class="item-note">— at least one general partner (unlimited liability, runs business) + at least one limited partner (liable only for their financial contribution). Limited partners cannot actively participate or lose limited status.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Limited Liability Partnership (LLP)</span><span class="item-note">— each partner's liability limited to their own acts only; other partners' personal assets not at risk. Must carry prescribed level of liability insurance.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">4 Items Typically Governed by a Partnership Agreement<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Who has authority to sign contracts</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Division of profits</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Procedures for business decisions</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Procedures for dissolving the partnership</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">3 Roles in a Corporation<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Shareholders</span><span class="item-note">— own the corporation proportionally; vote to elect directors and authorize major changes; do not run the business</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Directors</span><span class="item-note">— direct the business; elected by shareholders; elect officers; must be individuals (not corporations)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Officers</span><span class="item-note">— president, vice-president, corporate secretary; provide closer operational direction; elected by directors; must be individuals</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">2 Types of Corporations<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Private (Closely Held) Corporation</span><span class="item-note">— shares held by small group; cannot offer shares to public; financial records not public (but names/addresses of directors/officers/shareholders must be available)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Public Corporation</span><span class="item-note">— shares publicly traded on a stock exchange; stringent legislative rules; accounting records filed and publicly accessible</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">6 Mandatory Words for a Corporation Name<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Corporation</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Corp.</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Incorporated</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Inc.</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Limited</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Ltd.</span></div></div>
+      </div>
+      <div style="margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00"><strong>Note:</strong> "Company" or "Co." is NOT on the list — a common exam trap.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#854F0B">8</div>
+      <div class="sec-title">Directors & Officers — Personal Liabilities (examples)<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Unpaid employee wages</span><span class="item-note">— if corporation goes bankrupt</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Unpaid GST</span><span class="item-note">— under Excise Tax Act</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Failure to remit Canada Pension Plan deductions</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Failure to remit income tax</span><span class="item-note">— under Income Tax Act</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Breaches of occupational health and safety legislation</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Breaches of trust under construction lien statutes</span></div></div>
+      </div>
+      <div style="margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00"><strong>Note:</strong> Unpaid RENT is NOT on this list — also a common exam trap (Q9 answer = F).</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#993C1D">9</div>
+      <div class="sec-title">2 Protections Officers & Directors Can Take<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Corporate Indemnity</span><span class="item-note">— contractual promise from corporation to cover costs; useless if corporation goes bankrupt</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Directors' & Officers' Liability Insurance</span><span class="item-note">— covers financial liability but NOT criminal penalties; does not prevent imprisonment</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#3B6D11">10</div>
+      <div class="sec-title">Fiduciary Duties — Who Owes Them to Whom<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Partners → Other Partners</span><span class="item-note">— cannot compete, must act in best interest of partnership, declare conflicts of interest. Cannot be negated by partnership agreement.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Officers & Directors → The Corporation</span><span class="item-note">— NOT to shareholders. Must act honestly, in good faith, be loyal, declare conflicts. Only the corporation can sue for breach (or minority shareholders via derivative action).</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggle('s11')">
+      <div class="sec-num" style="background:#3B6D11">11</div>
+      <div class="sec-title">Insider Trading — 2 Key Distinctions<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Lawful Insider Trading</span><span class="item-note">— trading shares while connected to a corporation IS allowed as long as no non-public privileged information is used</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Unlawful Insider Trading</span><span class="item-note">— using or sharing privileged non-public information to trade. Includes stock tipping. Both civil AND criminal penalties. Applies to commodities markets too.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

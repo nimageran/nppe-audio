@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 5: Visual Mechanics — Business Organizations</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.liability { border-top-color: #dc2626; }
+    .framework-card.formation { border-top-color: #0ea5e9; }
+    .framework-card.limited { border-top-color: #ca8a04; }
+    .framework-card.veil { border-top-color: #9333ea; }
+    .framework-card.fiduciary { border-top-color: #16a34a; }
+    .framework-card.statutory { border-top-color: #ef4444; }
+    .framework-card.protect { border-top-color: #64748b; }
+    .framework-card.insider { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 5: VISUAL MECHANICS — BUSINESS ORGANIZATIONS</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Liability Cascade Across Four Structures</a>
+    <a href="#d2">2. Partnership Formation — You Can Be a Partner Without Knowing It</a>
+    <a href="#d3">3. The Limited Partner Trap</a>
+    <a href="#d4">4. Piercing the Corporate Veil</a>
+    <a href="#d5">5. The Fiduciary Duty Enforcement Gap</a>
+    <a href="#d6">6. The Officer/Director Statutory Liability Web</a>
+    <a href="#d7">7. Two Imperfect Shields — Indemnity vs Insurance</a>
+    <a href="#d8">8. Insider Trading — The Public Disclosure Timing Test</a>
+  </div>
+
+
+  <div class="framework-card liability" id="d1">
+    <h2>1. The Liability Cascade Across Four Structures</h2>
+    <p>The single most important variable separating these business forms is WHO is exposed when something goes wrong. This diagram lines up all four structures by exactly that variable, showing the cascade from total personal exposure down to fully contained exposure.</p>
+
+    <div class="mermaid">
+      graph TD
+        Sole[SOLE PROPRIETORSHIP] --> SoleL[NO legal distinction between<br/>individual and business —<br/>ALL personal assets at risk]
+
+        Partner[PARTNERSHIP] --> PartnerL[Each partner JOINTLY liable<br/>for ALL partnership debts —<br/>NOT limited to their own<br/>proportionate share. One<br/>partner's negligence can<br/>expose ALL partners]
+
+        LLP[LIMITED LIABILITY<br/>PARTNERSHIP] --> LLPL[Each partner's liability<br/>LIMITED to their OWN<br/>conduct + the partnership's<br/>assets — other partners'<br/>PERSONAL assets protected.<br/>Requires mandatory insurance]
+
+        Corp[CORPORATION] --> CorpL[Liability contained to the<br/>CORPORATION itself —<br/>shareholders/directors/<br/>officers personal assets<br/>protected, SUBJECT TO<br/>exceptions in diagrams<br/>4 and 6]
+
+        style Sole fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style SoleL fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Partner fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style PartnerL fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style LLP fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style LLPL fill:#e0f2fe,stroke:#0284c7
+        style Corp fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style CorpL fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Reading top to bottom as a cascade from MAXIMUM exposure to MOST contained exposure clarifies what's actually changing across these structures — it's not really about profit-sharing or management style, those are secondary; the structural backbone of the whole chapter is risk containment. The partnership row deserves the most attention because it contains the chapter's sharpest, most counterintuitive fact: joint liability means a partner who had ZERO involvement in causing a debt or a negligence claim can still be personally sued for the FULL amount, not capped at their proportionate share — the computer-store example makes this concrete (the store can sue BOTH Smith and Jones for the full unpaid balance, even if only Smith bought the computer, as long as it was for partnership business). The LLP row exists specifically as professional services' answer to that partnership risk — it preserves partnership-style collaboration while ring-fencing each partner's PERSONAL liability to their own conduct, which is precisely why it's commonly used by accounting and law firms and increasingly by other professional practices.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card formation" id="d2">
+    <h2>2. Partnership Formation — You Can Be a Partner Without Knowing It</h2>
+    <p>This is a genuinely surprising mechanical fact: a formal written partnership agreement is NOT required to legally BE a partnership. This diagram shows the alternate, conduct-based triggers that can create partnership status even without anyone intending it.</p>
+
+    <div class="mermaid">
+      graph TD
+        Question{Are these parties<br/>LEGALLY partners?} --> WrittenPath{Did they sign a<br/>WRITTEN partnership<br/>agreement?}
+
+        WrittenPath -->|Yes| StillCheck[Likely partners —<br/>BUT other 'indicators<br/>of partnership' must<br/>STILL be present —<br/>Backman v. Canada]
+        WrittenPath -->|No written<br/>agreement at all| ConductTest{Without any written<br/>agreement — do<br/>CONDUCT-BASED<br/>indicators exist?}
+
+        ConductTest --> C1[Joint participation on a<br/>CONTINUING BASIS in<br/>managing a business]
+        ConductTest --> C2[Parties DECLARE<br/>themselves to<br/>be partners]
+        ConductTest --> C3[JOINT MONETARY<br/>CONTRIBUTION to<br/>start the business]
+
+        C1 --> Likely[Provincial Partnership Acts<br/>likely deem them LEGAL<br/>PARTNERS regardless of<br/>intent or paperwork]
+        C2 --> Likely
+        C3 --> Likely
+
+        Likely --> ConcertExample{Musicians example:<br/>ONE concert vs a<br/>SERIES of concerts?}
+        ConcertExample -->|One concert| NotPartners[Unlikely to be<br/>considered a<br/>partnership]
+        ConcertExample -->|SERIES of<br/>concerts — CONTINUING<br/>joint activity| ArePartners[Law MAY consider<br/>them partners]
+
+        style Question fill:#1e293b,color:#fff
+        style ConductTest fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Likely fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style ArePartners fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NotPartners fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The ConductTest diamond is the heart of this diagram because it captures something easy to miss: partnership status isn't purely a matter of CHOICE or PAPERWORK — it can be IMPOSED by conduct, regardless of whether the parties ever sat down and decided "let's be partners." This matters enormously for unsuspecting professionals, since two engineers sharing office space, regularly collaborating on projects, and splitting certain costs on an ongoing basis could find themselves legally exposed to JOINT, UNLIMITED liability for each other's business debts without ever having intended to form a formal partnership. The musicians example at the bottom crystallizes the key distinguishing factor across all three conduct indicators: CONTINUITY. A single one-off collaboration looks more like an isolated joint project, but a recurring, ongoing pattern of joint activity starts to look exactly like what Partnership Acts are designed to catch, which is precisely why the chapter recommends reviewing the provincial Partnership Act carefully before entering ANY ongoing collaborative arrangement without a written agreement.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card limited" id="d3">
+    <h2>3. The Limited Partner Trap</h2>
+    <p>A limited partner's entire protective benefit hinges on ONE behavioral boundary. Cross it, even informally, and the protection disappears. This diagram isolates that single trigger.</p>
+
+    <div class="mermaid">
+      graph TD
+        LP[Limited Partner —<br/>liability normally CAPPED<br/>at their financial<br/>contribution] --> Boundary{Does the limited partner<br/>ACTIVELY PARTICIPATE<br/>in the business?}
+
+        Boundary -->|NO — purely passive<br/>investor| Protected[LIMITED LIABILITY<br/>STATUS PRESERVED —<br/>only the contribution<br/>amount at risk]
+        Boundary -->|YES — even informally| Lost[LIMITED LIABILITY<br/>STATUS LOST]
+
+        Lost --> WhatCounts{What counts as<br/>active participation?}
+        WhatCounts --> A1[Being involved in<br/>CONTROLLING the<br/>business]
+        WhatCounts --> A2[PROVIDING SERVICES<br/>to the business]
+
+        A1 --> Consequence[Limited partner now<br/>exposed like a<br/>GENERAL PARTNER —<br/>UNLIMITED liability]
+        A2 --> Consequence
+
+        style LP fill:#1e293b,color:#fff
+        style Boundary fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Protected fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Lost fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Consequence fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The single boundary diamond at the top is doing all the work in this diagram because the whole limited-partnership structure rests on ONE simple, brittle distinction — money in, hands off. The moment a "limited" partner starts genuinely controlling decisions or actively contributing services (even something that might feel minor, like regularly weighing in on operational choices or doing hands-on work), they've crossed from passive INVESTOR territory into active MANAGEMENT territory, and the law responds by stripping away the entire protective benefit they were relying on. This connects to a practical structuring lesson worth remembering: a limited partnership only delivers genuine "corporation-like" protection (as the chapter describes it) if the limited partners genuinely STAY limited in practice, not just on paper — a limited partner who can't resist getting hands-on involved is, functionally, choosing to become a general partner without realizing the liability consequences of that choice.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card veil" id="d4">
+    <h2>4. Piercing the Corporate Veil</h2>
+    <p>The corporate veil is usually treated as nearly impenetrable, but this diagram shows the narrow, specific circumstances under which a court will actually look past it — and crucially, when it WON'T, despite a company having very few assets of its own.</p>
+
+    <div class="mermaid">
+      graph TD
+        Shield[Corporation provides<br/>LIMITED LIABILITY SHIELD<br/>— the corporate veil] --> Challenge{Is someone trying<br/>to PIERCE the veil?}
+
+        Challenge --> Q1{Was the company SET UP<br/>WITH THE INTENTION of<br/>perpetrating FRAUD, or<br/>USED AS A VEHICLE<br/>for fraud?}
+
+        Q1 -->|Yes| Pierced[VEIL PIERCED —<br/>individual shareholder(s)<br/>held PERSONALLY<br/>responsible]
+        Q1 -->|No — ordinary<br/>business failure,<br/>poor decisions,<br/>insolvency| NotPierced[VEIL HOLDS —<br/>shareholders remain<br/>protected, EVEN IF<br/>the company has<br/>FEW assets]
+
+        Pierced --> TypicalCase[TYPICALLY involves<br/>CLOSELY HELD companies<br/>— one or very few<br/>shareholders/directors]
+
+        NotPierced --> RealWorldFix{If a company genuinely<br/>has FEW assets, how<br/>do creditors protect<br/>themselves?}
+        RealWorldFix --> PersonalGuarantee[PRACTICAL workaround —<br/>NOT a veil-piercing —<br/>bank/suppliers require<br/>a PERSONAL GUARANTEE<br/>from the shareholder<br/>BEFORE extending<br/>credit/supplies]
+
+        style Shield fill:#1e293b,color:#fff
+        style Q1 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Pierced fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NotPierced fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style PersonalGuarantee fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The Q1 diamond is given the heaviest visual weight because it's a NARROW gate, not a broad fairness test — many people assume courts will pierce the veil whenever the result of NOT piercing it feels unfair (e.g., a thinly-capitalized company that genuinely can't pay its debts), but the chapter restricts this to circumstances "usually limited to acts of fraud" specifically. A company that's simply a bad investment, poorly managed, or insolvent through ordinary business misfortune does NOT trigger veil-piercing — the protection holds regardless of how sympathetic the unpaid creditor's situation might be. The "RealWorldFix" branch is included specifically to prevent confusing two genuinely different protective mechanisms: a personal guarantee is a PROACTIVE, CONTRACTUAL workaround banks and suppliers use BEFORE a problem arises (essentially refusing to rely on limited liability protection in the first place for a thinly-capitalized company), which is structurally completely different from a court RETROACTIVELY piercing the veil after the fact due to fraud — one is a private contractual choice, the other is a judicial remedy with a much higher bar to clear.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fiduciary" id="d5">
+    <h2>5. The Fiduciary Duty Enforcement Gap</h2>
+    <p>Officers and directors owe a real, enforceable fiduciary duty — but this diagram exposes a structural problem with WHO actually gets to enforce it, and the specific legal tool created to patch that gap.</p>
+
+    <div class="mermaid">
+      graph TD
+        Duty[Officers/Directors owe<br/>FIDUCIARY DUTY —<br/>loyalty, good faith,<br/>avoid conflicts] --> WhoOwed{WHO is this duty<br/>legally OWED to?}
+
+        WhoOwed --> OnlyCorp[ONLY the CORPORATION<br/>itself — NOT owed<br/>directly to shareholders]
+
+        OnlyCorp --> WhoSues{WHO can sue for<br/>a BREACH of this duty?}
+        WhoSues --> OnlyCorpSues[Only the CORPORATION<br/>can sue its own<br/>officers/directors]
+
+        OnlyCorpSues --> Problem{STRUCTURAL PROBLEM:<br/>who CONTROLS the<br/>corporation's decision<br/>to sue?}
+        Problem --> SameParty[Often the SAME<br/>officers/directors<br/>accused of the<br/>breach — corporation<br/>is RELUCTANT to<br/>sue itself]
+
+        SameParty --> Gap[ENFORCEMENT GAP:<br/>minority shareholders<br/>harmed by the breach<br/>have NO direct<br/>standing to sue]
+
+        Gap --> Fix{THE FIX}
+        Fix --> Derivative[DERIVATIVE ACTION —<br/>some provinces permit<br/>OPPRESSED MINORITY<br/>SHAREHOLDERS to sue<br/>officers/directors ON<br/>BEHALF OF the<br/>corporation]
+
+        style Duty fill:#1e293b,color:#fff
+        style OnlyCorp fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Problem fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Gap fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Derivative fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagram traces a logical chain that exposes a genuine structural flaw, not just a definitional fact — the chain runs from "who is the duty owed to" through "who can sue" to "but what if the wrongdoer controls that decision," and each step builds on the last to reveal WHY a special remedy (the derivative action) had to be invented at all. The key insight is the circularity at the "Problem" diamond: the fiduciary duty exists to protect the corporation FROM its own officers and directors, but enforcement of that duty is ALSO controlled by those same officers and directors, creating an obvious conflict where the wrongdoers are effectively in charge of deciding whether to pursue themselves. The derivative action exists specifically to break that circularity by giving harmed MINORITY SHAREHOLDERS — who have a real stake in the outcome but no DIRECT legal claim of their own (since the duty was never owed to them personally) — a path around the corporation's own reluctance to sue its own leadership.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card statutory" id="d6">
+    <h2>6. The Officer/Director Statutory Liability Web</h2>
+    <p>Beyond fiduciary duty (which is owed only to the corporation), a separate and much broader web of STATUTORY liabilities can expose officers and directors PERSONALLY, directly, regardless of fiduciary duty principles. This diagram organizes that web by category.</p>
+
+    <div class="mermaid">
+      graph TD
+        Director[Officer/Director] --> Categories{Categories of<br/>STATUTORY personal<br/>exposure}
+
+        Categories --> C1[UNPAID WAGES —<br/>if corporation goes<br/>bankrupt and fails<br/>to pay employees]
+        Categories --> C2[ENVIRONMENTAL —<br/>due diligence<br/>obligations under<br/>environmental<br/>legislation]
+        Categories --> C3[TAX — unpaid GST,<br/>CPP deduction failures,<br/>income tax remittance<br/>failures]
+        Categories --> C4[CONSTRUCTION LIENS —<br/>breach of TRUST<br/>provisions under<br/>lien statutes]
+        Categories --> C5[HEALTH & SAFETY —<br/>breaches of<br/>occupational health<br/>and safety legislation]
+        Categories --> C6[CRIMINAL — under statutes<br/>like the Aeronautics Act,<br/>director/officer can be<br/>found PERSONALLY guilty<br/>of the SAME offence<br/>as the corporation]
+
+        C1 --> Defence{PRIMARY DEFENCE<br/>across most categories}
+        C2 --> Defence
+        C3 --> Defence
+        C4 --> Defence
+        C5 --> Defence
+
+        Defence --> DueDiligence[DUE DILIGENCE —<br/>ACTIVE, REASONABLE<br/>steps taken to ensure<br/>compliance — passive<br/>ignorance is NOT<br/>a defence for<br/>SOME obligations]
+
+        C6 --> NoShield[CRIMINAL exposure —<br/>NEITHER indemnity<br/>NOR insurance can<br/>prevent IMPRISONMENT]
+
+        style Director fill:#1e293b,color:#fff
+        style Categories fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Defence fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style DueDiligence fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style NoShield fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Organizing these statutory exposures by CATEGORY (wages, environment, tax, liens, safety, criminal) rather than as a flat list of named statutes makes a pattern visible: nearly all of these categories share the SAME defence mechanism — due diligence — which means understanding due diligence deeply (covered in depth in Chapter 23's environmental context) gives you transferable protection across most of this web at once, rather than needing a separate defence theory for each statute. The C6 branch is deliberately isolated with its own red "NoShield" box because criminal liability is categorically different from the others — due diligence can still apply as a defence in some criminal contexts, but the chapter's separate, blunt warning is that NEITHER a corporate indemnity NOR D&O liability insurance can ever protect against actual IMPRISONMENT, since insurance and indemnities are financial instruments that simply have no mechanism to address a custodial criminal sentence. This is precisely why the chapter frames accepting an officer/director role as "a serious undertaking" deserving real reflection, not a routine resume addition.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card protect" id="d7">
+    <h2>7. Two Imperfect Shields — Indemnity vs Insurance</h2>
+    <p>Officers and directors have two standard tools to protect themselves from the liability web in diagram 6. This diagram shows both shields and the specific, different way each one can fail.</p>
+
+    <div class="mermaid">
+      graph LR
+        Risk[Officer/Director facing<br/>potential liability] --> Shield1[CORPORATE INDEMNITY —<br/>company promises to<br/>cover costs/liability]
+        Risk --> Shield2[LIABILITY INSURANCE<br/>— D&O insurance policy]
+
+        Shield1 --> Fail1{When does this<br/>shield FAIL?}
+        Fail1 --> F1[Indemnity is just a<br/>CONTRACTUAL PROMISE —<br/>a BANKRUPT company<br/>cannot fulfill a<br/>promise to pay]
+
+        Shield2 --> Fail2{When does this<br/>shield FAIL?}
+        Fail2 --> F2[Does NOT prevent<br/>CRIMINAL penalties —<br/>some statutes impose<br/>BOTH financial liability<br/>AND criminal penalties]
+
+        F1 --> BothLimited[BOTH shields are<br/>genuinely USEFUL —<br/>but NEITHER is<br/>complete protection]
+        F2 --> BothLimited
+
+        style Risk fill:#1e293b,color:#fff
+        style Shield1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Shield2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style F1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style F2 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style BothLimited fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Showing both shields side by side, each with its OWN distinct failure mode, prevents the common mistake of treating "get an indemnity AND insurance" as a complete solution — the two tools fail in genuinely DIFFERENT ways, so stacking them covers more ground but still leaves real gaps. The indemnity's weakness is fundamentally about CREDITWORTHINESS — it's only as good as the company's ability to actually pay when the bill comes due, and the exact scenario where a director most needs protection (the company is in serious trouble, facing claims or bankruptcy) is precisely the scenario where the company is LEAST able to honor that promise. The insurance's weakness is categorically different and connects directly to diagram 6's criminal liability point — insurance is a financial product addressing financial exposure, and it has no mechanism whatsoever to address imprisonment, meaning a director facing potential criminal charges under something like the Aeronautics Act gets zero protection from either shield on that specific front, regardless of how comprehensive their coverage looks on paper.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card insider" id="d8">
+    <h2>8. Insider Trading — The Public Disclosure Timing Test</h2>
+    <p>This diagram resolves the chapter's own chapter question (Ted selling shares after a public announcement) by isolating the single timing fact that determines guilt or innocence in insider trading cases.</p>
+
+    <div class="mermaid">
+      graph TD
+        Trade[Insider trades shares<br/>of a company they<br/>have information about] --> Timing{WHEN, relative to PUBLIC<br/>DISCLOSURE, did the<br/>trade occur?}
+
+        Timing -->|BEFORE the information<br/>was made public| Before[UNLAWFUL — trading on<br/>PRIVILEGED, NON-PUBLIC<br/>information]
+        Timing -->|AFTER the information<br/>was ALREADY publicly<br/>disclosed| After[LAWFUL — Ted's case:<br/>sold shares DAYS AFTER<br/>the public announcement<br/>about technology failure —<br/>information was already<br/>public, NOT insider<br/>trading]
+
+        Before --> AlsoTip{Did the insider also<br/>SHARE the information<br/>with someone else<br/>before trading?}
+        AlsoTip -->|Yes| StockTipping[STOCK TIPPING —<br/>SEPARATE offence —<br/>BOTH civil and<br/>criminal liability<br/>possible for EVERYONE<br/>involved in the<br/>information exchange]
+
+        Before --> Scope{What information<br/>scope counts?}
+        Scope --> S1[Information about<br/>YOUR OWN company<br/>— e.g. engineers/<br/>geoscientists holding<br/>shares with confidential<br/>internal knowledge]
+        Scope --> S2[Information about<br/>a DIFFERENT company<br/>you happen to learn<br/>about]
+        Scope --> S3[COMMODITIES markets<br/>— same rules apply,<br/>e.g. a geoscientist's<br/>own gold-strike data]
+
+        style Trade fill:#1e293b,color:#fff
+        style Timing fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Before fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style After fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style StockTipping fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The single Timing diamond is the entire mechanism behind the chapter's Ted chapter question, and it's worth treating as a standalone, memorizable rule: insider trading isn't about WHETHER you have inside knowledge at all (Ted clearly does, as an employee-shareholder), it's about whether you traded BEFORE or AFTER that knowledge became available to everyone else. Ted's sale happened DAYS AFTER the public announcement, meaning by the time he traded, he had no informational advantage over any other investor reading the news — the information that was once "inside" had already crossed over into public knowledge, which is precisely why the chapter's answer is "not guilty." The StockTipping branch adds an important extension worth remembering separately: insider trading liability doesn't stop at the person who actually executes the trade — anyone who PASSES ALONG privileged non-public information, even without trading themselves, faces independent liability, meaning the geoscientist mentioning a confidential gold-strike result to a friend who then trades on it exposes BOTH people, not just the actual trader.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 2: Visual Mechanics — Regulation of the Professions</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.twopillars { border-top-color: #0ea5e9; }
+    .framework-card.title { border-top-color: #dc2626; }
+    .framework-card.definition { border-top-color: #9333ea; }
+    .framework-card.exclusion { border-top-color: #ca8a04; }
+    .framework-card.registration { border-top-color: #16a34a; }
+    .framework-card.multijuris { border-top-color: #f59e0b; }
+    .framework-card.discipline { border-top-color: #64748b; }
+    .framework-card.seal { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 2: VISUAL MECHANICS — REGULATION OF THE PROFESSIONS</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Two Pillars of Self-Regulation</a>
+    <a href="#d2">2. The Title Progression — From Graduate to P.Eng.</a>
+    <a href="#d3">3. Generic vs Specific Definitions of Scope</a>
+    <a href="#d4">4. The Natural Science Carve-Out</a>
+    <a href="#d5">5. The Registration Pathway</a>
+    <a href="#d6">6. Multi-Jurisdiction Registration — Practice Follows the Work</a>
+    <a href="#d7">7. Discipline vs Enforcement</a>
+    <a href="#d8">8. The Seal — What It Actually Certifies</a>
+  </div>
+
+
+  <div class="framework-card twopillars" id="d1">
+    <h2>1. The Two Pillars of Self-Regulation</h2>
+    <p>Professional self-regulation isn't one single protection — it's built on two genuinely separate pillars, and different professions get DIFFERENT combinations of the two. This diagram shows both pillars and where each profession sits.</p>
+
+    <div class="mermaid">
+      graph TD
+        SelfReg[PROFESSIONAL<br/>SELF-REGULATION] --> Pillar1[PILLAR 1: RIGHT TO TITLE<br/>— exclusive right to USE<br/>a specific protected title,<br/>e.g. 'Professional Engineer'<br/>or 'P.Eng.']
+        SelfReg --> Pillar2[PILLAR 2: SCOPE OF<br/>PRACTICE — exclusive right<br/>to PERFORM certain work,<br/>regardless of what you<br/>CALL yourself]
+
+        Pillar1 --> Both{Which professions<br/>have BOTH pillars?}
+        Pillar2 --> Both
+        Both --> FullProtection[Architecture, Engineering,<br/>Geoscience — EXCEPT<br/>geoscience in PEI and<br/>Yukon, which lack<br/>scope-of-practice<br/>protection]
+
+        Pillar1 --> TitleOnly{Which professions<br/>have ONLY title<br/>protection?}
+        TitleOnly --> Interior[e.g. INTERIOR DESIGN —<br/>can't call yourself a<br/>registered interior<br/>designer without<br/>credentials, but ANYONE<br/>can still LEGALLY DO<br/>interior design work]
+
+        style SelfReg fill:#1e293b,color:#fff
+        style Pillar1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Pillar2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style FullProtection fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Interior fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The critical distinction this diagram protects is that these are TWO SEPARATE rights, not one combined package — a profession with only title protection (like interior design) controls who gets to use a fancy label, but cannot stop an unlicensed person from actually DOING the work itself. Engineering, architecture, and geoscience are unusual specifically because they hold BOTH pillars together, meaning unauthorized practice is illegal regardless of what title the person uses or doesn't use — someone performing engineering work while carefully avoiding the word "engineer" is still breaching scope of practice, even though they haven't breached right to title. The PEI/Yukon exception for geoscience is worth remembering as a specific, testable fact: it shows the two pillars genuinely CAN be split apart even within these three core professions, not just as a hypothetical possibility but as an actual real-world example sitting right in the chapter's own text.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card title" id="d2">
+    <h2>2. The Title Progression — From Graduate to P.Eng.</h2>
+    <p>A completed engineering degree does NOT, by itself, grant the right to any protected title. This diagram traces the actual progression of what a person is legally permitted to call themselves at each stage.</p>
+
+    <div class="mermaid">
+      graph LR
+        Degree[Bachelor of Science<br/>in Engineering<br/>COMPLETED] --> Check{Does the degree ALONE<br/>permit using the title<br/>'engineer'?}
+
+        Check -->|NO| NoTitle[NO RIGHT to any<br/>protected title yet —<br/>degree is only ONE<br/>element of registration]
+
+        NoTitle --> Apprentice[APPRENTICESHIP period<br/>— training under<br/>licensed members]
+
+        Apprentice --> Interim[INTERIM TITLE permitted:<br/>'Engineer-in-Training' EIT<br/>or 'Member-in-Training' MIT]
+
+        Interim --> FullReg{Complete FULL<br/>registration —<br/>experience + exams}
+
+        FullReg --> Full[FULL TITLE permitted:<br/>'Professional Engineer' /<br/>'P.Eng.' — ONLY NOW]
+
+        Check -.->|Using 'engineer' BEFORE<br/>proper registration| Violation[MISREPRESENTATION —<br/>triggers ENFORCEMENT<br/>proceedings + potential<br/>CIVIL liability]
+
+        style Degree fill:#1e293b,color:#fff
+        style Check fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style NoTitle fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Interim fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Full fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style Violation fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The Check diamond near the top targets a specific, common misconception directly: graduating with the right degree FEELS like it should earn you the title, but the chapter is explicit that the degree is only "one of the elements of registration" — not the registration itself. The middle of the timeline (Apprentice → Interim) is worth holding onto as its own milestone, since EIT/MIT status is a genuine, legally recognized title in its own right, distinct from both "no title" and "full P.Eng." status — it signals to the public that the person is in a supervised training period, not yet independently licensed. The Violation branch at the bottom is a standalone warning worth remembering separately: jumping the gun and using "engineer" before completing this progression isn't just an informal faux pas, it's MISREPRESENTATION that can trigger formal enforcement action plus separate civil exposure — the title itself is a legally guarded asset, not just a professional courtesy.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card definition" id="d3">
+    <h2>3. Generic vs Specific Definitions of Scope</h2>
+    <p>Provinces define "scope of practice" using two structurally different drafting approaches. This diagram shows both approaches side by side using the chapter's own quoted examples, and explains the tradeoff baked into each.</p>
+
+    <div class="mermaid">
+      graph TD
+        Define{How does a province<br/>DEFINE a profession's<br/>scope of practice?} --> Generic[GENERIC DEFINITION —<br/>broadly states the TYPES<br/>of tasks involved]
+        Define --> Specific[SPECIFIC DEFINITION —<br/>identifies INDIVIDUAL<br/>tasks in detail]
+
+        Generic --> GenEx[EXAMPLE — Engineers Canada:<br/>'any act of planning,<br/>designing...that requires<br/>APPLICATION OF ENGINEERING<br/>PRINCIPLES, and concerns<br/>safeguarding of life, health,<br/>property...']
+
+        GenEx --> Circular{PROBLEM: definition<br/>is somewhat CIRCULAR}
+        Circular --> CircularDetail[Key phrase is 'application<br/>of engineering principles' —<br/>but what counts as an<br/>'engineering principle'<br/>is ITSELF not fully<br/>defined]
+
+        CircularDetail --> CourtsResolve[RESULT: creates AMBIGUITY<br/>that COURTS must resolve<br/>case by case — reflects the<br/>genuine DIFFICULTY of<br/>precisely defining any<br/>profession's boundaries]
+
+        Specific --> SpecEx[Less ambiguous on its face,<br/>but RISKS missing<br/>activities the drafters<br/>didn't anticipate —<br/>new technologies/practices<br/>may fall through gaps]
+
+        style Define fill:#1e293b,color:#fff
+        style Generic fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Specific fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Circular fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style CourtsResolve fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The Circular branch is the heart of this diagram because it captures something the chapter states plainly but is easy to gloss over: the Engineers Canada definition, despite being the OFFICIAL, governing definition of the entire profession, openly acknowledges its own circularity — defining engineering practice by reference to "engineering principles" is somewhat tautological, since you'd need to already know what counts as an engineering principle to apply the definition in the first place. This isn't presented as a drafting failure, though — the chapter frames it as reflecting the genuine, inherent DIFFICULTY of precisely bounding any profession, which is exactly why ambiguous edge cases (is THIS specific activity engineering or not?) end up being resolved by courts on a case-by-case basis rather than through a perfectly precise statutory checklist. The tradeoff implied in the Specific branch deserves equal attention: a highly detailed, itemized definition trades away that flexibility — it's clearer in obvious cases but can fail to anticipate genuinely new activities or technologies that don't map cleanly onto the pre-written list, creating its own different kind of gap.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card exclusion" id="d4">
+    <h2>4. The Natural Science Carve-Out</h2>
+    <p>The Engineers Canada definition isn't just an inclusion test — it has a built-in EXCLUSION specifically designed to prevent the engineering scope from accidentally swallowing up the practice of natural science. This diagram isolates that exclusion as its own mechanism.</p>
+
+    <div class="mermaid">
+      graph TD
+        Activity[Someone performs an<br/>activity requiring<br/>application of SCIENTIFIC<br/>principles] --> Q1{Does this person hold a<br/>RECOGNIZED HONOURS/<br/>HIGHER DEGREE in physical,<br/>chemical, life, computer,<br/>or mathematical sciences<br/>— OR equivalent<br/>experience?}
+
+        Q1 -->|Yes| Q2{Is the activity<br/>genuinely NATURAL<br/>SCIENCE — not<br/>engineering?}
+        Q1 -->|No, AND not under direct<br/>supervision of someone<br/>who does| MustBeEngineer[Activity must fall under<br/>PROPER ENGINEERING<br/>REGISTRATION instead —<br/>no carve-out applies]
+
+        Q2 -->|Yes| Excluded[EXCLUDED from the<br/>engineering scope of<br/>practice — this person<br/>can LEGALLY perform<br/>this work WITHOUT<br/>P.Eng. registration]
+
+        Q1 -->|No personal<br/>qualification, BUT acting<br/>under DIRECT SUPERVISION<br/>of someone who has it| AlsoExcluded[ALSO excluded —<br/>supervision by a qualified<br/>person extends the<br/>carve-out]
+
+        style Activity fill:#1e293b,color:#fff
+        style Q1 fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Excluded fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style AlsoExcluded fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style MustBeEngineer fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagram exists because the chapter explicitly tells you WHY this exclusion exists — to "retain the distinction between the practice of engineering and the practice of natural science" — and that purpose only makes sense once you see it as a deliberate boundary-drawing mechanism rather than a random technical footnote. Without this carve-out, the generic engineering definition from diagram 3 (any act requiring "application of engineering principles" concerning safety/welfare) could theoretically be read broadly enough to swallow up legitimate scientific work performed by chemists, physicists, or mathematicians who have zero engineering credentials. The Q1 diamond's qualification path is worth noting carefully — it's not JUST about holding the right degree; "equivalent combination of education, training and experience" is explicitly included too, and the supervision branch (AlsoExcluded) extends the carve-out even further to people who DON'T personally hold the qualification but are working directly under someone who does, similar in spirit to how engineering interns work under licensed P.Engs.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card registration" id="d5">
+    <h2>5. The Registration Pathway</h2>
+    <p>Full registration requires clearing three independent components together. This diagram shows all three and the branching exam requirement that depends on where the candidate's degree came from.</p>
+
+    <div class="mermaid">
+      graph TD
+        Candidate[Candidate seeking<br/>full registration] --> Three{THREE components<br/>required TOGETHER}
+
+        Three --> Experience[EXPERIENCE —<br/>generally 4 YEARS of<br/>QUALIFYING experience<br/>for engineers]
+        Three --> Education[EDUCATION —<br/>degree from an<br/>ACCREDITED university]
+        Three --> Exam{EXAMINATION —<br/>depends on degree<br/>source}
+
+        Exam -->|Degree from an<br/>ACCREDITED program| StandardExam[Generally a NON-TECHNICAL<br/>exam on LAW AND ETHICS<br/>only]
+        Exam -->|Degree from a<br/>NON-ACCREDITED<br/>program| ExtraExam[ADDITIONAL TECHNICAL<br/>examinations required —<br/>beyond just law/ethics]
+
+        Education -.->|Feeds into| Exam
+
+        Experience --> AllThree[ALL THREE components<br/>must be satisfied —<br/>missing any ONE blocks<br/>full registration]
+        StandardExam --> AllThree
+        ExtraExam --> AllThree
+
+        style Candidate fill:#1e293b,color:#fff
+        style Three fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Exam fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style ExtraExam fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style AllThree fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The dotted line from Education feeding into the Exam diamond is the key relationship this diagram is built to show — these three components aren't fully independent, the EDUCATION component directly determines what the EXAM component will actually require. A candidate from an accredited program essentially gets a "lighter" exam load (law and ethics only), on the theory that the accreditation process has already verified their technical competence through the degree itself. A candidate from a non-accredited program hasn't had that technical verification built in elsewhere, so the regulatory body compensates by adding technical examinations on top of the standard law/ethics requirement. The architecture and US-engineering comparisons mentioned elsewhere in the chapter (NCARB's nine exams, NCEES in the US) are worth holding as separate reference points — they show this same three-component skeleton (experience + education + exam) repeating across different professions and countries, just with different specific exam bodies and structures layered on top of the same underlying framework.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card multijuris" id="d6">
+    <h2>6. Multi-Jurisdiction Registration — Practice Follows the Work</h2>
+    <p>This diagram resolves the chapter's own chapter question about an architect working across three provinces, showing the actual rule (registration tracks the LOCATION OF THE WORK, not the professional's home base) and the mechanism that eases the burden of multiple registrations.</p>
+
+    <div class="mermaid">
+      graph TD
+        Architect[Architect based in<br/>SASKATCHEWAN, designing<br/>a project in the YUKON,<br/>inspecting construction<br/>in ONTARIO] --> Rule{WHERE must this<br/>architect be<br/>REGISTERED?}
+
+        Rule --> WrongAssumption[WRONG ASSUMPTION:<br/>'just register where<br/>my office is']
+
+        Rule --> CorrectRule[CORRECT RULE: registration<br/>required in EVERY<br/>PROVINCE WHERE THE<br/>PROFESSION IS ACTUALLY<br/>BEING PRACTISED]
+
+        CorrectRule --> AllThree[Architect must register<br/>in ALL THREE:<br/>Saskatchewan AND<br/>Yukon AND Ontario]
+
+        AllThree --> Burden{Does this create an<br/>UNMANAGEABLE<br/>burden?}
+
+        Burden --> Reciprocity[EASED BY: reciprocity<br/>AGREEMENTS between<br/>provincial regulatory<br/>bodies — makes MULTIPLE<br/>registrations EASIER<br/>to obtain]
+
+        Reciprocity --> International{Do reciprocity<br/>agreements extend<br/>BEYOND Canada?}
+        International --> IntlExamples[YES — e.g. Engineers<br/>Canada has professional-level<br/>agreements with Mexico,<br/>Texas via NAFTA, France,<br/>Hong Kong, Australia, Ireland<br/>— AND separate<br/>education-level<br/>agreements recognizing<br/>accredited degrees]
+
+        style Architect fill:#1e293b,color:#fff
+        style Rule fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style WrongAssumption fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style CorrectRule fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style Reciprocity fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The WrongAssumption box is placed deliberately to catch the intuitive-but-incorrect answer many people would give to this exact scenario — it FEELS reasonable that your "home province" registration should be the one that matters, but the actual rule tracks something completely different: WHERE the practice is actually happening, regardless of where the professional's office or home base sits. This means design work done remotely from Saskatchewan FOR a Yukon project still counts as practising in the Yukon, and on-site inspection work in Ontario counts as practising in Ontario — three separate locations of actual practice, three separate registration requirements, even though it's all one continuous project for one client. The Reciprocity branch exists to soften what would otherwise sound like a genuinely heavy administrative burden — these agreements don't ELIMINATE the multi-jurisdiction requirement, they make SATISFYING it easier by allowing credentials earned in one jurisdiction to count toward registration in another, extending in some cases (per the IntlExamples box) well beyond Canada's own provincial borders into specific reciprocal relationships with other countries.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card discipline" id="d7">
+    <h2>7. Discipline vs Enforcement</h2>
+    <p>These two terms sound interchangeable but the chapter uses them with precise, different meanings tied to WHO is being proceeded against. This diagram isolates that distinction cleanly.</p>
+
+    <div class="mermaid">
+      graph TD
+        Process{A regulatory body<br/>initiates a formal<br/>process} --> WhoTarget{WHO is the<br/>target?}
+
+        WhoTarget -->|A registered MEMBER<br/>of the profession| Discipline[DISCIPLINE]
+        WhoTarget -->|A NON-MEMBER —<br/>not registered<br/>at all| Enforcement[ENFORCEMENT]
+
+        Discipline --> DiscReason[Reasons: INCOMPETENCE<br/>or BREACH OF THE<br/>CODE OF ETHICS]
+        Enforcement --> EnfReason[Reasons: using a<br/>PROTECTED TITLE without<br/>right OR practising<br/>WITHIN the exclusive<br/>scope of practice<br/>without a licence]
+
+        DiscReason --> Nature{Nature of BOTH<br/>proceedings}
+        EnfReason --> Nature
+        Nature --> QuasiCriminal[QUASI-CRIMINAL —<br/>taken seriously, since a<br/>disciplined professional<br/>may lose their<br/>LIVELIHOOD — STRICT<br/>standards of proof<br/>and process]
+
+        QuasiCriminal --> NotCriminal{Is this the SAME<br/>as a criminal<br/>proceeding?}
+        NotCriminal -->|NO| Distinction[NOT a true criminal<br/>proceeding — but treated<br/>with similar SERIOUSNESS<br/>and PROCEDURAL RIGOUR<br/>because of what's<br/>at stake]
+
+        style Process fill:#1e293b,color:#fff
+        style WhoTarget fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Discipline fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Enforcement fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style QuasiCriminal fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The WhoTarget diamond is the single fact that cleanly separates these two terms, and it directly answers the chapter's own chapter question 8 (is a disciplinary hearing a criminal proceeding — no, it's quasi-criminal). Discipline is internal-facing — it's the profession holding its OWN registered members accountable for incompetence or ethics breaches, essentially the regulatory body policing people who voluntarily joined and agreed to its rules. Enforcement is external-facing — it's the regulatory body asserting its legal monopoly against OUTSIDERS who never joined at all, whether by stealing the protected title or by performing protected work without a licence. Both share the same "quasi-criminal" classification and procedural seriousness, which is worth remembering as a single combined fact: NEITHER process is literally a criminal proceeding (no criminal record results, the Crown isn't prosecuting), but BOTH are treated with comparable rigour and strict standards of proof specifically because the practical stakes — someone's professional livelihood — are genuinely severe.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card seal" id="d8">
+    <h2>8. The Seal — What It Actually Certifies</h2>
+    <p>A professional seal isn't just a formality stamped onto a finished document — it's a specific factual representation. This diagram shows exactly what applying a seal is legally claiming, and where the most common seal-related discipline problems originate.</p>
+
+    <div class="mermaid">
+      graph TD
+        Seal[Professional applies<br/>their SEAL to a<br/>document] --> Claim{WHAT does sealing<br/>a document actually<br/>REPRESENT?}
+
+        Claim --> C1[Professional PERSONALLY<br/>PREPARED the document]
+        Claim --> C2[OR professional<br/>SUPERVISED its<br/>preparation]
+        Claim --> C3[OR professional<br/>REVIEWED/CHECKED<br/>the document]
+
+        C1 --> Problem{MOST COMMON<br/>seal-related<br/>PROBLEM}
+        C2 --> Problem
+        C3 --> Problem
+
+        Problem --> Gap[Sealing a document<br/>WITHOUT actually having<br/>appropriately PREPARED<br/>OR CHECKED it —<br/>the seal becomes a<br/>FALSE representation]
+
+        Gap --> Discipline[DISCIPLINARY OFFENCE —<br/>improper use of the seal]
+
+        Seal --> RelatedDoc{SEPARATE related issue:<br/>LETTER OF ASSURANCE}
+        RelatedDoc --> Broad[Often VERY BROAD —<br/>certifies building was<br/>constructed per<br/>plans/specifications]
+        Broad --> Decision{Should the<br/>professional sign?}
+        Decision --> CheckFirst[MUST determine BEFORE<br/>starting the project<br/>whether one will be<br/>required — if unwilling/<br/>unable to sign such a<br/>letter, should NOT<br/>take on the project]
+
+        style Seal fill:#1e293b,color:#fff
+        style Claim fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Gap fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Discipline fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style CheckFirst fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The three C-boxes at the top matter because they show sealing isn't a single, narrow claim — it can legitimately represent ANY of three different relationships to a document (personal authorship, supervision, or review/checking), but it must represent AT LEAST ONE of them truthfully. The Gap box captures the chapter's central warning about seal misuse: the practical danger isn't usually outright fraud, it's a professional sealing something out of habit, convenience, or external pressure WITHOUT having actually done the preparing or checking the seal is supposed to certify — turning a routine administrative act into a false professional representation. The letter-of-assurance branch is connected to this same diagram because it shares the same underlying logic but raises the stakes further: these letters are often extremely broad certifications (the whole building matches the plans), and the chapter's practical advice is to make that assessment BEFORE accepting the project at all — discovering partway through that you're unwilling to sign the assurance document the client needs is a much worse position than declining the engagement upfront.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

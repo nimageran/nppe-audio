@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 16: Visual Mechanics — Insurance</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.judgproof { border-top-color: #64748b; }
+    .framework-card.defend { border-top-color: #0ea5e9; }
+    .framework-card.subrogation { border-top-color: #9333ea; }
+    .framework-card.insurable { border-top-color: #16a34a; }
+    .framework-card.claimsmade { border-top-color: #ca8a04; }
+    .framework-card.notice { border-top-color: #dc2626; }
+    .framework-card.disclosure { border-top-color: #ef4444; }
+    .framework-card.conflict { border-top-color: #f59e0b; }
+    .framework-card.exclusion { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 16: VISUAL MECHANICS — INSURANCE</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. Operating Without Insurance — The Judgment-Proofing Trap</a>
+    <a href="#d2">2. Duty to Defend vs Duty to Indemnify</a>
+    <a href="#d3">3. The Subrogation Step-Into-Shoes Flow</a>
+    <a href="#d4">4. Insurable Interest — Why a Subcontractor Insures the Whole Project</a>
+    <a href="#d5">5. Claims-Made vs Occurrence — The Timing Puzzle</a>
+    <a href="#d6">6. The Notice Trap When Changing Insurers</a>
+    <a href="#d7">7. Material Non-Disclosure — Even Unrelated Facts Can Void Coverage</a>
+    <a href="#d8">8. Insurer-Insured Conflict — When You Need Your Own Lawyer</a>
+    <a href="#d9">9. The Faulty-Design Exclusion + Resultant Damage Carve-Out</a>
+  </div>
+
+
+  <div class="framework-card judgproof" id="d1">
+    <h2>1. Operating Without Insurance — The Judgment-Proofing Trap</h2>
+    <p>Going uninsured and trying to "judgment-proof" yourself both look like clever risk-avoidance shortcuts. This diagram shows why each path quietly fails, and exactly where the timing of a transfer decides whether it's legal asset planning or fraud.</p>
+
+    <div class="mermaid">
+      graph TD
+        NoIns[Professional operates<br/>WITHOUT insurance] --> Save[Saves on premiums]
+        NoIns --> BigRisk[Even a FRIVOLOUS claim<br/>is costly to defend —<br/>successful litigants recover<br/>under 50% of legal costs]
+        BigRisk --> Bankrupt[Single large claim<br/>can cause BANKRUPTCY]
+
+        Protect[Attempt to become<br/>JUDGMENT PROOF] --> Method1[Transfer assets to spouse]
+        Protect --> Method2[Incorporate, keep minimal<br/>assets in the company]
+
+        Method1 --> Timing{WHEN was the<br/>transfer made?}
+        Timing -->|Before any claim<br/>is anticipated| Legal[LEGAL — ordinary<br/>asset planning]
+        Timing -->|After becoming aware<br/>a lawsuit is imminent| Fraud[FRAUDULENT TRANSFER<br/>— court will REVERSE it<br/>to satisfy the creditor]
+
+        Method2 --> Veil{Could the corporate<br/>veil be pierced?}
+        Veil -->|Improper purpose found| Pierced[Shareholders found<br/>personally liable anyway]
+        Veil --> PersonalNeg[SEPARATE problem:<br/>individual can be sued<br/>PERSONALLY for negligence<br/>even as an employee/officer]
+
+        style NoIns fill:#1e293b,color:#fff
+        style Bankrupt fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Timing fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Legal fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Fraud fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Pierced fill:#fee2e2,stroke:#dc2626
+        style PersonalNeg fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Both halves of this diagram converge on the same lesson from two different angles — there is no reliable shortcut around carrying real insurance. The timing diamond is the single highest-yield fact in this section: the EXACT same act (transferring assets to a spouse) is either completely legal or completely reversible fraud depending entirely on whether the person already knew a claim was coming when they did it. The corporate veil branch adds a second, independent trap — even if the corporate shell itself survives a piercing attempt, that protects the COMPANY's assets, not the individual professional, who remains personally exposed to a negligence claim regardless of their corporate role. Two separate doors into liability, and incorporating only closes one of them.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card defend" id="d2">
+    <h2>2. Duty to Defend vs Duty to Indemnify</h2>
+    <p>These two duties are usually bundled together, which is exactly why it's easy to miss that they're legally SEPARATE obligations that can split apart. This diagram shows the moment they diverge.</p>
+
+    <div class="mermaid">
+      graph TD
+        Claim[Claim made against<br/>the insured professional] --> Scope{Does the claim ALLEGE conduct<br/>that falls within the<br/>policy's coverage?}
+
+        Scope -->|At least PARTIALLY<br/>within coverage| Defend[DUTY TO DEFEND ACTIVATES:<br/>Insurer pays legal fees,<br/>appoints counsel, pays for<br/>expert witnesses]
+        Scope -->|Entirely OUTSIDE coverage<br/>e.g. pure fraud allegation| NoDefend[NO duty to defend<br/>and NO duty to indemnify]
+
+        Defend --> Trial[Case proceeds]
+        Trial --> IndemQ{Is the insured found<br/>liable for something<br/>WITHIN the policy's coverage?}
+
+        IndemQ -->|Yes| BothDuties[BOTH duties triggered:<br/>Insurer DEFENDED<br/>AND must now INDEMNIFY<br/>— pay the judgment]
+        IndemQ -->|No — claim fails, OR liability<br/>is for something outside<br/>coverage scope| DefendOnly[ONLY duty to defend was<br/>triggered — defence cost<br/>was still paid, even though<br/>no payout follows]
+
+        style Claim fill:#1e293b,color:#fff
+        style Scope fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Defend fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style NoDefend fill:#fee2e2,stroke:#dc2626
+        style IndemQ fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style BothDuties fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style DefendOnly fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The key insight this diagram isolates is that the duty to defend is triggered by the ALLEGATION, not by the eventual finding — the insurer has to defend based on what the claim SAYS, even if it later turns out the insured isn't liable, or is liable for something the policy doesn't cover. This is exactly why "DefendOnly" is a real, common outcome and not an edge case: the chapter explicitly notes the duty to defend can be MORE valuable than the duty to indemnify when a claim is weak, because defence costs alone (lawyers, experts, discovery) can be enormous even for a claim that ultimately goes nowhere. It also explains the strategic note buried in the text: a sharp plaintiff's lawyer will deliberately frame a claim to touch on covered conduct, specifically to drag the insurer into the defend box even if the core allegation (like fraud) wouldn't otherwise qualify.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card subrogation" id="d3">
+    <h2>3. The Subrogation Step-Into-Shoes Flow</h2>
+    <p>Subrogation sounds abstract until you trace the actual sequence of payments and lawsuits using the chapter's own architect/specification-writer example. This diagram follows the money and the legal standing as they move from the original loss all the way to a second lawsuit.</p>
+
+    <div class="mermaid">
+      graph TD
+        Spec[Specification writer drafts<br/>FAULTY waterproofing section] --> Owner[Owner discovers defect,<br/>must redo waterproofing<br/>at great expense]
+        Owner --> Sues1[Owner SUES the Architect<br/>— architect was the<br/>contracting party]
+        Sues1 --> InsurerDefends[Architect's INSURER<br/>defends + judgment is<br/>awarded against Architect]
+        InsurerDefends --> InsurerPays[Insurer PAYS the judgment]
+
+        InsurerPays --> StepsIn[SUBROGATION: Insurer now<br/>STEPS INTO the Architect's<br/>legal shoes]
+        StepsIn --> Sues2[Insurer sues the<br/>Specification Writer —<br/>IN THE NAME of the Architect —<br/>to recover what it paid out]
+
+        StepsIn --> Block{Was there a WAIVER<br/>OF SUBROGATION clause<br/>in the contract?}
+        Block -->|Yes| Blocked[Insurer's subrogation<br/>right is ELIMINATED —<br/>cannot recover from<br/>the spec writer]
+        Block -->|No| Sues2
+
+        StepsIn --> SameInsured{Is the target ALSO<br/>an insured under the<br/>SAME policy?}
+        SameInsured -->|Yes| Prohibited[PROHIBITED — basic rule:<br/>subrogation CANNOT be<br/>obtained against an insured<br/>— Commonwealth v. Imperial Oil]
+        SameInsured -->|No| Sues2
+
+        style Spec fill:#1e293b,color:#fff
+        style StepsIn fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Block fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Blocked fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style SameInsured fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Prohibited fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Sues2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Follow the chain top to bottom and you can see subrogation is really just the insurer recovering what it already paid out, by temporarily "becoming" the party it insured for the purpose of a NEW lawsuit against whoever actually caused the loss. The two diamonds at the bottom are the two ways this otherwise-automatic right gets cut off, and they're conceptually different: a waiver of subrogation clause is a CONTRACTUAL choice the parties made (and one professionals should watch for, since agreeing to it can unintentionally let the insurer walk away from its indemnity obligation); the "same insured" block is a fundamental LEGAL RULE that can't be waived around — confirmed in Commonwealth v. Imperial Oil, where the court refused to let an insurer pay one insured and then turn around and sue another insured under the SAME policy, because that would make the policy's protection illusory. This is also exactly why naming all project participants under one project-specific policy (a wrap-up policy, covered in diagram 9's neighbourhood) is such an effective way to eliminate subrogation fights between contractors and subs.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card insurable" id="d4">
+    <h2>4. Insurable Interest — Why a Subcontractor Insures the Whole Project</h2>
+    <p>It seems counterintuitive that a subcontractor doing a small fraction of a project's total work could have an insurable interest in the ENTIRE project. This diagram walks through the Commonwealth v. Imperial Oil reasoning that makes this make sense.</p>
+
+    <div class="mermaid">
+      graph TD
+        Sub[Subcontractor performs a<br/>LIMITED scope of work<br/>on a large project] --> NarrowView{Is insurable interest limited<br/>to just the subcontractor's<br/>OWN portion of work?}
+
+        NarrowView -->|If TRUE| Bad[Damage caused BY this sub<br/>TO OTHER trades' work<br/>would NOT be covered<br/>under the project policy]
+        NarrowView -->|Court REJECTED<br/>this view| Wide[Subcontractor has insurable<br/>interest in the ENTIRE project]
+
+        Wide --> Why[WHY: every tradesman on a<br/>jobsite can foreseeably damage<br/>another's work or the whole<br/>structure — that REAL POSSIBILITY<br/>itself creates the interest]
+        Why --> Goal[GOAL: avoids tradespeople fighting<br/>each other over negligence in court —<br/>all parties pursuing one common<br/>goal share coverage instead]
+
+        style Sub fill:#1e293b,color:#fff
+        style NarrowView fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Bad fill:#fee2e2,stroke:#dc2626
+        style Wide fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Why fill:#e0f2fe,stroke:#0284c7
+        style Goal fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diagram is built around a single rejected hypothesis to make the actual rule memorable — courts COULD have limited insurable interest to "your own work only," but explicitly chose not to, because doing so would have left massive gaps in project insurance every time one trade's mistake damaged another trade's work. The deeper logic in the "Why" box is the real exam-relevant principle: insurable interest isn't really about OWNERSHIP, it's about whether you'd be PREJUDICED by a loss — and a subcontractor working inside a complex structure is obviously prejudiced if that structure burns down or collapses, regardless of how small their own contract value is. The bottom box also quietly connects back to diagram 3 — this is precisely the mechanism (everyone sharing the same project policy) that makes the "same insured" subrogation block in diagram 3 so commonly applicable in construction.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card claimsmade" id="d5">
+    <h2>5. Claims-Made vs Occurrence — The Timing Puzzle</h2>
+    <p>This is the chapter's single most testable mechanical concept. Using the chapter's own geoscientist example (Ace → Deuce), this diagram plots BOTH the work date and the claim date on a timeline to show exactly which policy ends up on the hook — and why occurrence-style thinking gets the wrong answer.</p>
+
+    <div class="mermaid">
+      graph LR
+        T1[1995: Faulty research<br/>performed at ACE<br/>— covered by ABC policy<br/>at the time] --> T2[2000: Geoscientist<br/>leaves ACE for DEUCE]
+        T2 --> T3[2001: ACE goes bankrupt,<br/>does NOT renew ABC policy.<br/>Geoscientist now covered<br/>by DEF policy at DEUCE]
+        T3 --> T4[2002: Third party SUES<br/>— claim is MADE now,<br/>about 1995 work]
+
+        T4 --> Test{CLAIMS-MADE TEST:<br/>Which policy was<br/>IN FORCE when the<br/>CLAIM WAS MADE<br/>— not when the work<br/>was done?}
+
+        Test --> ABC[ABC Policy:<br/>NOT in force in 2002<br/>— NO COVERAGE,<br/>even though this is the<br/>policy that covered the<br/>actual work in 1995]
+        Test --> DEF[DEF Policy:<br/>IN FORCE in 2002<br/>— THIS is the policy<br/>that covers the claim]
+
+        style T1 fill:#e0f2fe,stroke:#0284c7
+        style T4 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Test fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style ABC fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style DEF fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The whole point of laying this out as a timeline rather than a definition is to make the counterintuitive result impossible to miss: the policy that was actually in force when the NEGLIGENT WORK happened (ABC, 1995) ends up providing ZERO coverage, while a policy that didn't even exist yet at the time of the work (DEF, which the geoscientist wasn't insured under until 2001) is the one that pays. This only makes sense once you fully internalize that "claims-made" tracks the CLAIM DATE, not the WORK DATE — which is the opposite of how an occurrence policy would behave. This single mechanic explains why retiring professionals are told to keep paying for "tail" coverage after they stop practicing (diagram 6 picks this thread up directly) — without it, work done decades ago can become completely uninsured the moment the original policy lapses, regardless of how good the work actually was.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card notice" id="d6">
+    <h2>6. The Notice Trap When Changing Insurers</h2>
+    <p>Claims-made coverage creates a notice trap that's easy to fall into completely by accident — simply by changing jobs, changing insurers, or retiring without taking one specific extra step. This diagram shows the trap and the single action that avoids it.</p>
+
+    <div class="mermaid">
+      graph TD
+        Trigger{What's changing?} --> Job[Changing employers /<br/>company changes name]
+        Trigger --> Insurer[Switching to a<br/>new insurer]
+        Trigger --> Retire[Retiring from practice]
+
+        Job --> Gap1[Former policy may not<br/>cover a NOW-FORMER<br/>employee. New company's<br/>policy may not extend to<br/>work done under the<br/>OLD company name]
+        Insurer --> Gap2[OLD insurer no longer covers<br/>claims made after switch —<br/>even for work done while<br/>that policy was active —<br/>UNLESS notified in time]
+        Retire --> Gap3[No active policy at all<br/>— but old work can still<br/>generate a claim YEARS later]
+
+        Gap1 --> Fix[THE FIX: Notify the<br/>relevant insurer of ALL<br/>known potential claims<br/>— even ones that 'might<br/>disappear' — BEFORE the<br/>policy lapses or changes]
+        Gap2 --> Fix
+        Gap3 --> Fix2[THE FIX: Purchase 'tail'<br/>coverage to remain insured<br/>AFTER retirement —<br/>usually available at<br/>reduced rates]
+
+        style Trigger fill:#1e293b,color:#fff
+        style Gap1 fill:#fee2e2,stroke:#dc2626
+        style Gap2 fill:#fee2e2,stroke:#dc2626
+        style Gap3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Fix fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Fix2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> All three triggers create the exact same underlying danger — a gap opens up where past work exists but no current policy will cover a future claim about it — even though each trigger looks like a routine, unremarkable life event. The Reid Crowther v. Simcoe & Erie case (not shown as its own box, but the reasoning behind "Fix") sharpens this further: you don't need the words "I am suing you" to trigger a notice obligation — if a REASONABLE professional in your position would have suspected a claim might be coming (e.g. a client expressing quality concerns), you're expected to report that as a potential claim, not wait for a formal demand letter. Reid Crowther actually won that case on unusual facts, but the chapter is explicit that this is the exception, not something to rely on — the safe move is always to over-disclose rather than wait and hope a brewing problem quietly goes away.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card disclosure" id="d7">
+    <h2>7. Material Non-Disclosure — Even Unrelated Facts Can Void Coverage</h2>
+    <p>This diagram targets a result that feels deeply unfair at first: an insurer can deny an UNRELATED claim because of a non-disclosure that had nothing to do with that specific claim. Walking through why exposes the actual logic insurers rely on.</p>
+
+    <div class="mermaid">
+      graph TD
+        Apply[Firm applies for<br/>E&O insurance] --> Hide[Firm fails to disclose:<br/>ONE employee had a<br/>negligence claim against<br/>her last year]
+        Hide --> Issue[Insurer issues the policy<br/>— unaware of that history]
+
+        Issue --> NewClaim[LATER: a claim arises<br/>against a COMPLETELY<br/>DIFFERENT employee,<br/>for UNRELATED negligence]
+
+        NewClaim --> Deny{Can the insurer<br/>deny THIS claim?}
+        Deny -->|YES| WhyYes[Reasoning: Insurer argues it<br/>would have charged a HIGHER<br/>PREMIUM or REFUSED coverage<br/>entirely had it known the full risk<br/>profile — relatedness of the<br/>CLAIM to the non-disclosure<br/>is NOT the test]
+
+        WhyYes --> Limit[BUT: this insurer right is<br/>LIMITED by legislation in<br/>some provinces]
+
+        style Apply fill:#1e293b,color:#fff
+        style Hide fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Deny fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style WhyYes fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Limit fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The surprising result sits entirely in the WhyYes box, and it's worth sitting with: the test for material non-disclosure is not "did this specific fact cause this specific claim" — it's "would the insurer have priced or accepted the risk DIFFERENTLY had it known everything." Once you frame it that way, the result stops feeling arbitrary: the insurer was deprived of the chance to evaluate the firm's TRUE overall risk profile (a firm with one prior claim is statistically a different risk than one with none), and the duty of utmost good faith means the insured has to volunteer that picture even where it seems unrelated to whatever eventually goes wrong. Compare this against chapter question 7 (the "foreign citizen" non-disclosure) for contrast — THAT non-disclosure was found immaterial because immigration status has no plausible bearing on theft/fire risk, while a prior negligence claim plausibly does bear on future E&O risk. The test is always "could this fact have changed the insurer's pricing or acceptance decision," not "is this fact embarrassing or unrelated-sounding."</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card conflict" id="d8">
+    <h2>8. Insurer-Insured Conflict — When You Need Your Own Lawyer</h2>
+    <p>Most of the time insurer and insured want the exact same outcome. This diagram isolates the specific situations where their interests split apart, and what a professional should do once that split appears.</p>
+
+    <div class="mermaid">
+      graph TD
+        Aligned[USUAL CASE: Insurer and<br/>Insured interests ALIGNED<br/>— both want the claim DEFEATED] --> OneLawyer[ONE lawyer represents<br/>both interests]
+
+        Conflict{CONFLICT SITUATIONS} --> C1[Insurer DENIES coverage]
+        Conflict --> C2[Claim alleges conduct<br/>OUTSIDE policy scope<br/>— e.g. fraud]
+        Conflict --> C3[Insured wants to FIGHT despite<br/>a reasonable SETTLEMENT offer]
+        Conflict --> C4[Claim EXCEEDS<br/>policy limits]
+        Conflict --> C5[Settlement requires<br/>compromising a counterclaim<br/>— e.g. professional's<br/>OWN fee claim]
+
+        C1 --> Separate[INSURED should retain<br/>SEPARATE COUNSEL —<br/>insurer's goal is lowest-cost<br/>resolution, which may NOT<br/>match the insured's goals<br/>— e.g. reputation, fee recovery]
+        C2 --> Separate
+        C3 --> Separate
+        C4 --> ExceedRisk[SPECIAL DANGER:<br/>insured faces PERSONAL<br/>liability for the excess —<br/>e.g. $1M coverage,<br/>$2M claim]
+        C5 --> Separate
+
+        ExceedRisk --> Notify[Insured should formally put<br/>insurer on notice: WANTS<br/>settlement within policy limits]
+        Notify --> BadFaith{Insurer refuses to settle<br/>within limits anyway?}
+        BadFaith -->|Yes| BadFaithClaim[Insured may have a<br/>BAD FAITH claim against<br/>the insurer for refusing<br/>to settle]
+
+        style Aligned fill:#dcfce7,stroke:#16a34a
+        style Conflict fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Separate fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style ExceedRisk fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style BadFaithClaim fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The five conflict triggers all share one underlying mechanism worth memorizing as a single sentence: whenever the INSURER's incentive (resolve this as cheaply as possible) might diverge from the INSURED's incentive (protect reputation, avoid personal exposure, preserve a fee claim, or avoid a result that bleeds into uninsured territory), that's the signal to get independent advice — sometimes paid for by the insurer, sometimes not, but valuable either way. The policy-limits branch gets extra visual weight because it's the one situation where the insured's OWN MONEY (not just the insurer's) is genuinely on the line — a $1M policy facing a $2M claim means the insured is personally exposed for the gap, which flips the insured's incentive to settle quickly even if the insurer (who's only on the hook for $1M regardless of outcome) might be willing to gamble on a trial. The bad-faith branch at the bottom is the insured's actual leverage in that exact scenario — formally requesting a within-limits settlement creates a paper trail that can support a bad-faith claim if the insurer refuses and then loses, exposing the insured to the excess.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card exclusion" id="d9">
+    <h2>9. The Faulty-Design Exclusion + Resultant Damage Carve-Out</h2>
+    <p>This is the most layered mechanic in the chapter, built from the wall-collapse and CNR tunnel cases. A builders' risk claim isn't a single yes/no — it runs through a chain of tests, and the final answer can split a SINGLE incident into covered and uncovered pieces simultaneously.</p>
+
+    <div class="mermaid">
+      graph TD
+        Loss[Loss occurs on an<br/>ALL-RISKS builders'<br/>risk policy] --> Q1{Is the loss caused by<br/>FAULTY DESIGN, MATERIALS,<br/>or WORKMANSHIP?}
+
+        Q1 -->|No — covered peril,<br/>e.g. fire, theft, weather| Covered[COVERED — standard<br/>all-risks claim]
+        Q1 -->|Yes| StateOfArt{STATE-OF-THE-ART TEST<br/>— CNR v. Royal Sun Alliance:<br/>did the design meet the<br/>THEN-CURRENT state of the art<br/>for foreseeable risks?}
+
+        StateOfArt -->|Yes, met state of the art<br/>— even if it still failed| NotFaulty[NOT 'faulty' — design does<br/>not need to achieve<br/>PERFECTION against<br/>all foreseeable risks]
+        StateOfArt -->|No, fell below the<br/>then-current standard| Faulty[Design/workmanship/<br/>materials IS 'faulty']
+
+        Faulty --> Split{Apply the EXCLUSION<br/>— but check the<br/>RESULTANT DAMAGE<br/>exception}
+
+        Split --> OwnWork[Damage to the FAULTY<br/>component ITSELF —<br/>e.g. the collapsed wall]
+        Split --> OtherProperty[Damage to OTHER property<br/>— e.g. equipment or a car<br/>damaged BY the collapse]
+
+        OwnWork --> Excluded[EXCLUDED — cost of<br/>making good the faulty<br/>work itself is NOT covered]
+        OtherProperty --> Integration{Do courts view the damaged<br/>property as part of the SAME<br/>integrated contractual<br/>obligation? — B.C. Rail,<br/>Sayers cases}
+
+        Integration -->|Yes — same integrated<br/>scope of work| StillExcluded[STILL EXCLUDED —<br/>courts increasingly treat<br/>integrated work as ONE<br/>unit, defeating the<br/>resultant-damage argument]
+        Integration -->|No — genuinely<br/>separate property| ResultantCovered[COVERED as<br/>RESULTANT DAMAGE]
+
+        style Loss fill:#1e293b,color:#fff
+        style Q1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style StateOfArt fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style NotFaulty fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Excluded fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Integration fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style StillExcluded fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style ResultantCovered fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This chain deliberately has TWO separate diamonds that each independently decide the outcome, and missing either one leads to the wrong answer. The first diamond (state-of-the-art) decides whether "faulty design" even applies in the first place — CNR's tunnelling machine failure was NOT automatically "faulty" just because it failed; the test asks whether it met the engineering knowledge available AT THE TIME, which is a deliberately HIGHER bar than ordinary negligence but still short of demanding perfection or omniscience. The second diamond only matters once you've already concluded the work WAS faulty — and it asks the completely different question of whether damage that spread to other property counts as genuinely separate "resultant damage" or whether courts will treat the whole project as one integrated obligation (the trend the chapter flags: courts increasingly say the latter, narrowing the resultant-damage exception over time). The practical exam lesson buried in this chain: a single incident — like the chapter's own switchgear/sports car example — can split into covered and uncovered pieces simultaneously (the car covered under a separate LIABILITY policy entirely, the wall excluded under the PROPERTY policy, the switchgear genuinely uncertain) — you have to run EACH damaged item through this chain separately rather than assuming one verdict covers the whole loss.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

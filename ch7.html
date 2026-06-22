@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 7: Visual Mechanics — Breach of Contract</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.causes { border-top-color: #0ea5e9; }
+    .framework-card.protest { border-top-color: #dc2626; }
+    .framework-card.limits { border-top-color: #ca8a04; }
+    .framework-card.consequential { border-top-color: #9333ea; }
+    .framework-card.penalty { border-top-color: #ef4444; }
+    .framework-card.fundamental { border-top-color: #16a34a; }
+    .framework-card.repudiation { border-top-color: #f59e0b; }
+    .framework-card.termination { border-top-color: #64748b; }
+    .framework-card.measure { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 7: VISUAL MECHANICS — BREACH OF CONTRACT</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Kiewit Trap and the Performance-Under-Protest Fix</a>
+    <a href="#d2">2. The Three Limitations on Damages</a>
+    <a href="#d3">3. Consequential Damages — The Pricing Problem</a>
+    <a href="#d4">4. Liquidated Damages vs Penalty</a>
+    <a href="#d5">5. Fundamental Breach vs Simple Breach — The High-Stakes Fork</a>
+    <a href="#d6">6. Repudiation and Anticipatory Breach — Timing on a Line</a>
+    <a href="#d7">7. The Termination Decision Tree</a>
+    <a href="#d8">8. Cost of Performance vs Diminution in Value</a>
+    <a href="#d9">9. Chapter Question 1 — The Waiver-Within-a-Breach Trap</a>
+  </div>
+
+
+  <div class="framework-card causes" id="d1">
+    <h2>1. The Kiewit Trap and the Performance-Under-Protest Fix</h2>
+    <p>This diagram traces the exact dilemma a party faces when they disagree about contract scope, showing why the "obvious" choice (just do the work, sort out payment later) was historically a legal trap — and the specific fix that was built to close it.</p>
+
+    <div class="mermaid">
+      graph TD
+        Disagreement[Owner demands work the<br/>contractor believes is<br/>OUTSIDE the contract's<br/>scope] --> Choice{Contractor's<br/>dilemma}
+
+        Choice --> RefuseDo[REFUSE to perform —<br/>hope a court later<br/>agrees it was<br/>outside scope]
+        Choice --> JustDo[PERFORM the work<br/>silently, then bill<br/>for the extra]
+
+        RefuseDo --> RefuseRisk[RISK: if court finds<br/>it WAS in scope,<br/>contractor is now in<br/>BREACH for refusing]
+
+        JustDo --> Kiewit[KIEWIT PRINCIPLE — SCC:<br/>performing the work is<br/>treated as an ADMISSION<br/>that it was already<br/>within scope]
+        Kiewit --> LostRight[Contractor LOSES the<br/>right to claim extra<br/>payment — performance<br/>itself defeats the claim]
+
+        LostRight --> Fix{THE FIX: PERFORMANCE<br/>UNDER PROTEST}
+        Fix --> Notice[Contractor gives<br/>WRITTEN NOTICE: 'performing<br/>WITHOUT PREJUDICE to my<br/>right to claim extra<br/>payment']
+
+        Notice --> Preserved[Right to claim<br/>compensation is<br/>PRESERVED — for<br/>services, property,<br/>liability, or money<br/>beyond contract<br/>requirements]
+
+        Preserved --> Availability{Is this right<br/>available EVERYWHERE?}
+        Availability -->|NO — must check<br/>STATUTE or CONTRACT.<br/>e.g. Alberta has NO<br/>statutory right| MustNegotiate[Parties must<br/>NEGOTIATE this<br/>protection directly<br/>INTO the contract]
+        Availability -->|YES — statute exists,<br/>e.g. BC's Law and<br/>Equity Act s.62| Automatic[Protection applies<br/>AUTOMATICALLY to<br/>commercial contracts]
+
+        style Disagreement fill:#1e293b,color:#fff
+        style Kiewit fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style LostRight fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Fix fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Preserved fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style MustNegotiate fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Automatic fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "JustDo" branch is placed deliberately as the intuitive-but-wrong choice, because most people would assume quietly performing disputed work and sorting out payment afterward is the safe, cooperative path — Kiewit proves the opposite: the Supreme Court held that simply DOING the work was itself treated as conceding the work was already covered by the contract, destroying the very claim for extra payment the contractor was trying to preserve. The "Fix" box shows the legislative response this harsh result triggered, and the key word in that fix is "WITHOUT PREJUDICE" — that specific phrase is what breaks the Kiewit logic, because it converts silent, ambiguous performance into an explicit, on-the-record statement that performing now does NOT concede the scope dispute. The Availability diamond at the bottom is a critical practical caveat: this protection is NOT automatically available everywhere in Canada — the chapter specifically flags Alberta as a province without a statutory right, meaning parties operating there (or anywhere a relevant statute doesn't exist) need to negotiate equivalent protest language directly into their contract, or risk falling right back into the original Kiewit trap.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card limits" id="d2">
+    <h2>2. The Three Limitations on Damages</h2>
+    <p>Winning a breach of contract claim doesn't mean recovering everything you've lost. This diagram shows the three independent filters damages have to pass through, each capable of cutting the recovery down on its own.</p>
+
+    <div class="mermaid">
+      graph TD
+        Loss[Breach occurred,<br/>innocent party<br/>suffered a loss] --> Filter1{FILTER 1: MITIGATION<br/>— did the innocent party<br/>take REASONABLE STEPS<br/>to reduce the loss?}
+
+        Filter1 -->|No, failed to<br/>mitigate| Reduced1[Damages REDUCED by<br/>whatever COULD have<br/>been avoided through<br/>reasonable effort]
+        Filter1 -->|Yes, mitigated<br/>properly| Filter2{FILTER 2: NOT<br/>SPECULATIVE — can the<br/>loss be PROVEN, not<br/>just asserted?}
+
+        Filter2 -->|No — e.g. cannot prove<br/>a profit was MORE<br/>LIKELY THAN NOT and<br/>HOW MUCH| Denied2[Speculative portion<br/>of the claim DENIED]
+        Filter2 -->|Yes, provable| Filter3{FILTER 3: REMOTENESS<br/>— was this loss<br/>REASONABLY FORESEEABLE<br/>at the time the<br/>CONTRACT WAS MADE?}
+
+        Filter3 -->|No — e.g. delay causing<br/>lost revenue is<br/>foreseeable, but delay<br/>causing BANKRUPTCY<br/>usually is NOT| TooRemote[TOO REMOTE —<br/>not recoverable]
+        Filter3 -->|Yes, foreseeable| Recoverable[FULLY RECOVERABLE]
+
+        TooRemote --> Fix[FIX: disclose UNUSUAL<br/>risks to the other party<br/>BEFORE contracting —<br/>this makes them<br/>FORESEEABLE]
+
+        style Loss fill:#1e293b,color:#fff
+        style Filter1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Filter2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Filter3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Recoverable fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style TooRemote fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Fix fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Treating these as three SEQUENTIAL filters (rather than three unrelated rules) shows that a damages claim has to survive ALL three independently — passing one filter says nothing about whether the next one will let the claim through. Filter 3's remoteness test deserves the most attention because it contains the chapter's most counterintuitive and exam-relevant distinction: a delay causing lost REVENUE is the kind of garden-variety consequence any reasonable party would foresee, but that SAME delay causing the other party's complete BANKRUPTCY is typically too remote — not because bankruptcy is impossible, but because it's not the kind of consequence parties would ordinarily anticipate when making the deal. The Fix box at the bottom turns this filter into actionable drafting advice: foreseeability is measured AT THE TIME OF CONTRACTING, which means a party with an unusually severe exposure (e.g., "if you're late, I lose a once-in-a-decade business opportunity worth millions") needs to actually SAY SO before signing — silence about unusual risk isn't neutral, it's what gets that risk excluded from recovery later as too remote.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card consequential" id="d3">
+    <h2>3. Consequential Damages — The Pricing Problem</h2>
+    <p>This diagram walks through the chapter's own $5 marine seal example arithmetically, because the economic logic behind consequential damages exclusions only really lands once you see the actual numbers driving the decision.</p>
+
+    <div class="mermaid">
+      graph TD
+        Seal[Marine seal costs<br/>$5 to manufacture] --> Risk{What if the seal<br/>FAILS?}
+
+        Risk --> Consequence[Boat owner faces:<br/>$500,000 in REPAIRS<br/>+ $1,000,000 in<br/>LOST BUSINESS during<br/>repair downtime]
+
+        Consequence --> WhoBearsRisk{WHO should bear<br/>this catastrophic<br/>downside risk?}
+
+        WhoBearsRisk --> Option1[OPTION A: Manufacturer<br/>bears the risk —<br/>seal must now cost<br/>roughly $100,000<br/>to account for<br/>potential liability]
+        WhoBearsRisk --> Option2[OPTION B: Buyer accepts<br/>the risk via a<br/>CONSEQUENTIAL DAMAGES<br/>EXCLUSION — seal<br/>stays at $5]
+
+        Option1 --> BadResult[ECONOMICALLY WORSE:<br/>massively inflated cost<br/>for EVERY seal sold,<br/>even the ones that<br/>never fail]
+        Option2 --> GoodResult[ECONOMICALLY BETTER:<br/>buyer pays $5, but<br/>monitors/maintains<br/>the seal carefully<br/>themselves]
+
+        GoodResult --> Limits{Are these exclusion<br/>clauses ALWAYS<br/>enforced as written?}
+        Limits --> L1[NO — courts interpret<br/>exclusion clauses<br/>NARROWLY]
+        Limits --> L2[NO — AMBIGUITY construed<br/>AGAINST the drafter<br/>— contra proferentem]
+
+        style Seal fill:#1e293b,color:#fff
+        style WhoBearsRisk fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style BadResult fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style GoodResult fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Limits fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Running the actual dollar figures rather than discussing the concept abstractly is what makes this economic argument land — a $5 component absorbing the FULL risk of a $1.5 million consequence would have to be priced at roughly $100,000 to make that bet rational for the manufacturer, and that inflated price would apply to EVERY seal sold, including the overwhelming majority that never fail at all. The diagram's structure shows WHY consequential damages exclusions are a genuinely efficient market solution rather than just a one-sided manufacturer protection: it's cheaper, in aggregate, for buyers to pay $5 and accept the (small, monitored) risk than for everyone to pay $100,000 to fully insure against a rare catastrophic failure. The Limits branch at the bottom is the necessary caveat — these clauses are powerful but not absolute, and the chapter specifically flags that ambiguous or overly broad consequential-damages language gets read narrowly and against whoever drafted it, which is exactly why the chapter insists these clauses should be drafted by a lawyer rather than copied casually from a template.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card penalty" id="d4">
+    <h2>4. Liquidated Damages vs Penalty</h2>
+    <p>This diagram applies the same methodology-based test introduced in Chapter 11 to the breach-of-contract context, then adds the chapter's specific guidance on documentation and the bonus-clause myth.</p>
+
+    <div class="mermaid">
+      graph TD
+        Clause[Contract specifies a $<br/>amount for breach<br/>— e.g. $1,000/day delay] --> Test{Was the amount a<br/>GENUINE PRE-ESTIMATE<br/>of loss, calculated<br/>BEFORE any breach<br/>occurred?}
+
+        Test -->|Yes| LD[LIQUIDATED DAMAGES<br/>— enforceable]
+        Test -->|No — set artificially<br/>HIGH purely to COERCE<br/>performance| Penalty[PENALTY — courts have<br/>DISCRETION to refuse<br/>to enforce]
+
+        LD --> Practice{Best practice for<br/>BOTH parties}
+        Practice --> P1[PERFORM and KEEP A<br/>RECORD of the<br/>calculation/rationale<br/>BEFORE signing]
+
+        Penalty --> Discretion{Will courts ALWAYS<br/>strike down a<br/>penalty clause?}
+        Discretion --> Sparingly[NO — equitable<br/>discretion to relieve<br/>a party from a penalty<br/>is exercised SPARINGLY,<br/>not automatically]
+
+        LD --> Myth{MYTH: must a bonus<br/>clause for EARLY<br/>performance also<br/>be included?}
+        Myth --> NoMyth[NO SUCH REQUIREMENT —<br/>liquidated damages clause<br/>is valid WITHOUT a<br/>matching bonus clause]
+
+        style Clause fill:#1e293b,color:#fff
+        style Test fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style LD fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Penalty fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Sparingly fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style NoMyth fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The core test diamond mirrors exactly what appears in Chapter 11's version of this same concept, which is worth noticing as a pattern — this isn't really TWO different rules living in two different chapters, it's ONE rule (methodology of calculation, not the size of the number, determines enforceability) that happens to come up in both the contract-formation context and the breach-remedies context. The "Sparingly" branch adds nuance this chapter's version emphasizes that Chapter 11's didn't dwell on: even a clause a court SUSPECTS might be more punitive than compensatory doesn't get automatically struck — courts treat the discretion to relieve a party from a penalty as an equitable remedy to be used cautiously, not a routine override. The myth branch reinforces the same standalone fact from Chapter 11 (no bonus-clause symmetry requirement exists), included here because it's exactly the kind of "intuitive but legally false" assumption that shows up as a trap answer choice on exam questions.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card fundamental" id="d5">
+    <h2>5. Fundamental Breach vs Simple Breach — The High-Stakes Fork</h2>
+    <p>Classifying a breach correctly isn't academic — getting it WRONG and terminating based on a misjudged "fundamental" breach can flip the innocent party into being the one who's actually in breach. This diagram traces that risk precisely.</p>
+
+    <div class="mermaid">
+      graph TD
+        Breach[A breach of contract<br/>has occurred] --> Classify{Is this a<br/>FUNDAMENTAL breach —<br/>goes to the ROOT of the<br/>contract, deprives the<br/>innocent party of ALL or<br/>SUBSTANTIALLY ALL benefit?}
+
+        Classify -->|YES — e.g. failure<br/>to pay money owed| FundOptions{Innocent party<br/>has TWO OPTIONS}
+        FundOptions --> O1[Continue performing<br/>+ sue for damages]
+        FundOptions --> O2[TERMINATE the<br/>contract + sue<br/>for damages]
+
+        Classify -->|NO — simple breach| SimpleOption[ONLY remedy: sue for<br/>damages — CANNOT<br/>treat contract as<br/>ended, CANNOT stop<br/>performing]
+
+        SimpleOption --> Danger{What if the innocent<br/>party WRONGLY treats<br/>this simple breach<br/>as fundamental and<br/>TERMINATES anyway?}
+        Danger --> Reversal[ROLE REVERSAL: the<br/>WRONGLY-terminating<br/>party has now ITSELF<br/>committed a<br/>FUNDAMENTAL BREACH<br/>— and becomes LIABLE<br/>for damages]
+
+        Reversal --> Lesson[LESSON: this<br/>classification call<br/>is WHO COURTS<br/>ultimately decide —<br/>NEVER terminate<br/>without careful<br/>deliberation and<br/>legal advice]
+
+        style Breach fill:#1e293b,color:#fff
+        style Classify fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style SimpleOption fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Danger fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Reversal fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Lesson fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "Danger" branch is the entire reason this classification matters so much — it's not a neutral labeling exercise, it's a high-stakes bet, because guessing wrong doesn't just mean "the termination doesn't work," it actively FLIPS legal fault onto the party who was originally the innocent one. This is precisely why the chapter frames unilateral termination as "a very serious step that may have potentially disastrous consequences" — a party convinced they're righteously ending a contract over what they perceive as a major breach can, if a court later disagrees with that characterization, end up as the DEFENDANT in the resulting lawsuit instead of the plaintiff. The "Lesson" box at the bottom reinforces a practical takeaway worth internalizing: because COURTS, not the parties themselves, ultimately decide whether a breach was fundamental, no party should ever treat their own internal judgment call on this question as final or safe without first getting legal advice.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card repudiation" id="d6">
+    <h2>6. Repudiation and Anticipatory Breach — Timing on a Line</h2>
+    <p>These two concepts are easy to conflate because they overlap, but they're triggered by DIFFERENT timing relative to the actual breach. This diagram places both on a single timeline to show exactly where each one lives.</p>
+
+    <div class="mermaid">
+      graph LR
+        Before[BEFORE the time<br/>for performance<br/>arrives] --> Announce{Party communicates<br/>intent NOT to<br/>perform}
+
+        Announce --> Anticipatory[ANTICIPATORY BREACH<br/>— e.g. owner says<br/>NOW: 'I will not pay<br/>on the due date<br/>at month-end']
+
+        Anticipatory --> CheckSeverity{Is the threatened<br/>breach FUNDAMENTAL<br/>or SIMPLE in nature?}
+        CheckSeverity -->|FUNDAMENTAL| AlsoRepud[This ALSO qualifies<br/>as REPUDIATION]
+        CheckSeverity -->|Simple| NotRepud[Anticipatory breach<br/>only — NOT<br/>repudiation]
+
+        AnyTime[AT ANY TIME —<br/>before OR at the<br/>moment performance<br/>is due] --> Conduct{Party's WORDS or<br/>CONDUCT show they<br/>do NOT intend to<br/>perform AT ALL}
+
+        Conduct --> Repudiation[REPUDIATION —<br/>without justification,<br/>this automatically<br/>CONSTITUTES a<br/>fundamental breach]
+
+        style Before fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style AnyTime fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Anticipatory fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style AlsoRepud fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Repudiation fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style NotRepud fill:#fde68a,stroke:#ca8a04
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two starting boxes ("Before" vs "AnyTime") show the actual relationship between these concepts: anticipatory breach is specifically about timing — it can ONLY happen BEFORE the performance deadline, by definition, since it's about announcing a future breach in advance. Repudiation is broader and can happen at any point, including right at the moment performance was due. The CheckSeverity diamond captures the overlap precisely: an anticipatory breach automatically becomes repudiation too, but ONLY if the threatened future breach would itself be fundamental in nature — an anticipated SIMPLE breach (say, an owner indicating they might be a day late on a minor administrative item) is still an anticipatory breach in the technical sense, but doesn't rise to repudiation, which carries the more serious automatic fundamental-breach classification and the corresponding termination rights that come with it.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card termination" id="d7">
+    <h2>7. The Termination Decision Tree</h2>
+    <p>This diagram consolidates everything from diagrams 5 and 6 into a single workflow you can run on a fact pattern asking "can this party terminate right now?"</p>
+
+    <div class="mermaid">
+      graph TD
+        Start([Can the innocent party<br/>TERMINATE right now?]) --> Q1{Does the CONTRACT<br/>contain TERMINATION<br/>PROVISIONS?}
+
+        Q1 -->|Yes| Q2{Has the terminating<br/>party STRICTLY<br/>COMPLIED with notice<br/>requirements and<br/>limitation periods<br/>in those provisions?}
+        Q2 -->|No| Wrongful1[TERMINATION IS<br/>WRONGFUL — terminating<br/>party now in BREACH]
+        Q2 -->|Yes| Proceed1[Termination<br/>VALID per the<br/>contract's own terms]
+
+        Q1 -->|No specific<br/>termination clause| Q3{Is the breach<br/>FUNDAMENTAL?<br/>— diagram 5}
+        Q3 -->|No, simple breach<br/>only| NoTerm[CANNOT terminate —<br/>only remedy is<br/>damages]
+        Q3 -->|Yes| Proceed2[May TERMINATE —<br/>but court will later<br/>REVIEW whether this<br/>classification<br/>was correct]
+
+        Q1 -->|Convenience clause<br/>exists| Convenience[TERMINATION FOR<br/>CONVENIENCE — no<br/>cause needed, but<br/>often requires paying<br/>the OTHER party a<br/>termination sum<br/>or lost profit]
+
+        style Start fill:#1e293b,color:#fff
+        style Q1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Q2 fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style Wrongful1 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Q3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NoTerm fill:#e0f2fe,stroke:#0284c7
+        style Convenience fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This tree exists specifically to show that "can I terminate" has DIFFERENT analytical paths depending on what kind of contract you're dealing with — a contract WITH explicit termination provisions (like CCDC 2's GC 7.1/7.2) is analyzed completely differently from one without any such clause. The Q2 diamond carries the heaviest visual weight because it captures a trap distinct from the fundamental/simple distinction in diagrams 5 and 6: even where a party has an ABSOLUTELY VALID underlying reason to terminate, getting the PROCEDURAL mechanics wrong — missing a required notice period, skipping a cure window the breaching party was entitled to — can independently make the termination wrongful, regardless of how clearly the other side was actually in breach. The convenience-clause branch is structurally different from the other two paths since it doesn't depend on breach analysis at all — it's a pure contractual right to walk away, usually priced through a required payment to the other side, existing specifically so parties can exit cleanly without the messy, risky business of arguing about fault.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card measure" id="d8">
+    <h2>8. Cost of Performance vs Diminution in Value</h2>
+    <p>When work is deficient, courts choose between two very different damages measures. This diagram, built on the chapter's own thin-slab warehouse example, shows the actual factors that decide which measure applies.</p>
+
+    <div class="mermaid">
+      graph TD
+        Deficiency[Slab built at 3.5 inches<br/>instead of specified<br/>5 inches] --> ThreeOptions{Three possible<br/>measures considered}
+
+        ThreeOptions --> M1[Contractor's COST<br/>SAVINGS from<br/>under-building<br/>— $100,000]
+        ThreeOptions --> M2[COST OF REPAIR<br/>— $200,000]
+        ThreeOptions --> M3[DIMINUTION IN<br/>property VALUE<br/>— $50,000]
+
+        M1 --> Eliminated[ELIMINATED IMMEDIATELY<br/>— irrelevant under a<br/>FIXED-PRICE contract;<br/>owner's damages don't<br/>depend on what the<br/>contractor saved]
+
+        M2 --> RealQuestion{Choosing between<br/>M2 and M3: REAL<br/>question is INTENTION<br/>and REASONABLENESS}
+        M3 --> RealQuestion
+
+        RealQuestion --> F1{Have repairs<br/>ALREADY been<br/>carried out?}
+        F1 -->|Yes| LeanM2a[Leans toward<br/>COST OF<br/>PERFORMANCE — M2]
+
+        RealQuestion --> F2{Has the owner<br/>shown GENUINE<br/>INTENTION to repair?}
+        F2 -->|Yes| LeanM2b[Leans toward<br/>COST OF<br/>PERFORMANCE — M2]
+        F2 -->|No genuine intent<br/>— appears to just<br/>want a WINDFALL| LeanM3[Court awards<br/>DIMINUTION IN<br/>VALUE — M3 —<br/>to AVOID a windfall]
+
+        RealQuestion --> F3{Would repair be<br/>REASONABLE given<br/>the cost involved?}
+        F3 -->|No — repair cost<br/>grossly disproportionate| LeanM3
+
+        style Deficiency fill:#1e293b,color:#fff
+        style ThreeOptions fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Eliminated fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style RealQuestion fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style LeanM3 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style LeanM2a fill:#e0f2fe,stroke:#0284c7
+        style LeanM2b fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "Eliminated" box is placed first and given strong visual weight because it disposes of the most intuitive-feeling option immediately — it might seem natural to ask "well how much did the contractor save by cutting corners," but the chapter is explicit this measure is IRRELEVANT, since damages exist to compensate the OWNER's actual loss, not to confiscate the contractor's ill-gotten savings (those are two completely different legal questions). The real decision then happens in the three F-boxes, all converging on a SINGLE underlying concern explicit in the Strata Corp NW 1714 reasoning: courts are fundamentally worried about handing the injured party a WINDFALL — an amount of money roughly equal to the repair cost when there's no genuine intention to actually spend it on repairs would leave the owner with cash in hand AND a still-functional (if technically deficient) building, which the court explicitly calls "not a reasonable result." This is why genuine intention and reasonableness of repair, not just the existence of a quantifiable deficiency, end up driving which of the two remaining measures (M2 or M3) actually gets applied.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card causes" id="d9">
+    <h2>9. Chapter Question 1 — The Waiver-Within-a-Breach Trap</h2>
+    <p>This diagram walks through the chapter's own geoscientist/late-payment chapter question step by step, because it layers a WAIVER analysis (from Chapter 6) directly on top of a fundamental breach analysis — showing how the two interact in sequence.</p>
+
+    <div class="mermaid">
+      graph TD
+        Missed[Client misses a<br/>SIGNIFICANT progress<br/>payment] --> FB[This is a<br/>FUNDAMENTAL BREACH<br/>— failure to pay is<br/>almost always treated<br/>this way]
+
+        FB --> Ultimatum[Geoscientist sends an<br/>ULTIMATUM: 'pay by NOON<br/>tomorrow or we treat<br/>this as fundamental<br/>breach, contract ENDED']
+
+        Ultimatum --> ClientResponse[Client responds:<br/>'we'll pay at 4:00pm<br/>instead — acceptable?']
+
+        ClientResponse --> GeoResponse{Geoscientist says<br/>'unacceptable' —<br/>but does NOT<br/>terminate yet}
+
+        GeoResponse --> WaiverMoment[WAIVER MOMENT:<br/>by NOT immediately<br/>terminating at noon<br/>when the original<br/>deadline passed,<br/>geoscientist effectively<br/>WAIVED the ORIGINAL<br/>noon deadline]
+
+        WaiverMoment --> NewQuestion{NEW QUESTION:<br/>was missing the<br/>SECOND deadline<br/>— now effectively<br/>4:00pm — itself a<br/>FUNDAMENTAL breach?}
+
+        NewQuestion --> Analysis[ANALYSIS: payment was<br/>made AT 4:00pm exactly<br/>as the client proposed —<br/>a 4-HOUR delay from<br/>noon, absent unusual<br/>circumstances like a<br/>narrow travel window,<br/>is likely NOT itself<br/>a fundamental breach]
+
+        Analysis --> Result[RESULT: Geoscientist<br/>likely LOSES — wrongly<br/>treated a non-fundamental<br/>delay as grounds to<br/>abandon the site]
+
+        style Missed fill:#1e293b,color:#fff
+        style FB fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style WaiverMoment fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style NewQuestion fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Result fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This diagram exists because the chapter's own answer to this question requires combining TWO separate frameworks from TWO different chapters, and seeing them interact sequentially is far clearer than reading the prose explanation alone. The first fundamental breach (missing the original payment) is real and would have justified termination — but the geoscientist's own conduct (entertaining the client's 4:00pm counter-proposal rather than terminating immediately) functions exactly like the waiver mechanism from Chapter 6's diagram 8: by not enforcing the original deadline right when it passed, the geoscientist effectively reset the operative deadline to 4:00pm. Once that reset happens, the ENTIRE analysis restarts at the "NewQuestion" diamond — the relevant question is no longer about the original missed payment, it's whether THIS new, self-created 4:00pm deadline was itself breached in a fundamental way, and a payment that arrives exactly when promised obviously isn't a breach at all. This demonstrates a genuinely important practical lesson buried in this question: responding to a missed deadline with anything other than immediate, decisive termination can inadvertently waive your own enforcement rights, even while you're actively in the middle of trying to assert them.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

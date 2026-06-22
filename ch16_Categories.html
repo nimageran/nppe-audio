@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.16 Reference Card: Insurance</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 16 — Insurance</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">2 Categories of Insurance Policies<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Liability Insurance</span><span class="item-note">— protects insured against claims by THIRD PARTIES (e.g. professional E&O claims). A third-party claim IS a prerequisite for recovery.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Property Insurance</span><span class="item-note">— protects insured against loss/damage to property (e.g. fire, theft). A third-party claim is NOT required to recover.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">4 Basic Elements of Every Insurance Policy<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Deductible (Self-Retention)</span><span class="item-note">— portion of claim/defence costs the insured must pay</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Coverage Period</span><span class="item-note">— the length of time coverage is in place</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Coverage Description</span><span class="item-note">— either (a) listed PERILS that trigger the duty to indemnify/defend, or (b) an ALL-RISKS policy covering everything except specific exclusions</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Limitation Period</span><span class="item-note">— contractual/statutory time limit to give notice of claim or commence legal action</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">4 Reasons for Loss of Coverage<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Expiry of a limitation period</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Lack of insurable interest</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Failure to provide timely notice</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Material non-disclosure</span></div></div>
+      </div>
+      <div class="warn"><strong>Insured's obligations after a claim:</strong> Cooperate with the insurer in defending the claim and do NOT admit fault. Failure to give timely notice or cooperate can relieve the insurer of its obligations entirely.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">3 Common Specialty Coverage Types<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Boiler and Machinery Insurance</span><span class="item-note">— damage to pressure vessels, mechanical/electrical equipment, and resulting losses</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Marine and Transportation Insurance</span><span class="item-note">— covers shipments of goods</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Delayed Opening / Business Interruption Insurance</span><span class="item-note">— protects against loss of rents or profits</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">Duty to Defend vs Duty to Indemnify<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Duty to Defend</span><span class="item-note">— obligation to pay legal fees/defence costs (incl. expert witnesses). Insurer appoints counsel, subject to deductible. May exist even if duty to indemnify is never triggered — especially valuable for unlikely-to-succeed claims.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Duty to Indemnify</span><span class="item-note">— obligation to pay the claim itself</span></div></div>
+      </div>
+      <div class="warn"><strong>Out-of-scope conduct:</strong> If a claim alleges ONLY conduct outside policy scope (e.g. fraud), insurer likely has NEITHER duty. Skilled plaintiff's lawyers frame claims so at least part falls within typical coverage.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#0F6E56">6</div>
+      <div class="sec-title">Subrogation — Definition + 2 Ways to Eliminate It<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="info"><strong>Subrogation:</strong> After paying a claim, the insurer can "step into the shoes" of the insured to recover the loss from a responsible third party (in the insured's name).</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Waiver of Subrogation Clause</span><span class="item-note">— contract clause that eliminates the insurer's subrogation rights. Watch for unauthorized waivers — they can let the insurer escape its indemnity obligation.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Naming All Project Participants as Insureds Under the Same Policy</span><span class="item-note">— basic rule: subrogation CANNOT be obtained against an insured (Commonwealth v. Imperial Oil). Common for project-specific policies.</span></div></div>
+      </div>
+      <div class="info"><strong>Insurable interest in construction:</strong> A subcontractor has an insurable interest in the ENTIRE PROJECT, not just its own scope (Commonwealth v. Imperial Oil).</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#854F0B">7</div>
+      <div class="sec-title">Claims-Made vs Occurrence Policies<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Claims-Made Policy</span><span class="item-note">— covers claims MADE during the policy period, regardless of when the work was done. Almost all professional liability / E&O policies are this type.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Occurrence Policy</span><span class="item-note">— covers events that OCCURRED during the policy period, regardless of when the claim is made</span></div></div>
+      </div>
+      <div class="warn"><strong>Gap risks:</strong> Corporate changes (renaming, new employer), retirement without maintaining coverage, and switching insurers without disclosing potential claims can ALL leave a professional uninsured for past work. Hybrid policies (occurrence-based trigger + claims-made reporting window) add further complexity — report any potential claim immediately.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#993C1D">8</div>
+      <div class="sec-title">5 Situations Where Insurer & Insured Interests May Diverge<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Denial of coverage by the insurer</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Claims alleging conduct outside scope of coverage (e.g. fraud)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Insured wants to defend despite a reasonable settlement offer</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Claims exceeding policy limits</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Settlement offers requiring compromise of a counterclaim</span><span class="item-note">— e.g. professional's claim for unpaid fees</span></div></div>
+      </div>
+      <div class="info"><strong>Separate counsel:</strong> When no conflict exists, one lawyer represents both insurer and insured. Where a conflict/potential conflict exists, the insured should retain SEPARATE counsel — sometimes paid by the insurer. If a claim exceeds policy limits and a settlement offer falls within limits, the insured should put the insurer on notice — refusal to settle could support a bad-faith claim.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#3B6D11">9</div>
+      <div class="sec-title">4 Key Policy Types in Construction/Consulting<span class="sec-count">comparison table</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Policy</th><th>Type</th><th>Covers</th><th>Key Exclusions</th></tr></thead>
+        <tbody>
+          <tr><td>Builders' Risk</td><td>Property — "all risks"</td><td>Projects under construction; ceases once complete & occupied</td><td>Faulty design, materials, and workmanship (with exception for RESULTANT DAMAGE to other property)</td></tr>
+          <tr><td>CGL (Commercial General Liability)</td><td>Liability</td><td>Third-party claims for bodily injury / property damage</td><td>Damage to the insured's OWN work or product</td></tr>
+          <tr><td>Wrap-Up Policy</td><td>Liability</td><td>ALL direct participants (consultants, owner, contractor, subs) — arranged by owner/GC; runs through construction + warranty period</td><td>—</td></tr>
+          <tr><td>Errors & Omissions (E&O)</td><td>Liability — claims-made</td><td>Third-party claims for loss caused by professional's NEGLIGENCE</td><td>Late delivery of drawings · work done as contractor/design-build partner · mould · water ingress</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#534AB7">10</div>
+      <div class="sec-title">Builders' Risk: The "Resultant Damage" Exception — 2 Key Tests<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">State-of-the-Art Test (CN Rail v. Royal Sun Alliance)</span><span class="item-note">— a design is NOT "faulty" merely because it fails to meet a standard of perfection for ALL foreseeable risks. Must comply with the then-current state of the art. Higher bar than negligence/industry standard, but does not require perfection.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">"Resultant Damage" — Courts Reject Splitting One Project Into Separate Components</span><span class="item-note">— (B.C. Rail v. American Home; Sayers) Damage to the faulty component itself is excluded; courts have generally treated surrounding/integrated work as part of the SAME faulty performance, NOT as separate "other property" — narrowing the resultant-damage exception</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggle('s11')">
+      <div class="sec-num" style="background:#3B6D11">11</div>
+      <div class="sec-title">2 "Judgment Proofing" Methods + Why Risky<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Transferring assets (e.g. to a spouse)</span><span class="item-note">— transferring assets AFTER a lawsuit is imminent = fraudulent transfer; courts will reverse it</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Incorporating and keeping minimal assets in the company</span><span class="item-note">— ineffective because: (a) courts CAN pierce the corporate veil for improper purposes (though difficult), and (b) an individual can still be personally sued for negligence even while acting as an employee/officer</span></div></div>
+      </div>
+      <div class="info">Asset planning done BEFORE notice of a potential claim is legal. After notice of a potential claim, transferring assets to avoid creditors is prohibited.</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

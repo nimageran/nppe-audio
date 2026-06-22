@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.14 Reference Card: Dispute Resolution and Expert Evidence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 14 — Dispute Resolution and Expert Evidence</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">4 Methods of Dispute Resolution — Voluntary vs Involuntary<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Negotiation</span><span class="item-note">— purely voluntary; forcing it is futile</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Litigation</span><span class="item-note">— voluntary for plaintiff (no recovery if not pursued), INVOLUNTARY for defendant (judgment awarded if non-participant)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Arbitration</span><span class="item-note">— voluntary at contract negotiation stage (parties choose whether to include the clause); but once a MANDATORY arbitration clause exists, it can be forced on the other party. Always available even without a clause/contract.</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Mediation</span><span class="item-note">— can be agreed before or after dispute arises, but is NON-BINDING; a party can always refuse to settle</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#185FA5">2</div>
+      <div class="sec-title">6 Types of Pleadings<span class="sec-count">6 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Statement of Claim</span><span class="item-note">— commences litigation; identifies parties, allegations, and relief sought (in BC: "Notice of Civil Claim"; in US: "Complaint")</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Statement of Defence</span><span class="item-note">— sets out legal basis for denying the claim; failure to deny an allegation may = admission (typically 14–21 days to file)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Reply</span><span class="item-note">— plaintiff's response to statement of defence; rarely used</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Demand for Particulars</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Interrogatories</span><span class="item-note">— written questions answered under oath</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Motions</span></div></div>
+      </div>
+      <div class="info"><strong>Key point:</strong> Pleadings are the ONLY documents the judge sees prior to trial commencement. A statement of claim that fails to set out a cause of action (e.g. alleges a duty but not a breach) will be struck — though this rarely happens.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">Counterclaim vs Third-Party Claim<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Counterclaim</span><span class="item-note">— a claim the DEFENDANT asserts against the PLAINTIFF. No rule limiting it to the size of the original claim — can be much larger.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Third-Party Claim</span><span class="item-note">— pleading by the DEFENDANT against a THIRD PARTY not originally part of the suit</span></div></div>
+      </div>
+      <div class="warn"><strong>Why include third parties in the main action:</strong> If heard separately, the third party is NOT bound by findings of fact from the main action — risk of inconsistent results, different witnesses/evidence, and the defendant may have to fight a second battle later.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#0F6E56">4</div>
+      <div class="sec-title">4 Discovery Procedures<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Examination for Discovery</span><span class="item-note">— oral cross-examination of a representative of the opposing party before trial; transcript can be used to IMPEACH a witness whose trial testimony differs</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Interrogatories</span><span class="item-note">— written questions answered under oath; sent shortly after pleadings to identify knowledgeable witnesses</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Inspection of Property</span><span class="item-note">— on-site inspection, often with litigant, lawyer, and expert witness</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Discovery of Documents</span><span class="item-note">— ongoing identification of all RELEVANT documents (test: does it tend to prove or disprove a fact in dispute), except privileged documents</span></div></div>
+      </div>
+      <div class="warn"><strong>Email warning:</strong> Emails are a "gold mine" in litigation because written informally. Treat every email as you would a signed and sealed report.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#854F0B">5</div>
+      <div class="sec-title">4 Questions to Answer Before Arbitration<span class="sec-count">4 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Who will act as arbitrator?</span><span class="item-note">— the MOST important question; chosen for reputation, expertise, and impartiality</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">What are the arbitrator's terms of reference / specific questions to answer?</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">What rules of procedure will the arbitrator follow?</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">What law will apply?</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#854F0B">6</div>
+      <div class="sec-title">3 Types of Arbitration<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Mandatory Binding Arbitration</span><span class="item-note">— contract contains a mandatory arbitration clause; most popular method</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Voluntary Binding Arbitration</span><span class="item-note">— parties agree to arbitrate only AFTER the dispute has arisen</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Non-Binding Arbitration</span><span class="item-note">— arbitrator gives only an advisory opinion</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#993C1D">7</div>
+      <div class="sec-title">Arbitration — Advantages vs Disadvantages<span class="sec-count">comparison</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead><tr><th>Advantages</th><th>Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Privacy — hearings are not public (good for trade secrets)</td><td>Still considerable cost (organization fees + arbitrator fees + facility rental)</td></tr>
+          <tr><td>Arbitrator expertise — can choose someone with subject-matter knowledge, speeding up technical evidence</td><td>Arbitrator scheduling — practising professionals may cause delays/multiple sessions</td></tr>
+          <tr><td>Relaxed rules of evidence (hearsay/opinion may be admitted)</td><td>Third-party problem — cannot force a non-signatory third party to participate; risk of separate hearing & inconsistent findings</td></tr>
+          <tr><td>Generally faster and cheaper than litigation for cooperative parties</td><td>If a party prolongs the dispute, can become MORE expensive than litigation</td></tr>
+        </tbody>
+      </table>
+      <div class="info"><strong>Fundamental fairness required regardless:</strong> adequate notice of hearing, opportunity to be heard, opportunity to test other parties' evidence, and an impartial decision maker.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#3B6D11">8</div>
+      <div class="sec-title">3 Advantages of Negotiated Settlements<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Parties maintain control over the procedure</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Much less costly than litigation and arbitration</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Eliminates uncertainty once settlement reached</span></div></div>
+      </div>
+      <div class="info"><strong>Privilege:</strong> If negotiation fails, everything discussed is privileged — cannot be used as evidence later. Same applies to mediation.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#3B6D11">9</div>
+      <div class="sec-title">3 Requirements for Mediation to Succeed<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Genuine desire by both parties to reach settlement</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Each party represented by someone with authority to conclude a settlement</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Mediator has the trust of all parties</span></div></div>
+      </div>
+      <div class="info">Unlike a judge/arbitrator, a mediator MAY meet privately with each party and must keep confidences shared in those meetings.</div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')">
+      <div class="sec-num" style="background:#534AB7">10</div>
+      <div class="sec-title">Other Dispute Resolution Methods<span class="sec-count">5 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Mini-Trial</span><span class="item-note">— condensed trial before a judge alone; non-binding ruling gives a realistic preview of likely outcome</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Settlement Conference</span><span class="item-note">— informal meeting (or formal mediation) with a judge to help parties settle before litigation; some jurisdictions mandate this first</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Binding Mediation (Med-Arb)</span><span class="item-note">— mediator becomes arbitrator if no settlement reached; risk: arbitrator may be influenced by confidential info disclosed during mediation phase</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Court-Appointed Masters and Referees</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Summary Jury Trials</span></div></div>
+      </div>
+      <div class="list-title">5 Factors to Evaluate Before Using Any ADR Method</div>
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Cost</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Time and delay</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Whether an independent party is involved, and how chosen / their qualifications</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Whether the process is binding</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Right (or lack of right) to appeal</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggle('s11')">
+      <div class="sec-num" style="background:#185FA5">11</div>
+      <div class="sec-title">Expert Witness — Key Rules<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Must remain neutral and unbiased</span><span class="item-note">— role is to assist the COURT, not to act as a "hired gun" for the party that retained them</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Cannot charge a contingent fee</span><span class="item-note">— a fee contingent on outcome creates a conflict between client interest and public interest; disclosure of such a fee likely renders the opinion INADMISSIBLE (real case: 3-month suspension for an engineer who did this)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Must present the most credible theory while acknowledging other plausible explanations</span><span class="item-note">— presenting an unlikely theory as equally acceptable is unprofessional conduct</span></div></div>
+      </div>
+      <div class="info">Opinion evidence is normally inadmissible — expert opinion is a recognized EXCEPTION for technical matters beyond a layperson's knowledge. Standard-of-care testimony is judged on <strong>balance of probabilities</strong> (more likely than not), not "beyond a reasonable doubt."</div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 1: Visual Mechanics — The Canadian Legal System</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.division { border-top-color: #0ea5e9; }
+    .framework-card.courts { border-top-color: #dc2626; }
+    .framework-card.appeal { border-top-color: #9333ea; }
+    .framework-card.charter { border-top-color: #ca8a04; }
+    .framework-card.lawtype { border-top-color: #16a34a; }
+    .framework-card.quebec { border-top-color: #f59e0b; }
+    .framework-card.tortcontract { border-top-color: #64748b; }
+    .framework-card.nafta { border-top-color: #15803d; }
+    .framework-card.citation { border-top-color: #9333ea; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 1: VISUAL MECHANICS — THE CANADIAN LEGAL SYSTEM</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Division of Powers — Which Government Makes This Law</a>
+    <a href="#d2">2. The Federal-Provincial Conflict Rule</a>
+    <a href="#d3">3. The Canadian Court Hierarchy</a>
+    <a href="#d4">4. The Supreme Court Leave-to-Appeal Gate</a>
+    <a href="#d5">5. The Charter — Government Acts Only</a>
+    <a href="#d6">6. Statute Law vs Common Law — Two Sources Feeding One System</a>
+    <a href="#d7">7. Common Law vs Civil Law — Why Quebec Is Different</a>
+    <a href="#d8">8. Contract vs Tort — The Voluntary/Involuntary Split</a>
+    <a href="#d9">9. NAFTA TN Visa — Right to Work vs Right to Practise</a>
+    <a href="#d10">10. Decoding a Case Citation</a>
+  </div>
+
+
+  <div class="framework-card division" id="d1">
+    <h2>1. The Division of Powers — Which Government Makes This Law</h2>
+    <p>Before analyzing ANY legal question in Canada, you first need to know which government even has the authority to legislate on it. This diagram sorts subject matter into federal versus provincial jurisdiction, since most of this textbook's content lives on one specific side.</p>
+
+    <div class="mermaid">
+      graph TD
+        Subject{What is the<br/>SUBJECT MATTER<br/>of the law?} --> Federal{Matters of<br/>NATIONAL importance}
+        Subject --> Provincial{PRIVATE LAW —<br/>relationships between<br/>individuals/businesses}
+
+        Federal --> F1[National defence]
+        Federal --> F2[Postal service,<br/>broadcasting]
+        Federal --> F3[Criminal law]
+        Federal --> F4[Patent law]
+
+        Provincial --> P1[Property rights]
+        Provincial --> P2[Contracts]
+        Provincial --> P3[Negligence law]
+        Provincial --> P4[Construction liens]
+        Provincial --> P5[MOST architecture/<br/>engineering/geoscience<br/>practice regulation]
+
+        Provincial --> Exceptions{TWO EXCEPTIONS<br/>where private-law-like<br/>matters are STILL<br/>federal}
+        Exceptions --> E1[LABOUR LAW for<br/>federally regulated<br/>INDUSTRIES — airlines,<br/>railroads, post office]
+        Exceptions --> E2[COMPETITION LAW —<br/>bid rigging, unfair trade<br/>practices, under the<br/>federal Competition Act]
+
+        style Subject fill:#1e293b,color:#fff
+        style Federal fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Provincial fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style Exceptions fill:#fef3c7,stroke:#d97706,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The Provincial box is given the heaviest visual weight deliberately, because the chapter is explicit that this textbook's content overwhelmingly falls on the PROVINCIAL side — contracts, negligence, liens, and professional regulation are all provincial matters, which is exactly why provinces can and do have genuinely different rules from each other on these topics (Alberta lien legislation differs from Ontario's, as the chapter notes directly). The Exceptions box deserves special attention precisely because it's counterintuitive — labour law and competition law FEEL like classic private-law subjects that should be provincial, but they're explicitly carved out as federal in specific circumstances (labour law only for federally regulated industries like airlines/railroads; competition law as a blanket federal matter regardless of industry). Recognizing these two exceptions prevents the common mistake of assuming "private law topic" always means "automatically provincial."</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card division" id="d1b">
+    <h2>1b. Territories — Same Practical Effect, Different Legal Source</h2>
+    <p>Territories aren't provinces, but they function almost identically in practice. This small diagram isolates the one structural difference that actually matters.</p>
+
+    <div class="mermaid">
+      graph LR
+        Province[PROVINCE — powers<br/>derive DIRECTLY from<br/>the CONSTITUTION] --> SamePractical{Practical effect<br/>on professionals?}
+        Territory[TERRITORY — Yukon, NWT,<br/>Nunavut — powers ASSIGNED<br/>BY the federal government,<br/>NOT constitutionally<br/>guaranteed] --> SamePractical
+
+        SamePractical --> Result[ESSENTIALLY THE SAME —<br/>territorial legislatures<br/>create legislation VERY<br/>SIMILAR to provinces —<br/>e.g. Yukon has its own<br/>Association of Professional<br/>Engineers, just like a<br/>province would]
+
+        style Province fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Territory fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Result fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This is a short but high-value distinction because it's exactly the kind of technical-sounding-but-practically-irrelevant fact an exam question might test to see if you understand the underlying STRUCTURE rather than just the practical outcome. The key legal difference (provinces draw power directly from the Constitution; territories receive delegated power FROM the federal government, meaning Parliament could theoretically alter that delegation) almost never matters in day-to-day professional practice, which is exactly why the chapter instructs readers to treat references to provinces throughout the rest of the textbook as automatically including territories.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card division" id="d2">
+    <h2>2. The Federal-Provincial Conflict Rule</h2>
+    <p>What happens when a federal statute and a provincial statute genuinely collide? This diagram isolates the single tie-breaking rule, while being careful to distinguish a real DIRECT conflict from laws that simply touch the same general topic.</p>
+
+    <div class="mermaid">
+      graph TD
+        TwoLaws[A federal statute AND<br/>a provincial statute<br/>both seem to apply<br/>to the same situation] --> DirectConflict{Is there a DIRECT<br/>OPERATIONAL conflict<br/>— genuinely IMPOSSIBLE<br/>to comply with BOTH<br/>at once?}
+
+        DirectConflict -->|No — they can<br/>coexist, even if both<br/>touch similar subject<br/>matter| BothApply[BOTH statutes remain<br/>in force and apply —<br/>NO override needed]
+
+        DirectConflict -->|Yes, genuine<br/>operational conflict| FederalWins[FEDERAL LAW PREVAILS<br/>— constitutional rule]
+
+        style TwoLaws fill:#1e293b,color:#fff
+        style DirectConflict fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style FederalWins fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style BothApply fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diamond's wording is doing careful work here — it specifically says DIRECT OPERATIONAL conflict, not just "both laws relate to the same general topic," because the far more common scenario is federal and provincial statutes peacefully coexisting on related subject matter without ever actually clashing. This same rule reappears in Chapter 23's environmental law content (federal CEPA/Fisheries Act vs provincial environmental statutes) and would apply identically anywhere else in the textbook where federal and provincial jurisdiction genuinely overlap — it's a single constitutional principle, not something unique to any one subject area, which is why it's worth anchoring here in Chapter 1 as a standalone, reusable rule.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card courts" id="d3">
+    <h2>3. The Canadian Court Hierarchy</h2>
+    <p>This diagram converts the chapter's own Figure 1-1 into a simplified, generic structure (since the exact court names vary by province) so the LEVELS and their relationships are what gets retained, not 13 different provincial court names.</p>
+
+    <div class="mermaid">
+      graph TD
+        SCC[SUPREME COURT<br/>OF CANADA<br/>— ultimate appeal level,<br/>requires LEAVE — see<br/>diagram 4] --> ProvCA[PROVINCIAL/TERRITORIAL<br/>COURTS OF APPEAL<br/>— e.g. BC Court of Appeal,<br/>Ontario Court of Appeal]
+        SCC --> FedCA[FEDERAL COURT<br/>OF APPEAL]
+
+        ProvCA --> Superior[SUPERIOR/TRIAL-LEVEL<br/>COURT — names vary:<br/>'Supreme Court' BC,<br/>'Court of Queen's Bench'<br/>Alberta, 'Superior Court'<br/>Ontario/Quebec — SAME<br/>powers regardless of name]
+        FedCA --> FedTrial[FEDERAL COURT<br/>— trial division —<br/>patents, shipping<br/>disputes]
+
+        Superior --> Inherent[INHERENT JURISDICTION:<br/>can administer justice<br/>EVEN WITHOUT a specific<br/>statutory basis — this is<br/>the SAME power English<br/>Court of Queen's Bench<br/>historically held]
+
+        Superior --> Lower[PROVINCIAL COURT —<br/>lower level — includes<br/>criminal court, SMALL<br/>CLAIMS, sometimes<br/>family court]
+
+        Lower --> Limited[LIMITED jurisdiction —<br/>BOTH dollar value AND<br/>subject matter — e.g.<br/>BC small claims: $25,000<br/>cap, NO jurisdiction<br/>over construction liens]
+
+        Independent{Do provincial court<br/>systems have authority<br/>OVER each other?} --> NoAuthority[NO — each province's<br/>courts are INDEPENDENT.<br/>No province's court has<br/>jurisdiction over another<br/>province's courts, and<br/>Federal Courts have NO<br/>jurisdiction over<br/>provincial courts]
+
+        style SCC fill:#1e293b,color:#fff
+        style Superior fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Inherent fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Lower fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Limited fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NoAuthority fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Rather than memorizing 13 separate names for the same functional court level (an approach that wastes effort on trivia), this diagram groups courts by FUNCTIONAL LEVEL and explicitly notes that the powers stay constant even though the names vary wildly by province — that's the actual transferable knowledge worth retaining. The Inherent Jurisdiction box is worth special attention because it's a genuinely distinctive power: it means the superior trial courts can resolve a dispute and grant a remedy even where NO statute explicitly authorizes that specific remedy, tracing back to historical English common law court powers rather than being a modern statutory creation. The Independent diamond at the bottom captures a structural fact with real practical consequences for cross-provincial work: a judgment or court process from one province's court system has NO automatic authority in another province's court system — provincial court systems run in parallel, not in a single connected national hierarchy below the Supreme Court of Canada.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card appeal" id="d4">
+    <h2>4. The Supreme Court Leave-to-Appeal Gate</h2>
+    <p>Losing at a provincial Court of Appeal doesn't automatically mean you can appeal to the Supreme Court of Canada. This diagram shows the extra gate that has to be cleared first, and why most professional-practice cases never make it through.</p>
+
+    <div class="mermaid">
+      graph TD
+        Lost[Litigant loses at the<br/>provincial COURT<br/>OF APPEAL level] --> AutoRight{Is there an<br/>AUTOMATIC RIGHT<br/>to appeal further, to<br/>the Supreme Court<br/>of Canada?}
+
+        AutoRight -->|NO — civil cases<br/>do NOT have this<br/>automatic right| LeaveNeeded[Must first apply for<br/>and OBTAIN 'LEAVE'<br/>— PERMISSION —<br/>from the SCC itself]
+
+        LeaveNeeded --> Standard{What MUST be<br/>demonstrated to<br/>obtain leave?}
+        Standard --> NationalImportance[At least ONE issue in<br/>the case is of NATIONAL<br/>IMPORTANCE]
+
+        NationalImportance --> Reality{Practical reality for<br/>architecture/engineering/<br/>geoscience cases?}
+        Reality --> Rare[RARELY granted leave —<br/>most professional-practice<br/>disputes, however<br/>significant to the parties<br/>involved, don't rise to<br/>NATIONAL significance]
+
+        style Lost fill:#1e293b,color:#fff
+        style AutoRight fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style LeaveNeeded fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Rare fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The AutoRight diamond corrects an intuitive assumption that the court hierarchy works like a simple staircase anyone can climb if they lose and choose to appeal — civil litigants specifically do NOT have that automatic next step, they have to clear an entirely separate PERMISSION gate first, with its own distinct legal standard (national importance) that has nothing to do with whether the lower court simply got the law wrong in their specific case. This explains a practical pattern worth remembering: the Supreme Court of Canada cases cited throughout this very textbook (Ron Engineering, Tercon, M.J.B., etc.) represent a tiny, unusually significant slice of all the construction/professional-practice litigation that actually occurs in Canada — the vast majority of disputes in this field are conclusively resolved at the provincial Court of Appeal level, simply because they never clear this leave-to-appeal bar.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card charter" id="d5">
+    <h2>5. The Charter — Government Acts Only</h2>
+    <p>The Charter is often assumed to be a general "bill of rights" protecting people from each other. This diagram corrects that assumption by isolating exactly WHO the Charter actually binds, and what fills the gap it leaves open.</p>
+
+    <div class="mermaid">
+      graph TD
+        Charter[Charter of Rights<br/>and Freedoms] --> Applies{WHO does the<br/>Charter actually<br/>bind?}
+
+        Applies --> Government[GOVERNMENT and its<br/>BRANCHES ONLY —<br/>federal, provincial,<br/>municipal action]
+        Applies --> NotPrivate[Does NOT apply to<br/>interactions BETWEEN<br/>PRIVATE PARTIES —<br/>e.g. one company<br/>discriminating against<br/>another, or an employer<br/>against an employee]
+
+        NotPrivate --> Gap{So what protects<br/>people from<br/>DISCRIMINATION by<br/>PRIVATE parties?}
+        Gap --> HumanRights[PROVINCIAL HUMAN<br/>RIGHTS STATUTES —<br/>separate from the Charter<br/>entirely, fill this gap]
+
+        Government --> Examples[e.g. RIGHT TO COUNSEL,<br/>right against<br/>self-incrimination —<br/>criminal context.<br/>Freedom of religion,<br/>speech, association.<br/>PROHIBITED GROUNDS:<br/>race, ethnic origin,<br/>religion, disability, age]
+
+        style Charter fill:#1e293b,color:#fff
+        style Applies fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Government fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style NotPrivate fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style HumanRights fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The NotPrivate branch is the single most important fact in this diagram because it's the one most commonly misunderstood — people frequently invoke "the Charter" when complaining about discrimination by an employer, a landlord, or another private business, but the Charter has zero application to those purely private relationships; it only restrains GOVERNMENT action. The Gap diamond completes the picture by showing this isn't actually a hole in Canadian rights protection overall, it's a deliberate DIVISION OF LABOUR between two different legal instruments — the Charter constrains the state, while separate provincial human rights legislation independently constrains private parties, meaning a person facing discrimination from a private employer needs to look to their PROVINCIAL human rights statute, not the Charter, for a remedy. This distinction connects directly back to Chapter 21's employment law content, where the same point resurfaces in the specific context of workplace discrimination claims.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card lawtype" id="d6">
+    <h2>6. Statute Law vs Common Law — Two Sources Feeding One System</h2>
+    <p>Canadian law (outside Quebec) is built from two genuinely different sources operating together, not one unified code. This diagram shows how they interact, including the subtle truth about judges "interpreting" versus "creating" law.</p>
+
+    <div class="mermaid">
+      graph TD
+        System[Canadian Common Law<br/>Legal System] --> Statute[STATUTE LAW —<br/>enacted by FEDERAL/<br/>PROVINCIAL legislatures]
+        System --> CommonLaw[COMMON LAW —<br/>created by JUDGES,<br/>based on centuries of<br/>precedent tracing<br/>to England]
+
+        Statute --> MustComply{Must be<br/>COMPATIBLE with<br/>the Constitution}
+        MustComply --> ThenInterpret[Statutes are then<br/>INTERPRETED by judges]
+
+        ThenInterpret --> Theory{IN THEORY: do<br/>judges 'make' law<br/>when interpreting<br/>a statute?}
+        Theory -->|In theory, NO —<br/>judges only INTERPRET| TheoryBox[Officially: courts apply<br/>and explain existing<br/>statutory law]
+        Theory -->|IN PRACTICE| PracticeBox[Interpretation UNAVOIDABLY<br/>creates NEW rights and<br/>remedies — the line between<br/>'interpreting' and 'creating'<br/>law blurs in practice]
+
+        Statute --> Subordinate{Can OTHER bodies<br/>also create<br/>'law'-like rules?}
+        Subordinate --> SubLeg[SUBORDINATE LEGISLATION<br/>— e.g. a provincial<br/>engineering association's<br/>BYLAWS, or a municipality's<br/>rules — created under<br/>authority GRANTED by<br/>a statute]
+
+        CommonLaw --> NoStatute[Applies WHERE NO<br/>STATUTE governs a topic<br/>at all — e.g. much of basic<br/>contract formation law<br/>has NO governing statute]
+
+        style System fill:#1e293b,color:#fff
+        style Theory fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style PracticeBox fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style SubLeg fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style NoStatute fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The Theory diamond captures a subtle but genuinely important point the chapter makes explicitly — there's an official, constitutional FICTION that judges only "interpret" statutes rather than "create" law, but the chapter is candid that this distinction breaks down in practice, since the very act of resolving an ambiguous statutory phrase unavoidably generates new rights and remedies that didn't exist in a clearly articulated form before that interpretation. The Subordinate branch deserves attention because it's directly relevant to professional practice: a provincial engineering association's BYLAWS aren't created by the legislature itself, but they still carry real legal weight (breach can create liability) because the ENABLING STATUTE granted the association the authority to create them — this is exactly the same mechanism by which municipalities create binding bylaws. The NoStatute box at the bottom is worth connecting directly to Chapter 6's content: basic contract formation concepts like consideration have NO governing statute defining them at all in most common law provinces — the entire framework comes from centuries of accumulated case law, which is precisely why Chapter 6 had to rely so heavily on named cases (Smith v. Dawson, etc.) rather than citing a Consideration Act.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card quebec" id="d7">
+    <h2>7. Common Law vs Civil Law — Why Quebec Is Different</h2>
+    <p>Quebec isn't just "a province with different statutes" — it runs on a structurally different LEGAL SYSTEM for private law. This diagram isolates exactly what's different and what stays the same.</p>
+
+    <div class="mermaid">
+      graph TD
+        Canada{Canadian legal<br/>systems} --> RestOfCanada[REST OF CANADA —<br/>COMMON LAW —<br/>traces to England]
+        Canada --> Quebec[QUEBEC — CIVIL LAW —<br/>traces to the Napoleonic<br/>Code of France]
+
+        RestOfCanada --> CLStructure[Private law areas often<br/>have NO comprehensive<br/>statute — built from<br/>centuries of CASE LAW]
+
+        Quebec --> CivilStructure[Private law is<br/>COMPREHENSIVELY<br/>CODIFIED — the CIVIL<br/>CODE OF QUEBEC governs<br/>contracts, torts, employment,<br/>business organizations,<br/>insurance, bonds, etc.]
+
+        RestOfCanada --> StillSame{Does FEDERAL<br/>jurisdiction work<br/>differently in Quebec?}
+        Quebec --> StillSame
+        StillSame --> SameFederal[NO — common law STILL<br/>applies in Quebec for<br/>FEDERAL matters —<br/>criminal law, patent law,<br/>other federal jurisdiction<br/>areas — ONLY private<br/>relationships differ]
+
+        SameFederal --> Practical{Does this create<br/>HUGE practical<br/>differences for<br/>professionals?}
+        Practical --> NotHuge[GENERALLY NOT —<br/>basic principles of<br/>negligence, contract<br/>formation, insurance,<br/>etc. are FAIRLY<br/>CONSISTENT — similar<br/>to variation that exists<br/>between any two<br/>COMMON LAW<br/>provinces anyway]
+
+        style Canada fill:#1e293b,color:#fff
+        style RestOfCanada fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Quebec fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style SameFederal fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style NotHuge fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The StillSame diamond is placed deliberately in the middle of the diagram to prevent an overcorrection — once someone learns Quebec uses a "totally different legal system," it's easy to wrongly assume EVERYTHING is different there, but the chapter is explicit that federal-jurisdiction matters (criminal law, patent law, and other federal areas) are governed by the SAME common law throughout Quebec as everywhere else in Canada. The difference is narrower and more specific than "Quebec's whole legal system": it's specifically PRIVATE LAW relationships — contracts, torts, employment, business organizations, insurance, bonds — that fall under the Civil Code instead of common law. The final Practical diamond delivers the chapter's own reassuring, practically-oriented conclusion: despite the structural difference in HOW the law is organized (comprehensive code versus accumulated case law), the actual SUBSTANCE of basic legal principles ends up fairly similar in practice — different enough to need separate diligence when practising in Quebec specifically, but not so different that everything learned elsewhere in this textbook becomes useless there.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card tortcontract" id="d8">
+    <h2>8. Contract vs Tort — The Voluntary/Involuntary Split</h2>
+    <p>This diagram captures the chapter's foundational distinction between the textbook's two dominant subject areas, since nearly everything else in the course builds on understanding this split correctly.</p>
+
+    <div class="mermaid">
+      graph TD
+        Obligation{Source of a<br/>legal obligation} --> Contract[CONTRACT —<br/>VOLUNTARY]
+        Obligation --> Tort[TORT —<br/>INVOLUNTARY]
+
+        Contract --> ContractDetail[Party CHOSE to sign —<br/>had a genuine CHOICE<br/>whether to enter the<br/>relationship at all]
+
+        Tort --> TortDetail[Obligation IMPOSED<br/>BY LAW — no choice<br/>involved, applies<br/>REGARDLESS of any<br/>agreement]
+
+        Tort --> NoRelationship{Does a negligence<br/>claim REQUIRE a prior<br/>relationship between<br/>plaintiff and defendant?}
+        NoRelationship -->|NO contractual<br/>relationship is<br/>necessary| Independent[Tort obligations exist<br/>INDEPENDENTLY —<br/>but OFTEN arise<br/>BETWEEN parties who<br/>ALSO have a contract]
+
+        Independent --> Both{Can a party sue<br/>under BOTH theories<br/>SIMULTANEOUSLY?}
+        Both -->|YES| BothClaims[Breach of CONTRACT<br/>AND negligence claims<br/>can proceed TOGETHER —<br/>the contract may provide<br/>remedies IN ADDITION TO<br/>those available under<br/>negligence law]
+
+        style Obligation fill:#1e293b,color:#fff
+        style Contract fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Tort fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style BothClaims fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The Contract/Tort split at the top is framed specifically around VOLUNTARINESS because that's the conceptual key the chapter uses to distinguish them — a contract obligation exists because a party chose to take it on, while a tort obligation (most commonly negligence) is simply imposed by the legal system regardless of anyone's consent or agreement, the moment certain conditions (duty, breach, causation, damage — fully detailed in Chapter 12) are satisfied. The Both diamond at the bottom previews a theme that becomes critically important in Chapter 13's "concurrent liability" material: these two legal theories aren't mutually exclusive alternatives where a plaintiff has to pick one — a single set of facts involving parties who ALSO happen to have a contract can support BOTH a breach of contract claim AND a separate negligence claim running in parallel, with the contract potentially adding remedies beyond what negligence law alone would provide.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card nafta" id="d9">
+    <h2>9. NAFTA TN Visa — Right to Work vs Right to Practise</h2>
+    <p>Obtaining a US work visa and obtaining the right to actually practise a profession in the US are two ENTIRELY separate hurdles. This diagram shows both gates, since clearing one says nothing about the other.</p>
+
+    <div class="mermaid">
+      graph TD
+        Canadian[Canadian engineer<br/>wants to work as a<br/>consulting engineer<br/>in OREGON, USA] --> Gate1{GATE 1: Right<br/>to WORK in<br/>the US}
+
+        Gate1 --> TN[TN VISA — under NAFTA —<br/>relatively INEXPENSIVE,<br/>allows legal work<br/>REGARDLESS of state<br/>statutes]
+
+        TN --> Gate2{GATE 2: Right to<br/>PRACTISE the<br/>PROFESSION}
+
+        Gate2 --> StateLicence[Separate LICENCE from<br/>the applicable STATE<br/>Board of Registration —<br/>e.g. Oregon's board —<br/>COMPLETELY INDEPENDENT<br/>of the TN visa process]
+
+        TN --> BothNeeded{Are BOTH gates<br/>required together?}
+        StateLicence --> BothNeeded
+        BothNeeded --> Result[YES — clearing Gate 1<br/>alone does NOT permit<br/>practising the profession.<br/>Need TN visa AND state<br/>licence TOGETHER]
+
+        style Canadian fill:#1e293b,color:#fff
+        style Gate1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Gate2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Result fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two-gate structure exists specifically to correct a natural but incorrect assumption — that getting legal authorization to WORK in a country (the TN visa) is the only hurdle to actually DOING professional work there. The chapter is explicit that these are "completely different" requirements running on separate tracks: the TN visa is an IMMIGRATION mechanism governed by NAFTA at the federal/international level, while professional licensing is a STATE-level regulatory requirement that has nothing to do with immigration status at all — a Canadian engineer with a perfectly valid TN visa who skips the Oregon licensing process would still be illegally practising engineering in Oregon, entirely independent of their immigration status being fully in order. This same two-gate pattern is worth recognizing as a transferable concept: it mirrors the chapter's own point elsewhere about distinguishing the right to USE a title from the right to PRACTISE a profession (Chapter 2's two-pillars structure) — immigration status and professional licensing are simply two more independent gates layered on top of that same general principle when working across an international border.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card citation" id="d10">
+    <h2>10. Decoding a Case Citation</h2>
+    <p>Case citations look like dense, intimidating strings of characters, but they follow a precise, decodable format. This diagram breaks down both citation styles the chapter introduces, piece by piece.</p>
+
+    <div class="mermaid">
+      graph LR
+        Style1["OLDER STYLE:<br/>Backman v. Canada,<br/>[2001] 1 S.C.R. 367"] --> P1[Case NAME]
+        Style1 --> P2[YEAR of decision]
+        Style1 --> P3[VOLUME number]
+        Style1 --> P4[REPORTING SERIES —<br/>e.g. S.C.R. = Supreme<br/>Court Reports]
+        Style1 --> P5[PAGE number where<br/>the case starts]
+
+        Style2["NEWER STYLE:<br/>Martel Building Ltd. v.<br/>Canada, 2000 SCC 60"] --> Q1[Case NAME]
+        Style2 --> Q2[YEAR of decision]
+        Style2 --> Q3[COURT LEVEL —<br/>e.g. SCC = Supreme<br/>Court of Canada]
+        Style2 --> Q4[DECISION NUMBER —<br/>the Nth decision issued<br/>by that court that year]
+
+        style Style1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Style2 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Breaking down both citation formats side by side, piece by piece, turns what looks like an arbitrary string of numbers and abbreviations into a fully decodable reference system — useful not just for this exam but for actually being able to look up any case cited throughout this entire textbook series. The key practical difference between the two styles is what they tell you to search for: the older style points you to a PHYSICAL location (a specific volume and page number of a specific printed reporting series like the S.C.R.), while the newer "neutral citation" style points you to a court's own sequential decision numbering for that year, which works regardless of which printed or online reporting service you're using to actually access the text. Recognizing this format also has a practical safety benefit the chapter stresses separately: a non-lawyer reading a single cited case (as you'll encounter dozens of times throughout this textbook series) should never assume that one case's outcome perfectly predicts how an unrelated, even superficially similar, fact pattern will be decided — case law is fact-dependent, and these citations exist precisely so a lawyer can pull the FULL case and check exactly which specific facts drove that particular result.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

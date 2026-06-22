@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NPPE Chapter 21: Visualizing Employment Law</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; text-transform: uppercase; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.implied { border-top-color: #64748b; }
+    .framework-card.covenants { border-top-color: #f59e0b; }
+    .framework-card.termination { border-top-color: #ef4444; }
+    .framework-card.classification { border-top-color: #8b5cf6; }
+    .framework-card.remedies { border-top-color: #10b981; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    ul { margin-top: 0; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <h1>CHAPTER 21: DEEP EMPLOYMENT LAW VISUALIZATION</h1>
+
+  <div class="framework-card implied">
+    <h2>1. The Implied Contractual Duties</h2>
+    <p>Even if an employment contract is entirely oral, the common law automatically writes several strict obligations into the relationship[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Contract[The Employment Contract] --> D1[1. Duty of Fidelity]
+        Contract --> D2[2. Duty of Competence]
+        Contract --> D3[3. Duty of Notice / Severance]
+        
+        D1 -.->|Loyalty & Confidentiality| Rule1(Cannot use trade secrets to compete)
+        D2 -.->|Professional Standard| Rule2(Employer is vicariously liable for mistakes)
+        D3 -.->|Employer Obligation| Rule3(Must provide reasonable notice to terminate)
+        
+        style Contract fill:#1e293b,color:#fff,stroke:none
+        style D1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style D2 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style D3 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Rule1 fill:#f8fafc,stroke:#94a3b8
+        style Rule2 fill:#f8fafc,stroke:#94a3b8
+        style Rule3 fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This maps the three primary implied duties of employment[cite: 1].</p>
+      <ul>
+        <li><strong>Duty of Fidelity (Loyalty):</strong> Employees are agents of the employer and must remain loyal[cite: 1]. This means they cannot use or disclose confidential information (trade secrets) to compete against a former employer, even after they quit[cite: 1]. However, an employee <em>is</em> completely free to use their general skills and experience at a new job[cite: 1].</li>
+        <li><strong>Duty of Competence:</strong> Employees are expected to be competent[cite: 1]. If an employee makes a mistake causing a loss to a third party, the employer is usually sued under the doctrine of <em>vicarious liability</em>[cite: 1]. Employers rarely sue their own employees for mistakes because insurance usually covers both, and doing so would destroy their ability to hire future workers[cite: 1].</li>
+        <li><strong>Notice of Termination:</strong> Unless the employee commits a fundamental breach (just cause), the employer has an implied duty to provide adequate notice or severance pay[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card covenants">
+    <h2>2. The Restrictive Covenant Gauntlet</h2>
+    <p>Employers often try to prevent departing employees from competing against them by using "Restrictive Covenants" (non-compete clauses)[cite: 1]. Courts hate these clauses because they restrict a person's ability to earn a living[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        Start[Restrictive Covenant Signed] --> T1{Is the wording completely clear?}
+        T1 -->|No / Ambiguous| Fail1[UNENFORCEABLE]
+        T1 -->|Yes| T2{Is the Time limit reasonable?}
+        T2 -->|No e.g., 20 years| Fail2[UNENFORCEABLE]
+        T2 -->|Yes| T3{Is the Geographic scope reasonable?}
+        T3 -->|No e.g., whole province| Fail3[UNENFORCEABLE]
+        T3 -->|Yes| Pass(((ENFORCEABLE)))
+        
+        style Start fill:#1e293b,color:#fff
+        style T1 fill:#fef3c7,stroke:#d97706
+        style T2 fill:#fef3c7,stroke:#d97706
+        style T3 fill:#fef3c7,stroke:#d97706
+        style Fail1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Fail2 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Fail3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Pass fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This illustrates the legal tests a non-compete clause must pass to survive court scrutiny[cite: 1].</p>
+      <ul>
+        <li><strong>The Clarity Test:</strong> In the <em>Shafron</em> case, a lawyer drafted a geographic limit of "Metropolitan City of Vancouver"[cite: 1]. Because this term has no legal definition, the Supreme Court ruled it ambiguous, instantly destroying the entire covenant[cite: 1].</li>
+        <li><strong>The Reasonableness Test:</strong> In the <em>Terra Engineering</em> case, an engineer was banned from working within 150 km of multiple cities, effectively banning him from practicing in BC[cite: 1]. The court struck it down as overly broad and contrary to the public interest (restraint of trade)[cite: 1].</li>
+        <li><strong>The Rule:</strong> There is no "bright line" formula, but restricting a senior engineer for 1 year in a single city is far more likely to be enforced than restricting them for 15 years across a whole province[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card termination">
+    <h2>3. The Termination & Dismissal Matrix</h2>
+    <p>Unlike unionized environments, there is no such thing as a "layoff" in common law[cite: 1]. An employer terminating an employee must navigate a complex web of legal causes and notice periods[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Term[Termination Event] --> Cause[1. Just Cause]
+        Term --> NoCause[2. Without Cause]
+        Term --> Constructive[3. Constructive Dismissal]
+        
+        Cause -.->|Theft, Dishonesty, Gross Incompetence| F1(Fired Immediately: ZERO Notice Required)
+        NoCause -.->|Restructuring, Lack of Work| F2(Reasonable Notice OR Severance Required)
+        Constructive -.->|Employer slashes salary by 10%| F3(Employee quits & sues for Severance)
+        
+        F2 --> Mitigate{Duty to Mitigate}
+        F3 --> Mitigate
+        
+        Mitigate -->|Finds equivalent job in 1 week| Cut[Employer liability capped at 1 week]
+        
+        style Term fill:#1e293b,color:#fff
+        style Cause fill:#fee2e2,stroke:#dc2626
+        style NoCause fill:#e0f2fe,stroke:#0284c7
+        style Constructive fill:#fef3c7,stroke:#d97706
+        style F1 fill:#f8fafc,stroke:#94a3b8
+        style F2 fill:#f8fafc,stroke:#94a3b8
+        style F3 fill:#f8fafc,stroke:#94a3b8
+        style Mitigate fill:#10b981,color:#fff
+        style Cut fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This outlines the three ways an employment relationship ruptures[cite: 1].</p>
+      <ul>
+        <li><strong>Just Cause:</strong> A fundamental breach by the employee (e.g., sleeping on the job and lying about it, as in <em>Richardson v. Davis Wire Industries</em>)[cite: 1]. Minor absences only become "Just Cause" if repeated warnings are given[cite: 1]. Lack of business is <strong>never</strong> just cause[cite: 1].</li>
+        <li><strong>Without Cause & Reasonable Notice:</strong> An employer can fire anyone without cause, but they must provide reasonable notice (or pay in lieu)[cite: 1]. Notice length depends on age, tenure, and position[cite: 1]. (e.g., A 20-year executive gets 18-24 months; a 1-year junior gets 1 month)[cite: 1].</li>
+        <li><strong>Constructive Dismissal:</strong> If an employer unilaterally changes a contract to the employee's detriment (e.g., cutting salary), the employee can refuse, consider themselves fired, and sue for full severance[cite: 1].</li>
+        <li><strong>Duty to Mitigate:</strong> A fired employee cannot just sit on the couch[cite: 1]. They must actively look for suitable alternate work[cite: 1]. If they find a new job quickly, the original employer's liability drops drastically[cite: 1].</li>
+        <li><strong>Bad Faith (The Wallace Case):</strong> Employers must act fairly during dismissal[cite: 1]. If they terminate someone with bad faith or cause extreme personal damage, courts will punish the employer by increasing the required notice period[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card classification">
+    <h2>4. The Worker Classification Spectrum (The Control Test)</h2>
+    <p>Properly categorizing a worker dictates massive liabilities for taxes, insurance, holdbacks, and human rights[cite: 1]. You cannot just sign a paper calling someone an "Independent Contractor" and expect the government to believe you[cite: 1].</p>
+
+    <div class="mermaid">
+      graph LR
+        subgraph Employee
+          E1[One Client] 
+          E2[Tools Provided]
+          E3[Method Controlled]
+        end
+        
+        subgraph Independent Contractor
+          IC1[Multiple Clients]
+          IC2[Provides Own Tools]
+          IC3[Takes Financial Risk]
+        end
+        
+        E1 --- IC1
+        E2 --- IC2
+        E3 --- IC3
+        
+        style E1 fill:#e0f2fe,stroke:#0284c7
+        style E2 fill:#e0f2fe,stroke:#0284c7
+        style E3 fill:#e0f2fe,stroke:#0284c7
+        style IC1 fill:#f1f5f9,stroke:#64748b
+        style IC2 fill:#f1f5f9,stroke:#64748b
+        style IC3 fill:#f1f5f9,stroke:#64748b
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This shows the factors courts weigh to determine true employment status[cite: 1].</p>
+      <ul>
+        <li><strong>The Core Factors:</strong> The courts look at the level of control over means and methods, who provides the equipment, whether the worker hires their own helpers, the degree of financial risk, and the opportunity for profit[cite: 1].</li>
+        <li><strong>The Consequences:</strong> If classified as an employee, the employer must withhold taxes, pay vicarious liability for errors, and follow statutory notice periods[cite: 1]. If classified as an independent contractor, the worker can deduct expenses, but the owner must legally deduct builders' lien holdbacks from their pay[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="framework-card remedies">
+    <h2>5. The Triad of Employee Remedies</h2>
+    <p>When an employee is wrongfully terminated or abused, they have three distinct legal arenas to seek justice[cite: 1]. Each arena has completely different costs and rewards[cite: 1].</p>
+
+    <div class="mermaid">
+      graph TD
+        Wrong[Terminated Employee] --> R1[1. Common Law Courts]
+        Wrong --> R2[2. Employment Standards Branch]
+        Wrong --> R3[3. Human Rights Tribunal]
+        
+        R1 -.->|Expensive & High Damages| C1(No Reinstatement)
+        R2 -.->|Free to enforce, very low payout limits| C2(No Reinstatement)
+        R3 -.->|Must prove prohibited discrimination| C3(Can Order Physical Reinstatement)
+        
+        style Wrong fill:#1e293b,color:#fff
+        style R1 fill:#e0f2fe,stroke:#0284c7
+        style R2 fill:#e0f2fe,stroke:#0284c7
+        style R3 fill:#e0f2fe,stroke:#0284c7
+        style C1 fill:#f8fafc,stroke:#94a3b8
+        style C2 fill:#f8fafc,stroke:#94a3b8
+        style C3 fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This translates Table 21-1 into an actionable framework[cite: 1].</p>
+      <ul>
+        <li><strong>Common Law:</strong> Very expensive because you must hire a lawyer to sue, but it yields the highest financial damages (e.g., 6 months' pay)[cite: 1]. A judge cannot force the employer to give you your job back[cite: 1].</li>
+        <li><strong>Employment Standards Legislation:</strong> Every province has minimum standards (wage, hours, notice)[cite: 1]. It is free to enforce because the government pursues the employer, but the statutory payouts are tiny (e.g., 3 weeks' pay instead of 6 months)[cite: 1]. Note: Many provinces explicitly exclude professionals like engineers from these protections[cite: 1].</li>
+        <li><strong>Human Rights Legislation:</strong> Protects against prohibited discrimination (religion, race, disability, gender)[cite: 1]. Crucially, it does <em>not</em> protect against discrimination based on education or experience[cite: 1]. If a disability is involved, the employer must provide "reasonable accommodation" unless physical ability is a genuine job requirement[cite: 1]. The tribunal is cheap to access and has the extreme power to order the employer to reinstate the worker[cite: 1].</li>
+        <li><strong>Note on The Charter:</strong> The Charter of Rights and Freedoms only applies to government actions, not private companies[cite: 1]. Therefore, a private company having a mandatory retirement policy does not violate the Charter[cite: 1].</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

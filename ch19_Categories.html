@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPPE — Ch.19 Reference Card: Delay and Impact Claims</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f5f7;font-family:'Segoe UI',system-ui,sans-serif;color:#1a1d26;min-height:100vh;padding-bottom:60px}
+#header{background:#fff;border-bottom:1px solid #e2e6ed;padding:14px 32px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+#header-left{display:flex;align-items:center;gap:12px}
+#badge{background:#eff4ff;color:#2563eb;font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.05em}
+#hdr-title{font-size:14px;font-weight:600;color:#1a1d26}
+#hdr-sub{font-size:11px;color:#8b95aa;margin-top:2px}
+#search-wrap{position:relative}
+#search{border:1px solid #e2e6ed;border-radius:7px;padding:6px 12px 6px 32px;font-size:12px;font-family:inherit;color:#1a1d26;background:#f8f9fb;outline:none;width:220px;transition:border-color .15s}
+#search:focus{border-color:#2563eb;background:#fff}
+#search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:#8b95aa;pointer-events:none}
+#page{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:#fff;border:1px solid #e2e6ed;border-radius:12px;margin-bottom:16px;overflow:hidden}
+.section-header{padding:13px 20px;border-bottom:1px solid #e2e6ed;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.section-header:hover{background:#fafbfc}
+.sec-num{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:13px;font-weight:600;color:#1a1d26}
+.sec-count{font-size:11px;color:#8b95aa;margin-left:6px;font-weight:400}
+.sec-toggle{margin-left:auto;color:#8b95aa;font-size:12px;transition:transform .2s}
+.section.collapsed .sec-toggle{transform:rotate(-90deg)}
+.section-body{padding:16px 20px 20px}
+.section.collapsed .section-body{display:none}
+.list-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8b95aa;margin-bottom:10px;margin-top:18px}
+.list-title:first-child{margin-top:0}
+.items{display:flex;flex-direction:column;gap:5px}
+.item{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:7px;background:#f8f9fb;border:1px solid #e8eaef}
+.num{font-size:11px;font-weight:700;color:#8b95aa;min-width:18px;flex-shrink:0}
+.item-title{font-size:12.5px;font-weight:600;color:#1a1d26}
+.item-note{font-size:11.5px;color:#5a6070;margin-left:6px;font-weight:400}
+.warn{margin-top:10px;padding:8px 12px;background:#fff8ed;border:1px solid #f6c05a;border-radius:7px;font-size:11.5px;color:#7c4a00}
+.info{margin-top:10px;padding:8px 12px;background:#eff4ff;border:1px solid #bfcffa;border-radius:7px;font-size:11.5px;color:#1e3a8a}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.comp-table th{background:#f0f2f6;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b95aa;padding:8px 12px;text-align:left;border:1px solid #e2e6ed}
+.comp-table td{padding:9px 12px;border:1px solid #e2e6ed;color:#5a6070;vertical-align:top;line-height:1.45}
+.comp-table tr:nth-child(even) td{background:#fafbfc}
+.comp-table td:first-child{font-weight:600;color:#1a1d26;white-space:nowrap}
+#no-result{display:none;text-align:center;padding:60px 20px;color:#8b95aa;font-size:13px}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <span id="badge">NPPE PREP</span>
+    <div>
+      <div id="hdr-title">Chapter 19 — Delay and Impact Claims</div>
+      <div id="hdr-sub">Lists, types & categories only</div>
+    </div>
+  </div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search" type="text" placeholder="Search…">
+  </div>
+</div>
+
+<div id="page">
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <div class="sec-num" style="background:#534AB7">1</div>
+      <div class="sec-title">3 Core Definitions<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Delay</span><span class="item-note">— an event that causes extended time to complete all or part of a project</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Impact / Disruption</span><span class="item-note">— effect of an event that detrimentally affects a project but MAY OR MAY NOT extend completion time</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Acceleration</span><span class="item-note">— increase in labour/equipment that SHORTENS completion time or mitigates the effects of an impact/delay</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <div class="sec-num" style="background:#534AB7">2</div>
+      <div class="sec-title">2 Types of Project Schedules<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Bar Chart</span><span class="item-note">— each activity gets a start/end date. Simple, but does NOT show interrelationships/dependencies between activities.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Network Diagram (Critical Path Method / CPM)</span><span class="item-note">— links activities to show dependencies (e.g. excavation must finish before piles can be poured); identifies the most efficient sequence</span></div></div>
+      </div>
+      <div class="info"><strong>Float</strong> = time contingency in an activity (can be delayed without delaying final completion). <strong>Critical Path</strong> = the series of activities with ZERO float — any delay to these delays the whole project.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <div class="sec-num" style="background:#185FA5">3</div>
+      <div class="sec-title">3 Types of Delay<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Compensable Delay</span><span class="item-note">— one party is CONTRACTUALLY entitled to recover damages from the delaying party (e.g. CCDC 2 GC 6.5.1/6.5.2 for owner-caused delays)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Excusable Delay</span><span class="item-note">— not attributable to any party's fault; entitles a TIME EXTENSION; may or may not also be compensable (e.g. force majeure)</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Contractor-Caused Delay</span><span class="item-note">— caused by the contractor or those it's responsible for; almost ALWAYS non-excusable AND non-compensable</span></div></div>
+      </div>
+      <div class="warn"><strong>Critical path NOT required under CCDC 2:</strong> CCDC 2 does not distinguish between critical-path and non-critical-path delays for compensation purposes — compensation can apply even to a delay that doesn't push out the completion date (though entitlement to a TIME EXTENSION for non-critical-path delays is less clear, since extensions must be "reasonable").</div>
+      <div class="info"><strong>Notice requirement:</strong> CCDC 2 requires notice within 10 working days of a delay's commencement to claim a TIME EXTENSION. However, this notice bar does NOT remove the owner's separate obligation to REIMBURSE COSTS — entitlement to extension and to reimbursement are separate rights.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <div class="sec-num" style="background:#185FA5">4</div>
+      <div class="sec-title">Concurrent Delays — Key Principle<span class="sec-count">1 rule</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="info"><strong>Concurrent delays</strong> = two or more independent delays (compensable, excusable, and/or contractor-caused) occur simultaneously and affect the same activities. Apportioning responsibility becomes difficult/impossible. <strong>Result:</strong> absent a contrary clause, NEITHER party can recover damages from the other for the period of concurrency — courts are reluctant to award contractor compensation OR enforce owner liquidated damages during concurrency, because each party can argue lack of causation ("but for" my fault, the delay would have happened anyway due to the other party).</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <div class="sec-num" style="background:#0F6E56">5</div>
+      <div class="sec-title">No-Damages-for-Delay Clauses — 3 Rules of Interpretation<span class="sec-count">3 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Strict construction against the drafter</span><span class="item-note">— words exempting a party from liability for its OWN fault are construed strictly against that party</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Duty to facilitate</span><span class="item-note">— a party for whom work is being done has a duty to FACILITATE that work; the clause cannot become an obstruction to the other party's work</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">No party "at the mercy" of another</span><span class="item-note">— a contract won't be read to let the owner delay the contractor at will without recourse</span></div></div>
+      </div>
+      <div class="info">These clauses do NOT prevent a contractor from seeking a TIME EXTENSION — only damages. Reasonable/well-scoped clauses (e.g. CCDC 2's force majeure exclusion, GC 6.5.3) are generally ENFORCEABLE. Broader clauses attempting to exclude even INTENTIONAL owner-caused delays are the most likely to be struck down — courts require very clear language before depriving a contractor of damages for owner-caused delay.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <div class="sec-num" style="background:#854F0B">6</div>
+      <div class="sec-title">2 Types of Acceleration Claims<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Directed Acceleration</span><span class="item-note">— owner ACKNOWLEDGES a delay occurred and instructs the contractor to take steps to meet the original completion date. Easy to recognize.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Constructive Acceleration</span><span class="item-note">— owner does NOT acknowledge any delay, REFUSES a valid extension request, and insists on the original completion date — forcing the contractor to accelerate without admission. May entitle the contractor to compensation for acceleration costs.</span></div></div>
+      </div>
+      <div class="info">Acceleration is generally achieved via overtime/additional labour, which can REDUCE efficiency — so acceleration costs can sometimes exceed delay costs.</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <div class="sec-num" style="background:#993C1D">7</div>
+      <div class="sec-title">7 Heads of Damage for Delay Claims (Kelson case)<span class="sec-count">7 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Additional labour costs (supervisors and field labourers)</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Travel and related expenses</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Costs from lost productivity and loss of profit</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Additional site and head office overhead</span><span class="item-note">— extended overhead is one of the hardest to prove; head office overhead requires formulas</span></div></div>
+        <div class="item"><div class="num">5</div><div><span class="item-title">Costs of extending warranties and obtaining additional bonding</span></div></div>
+        <div class="item"><div class="num">6</div><div><span class="item-title">Loss of interest on holdback</span></div></div>
+        <div class="item"><div class="num">7</div><div><span class="item-title">Costs of paying subcontractors</span></div></div>
+      </div>
+      <div class="warn"><strong>Loss of profit on OTHER projects</strong> = consequential damages, usually too REMOTE to recover — unless proven not too speculative AND reasonably foreseeable by the owner at the time of breach.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <div class="sec-num" style="background:#993C1D">8</div>
+      <div class="sec-title">Documentation Required to Prove a Delay Claim<span class="sec-count">key items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Project schedules</span><span class="item-note">— bid schedule (ideally CPM), regularly updated → final "as-built" schedule. If missing, reconstruct from diaries, correspondence, and photographs.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Project records</span><span class="item-note">— transmittals (deliveries), labour records, correspondence, diaries, meeting minutes, photographs, phone records, invoices</span></div></div>
+        <div class="item"><div class="num">3</div><div><span class="item-title">Timely written notice to the other party</span><span class="item-note">— per contract requirements (e.g. CCDC 2 GC 6.5.4: 10 working days); failure to comply can BAR the claim</span></div></div>
+        <div class="item"><div class="num">4</div><div><span class="item-title">Productivity / job cost reports</span><span class="item-note">— needed for loss-of-productivity claims; must show productivity on UNAFFECTED portions for comparison; must be recorded at frequent, regular intervals to be useful</span></div></div>
+      </div>
+      <div class="info"><strong>Claims consultants:</strong> Can help analyze and present delay/impact/acceleration claims, but expertise must MATCH the technical subject matter (e.g. earth-moving expert for earth-moving claims) to be admissible/credible. Get legal advice BEFORE a consultant prepares a report — to preserve privilege and direct the work appropriately.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <div class="sec-num" style="background:#3B6D11">9</div>
+      <div class="sec-title">2 Approaches to Valuing Delay Claims<span class="sec-count">2 items</span></div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="items">
+        <div class="item"><div class="num">1</div><div><span class="item-title">Total Cost Approach</span><span class="item-note">— difference between EXPECTED cost (original estimate) and ACTUAL cost. Claimant argues the gap is due to owner breaches. HIGH RISK: owner need only show SOME of the cost increase came from other causes (contractor error, excusable non-compensable delays) to have the WHOLE claim rejected. Rarely succeeds in Canada — only where individual causes truly cannot be isolated and the claimant bears no responsibility for the increase.</span></div></div>
+        <div class="item"><div class="num">2</div><div><span class="item-title">Measured Mile Approach</span><span class="item-note">— uses an UNAFFECTED portion of the contract as a productivity "yardstick" to compare against the affected portion. Claimant must still prove the breaches and link them to the productivity loss. Can also be used DEFENSIVELY by an owner (showing poor productivity even on unaffected work). Has been used successfully in Canadian courts.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-result">No results found.</div>
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('collapsed');
+}
+const search=document.getElementById('search');
+search.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  let any=false;
+  document.querySelectorAll('.section').forEach(s=>{
+    const match=!q||s.innerText.toLowerCase().includes(q);
+    s.style.display=match?'':'none';
+    if(match){any=true;if(q)s.classList.remove('collapsed');}
+  });
+  document.getElementById('no-result').style.display=any?'none':'block';
+});
+</script>
+</body>
+</html>

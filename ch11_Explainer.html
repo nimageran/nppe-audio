@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 11 — Audio Explainer (With Applied Examples)</title>
+<style>
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface2:#EEF1F8; --border:#DDE2EE; --border2:#C8CEDD;
+  --accent:#2056C8; --accent-t:rgba(32,86,200,.08); --text:#1A1F35; --text2:#5B6585; --text3:#9AA0B8;
+  --green:#1D9B6A; --radius:9px; --shadow:0 1px 3px rgba(26,31,53,.07), 0 4px 12px rgba(26,31,53,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding:20px;}
+.wrap{max-width:760px;margin:0 auto;}
+h1{font-size:18px;font-weight:700;margin-bottom:4px;}
+.sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+
+#player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;position:sticky;top:16px;z-index:10;}
+#now-playing{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+#now-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px;min-height:20px;}
+
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ctrl-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity .12s;}
+.ctrl-btn:hover{opacity:.88;}
+.ctrl-btn.secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border2);}
+.ctrl-btn:disabled{opacity:.35;cursor:default;}
+.rate-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);margin-left:auto;}
+.rate-wrap select{border:1px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);}
+
+#jumprow{display:flex;flex-wrap:wrap;gap:6px;}
+.jbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .1s;}
+.jbtn:hover{background:var(--surface2);}
+.jbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.jbtn.done{border-color:var(--green);color:var(--green);}
+
+#progress-line{font-size:11px;color:var(--text3);margin-top:10px;}
+
+#script{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+.seg{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.seg:last-child{border-bottom:none;}
+.seg:hover{background:var(--surface2);}
+.seg.active{background:var(--accent-t);border-left:3px solid var(--accent);padding-left:19px;}
+.seg-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text2);margin-right:8px;}
+.seg.active .seg-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.seg-title{display:inline;font-size:13.5px;font-weight:600;color:var(--text);}
+.seg-text{margin-top:8px;font-size:13.5px;color:var(--text2);line-height:1.65;}
+.ex-text{margin-top:8px;font-size:13.5px;color:var(--text);font-weight:600;background:var(--surface2);padding:10px;border-radius:6px;}
+
+.hint{font-size:11px;color:var(--text3);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Chapter 11 — Audio Explainer</h1>
+  <div class="sub">Plain-language narration with strict engineering examples. Tap a number to jump straight to it.</div>
+
+  <div id="player">
+    <div id="now-playing">Up next</div>
+    <div id="now-title">Diagram 1 — Risk Allocation by Payment Method</div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-play">▶ Play</button>
+      <button class="ctrl-btn secondary" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="ctrl-btn secondary" id="btn-stop" disabled>⏹ Stop</button>
+      <div class="rate-wrap">
+        <span>Speed</span>
+        <select id="rate-select">
+          <option value="0.8">0.8×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="jumprow"></div>
+    <div id="progress-line">Diagram 1 of 12</div>
+  </div>
+
+  <div id="script"></div>
+
+  <div class="hint">Uses your browser's built-in voice — no audio files, no internet required after the page loads.</div>
+</div>
+
+<script>
+const SEGMENTS = [
+  {
+    title: "Diagram 1 — Risk Allocation by Payment Method",
+    text: "Payment methods are just tools to shift risk. In a Fixed-Price contract, the contractor takes all the risk; if prices surge, they eat the loss, but if they work fast, they keep the extra profit. In a Cost-Plus contract, the owner takes all the risk; the contractor has absolutely no incentive to save money because the owner pays for every mistake and delay. Unit Price sits in the middle: the contractor guarantees the cost per unit, but the owner takes the risk on how many units are actually needed.",
+    ex: "If you are building a road and use fixed-price, the contractor loses money if asphalt prices double. If you use cost-plus, the owner pays the doubled asphalt price. If you use unit-price, you agree to $100 per ton, but if the road ends up needing twice as many tons as expected, the owner pays for the extra tons."
+  },
+  {
+    title: "Diagram 2 — The Fixed-Price Myth vs Reality",
+    text: "Many owners falsely believe a 'fixed price' means the price will absolutely never change. In reality, changes to the scope, design errors, or unexpected site conditions will almost always trigger change orders that increase the price. Naive owners budget with zero contingency and face a massive financial crisis at the end. Sophisticated owners know the fixed price is just a starting baseline and hold a separate contingency fund to pay for unknowable risks.",
+    ex: "You sign a 'fixed-price' contract for a $5 million office building. Halfway through, the excavator hits solid bedrock that wasn't on the survey. The contractor files a legally valid change order for $500,000 to blast the rock. The fixed price just became $5.5 million."
+  },
+  {
+    title: "Diagram 3 — The Cost-Plus Transfer Pricing Trap",
+    text: "Cost-plus contracts hide a nasty trick called transfer pricing. If a contractor needs a site trailer, they could rent one from an outside company, and the owner pays the rental fee. But often, the contractor buys the trailer themselves and 'rents' it to your project. The owner reimburses them the full purchase price over the year, but when the project ends, the contractor walks away owning a free trailer. Owners must use aggressive audits to stop this.",
+    ex: "A contractor buys a $20,000 generator for your project and bills you $2,000 a month to rent it. After 10 months, you have paid $20,000. At the end of the job, the contractor puts the generator in their truck and uses it on their next job. You just bought them a generator."
+  },
+  {
+    title: "Diagram 4 — GMP Contracts: The Hybrid Mechanism",
+    text: "A Guaranteed Maximum Price (GMP) contract acts like a hybrid between cost-plus and fixed-price. Below the target price, it acts like cost-plus: the owner and contractor share any cost savings, giving the contractor a heavy incentive to be efficient. But if costs explode past the target price, a ceiling kicks in. It instantly switches to a fixed-price model, and the contractor must eat all the extra costs out of their own pocket to protect the owner.",
+    ex: "You set a GMP of $1 million with a 50/50 savings split. If the contractor finishes for $800,000, you save $100,000 and the contractor gets a $100,000 bonus. But if they mess up and it costs $1.2 million, you still only pay $1 million, and the contractor loses $200,000 of their own money."
+  },
+  {
+    title: "Diagram 5 — Unit Price: The Quantity Adjustment Logic",
+    text: "Unit price contracts only work well if the estimated quantities are accurate. If the actual quantity drops significantly, the contractor gets burned because they have fewer units to spread their heavy, fixed mobilization costs across. If the quantity spikes massively, the contractor might face terrible winter weather or overtime costs trying to finish the extra work. A good contract needs a formula to adjust the unit price if quantities swing too wildly in either direction.",
+    ex: "A contractor agrees to dig 100 holes for $100 each, assuming the $10,000 total will cover the $5,000 cost to haul the heavy excavator to the site. The owner changes the plan and only needs 10 holes. The contractor gets paid $1,000, which doesn't even cover a fraction of the cost to haul the machine."
+  },
+  {
+    title: "Diagram 6 — Construction Management: The Conflict-of-Interest Switch",
+    text: "A pure construction manager is just an agent who oversees trades for the owner; they do no physical work, making their oversight completely objective. But if a construction manager decides to start performing physical work themselves, a massive conflict of interest triggers. They are now the overseer judging their own physical work. This 'at-risk' model is legal, but the owner must explicitly agree to this dangerous dynamic upfront.",
+    ex: "You hire a pure construction manager to watch over the painters and plumbers. But then the CM decides to do the concrete pouring themselves to make extra money. If the concrete is poured poorly, you are relying on the CM to report their own bad work to you, which they have every incentive to hide."
+  },
+  {
+    title: "Diagram 7 — Alliance/IPD: The Shared Risk Pool",
+    text: "Alliance or Integrated Project Delivery (IPD) agreements try to stop everyone from pointing fingers and suing each other. They use a 'no-blame' clause so parties can't sue for defects, and a shared risk-and-reward pool. If the project wins, everyone splits the profit pool. If it fails, everyone loses their profit. The limitation is that if the failure is so catastrophic that it burns through the entire profit pool, the owner is still left holding the bag for the remaining losses.",
+    ex: "The owner, architect, and builder put their combined $1 million expected profit into a shared pool. If the builder makes a $500,000 pouring mistake, the repair money comes directly out of that shared pool, meaning the architect loses money too. This forces the architect to help the builder fix the problem instead of just suing them."
+  },
+  {
+    title: "Diagram 8 — Field Review: The Expectation Gap",
+    text: "Clients and engineers have totally different expectations of what 'field review' means. The client thinks the engineer is acting as a guarantor, making sure every single nail is perfectly placed. The engineer thinks they are just casually glancing around for general conformance. Both extremes are legally unreasonable. The engineer cannot guarantee perfection without moving into the building full-time, but they also cannot be completely blind. The exact scope of the review must be negotiated before signing.",
+    ex: "You do a two-hour weekly field review and miss that a contractor used the wrong screws behind a sealed wall. The client demands you pay to rip the wall open, thinking your 'review' was a 100 percent guarantee. You have to point to the contract proving you only promised periodic visual checks, not X-ray vision."
+  },
+  {
+    title: "Diagram 9 — Penalty vs Liquidated Damages",
+    text: "If a contract charges a contractor $10,000 a day for being late, it is only enforceable in Canada if it is classified as 'Liquidated Damages.' This means the $10,000 is a genuine, mathematical pre-estimate of what the owner will actually lose each day. If the $10,000 is just an arbitrarily massive number used to terrify the contractor into finishing quickly, it is called a 'Penalty Clause,' and courts will strike it down entirely.",
+    ex: "You build a toll bridge. The owner calculates they will lose exactly $5,000 a day in lost tolls if you are late. Setting the late fee at $5,000 a day is valid Liquidated Damages. But if they set the late fee at $100,000 a day just to punish you, a judge will declare it an illegal penalty and throw it out."
+  },
+  {
+    title: "Diagram 10 — The Tercon Three-Stage Exclusion Clause Test",
+    text: "Writing 'we are not liable' in a contract doesn't mean you are actually safe. The Supreme Court uses the Tercon test, which has three brutal gates. First, does the clause clearly apply to the specific disaster that happened? Second, was the clause horribly unfair or unconscionable when the contract was signed? Third, is there a major public policy reason for the judge to strike it down anyway? A clause can be perfectly written and still fail gate two or three.",
+    ex: "You sell engineering software and put an exclusion clause saying 'We are never liable for bugs.' You knowingly sell a bugged version that destroys the client's servers. The clause clearly applies (Gate 1), but the judge strikes it down at Gate 3 because protecting someone who actively lies and sells poisoned software violates fundamental public policy."
+  },
+  {
+    title: "Diagram 11 — The Dispute Resolution Provision: Escalating Stages",
+    text: "Contract disputes do not jump straight to court. They follow an escalating ladder of negotiation and arbitration. But the most dangerous part is the very first step: the Notice of Claim. Contracts have strict, unforgiving deadlines for notifying the other party that you are upset. If you miss that written notice deadline by even a few days, your entire million-dollar claim can be permanently barred, no matter how right you were.",
+    ex: "A contractor hits a buried gas line and racks up $50,000 in delays. The contract says you must notify the owner in writing within 7 days. The contractor waits 10 days to send the email. The owner uses the strict 7-day rule to completely deny the claim, and the contractor eats the $50,000 loss."
+  },
+  {
+    title: "Diagram 12 — What Makes a Contract 'Bankable'",
+    text: "'Bankability' means a lender looks at a project and feels safe giving it a massive loan. If an owner is already rich, bankability doesn't matter much. But if the owner is relying on the project itself to pay back the loan, the lender will heavily scrutinize every contract. They want to ensure risks are passed to third parties, like bonding companies or insurers, so the lender doesn't lose their money if the contractor goes bankrupt.",
+    ex: "A developer wants a $50 million loan to build a condo, but only has $1 million in cash. The bank refuses to lend the money until the developer forces the contractor to get a Performance Bond. The bank knows that if the contractor goes bankrupt, the bonding company will step in and finish the building, making the loan 'bankable' and safe."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = false;
+let isPaused = false;
+let utterance = null;
+
+const jumprow = document.getElementById('jumprow');
+const scriptBox = document.getElementById('script');
+const nowTitle = document.getElementById('now-title');
+const nowPlaying = document.getElementById('now-playing');
+const progressLine = document.getElementById('progress-line');
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+const btnStop = document.getElementById('btn-stop');
+const rateSelect = document.getElementById('rate-select');
+
+SEGMENTS.forEach((seg, i) => {
+  const jb = document.createElement('button');
+  jb.className = 'jbtn';
+  jb.textContent = i + 1;
+  jb.title = seg.title;
+  jb.onclick = () => jumpTo(i, true);
+  jumprow.appendChild(jb);
+
+  const block = document.createElement('div');
+  block.className = 'seg';
+  block.id = 'seg-' + i;
+  
+  block.innerHTML = `
+    <span class="seg-num">${i+1}</span>
+    <span class="seg-title">${seg.title.replace(/^Diagram \d+ — /,'')}</span>
+    <div class="seg-text">${seg.text}</div>
+    <div class="ex-text">Example: ${seg.ex}</div>
+  `;
+  block.onclick = () => jumpTo(i, true);
+  scriptBox.appendChild(block);
+});
+
+function refreshUI() {
+  document.querySelectorAll('.jbtn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentIndex && isPlaying);
+    b.classList.toggle('done', i < currentIndex);
+  });
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('active', i === currentIndex);
+  });
+  nowTitle.textContent = SEGMENTS[currentIndex].title;
+  nowPlaying.textContent = isPlaying ? (isPaused ? 'Paused' : 'Now playing') : 'Up next';
+  progressLine.textContent = `Diagram ${currentIndex + 1} of ${SEGMENTS.length}`;
+  btnPlay.disabled = isPlaying && !isPaused;
+  btnPause.disabled = !isPlaying || isPaused;
+  btnStop.disabled = !isPlaying;
+  if (isPlaying) {
+    const el = document.getElementById('seg-' + currentIndex);
+    if (el) el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+}
+
+function speakCurrent() {
+  window.speechSynthesis.cancel();
+  
+  const fullAudioText = SEGMENTS[currentIndex].text + " " + SEGMENTS[currentIndex].ex;
+  
+  utterance = new SpeechSynthesisUtterance(fullAudioText);
+  utterance.rate = parseFloat(rateSelect.value);
+  utterance.onend = () => {
+    if (currentIndex < SEGMENTS.length - 1) {
+      currentIndex++;
+      refreshUI();
+      speakCurrent();
+    } else {
+      isPlaying = false;
+      isPaused = false;
+      refreshUI();
+    }
+  };
+  isPlaying = true;
+  isPaused = false;
+  refreshUI();
+  window.speechSynthesis.speak(utterance);
+}
+
+function jumpTo(i, autoplay) {
+  currentIndex = i;
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+  if (autoplay) speakCurrent();
+}
+
+btnPlay.onclick = () => {
+  if (isPaused) {
+    window.speechSynthesis.resume();
+    isPaused = false;
+    isPlaying = true;
+    refreshUI();
+  } else {
+    speakCurrent();
+  }
+};
+btnPause.onclick = () => {
+  window.speechSynthesis.pause();
+  isPaused = true;
+  refreshUI();
+};
+btnStop.onclick = () => {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  isPaused = false;
+  refreshUI();
+};
+rateSelect.onchange = () => {
+  if (isPlaying) speakCurrent();
+};
+
+window.addEventListener('beforeunload', () => window.speechSynthesis.cancel());
+
+refreshUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 17: Visual Mechanics — Bonds</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.structure { border-top-color: #0ea5e9; }
+    .framework-card.obligations { border-top-color: #9333ea; }
+    .framework-card.recourse { border-top-color: #ca8a04; }
+    .framework-card.bidbond { border-top-color: #dc2626; }
+    .framework-card.options { border-top-color: #ef4444; }
+    .framework-card.moneyflow { border-top-color: #15803d; }
+    .framework-card.volunteer { border-top-color: #f59e0b; }
+    .framework-card.defences { border-top-color: #64748b; }
+    .framework-card.compare { border-top-color: #9333ea; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 17: VISUAL MECHANICS — BONDS</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Three-Party Structure and Two Separate Agreements</a>
+    <a href="#d2">2. Bond vs Insurance — Why a Bond Is Not Insurance</a>
+    <a href="#d3">3. Surety's Recourse After Paying Out — Two Parallel Tracks</a>
+    <a href="#d4">4. The Bid Bond Defence-Dependency Rule</a>
+    <a href="#d5">5. The Surety's Six Options on Default</a>
+    <a href="#d6">6. Case Study 17.1 — Tracing the Money</a>
+    <a href="#d7">7. The Volunteer Trap</a>
+    <a href="#d8">8. The Performance Bond Defence Chain</a>
+    <a href="#d9">9. Payment Bond Trust Structure — One-Tier Chain</a>
+    <a href="#d10">10. Lien Bond vs L&M Payment Bond — Timing Difference</a>
+  </div>
+
+
+  <div class="framework-card structure" id="d1">
+    <h2>1. The Three-Party Structure and Two Separate Agreements</h2>
+    <p>The single most foundational fact in this chapter is that a bond is NOT one agreement between three people — it's TWO separate agreements that happen to share a common thread. Confusing these two agreements is the root of most bond misunderstandings.</p>
+
+    <div class="mermaid">
+      graph TD
+        Principal[PRINCIPAL<br/>— a.k.a. Obligor<br/>usually the contractor] -->|AGREEMENT 1:<br/>PRIMARY OBLIGATIONS<br/>e.g. perform the work on time| Obligee[OBLIGEE<br/>usually the project owner]
+
+        Surety[SURETY<br/>— a.k.a. Bonding Company] -->|AGREEMENT 2: THE BOND<br/>SECONDARY OBLIGATIONS<br/>— guarantee of Agreement 1| Obligee
+
+        Principal -->|Pays PREMIUM<br/>+ gives INDEMNITY| Surety
+
+        Note1[Agreement 1 exists<br/>SEPARATELY and INDEPENDENTLY<br/>of the bond] -.-> Principal
+        Note2[Agreement 2's obligations<br/>are 'secondary' because they<br/>DEPEND on Agreement 1<br/>existing in the first place] -.-> Surety
+
+        style Principal fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Surety fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Obligee fill:#1e293b,color:#fff
+        style Note1 fill:#f8fafc,stroke:#94a3b8
+        style Note2 fill:#f8fafc,stroke:#94a3b8
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Drawing two separate arrows into the Obligee box (rather than one triangle) is deliberate — it shows that the principal's promise to perform and the surety's promise to guarantee are LEGALLY DISTINCT obligations, not one combined deal. This is exactly why the obligations are labeled "primary" and "secondary": the surety's promise has no independent existence — it only matters if and when the principal's underlying promise (Agreement 1) gets breached. The third arrow (principal pays the surety) captures the often-missed detail that this premium typically gets baked into the contractor's bid price, meaning the OWNER ultimately funds the very security that protects the owner — worth remembering for any "who really pays for this" exam question.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card structure" id="d2">
+    <h2>2. Bond vs Insurance — Why a Bond Is Not Insurance</h2>
+    <p>A surety looks a lot like an insurer on the surface — both take a premium and promise to cover a loss. This diagram isolates the structural differences that make a bond fundamentally NOT insurance, despite the surface-level resemblance.</p>
+
+    <div class="mermaid">
+      graph LR
+        Compare{Bond vs<br/>Insurance Policy} --> Indemnity[INDEMNITY FROM<br/>PRINCIPAL/INSURED?]
+        Compare --> Writing[MUST BE IN<br/>WRITING?]
+        Compare --> Original[ORIGINAL DOCUMENT<br/>REQUIRED to enforce?]
+        Compare --> Parties[NUMBER OF<br/>PARTIES?]
+
+        Indemnity --> IndBond[BOND: YES — surety demands<br/>indemnity FROM the principal<br/>it is bonding]
+        Indemnity --> IndIns[INSURANCE: Generally NO<br/>such demand on the insured]
+
+        Writing --> WriteBond[BOND: YES, mandatory]
+        Writing --> WriteIns[INSURANCE: Not always<br/>a strict requirement]
+
+        Original --> OrigBond[BOND: YES — photocopy<br/>is worthless]
+        Original --> OrigIns[INSURANCE: Less strict<br/>on this point]
+
+        Parties --> PartyBond[BOND: THREE —<br/>principal, surety, obligee]
+        Parties --> PartyIns[INSURANCE: Typically<br/>TWO — insurer, insured]
+
+        style Compare fill:#1e293b,color:#fff
+        style IndBond fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style WriteBond fill:#fee2e2,stroke:#dc2626
+        style OrigBond fill:#fee2e2,stroke:#dc2626
+        style PartyBond fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style IndIns fill:#e0f2fe,stroke:#0284c7
+        style WriteIns fill:#e0f2fe,stroke:#0284c7
+        style OrigIns fill:#e0f2fe,stroke:#0284c7
+        style PartyIns fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The indemnity branch is the one the chapter calls out explicitly as THE defining distinction — an insurer absorbs risk and generally doesn't expect to be repaid by the very person it insured, while a surety functions more like a credit guarantee: it expects to recover from the principal (and often the principal's shareholders personally) anything it has to pay out. That's why a bond behaves less like "buying protection" and more like "buying a loan guarantee" — the surety is fronting money on the assumption it'll get repaid one way or another, either through the principal performing properly or through indemnity recovery afterward. The three-party structure (versus insurance's typical two) is the other structural tell, and it's why bonds are described as "threeparty agreements" right in the chapter's opening lines.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card recourse" id="d3">
+    <h2>3. Surety's Recourse After Paying Out — Two Parallel Tracks</h2>
+    <p>Once a surety pays out on a claim, it doesn't just absorb the loss — it has two SEPARATE, parallel paths to try to recover that money, and the chapter is clear about why a prudent surety pursues both rather than relying on just one.</p>
+
+    <div class="mermaid">
+      graph TD
+        Payout[Surety PAYS OUT<br/>under the bond] --> Track1[TRACK 1: SUBROGATION<br/>— right exists automatically<br/>at COMMON LAW]
+        Payout --> Track2[TRACK 2: INDEMNITY<br/>— requires the principal/<br/>shareholders to have signed<br/>an INDEMNITY AGREEMENT]
+
+        Track1 --> T1Detail[Surety steps into the<br/>OBLIGEE's shoes — can sue<br/>any party responsible for<br/>the loss, e.g. the contractor]
+        Track2 --> T2Detail[Surety recovers directly<br/>FROM the principal and any<br/>shareholders who personally<br/>guaranteed the obligation]
+
+        T1Detail --> Insolvent{Is the principal/<br/>contractor INSOLVENT?}
+        T2Detail --> Insolvent
+
+        Insolvent -->|Yes| BothUseless[BOTH tracks may become<br/>USELESS — an insolvent<br/>company has nothing<br/>to recover from]
+        Insolvent -->|No, and shareholders<br/>personally indemnified| Recovers[Surety recovers —<br/>shareholders are now<br/>PERSONALLY liable,<br/>cannot hide behind an<br/>'empty corporate shell']
+
+        style Payout fill:#1e293b,color:#fff
+        style Track1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Track2 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Insolvent fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style BothUseless fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Recovers fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The diagram exists specifically to explain WHY sureties demand personal indemnities from shareholders even though subrogation already exists automatically — and the answer sits in the insolvency diamond. Subrogation alone just gives the surety the SAME rights the obligee had against the contractor, but if the contractor company is insolvent, those rights are worthless because there's no money behind them. Personal shareholder indemnities solve exactly this gap: they reach past the company entirely into the individual shareholders' own pockets, turning every claim into something the managers must treat as a PERSONAL threat rather than something they can simply let an empty shell absorb by walking away from the company. This is the practical reason "indemnity from the principal is one of the things that distinguishes a bond from an insurance contract" (diagram 2) — it's not just a definitional quirk, it's there because subrogation alone often isn't enough.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card bidbond" id="d4">
+    <h2>4. The Bid Bond Defence-Dependency Rule</h2>
+    <p>This is the chapter's most important structural rule and it applies to ALL bond types, not just bid bonds: the surety's position can never be better OR worse than the principal's position. This diagram shows that dependency running in both directions using the bid bond context.</p>
+
+    <div class="mermaid">
+      graph TD
+        Claim[Obligee makes a claim<br/>against the SURETY] --> Rule{THE RULE: Surety's position<br/>relative to the obligee can<br/>NEVER be WORSE than<br/>the principal's position}
+
+        Rule --> Check[Surety FIRST checks:<br/>what defences would the<br/>PRINCIPAL/contractor have<br/>against this exact claim?]
+
+        Check --> D1[Was the bid VALIDLY<br/>REVOKED before<br/>acceptance?]
+        Check --> D2[Did the claim miss the<br/>BOND'S limitation period<br/>— e.g. CCDC: 7 months<br/>from bond date?]
+        Check --> D3[Any other defence the<br/>contractor could raise<br/>against the owner directly]
+
+        D1 --> Available[If the CONTRACTOR has<br/>this defence, the SURETY<br/>gets it too — automatically]
+        D2 --> Available
+        D3 --> Available
+
+        Available --> Asymmetry[BUT NOTE THE ASYMMETRY:<br/>a separate non-bond claim<br/>against the contractor — e.g.<br/>breach of promise not to revoke —<br/>may have a DIFFERENT, possibly<br/>LONGER limitation period than<br/>the bond's own 7-month clock]
+
+        style Claim fill:#1e293b,color:#fff
+        style Rule fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Check fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style Available fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Asymmetry fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The structure deliberately routes every claim through the contractor's defences FIRST, because that's literally the order the chapter says a surety should investigate — "whenever a claim is made against a surety on a bid bond, the surety will first look to any defences available to the contractor." The bottom asymmetry box captures a genuinely tricky exam point: the BOND itself has its own self-contained limitation period (CCDC's 7 months), but a totally separate lawsuit against the contractor NOT based on the bond (like a breach-of-promise claim for revoking an irrevocable bid) runs on whatever limitation period applies to THAT kind of claim, which might be longer. So the surety's protection is bond-specific — the contractor could still face exposure outside the bond's narrower time window, even while the bond claim itself is time-barred.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card options" id="d5">
+    <h2>5. The Surety's Six Options on Default</h2>
+    <p>Once notified that the principal is in default, the surety faces a genuine strategic decision with six distinct paths, each with different cost exposure and risk profile. This diagram organizes them by how much financial exposure each path creates.</p>
+
+    <div class="mermaid">
+      graph TD
+        Default[Surety notified:<br/>Principal is in DEFAULT<br/>— condition precedent met] --> Decide{Six Options —<br/>ordered by RISK PROFILE}
+
+        Decide --> O1[1. Require principal to<br/>REMEDY the default itself]
+        Decide --> O5[5. ASSERT A DEFENCE<br/>and refuse to act]
+        Decide --> O6[6. WAIT AND SEE<br/>— genuine dispute exists<br/>over whether default<br/>actually occurred]
+        Decide --> O4[4. PAY THE FACE VALUE<br/>of the bond — capped,<br/>predictable exposure]
+        Decide --> O3[3. SOLICIT BIDS for<br/>completion — exposure<br/>CAPPED at face value]
+        Decide --> O2[2. COMPLETE the work<br/>itself — NO financial cap,<br/>PLUS inherits warranty<br/>obligations like a contractor]
+
+        O6 --> RiskWS[RISK: if principal turns out<br/>to have actually been in<br/>default, delay may aggravate<br/>damages — Canadian case law<br/>LEANS toward NOT holding<br/>surety liable for this delay,<br/>but it's UNSETTLED]
+
+        O2 --> RiskComplete[Sureties HESITATE here —<br/>this is the only option with<br/>truly OPEN-ENDED exposure]
+
+        style Default fill:#1e293b,color:#fff
+        style Decide fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style O2 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style O3 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style O4 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style O6 fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style RiskWS fill:#fee2e2,stroke:#dc2626
+        style RiskComplete fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The options are deliberately NOT presented in the chapter's original numbered order — they're regrouped here by the dimension that actually matters for decision-making: how much could this cost, and is that cost capped? Options 4 and 3 both have a hard ceiling at the bond's face value, which is exactly why they're the "safe" choices a surety calculating costs methodically would gravitate toward. Option 2 stands alone as the dangerous outlier — completing the work yourself sounds proactive, but it means the surety has effectively BECOME the contractor, inheriting open-ended cost exposure AND warranty obligations with no face-value cap protecting it, which is precisely why sureties "hesitate" to choose it even when speed matters. Option 6 looks passive but carries a hidden risk too — choosing to wait doesn't eliminate the underlying dispute, it just delays addressing it, and if the surety guessed wrong about whether real default existed, that delay itself can aggravate damages (though current Canadian authority tends to protect sureties from being liable for that delay specifically).</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card moneyflow" id="d6">
+    <h2>6. Case Study 17.1 — Tracing the Money</h2>
+    <p>This case study is dense with numbers, and the easiest way to actually understand it is to trace every dollar through the system rather than re-reading the paragraph. This diagram converts the entire fact pattern into a single money-flow chain.</p>
+
+    <div class="mermaid">
+      graph TD
+        Contract[$10M Contract<br/>50% Performance Bond<br/>= $5M face value] --> Default[Contractor completes<br/>only 50% of work,<br/>then DEFAULTS]
+
+        Default --> Overcert[Architect NEGLIGENTLY<br/>certifies 60% complete<br/>— should have certified 50%]
+        Overcert --> Overpay[Owner pays $6M<br/>— 60% of $10M —<br/>to the defaulting contractor]
+
+        Overpay --> Remaining[$4M remains to be paid<br/>on the $10M contract]
+        Remaining --> Tender[Surety tenders completion.<br/>Lowest bid to finish: $5.3M]
+
+        Tender --> Gap[GAP between remaining<br/>funds and completion cost:<br/>$5.3M − $4M = $1.3M]
+        Gap --> SuretyPays[SURETY'S EXPOSURE = $1.3M<br/>— well UNDER the $5M<br/>face value, so the cap<br/>never even comes into play]
+
+        SuretyPays --> Recourse{Surety's Recourse —<br/>THREE targets}
+        Recourse --> RC1[Defaulting CONTRACTOR<br/>as indemnitor]
+        Recourse --> RC2[CONTRACTOR'S<br/>shareholders/officers<br/>if personally indemnified]
+        Recourse --> RC3[ARCHITECT — for the<br/>NEGLIGENT overcertification<br/>that caused $300K of the<br/>surety's $1.3M loss to be<br/>avoidable]
+
+        style Contract fill:#1e293b,color:#fff
+        style Overcert fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style SuretyPays fill:#fde68a,stroke:#ca8a04,stroke-width:3px
+        style Recourse fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style RC3 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Tracing this as a single connected chain reveals the case study's real teaching point, which is easy to miss when reading prose: the surety's exposure ($1.3M) is dramatically smaller than the bond's face value ($5M), which by itself demonstrates that the face value is a CEILING, not a guaranteed payout amount — most claims never approach it. The more important insight sits in the RC3 branch: of that $1.3M loss, $300K specifically traces back to the architect's overcertification error (had the architect certified the correct 50%, the owner would only have overpaid by $1M instead of having $4M left when $5.3M was actually needed, meaning the surety's loss would have been $300K instead of $1.3M). That arithmetic is exactly why the surety has an independent claim against the ARCHITECT, separate from its claims against the contractor — a third-party professional's negligence directly enlarged the surety's loss, creating a distinct cause of action in negligence (or as a subrogated claim standing in the owner's shoes).</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card volunteer" id="d7">
+    <h2>7. The Volunteer Trap</h2>
+    <p>This is a subtle but high-stakes mechanism: a surety that acts in good faith on a reasonable belief can still end up legally unprotected if that belief turns out to be wrong. This diagram isolates the exact moment the trap springs shut.</p>
+
+    <div class="mermaid">
+      graph TD
+        Belief[Surety BELIEVES the<br/>principal is in default] --> Acts[Surety PAYS to complete<br/>the contract, relying on<br/>its indemnity rights<br/>against the principal]
+
+        Acts --> Reality{What does the<br/>PRINCIPAL then prove<br/>in a lawsuit?}
+
+        Reality -->|Principal proves the<br/>OBLIGEE — not the principal —<br/>was actually in default| Trap[VOLUNTEER TRAP SPRINGS:<br/>Surety paid money WITHOUT<br/>any actual legal obligation<br/>to do so]
+        Reality -->|Principal really<br/>was in default| Safe[Surety's indemnity<br/>rights remain INTACT<br/>— normal recovery applies]
+
+        Trap --> Consequence[Surety is now classified<br/>as a 'VOLUNTEER' at law]
+        Consequence --> Lost[Surety CANNOT collect on<br/>its indemnity from the<br/>principal — its own good-faith<br/>mistake destroyed its<br/>recovery rights]
+
+        style Belief fill:#1e293b,color:#fff
+        style Reality fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Trap fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Lost fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The trap only springs on ONE specific branch, and that's exactly why this diagram exists — to make clear that the surety's exposure isn't about whether it acted reasonably or in good faith, it's about whether its underlying FACTUAL ASSUMPTION (the principal was in default) turns out to be objectively correct. This explains directly why some sureties prefer the "wait and see" option from diagram 5 even though it looks passive — acting decisively on an assumption that later unravels doesn't just cost the surety the money it paid out, it strips away the entire indemnity-recovery mechanism that would normally let the surety get that money back. The lesson generalizes beyond bonds: paying money you weren't legally obligated to pay, even with the best of intentions, can permanently forfeit your right to recover it from anyone — which is precisely the legal definition of being a "volunteer."</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card defences" id="d8">
+    <h2>8. The Performance Bond Defence Chain</h2>
+    <p>A performance bond claim has to clear several SEPARATE conditions before the surety actually owes anything. This diagram lines those conditions up as sequential gates, since failing ANY one of them defeats the claim entirely.</p>
+
+    <div class="mermaid">
+      graph TD
+        Claim[Obligee claims against<br/>Performance Bond] --> Gate1{CONDITION PRECEDENT:<br/>Has the OBLIGEE performed<br/>ALL of ITS OWN obligations<br/>under the contract?}
+
+        Gate1 -->|No — e.g. obligee<br/>failed to pay| Defence1[DEFENCE: Obligee's own<br/>default justified the<br/>contractor's non-performance]
+        Gate1 -->|Yes| Gate2{Was TIMELY NOTICE<br/>given to the surety?}
+
+        Gate2 -->|No — notice came after<br/>remedial work was already<br/>done, preventing mitigation| Defence2[DEFENCE: Late notice<br/>deprived surety of ability<br/>to mitigate]
+        Gate2 -->|Yes| Gate3{Was there a SIGNIFICANT<br/>CHANGE IN RISK —<br/>e.g. material change in<br/>scope, type of work, or<br/>payment schedule?}
+
+        Gate3 -->|Yes, and NOT contemplated<br/>in the bond, and NOT just<br/>a 'usual' construction change| Defence3[DEFENCE: Change in risk<br/>may DISCHARGE the<br/>surety's obligations]
+        Gate3 -->|No — normal/contemplated<br/>changes only| Gate4{Was there SUBSTANTIAL<br/>OVERPAYMENT to<br/>the principal?}
+
+        Gate4 -->|Yes| Defence4[DEFENCE: Overpayment<br/>prejudices the surety to<br/>the extent of the<br/>overpayment]
+        Gate4 -->|No| Gate5{Is the claim within the<br/>TIME LIMITATION —<br/>e.g. CCDC 222-2002:<br/>2 years from final<br/>payment due date?}
+
+        Gate5 -->|No, too late| Defence5[DEFENCE: Time-barred]
+        Gate5 -->|Yes, all gates clear| Liable[Surety's obligation<br/>under the bond is<br/>TRIGGERED]
+
+        style Claim fill:#1e293b,color:#fff
+        style Gate1 fill:#fef3c7,stroke:#d97706
+        style Gate2 fill:#fef3c7,stroke:#d97706
+        style Gate3 fill:#fef3c7,stroke:#d97706
+        style Gate4 fill:#fef3c7,stroke:#d97706
+        style Gate5 fill:#fef3c7,stroke:#d97706
+        style Defence1 fill:#fee2e2,stroke:#dc2626
+        style Defence2 fill:#fee2e2,stroke:#dc2626
+        style Defence3 fill:#fee2e2,stroke:#dc2626
+        style Defence4 fill:#fee2e2,stroke:#dc2626
+        style Defence5 fill:#fee2e2,stroke:#dc2626
+        style Liable fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This is intentionally built as a gauntlet, mirroring the same "any single broken link defeats the claim" logic from the Negligence Gauntlet in Chapter 12's visual file — the parallel structure is not a coincidence, because both represent the same underlying legal idea that liability requires clearing EVERY required element, not most of them. Gate 3 deserves special attention since it's the most fact-dependent test in the chain: the chapter is explicit that construction changes are NORMAL and EXPECTED, so a "significant change in risk" defence only succeeds when changes are excessive in number or size beyond what's typically contemplated — this is exactly why a prudent owner is advised to get the surety's prior approval before any major project change, since doing so removes gate 3 as a future escape route for the surety. Also remember the chapter's separate, broader point sitting above this entire chain: in addition to these performance-bond-specific gates, the surety ALSO gets to raise any defence the PRINCIPAL itself would have against the obligee on the underlying contract (mistake, economic duress, misrepresentation, frustration, lack of consideration) — this five-gate chain is on TOP of that general inherited-defence rule from diagram 4, not a replacement for it.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card structure" id="d9">
+    <h2>9. Payment Bond Trust Structure — One-Tier Chain</h2>
+    <p>A labour and material payment bond isn't a simple two-party payout promise — it creates an actual TRUST relationship, and the "one-tier" limitation on who counts as a claimant is one of the most commonly tested specific facts in this chapter.</p>
+
+    <div class="mermaid">
+      graph TD
+        Bond[L&M Payment Bond<br/>in place at START<br/>of the contract] --> TrustRole{Trust Roles}
+
+        TrustRole --> Trustee[OBLIGEE = TRUSTEE<br/>— legal ownership of the<br/>bond's protection, but must<br/>act in beneficiaries' interest]
+        TrustRole --> Beneficiary[CLAIMANTS = BENEFICIARIES<br/>of the trust]
+
+        Beneficiary --> OneTier{ONE-TIER DEFINITION:<br/>Claimant = anyone with a<br/>DIRECT contract with<br/>the CONTRACTOR}
+
+        OneTier --> Yes1[Subcontractor —<br/>direct contract<br/>✓ QUALIFIES]
+        OneTier --> Yes2[Supplier to the<br/>contractor directly<br/>✓ QUALIFIES]
+        OneTier --> No1[Sub-SUBcontractor —<br/>contract is with the<br/>SUBcontractor, not the<br/>contractor directly<br/>✗ DOES NOT QUALIFY]
+
+        style Bond fill:#1e293b,color:#fff
+        style Trustee fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style OneTier fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Yes1 fill:#dcfce7,stroke:#16a34a
+        style Yes2 fill:#dcfce7,stroke:#16a34a
+        style No1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The "No1" box gets the strongest visual weight because it's the single most commonly tested fact about payment bonds in this chapter — sub-subcontractors are explicitly excluded under a standard one-tier CCDC bond, even though intuitively they're still "owed money for work on the project." The trust framing at the top isn't just decorative legal terminology — it has a real consequence: because the obligee is officially the TRUSTEE, it may be obligated to actively assist claimants in enforcing their rights, rather than just standing by neutrally. Contrast this against the U.S. standard form mentioned in the chapter, which defines claimants more broadly to include parties contracting with either the contractor OR its subcontractors — a "two-tier" structure. The exam-relevant habit this builds: always check whether a bond is explicitly one-tier or two-tier before assuming any unpaid party automatically has a valid claim.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card structure" id="d10">
+    <h2>10. Lien Bond vs L&M Payment Bond — Timing Difference</h2>
+    <p>Both are payment bonds, both protect against unpaid parties, but they exist on completely different timelines and solve different problems. This diagram lines them up side by side on a single timeline to make the distinction immediate.</p>
+
+    <div class="mermaid">
+      graph LR
+        Start[CONTRACT BEGINS] --> LM[L&M PAYMENT BOND<br/>put in place HERE —<br/>at the START]
+        LM --> Work[Work proceeds...]
+        Work --> Unpaid{A party goes<br/>UNPAID}
+        Unpaid --> LienFiled[LIEN gets FILED<br/>against the land]
+        LienFiled --> LienBond[LIEN BOND put in place<br/>HERE — only AFTER<br/>the lien already exists]
+
+        LienBond --> Purpose[PURPOSE: substitutes for<br/>the LAND as security,<br/>so the lien can be<br/>REMOVED from title]
+        Purpose --> Payout{Lien found VALID<br/>AND principal doesn't pay?}
+        Payout -->|Yes| SuretyPaysLien[Surety pays the<br/>lien claimant]
+
+        style Start fill:#1e293b,color:#fff
+        style LM fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style LienFiled fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style LienBond fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Purpose fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Placing both bond types on the SAME horizontal timeline rather than describing them separately makes the core distinction unmissable: the L&M bond is preventive, set up before any problem exists, while the lien bond is REACTIVE, only coming into existence after a specific lien has already been filed as a response to a specific, already-crystallized problem. This timing difference directly explains their different purposes — the L&M bond exists to prevent liens from ever needing to be filed in the first place (by guaranteeing payment to subs/suppliers), while the lien bond's entire purpose is narrower and more surgical: it substitutes for the LAND itself as security, which is the mechanism that lets a property owner get a lien removed from title and proceed with selling or financing the property even while the underlying payment dispute is still being resolved.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>

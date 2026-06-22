@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPPE Chapter 14: Visual Mechanics — Dispute Resolution and Expert Evidence</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f8fafc', primaryBorderColor: '#334155', lineColor: '#0f172a', fontFamily: 'sans-serif' } });
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; padding: 30px; margin: 0; color: #1e293b; line-height: 1.7; }
+    h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; font-weight: 800; max-width: 900px; margin: 0 auto 24px; }
+    h2 { color: #0f172a; font-size: 22px; text-transform: uppercase; margin-top: 0; font-weight: 700; letter-spacing: 1px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .framework-card { background-color: white; padding: 30px; margin-bottom: 40px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-top: 6px solid #3b82f6; }
+    .framework-card.spectrum { border-top-color: #9333ea; }
+    .framework-card.timeline { border-top-color: #0ea5e9; }
+    .framework-card.thirdparty { border-top-color: #dc2626; }
+    .framework-card.arbsetup { border-top-color: #ca8a04; }
+    .framework-card.advantage { border-top-color: #16a34a; }
+    .framework-card.privilege { border-top-color: #f59e0b; }
+    .framework-card.bindingmed { border-top-color: #ef4444; }
+    .framework-card.methods { border-top-color: #64748b; }
+    .framework-card.expert { border-top-color: #15803d; }
+    .explanation { background-color: #f8fafc; padding: 20px; border-radius: 6px; margin-top: 25px; border-left: 4px solid #94a3b8; }
+    .mermaid { display: flex; justify-content: center; margin: 30px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow-x: auto; }
+    .label { font-weight: 800; color: #0f172a; text-transform: uppercase; font-size: 0.9em; }
+    p { margin-bottom: 15px; }
+    strong { color: #0f172a; }
+    .toc { background: white; border-radius: 8px; padding: 20px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px; }
+    .toc a { display: block; padding: 4px 0; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  <h1>CHAPTER 14: VISUAL MECHANICS — DISPUTE RESOLUTION AND EXPERT EVIDENCE</h1>
+
+  <div class="toc">
+    <strong style="display:block;margin-bottom:8px;color:#0f172a;">Jump to a diagram:</strong>
+    <a href="#d1">1. The Voluntary-to-Involuntary Spectrum</a>
+    <a href="#d2">2. The Litigation Timeline</a>
+    <a href="#d3">3. The Third-Party Claim Branching Problem</a>
+    <a href="#d4">4. The Arbitration Setup Decision Tree</a>
+    <a href="#d5">5. Method Selection — Matching the Dispute to the Tool</a>
+    <a href="#d6">6. The Privilege Shield (Negotiation and Mediation)</a>
+    <a href="#d7">7. The Binding Mediation Role-Conflict Trap</a>
+    <a href="#d8">8. The Mediator's Private-Meeting Privilege</a>
+    <a href="#d9">9. The Expert Witness Neutrality Boundary</a>
+  </div>
+
+
+  <div class="framework-card spectrum" id="d1">
+    <h2>1. The Voluntary-to-Involuntary Spectrum</h2>
+    <p>The four dispute resolution methods are NOT four equal options sitting side by side — they sit on a spectrum from fully voluntary to partially forced. Where a method sits on this spectrum determines whether a reluctant party can simply walk away or whether they get dragged in regardless.</p>
+
+    <div class="mermaid">
+      graph LR
+        Negotiation[NEGOTIATION<br/>Fully voluntary —<br/>forcing it is futile] --> Mediation[MEDIATION<br/>Voluntary to attend,<br/>but non-binding —<br/>can refuse to settle]
+        Mediation --> Arbitration[ARBITRATION<br/>Voluntary at CONTRACT stage —<br/>but if a mandatory clause exists,<br/>becomes FORCED later]
+        Arbitration --> Litigation[LITIGATION<br/>Voluntary for PLAINTIFF only —<br/>INVOLUNTARY for defendant:<br/>no response = judgment against them]
+
+        style Negotiation fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Mediation fill:#fef3c7,stroke:#d97706
+        style Arbitration fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Litigation fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Read this left to right as "how much can a reluctant party escape?" Negotiation is pure — if someone refuses to talk, nothing happens to them. Mediation forces attendance only if there's a contract clause requiring it, but even then a party can show up and still refuse to sign anything. Arbitration has a sneaky timing trap: it LOOKS voluntary because nobody is forced to accept an arbitration clause when negotiating the contract — but once that clause is in, a party who later wants to escape arbitration and go to court cannot. Litigation is the one true asymmetry: the plaintiff chooses to start it, but the defendant has zero choice about whether to respond — ignoring it doesn't make it go away, it just guarantees they lose.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card timeline" id="d2">
+    <h2>2. The Litigation Timeline</h2>
+    <p>Litigation isn't one event — it's a sequence of distinct phases, each with its own purpose, and each generating specific document types. Seeing this as a timeline makes it obvious WHY each phase exists and what would go wrong if it were skipped.</p>
+
+    <div class="mermaid">
+      graph LR
+        SOC[Statement of Claim<br/>Plaintiff files & serves] --> SOD[Statement of Defence<br/>Defendant denies/admits<br/>within 14-21 days]
+        SOD --> CTP[Counterclaim and/or<br/>Third-Party Claim<br/>optional, added here]
+        CTP --> Disc[DISCOVERY PHASE<br/>Interrogatories, document<br/>disclosure, inspections,<br/>examination for discovery]
+        Disc --> Trial[TRIAL<br/>Evidence, expert witnesses,<br/>judge or jury decides]
+        Trial --> Costs[COSTS AWARDED<br/>Losing party typically pays<br/>~1/3 of winner's legal costs]
+
+        style SOC fill:#e0f2fe,stroke:#0284c7
+        style SOD fill:#e0f2fe,stroke:#0284c7
+        style CTP fill:#fef3c7,stroke:#d97706
+        style Disc fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Trial fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Costs fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The whole point of the Discovery box sitting BEFORE trial is to eliminate surprises — interrogatories find out who knows what, document disclosure forces both sides to show their evidence, and examination for discovery locks witnesses into testimony under oath that can later be used to impeach them if they change their story at trial. This is why discovery is expensive but also why most cases settle before ever reaching the Trial box — once both sides see the full picture, the incentive to gamble at trial usually drops. The Costs box at the end is the disincentive against weak claims: losing typically costs you money on top of not winning, which is why parties should only sue when they have a good chance or the claim is large enough to absorb that risk.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card thirdparty" id="d3">
+    <h2>3. The Third-Party Claim Branching Problem</h2>
+    <p>This is the chapter's most important strategic concept, built directly from the mine/engineer/equipment-supplier example in the text. It shows exactly WHY a defendant should pull a third party into the SAME lawsuit rather than suing them separately afterward.</p>
+
+    <div class="mermaid">
+      graph TD
+        Owner[Owner sues Engineer<br/>for design errors] --> Choice{Does Engineer bring the<br/>Equipment Supplier in as a<br/>THIRD PARTY in this SAME suit?}
+
+        Choice -->|NO — separate later suit| Path1[Trial 1: Owner v. Engineer<br/>Engineer found LIABLE]
+        Path1 --> Path1b[Engineer must now start<br/>Trial 2: Engineer v. Supplier]
+        Path1b --> Risk1[RISK: Supplier was NOT bound<br/>by Trial 1's findings — may raise<br/>defences never considered,<br/>different witnesses/evidence,<br/>possible INCONSISTENT result]
+
+        Choice -->|YES — joined as<br/>third party now| Path2[ONE Trial: Owner v. Engineer<br/>AND Engineer v. Supplier<br/>heard TOGETHER]
+        Path2 --> Result2[Supplier IS bound by this<br/>trial's findings. No second trial,<br/>no inconsistent result]
+
+        style Choice fill:#fef3c7,stroke:#d97706,stroke-width:3px
+        style Path1 fill:#fee2e2,stroke:#dc2626
+        style Risk1 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Path2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Result2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The top branch is what happens if the engineer waits — they win nothing by delaying, they just create a second, separate, MORE RISKY lawsuit where the supplier gets a clean slate to raise defences and isn't bound by anything decided in trial 1. The bottom branch shows why naming the supplier as a third party in the ORIGINAL suit is almost always smarter: one trial, one set of findings, supplier bound by the outcome. But don't ignore the chapter's counterpoint hidden in plain text: there IS a strategic reason to sometimes avoid pulling a third party in — if that third party would become hostile and start attacking the defendant too, the defendant trades "one second lawsuit later" for "two-front attack right now." This is a genuine judgment call, not an automatic rule.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card arbsetup" id="d4">
+    <h2>4. The Arbitration Setup Decision Tree</h2>
+    <p>Before any arbitration can even start, the parties must answer four specific questions. This diagram orders them by importance and shows what happens if the most critical one — choice of arbitrator — can't be agreed upon.</p>
+
+    <div class="mermaid">
+      graph TD
+        Setup[Arbitration Clause Triggered] --> Q1[Q1: WHO will act as arbitrator?<br/>— THE most important question]
+        Setup --> Q2[Q2: What are the arbitrator's<br/>TERMS OF REFERENCE —<br/>what questions must be answered?]
+        Setup --> Q3[Q3: What RULES OF PROCEDURE<br/>will apply?]
+        Setup --> Q4[Q4: What LAW will apply?]
+
+        Q1 --> Agree{Can the parties<br/>AGREE on an arbitrator?}
+        Agree -->|Yes| Chosen[Arbitrator chosen for<br/>reputation, technical expertise,<br/>and impartiality]
+        Agree -->|No| Fallback[Court APPOINTS one,<br/>OR parties request a list from<br/>an arbitration organization<br/>e.g. AAA]
+
+        style Setup fill:#1e293b,color:#fff
+        style Q1 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Q2 fill:#fef3c7,stroke:#d97706
+        style Q3 fill:#fef3c7,stroke:#d97706
+        style Q4 fill:#fef3c7,stroke:#d97706
+        style Agree fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Chosen fill:#dcfce7,stroke:#16a34a
+        style Fallback fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> All four questions must be answered before arbitration can proceed, but Q1 gets the thick red border because the chapter explicitly singles it out as the most important — your "private judge" needs to actually be qualified and trusted, or the entire process loses its main advantage over litigation. Notice the fallback path isn't a failure state — courts and arbitration organizations exist specifically to solve the "we can't agree on an arbitrator" deadlock, so this isn't a dead end, just an extra step. Also remember a separate point not shown here as a branch but worth holding in memory: arbitration's relaxed evidence rules (hearsay/opinion evidence CAN be heard) never override the baseline fairness requirements — adequate notice, a chance to be heard, a chance to test the other side's evidence, and an impartial decision-maker are non-negotiable regardless of which procedural rules the parties pick.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card advantage" id="d5">
+    <h2>5. Method Selection — Matching the Dispute to the Tool</h2>
+    <p>Rather than listing each method's pros and cons separately (which the category card already does), this diagram asks the questions a real fact pattern would force you to answer, routing you to the method that best fits.</p>
+
+    <div class="mermaid">
+      graph TD
+        Q1{Is the other party a<br/>RELUCTANT participant who<br/>might just ignore a process?} -->|Yes — need enforcement power| Lit[LITIGATION<br/>Only method that can force<br/>compliance via court orders]
+        Q1 -->|No, willing to engage| Q2{Is PRIVACY / confidentiality<br/>of trade secrets critical?}
+
+        Q2 -->|Yes| Q3{Want a decision-maker with<br/>TECHNICAL EXPERTISE in<br/>the subject matter?}
+        Q2 -->|Not critical| Q4{Do parties have an ONGOING<br/>RELATIONSHIP they want<br/>to preserve?}
+
+        Q3 -->|Yes| Arb[ARBITRATION<br/>Private + expert decision-maker]
+        Q4 -->|Yes, and genuine desire<br/>to settle amicably| Med[MEDIATION or NEGOTIATION<br/>Preserves relationship,<br/>cheaper, faster]
+        Q4 -->|No particular relationship<br/>to preserve| Neg[NEGOTIATION<br/>Cheapest, fastest,<br/>full party control]
+
+        style Q1 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Lit fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Q2 fill:#fef3c7,stroke:#d97706
+        style Q3 fill:#fef3c7,stroke:#d97706
+        style Q4 fill:#fef3c7,stroke:#d97706
+        style Arb fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Med fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Neg fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This routes a fact pattern to a method the same way you'd actually reason through an exam scenario. The very first gate is the most decisive: if the other side might simply not show up or not comply, only litigation has teeth (court orders, default judgment) — none of the ADR methods can force a true non-participant. If both sides ARE willing to engage, the next deciding factors become privacy, technical complexity, and relationship preservation — exactly the factors the chapter lists as governing the choice. Keep in mind real fact patterns often satisfy multiple branches at once (e.g., wanting BOTH privacy AND relationship preservation), in which case arbitration and mediation both become reasonable answers — the exam is testing whether you can identify the RELEVANT factors, not necessarily force a single "correct" method.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card privilege" id="d6">
+    <h2>6. The Privilege Shield (Negotiation and Mediation)</h2>
+    <p>This is a subtle but high-value mechanic: information shared during negotiation or mediation gets a special legal shield if no settlement results. This diagram shows exactly what that shield does and why it's the feature that makes parties willing to be honest in the first place.</p>
+
+    <div class="mermaid">
+      graph TD
+        Process[Negotiation or<br/>Mediation begins] --> Disclose[Parties disclose information,<br/>offers, even confidential<br/>"bottom line" settlement amounts]
+        Disclose --> Outcome{Does a settlement<br/>get reached?}
+
+        Outcome -->|Yes| Settled[Settlement Agreement signed.<br/>Dispute resolved.]
+        Outcome -->|No| Privileged[ALL information and offers<br/>exchanged become PRIVILEGED]
+
+        Privileged --> Shielded[CANNOT be used as evidence<br/>in subsequent litigation/arbitration —<br/>e.g. a settlement offer of $50,000<br/>cannot later be used against<br/>the offering party in court]
+
+        Shielded --> WhyItMatters[This is WHY parties are willing<br/>to be candid in the first place —<br/>without this shield, no one would<br/>ever make an honest offer]
+
+        style Process fill:#1e293b,color:#fff
+        style Outcome fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Settled fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Privileged fill:#fde68a,stroke:#ca8a04,stroke-width:2px
+        style Shielded fill:#fee2e2,stroke:#dc2626
+        style WhyItMatters fill:#e0f2fe,stroke:#0284c7
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The chain runs in one direction only — once you're in the "No settlement" branch, EVERYTHING said becomes off-limits for later proceedings, which is precisely what lets parties speak freely without fear that an offer to compromise will be read later as an admission of weakness. This directly answers chapter question 9 (are exchanged settlement offers admissible later if mediation fails — no) and explains why courts protect this privilege so strongly: remove the shield and negotiation/mediation would collapse, because no rational party would ever make a settlement offer if that very offer could be weaponized against them at trial.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card bindingmed" id="d7">
+    <h2>7. The Binding Mediation Role-Conflict Trap</h2>
+    <p>Case Study 14.1 in the chapter describes a hybrid process — binding mediation — where the same person who was the mediator becomes the arbitrator if settlement fails. This diagram isolates exactly why that hybrid creates two distinct structural problems.</p>
+
+    <div class="mermaid">
+      graph TD
+        Hybrid[BINDING MEDIATION:<br/>Same person is Mediator,<br/>then becomes Arbitrator<br/>if no settlement] --> Phase1[MEDIATION PHASE:<br/>Each party privately discloses<br/>confidential info to the mediator]
+
+        Phase1 --> NoSettle{Settlement reached?}
+        NoSettle -->|Yes| Done[Process ends — no conflict]
+        NoSettle -->|No| Transition[Mediator now becomes<br/>ARBITRATOR and must issue<br/>a BINDING decision]
+
+        Transition --> Problem1[PROBLEM 1: Arbitrator now holds<br/>undisclosed info from ONE party<br/>that the OTHER party never saw<br/>or had a chance to challenge]
+        Transition --> Problem2[PROBLEM 2: During mediation,<br/>both parties KNEW this person<br/>might later judge them —<br/>so they likely held back,<br/>undermining mediation's<br/>core promise of candor]
+
+        style Hybrid fill:#1e293b,color:#fff
+        style NoSettle fill:#fef3c7,stroke:#d97706,stroke-width:2px
+        style Transition fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style Problem1 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Problem2 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Done fill:#dcfce7,stroke:#16a34a
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> This is a single role wearing two incompatible hats. As a MEDIATOR, hearing confidential information privately from each side is not just allowed, it's expected — that's literally how mediation works (see diagram 8). But the moment that same person flips into ARBITRATOR mode, that exact same private information becomes a fairness problem, because the other party never had a chance to see it, challenge it, or respond to it — yet it's now sitting in the decision-maker's head while they render a BINDING ruling. Problem 2 is the sneakier one: it's not really about what happens after the failed mediation — it's about how the impending POSSIBILITY of arbitration distorts behavior DURING the mediation phase itself, since parties who know they might be judged later by this same person have every incentive to hide their real bottom line, which defeats the entire purpose of mediation.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card timeline" id="d8">
+    <h2>8. The Mediator's Private-Meeting Privilege</h2>
+    <p>One specific, testable fact buried in the text deserves its own diagram: who is and isn't allowed to meet privately with just one side of a dispute. Get this wrong on the exam and you'll misidentify the mediator's defining feature.</p>
+
+    <div class="mermaid">
+      graph LR
+        Judge[JUDGE] -->|NOT ALLOWED| NoPriv1[Cannot meet privately<br/>with one party]
+        Arbitrator[ARBITRATOR] -->|NOT ALLOWED| NoPriv2[Cannot meet privately<br/>with one party]
+        Mediator[MEDIATOR] -->|ALLOWED — this is<br/>the defining feature| YesPriv[CAN meet privately with<br/>each party separately,<br/>hear confidential info,<br/>even a hidden bottom line]
+
+        style Judge fill:#fee2e2,stroke:#dc2626
+        style Arbitrator fill:#fee2e2,stroke:#dc2626
+        style Mediator fill:#dcfce7,stroke:#16a34a,stroke-width:3px
+        style NoPriv1 fill:#f8fafc,stroke:#94a3b8
+        style NoPriv2 fill:#f8fafc,stroke:#94a3b8
+        style YesPriv fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> Judges and arbitrators are both acting as decision-makers in an adversarial process — meeting privately with one side would destroy the fairness of that process, since the other side could never test or respond to whatever was said. The mediator is structurally different: their entire job is to facilitate a settlement, not render a binding decision, so private meetings are not just tolerated but essential — it's literally how a mediator learns each side's real flexibility and bottom line in order to bridge the gap. This single fact directly answers chapter question 6 and is exactly the kind of "which role is the exception" question the NPPE tends to test.</p>
+    </div>
+  </div>
+
+
+  <div class="framework-card expert" id="d9">
+    <h2>9. The Expert Witness Neutrality Boundary</h2>
+    <p>An expert witness is paid by one party but is legally required to act as if they weren't. This diagram draws the line between what an expert IS allowed to do for the party that hired them and what crossing that line looks like — including the real disciplinary consequence the chapter describes.</p>
+
+    <div class="mermaid">
+      graph TD
+        Expert[Expert Witness<br/>hired by one party] --> Allowed{What is the expert<br/>PERMITTED to do?}
+
+        Allowed --> A1[Give an HONEST opinion —<br/>even if unfavourable<br/>to the hiring party]
+        Allowed --> A2[Present the theory they believe<br/>is MOST CREDIBLE among<br/>several plausible explanations]
+        Allowed --> A3[Help the COURT understand<br/>technical matters — not<br/>advocate for a side]
+
+        Expert --> Forbidden{What CROSSES<br/>the line?}
+        Forbidden --> F1[Presenting an UNLIKELY theory<br/>as though equally credible<br/>— unprofessional conduct]
+        Forbidden --> F2[CONTINGENT FEE arrangement<br/>— fee tied to case outcome]
+
+        F2 --> Consequence[Real consequence: an engineer<br/>was disciplined and SUSPENDED<br/>3 months by APEGBC for this.<br/>Disclosure of a contingent fee can<br/>also make the opinion INADMISSIBLE]
+
+        style Expert fill:#1e293b,color:#fff
+        style Allowed fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        style Forbidden fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+        style F2 fill:#fee2e2,stroke:#dc2626,stroke-width:3px
+        style Consequence fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    </div>
+
+    <div class="explanation">
+      <p><span class="label">Visualization Logic:</span> The two top branches show the expert's actual job description versus a lawyer's — a lawyer advocates, an expert assists the court, and that distinction is precisely the answer to chapter question 5 (why lawyers CAN take contingent fees but experts CANNOT). The green branch acknowledges something important and easy to miss: not every technical question has one right answer, so an expert isn't dishonest just for picking a side among legitimate competing theories — they're only in trouble if they pretend a weak theory is just as credible as a strong one. The red branch's contingent fee box is the highest-yield point in the whole chapter on this topic: it's not just "frowned upon," it's an actual real-world disciplinary case (APEGBC, 3-month suspension) and it can independently destroy the admissibility of the expert's opinion even before anyone gets to judge whether the opinion itself was any good.</p>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>
